@@ -1,0 +1,131 @@
+요구 사항 분석 
+
+
+ • Usecase
+
+- 맛집 정보를 등록할 수 있다. (관리자)
+- 맛집 정보를 수정할 수 있다. (관리자)
+- 맛집 정보를 삭제할 수 있다. (관리자)
+- 맛집의 리뷰를 작성할 수 있다. (사용자)
+- 맛집의 리뷰를 삭제할 수 있다. (사용자)
+- 맛집에 등록된 리뷰와 평균 별점을 확인할 수 있다. (사용자)
+
+- 내 예약을 확인할 수 있다. (사용자)
+- 가게 예약을 확인할 수 있다. (관리자) 
+- 내 예약을 취소, 수정 할 수 있다. (사용자)
+- 가게 예약을 취소, 수정 할 수 있다. (관리자)
+
+
+
+• 데이터
+
+- 맛집
+  - 이름 (String)
+  - 주소 (String)
+  - N개의 메뉴
+    - 이름 (String)
+    - 가격 (Int)
+  - N개의 리뷰
+    - 내용 (String)
+    - 별점 (Int)
+
+• ERD 도출
+
+
+• API 스펙
+ - 맛집 리스트 가져오기 API
+   ``` 
+   GET /restaurants
+       
+   // response
+    {
+      {
+        "id": Long,
+        "name": string,
+        "address": string,
+        "createdAt": string,
+        "updatedAt": string
+      },
+      ...
+    } 
+     ```
+ - 맛집 정보 가져오기 API
+   ```
+   GET /restaurant/{restaurantId}
+
+   // response
+   {
+     "id": Long,
+     "name": string,
+     "address": string,
+     "createdAt": string,
+     "updatedAt": string,
+     "menus": [
+       {"id": Long, "name": string, "price": int, "createdAt": string, "updatedAt": string},
+       {"id": Long, "name": string, "price": int, "createdAt": string, "updatedAt": string},
+       ...
+      ]
+   }
+   ```
+ -  맛집 정보 생성 API
+   ```
+   POST /restaurant
+
+   {
+     "name": string,
+     "address": string,
+     "menus": [
+       {"name": string, "price": int},
+       ...
+      ]
+    }
+   ```
+ - 맛집 정보 수정 API 
+   ```
+   PUT /restaurant/{restaurantId}
+   
+   {
+     "name": string,
+     "address": string,
+     "menus": [
+       {"name": string, "price": int},
+       ...
+      ]
+   }
+   ```
+ - 맛집 정보 삭제 API  
+   ```
+   DELETE /restaurant/{restaurantId}
+   ```
+ - 리뷰 작성 API 
+   ```
+   POST /review
+    
+    {
+      "restaurantId": int,
+      "content": string,
+      "score": float
+    }
+   ```
+ - 리뷰 삭제 API
+   ```
+   DELETE /review/{reviewId}
+   ```
+ - 맛집에 등록된 리뷰 조회 API
+   ```
+   GET /restaurant/{restaurantId}/reviews
+
+   // response
+   {
+     "avgScore": double, // 평균 별점
+     "reviews": [
+       {"id": int, "content": string, "score": double, "createdAt": string},
+       {"id": int, "content": string, "score": double, "createdAt": string},
+       {"id": int, "content": string, "score": double, "createdAt": string}
+     ],
+     "page": {
+       "offset": int,
+       "limit": int
+     }
+   }
+   ```

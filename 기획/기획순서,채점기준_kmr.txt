@@ -1,0 +1,35 @@
+[ 기획 ] - [ 분석 ] - [ 설계 ] - [ 개발 ] - [ 테스트 ]
+
+1. SpringFramework
+   1) 교재 : 코드로 배우는  스프링 :
+      - 내용 : 게시판, 페이지번호, RESTful, AOP, Transaction. Security(XML)
+   2) 포폴기준 : 도서 쇼핑몰
+
+2. React
+  1) 교재 : 생활코딩,  React+Node+MySQL
+     - 내용 : CRUD, 	    
+  2) 포폴기준 : MyBox - 리액트 쇼핑몰
+
+3. SpringBoot + RPA
+   1) PDF : 스프링부트 쇼핑몰 프로젝트 with JPA
+       - Thymeleaf, Security(Java), JPA
+   2) 포폴기준 : PDF 참조
+
+4. SpringBoot + React + RPA
+   1) PDF : 모던웹애플리케이션개발+알파    
+       - Back + Front 연동
+   2) 포폴기준 : GAYA_HOTEL - 232 4차 발표자료
+
+**5. 유효성 검사
+      1)  프론트 : 자바스크립트
+      2) 백 : Spring - Validator, SpringBoot - Validation
+
+
+
+
+※ 1차 : 스프링 -  (1월17일 ~ 2월 18일)
+\\대체 공휴일로 인해
+- 마감 일정이 하루씩 연기 되었습니다.
+         
+
+   2차 : React + SpringBoot - (2월 18일 ~ 3월 19일)
