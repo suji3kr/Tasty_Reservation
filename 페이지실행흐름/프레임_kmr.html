@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>World Festival</title>
+    <link href="css/style.css"type="text/css" rel="stylesheet">
+</head>
+<body>
+    <!--와이어프레임 왼쪽시작-->
+    <header>
+        <div class="top">
+            <div class="logo">
+                로고자리
+            </div>
+            <nav class="menu">
+                메뉴자리
+            </nav>
+        </div>
+    </header>
+
+    <div class="imgslide">
+        이미지 슬라이드 자리
+    </div>
+
+    <class="contents">
+        <div class="notice">
+            공지사항 자리
+        </div>
+        
+        <div class="gallery">
+            갤러리 자리
+        </div>
+        <div class="shortcut">
+            바로가기 자리
+        </div>
+    </div>
+
+    <footer>
+        <div class="bottom">
+            <div class="btlogo">
+                로고 자리
+            </div>
+            <div class="copy">
+                Copy right 자리
+            </div>
+            <div class="familysite">
+                패밀리사이트 자리
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+
+
+
+-------------------------------------------------------------
+
+
+@charset "utf-8";
+/* CSS Document */
+
+*{
+    margin:0 auto;
+    padding:0 ;
+    list-style:none;
+    font-family:"맑은 고딕";
+    color:#333333;  /* 컬러가이드 : 기본텍스트의 색*/
+}
+body {
+    width: 1000px;     /*와이어프레임 너비*/
+    height: 650px;      /* 와이어 프레임 B+C+D높이*/
+    background-color: #ffffff;   /* 컬러 가이드 : 배경색*/
+    font-size: 20px;
+}
+a{
+    text-decoration: none;
+    display: block;
+}
+header {
+    float: left;      /*  A영역:와이어 프레임 왼쪽영역*/
+}
+.top {                  /* 로고+메뉴 영역*/
+    float:left;
+    width: 200px;
+    height: 650px;
+}
+.logo {
+    float:left;
+    width: 200px;
+    height: 40px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.menu {
+    float: left;
+}
+.imgslide{              /* B영역 : 이미지 슬라이드 영역*/
+    float: right;
+    width: 800px;
+    height: 350px;
+}
+.notice {
+    float: left;
+    width: 300px;
+    height: 200px;
+}
+.gallery {
+    float: left;
+    width: 300px;
+    height: 200px;
+}
+.shortcut {
+    float:right;
+    width: 200px;
+    height: 200px;
+}
+footer{                 /* D영역 : 와이어 프레임 오른쪽하단 영역*/
+    float: right;
+}
+.bottom{                    /* 로고 +copyright+ 패밀리 사이트 영역*/
+    float: right;
+    width: 800px;
+    height: 100px;
+}
+.btlogo {
+    float:left;
+    width: 200px;
+    height: 100px;
+}
+.copy {
+    float:left;
+    width: 400px;
+    height: 100px;
+}
+.familysite {
+    float:right;
+    width: 200px;
+    height: 100px;
+}
