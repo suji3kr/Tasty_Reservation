@@ -8,9 +8,26 @@ _kmr(main)
 
 
 ### First Sample
+ - 디자인 컬러칩회의 후 홈페이지 디자인 위주로 프레임작업
+
+----
 
 <br>
 <br>
+
+![Image](https://github.com/user-attachments/assets/987f7446-8cd6-4a7c-8b2f-fc98f904a3b7)
+
+<br>
+<br>
+
+
+### Second Sample
+ - 기능의 다양성을 위해 다양한 버튼구현 및 메뉴와 이펙트를 생각해 재구현함
+
+   
+<br>
+<br>
+
 
 -------------------------------------
 
