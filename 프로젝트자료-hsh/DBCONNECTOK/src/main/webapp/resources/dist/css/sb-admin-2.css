@@ -1,0 +1,178 @@
+/* Global Styles */
+body {
+  background-color: #f8f8f8;
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+/* Wrapper */
+#wrapper {
+  width: 100%;
+}
+
+/* Header */
+header {
+  background-color: white;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header img {
+  max-width: 180px;
+}
+
+header nav {
+  margin-top: 15px;
+}
+
+header nav a {
+  margin: 0 15px;
+  color: #4e73df;
+  font-size: 1rem;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+header nav a:hover {
+  text-decoration: underline;
+}
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  padding: 50px 0;
+  background-color: #ffffff;
+}
+
+.hero img {
+  width: 100%;
+  max-width: 1200px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: #666;
+}
+
+/* Category Buttons */
+.categories {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0;
+}
+
+.categories button {
+  background-color: #4e73df;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 10px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.categories button:hover {
+  background-color: #3757b0;
+}
+
+/* Featured Section */
+.featured {
+  display: flex;
+  justify-content: space-around;
+  margin: 50px auto;
+  max-width: 1200px;
+  padding: 20px 0;
+}
+
+.featured .card {
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 30%;
+  border-radius: 8px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.featured .card img {
+  width: 100%;
+  height: auto;
+}
+
+.featured .card h3 {
+  margin: 15px 0;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.featured .card p {
+  font-size: 1rem;
+  color: #666;
+  padding: 0 15px;
+}
+
+/* Map Section */
+.map-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 50px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.map-section img {
+  max-width: 50%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.map-section .info {
+  max-width: 45%;
+  font-size: 1rem;
+  color: #555;
+}
+
+.map-section .info h3 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.map-section .info ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.map-section .info ul li {
+  margin-bottom: 10px;
+}
+
+/* Footer */
+footer {
+  background-color: #343a40;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 0.9rem;
+}
+
+footer p {
+  margin: 0;
+}
+
+footer a {
+  color: #4e73df;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
