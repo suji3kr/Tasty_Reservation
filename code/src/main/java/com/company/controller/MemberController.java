@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.company.domain.MemberDTO;
 import com.company.service.MemberService;
@@ -87,15 +88,32 @@ public class MemberController {
 	    return "/member/update";
 	  }
 	
+//	@PostMapping("/update")
+//		public String update(@ModelAttribute MemberDTO memberDTO ){
+//	    boolean result = memberService.update(memberDTO);
+//	    if(result) {
+//			/* return "redirect:/member?id= " + memberDTO.getId(); */
+//	    	return "redirect:/";
+//	    }else {
+//	    	return "/member/index";
+//	    }
+//	  }
+	
 	@PostMapping("/update")
-		public String update(@ModelAttribute MemberDTO memberDTO ){
+	public String update(@ModelAttribute MemberDTO memberDTO, RedirectAttributes redirectAttributes) {
 	    boolean result = memberService.update(memberDTO);
-	    if(result) {
-	    	return "redirect:/member?id= " + memberDTO.getId();
-	    }else {
-	    	return "/member/index";
+	    if (result) {
+	    	
+	    	System.out.println("수정완료되었습니다.");
+	        // 업데이트 성공을 나타내는 플래시 속성 추가
+	        redirectAttributes.addFlashAttribute("updateSuccess", true);
+	        // 홈페이지로 리다이렉트
+	        return "redirect:/";
+	    } else {
+	        // 업데이트 실패 시 멤버 인덱스 페이지로 돌아감
+	        return "/member/index";
 	    }
-	  }
+	}
 	
 	@PostMapping("/email-check")
 	  public @ResponseBody String emailCheck(@RequestParam("email") String email){

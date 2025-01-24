@@ -117,6 +117,10 @@ public class BoardController {
 
 	}
 	
+	@GetMapping("/favfood")
+	public String getFavFood() {
+		return "/board/favfood"; // view 이름
+	}
 	
 	 
 }

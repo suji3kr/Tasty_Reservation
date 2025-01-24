@@ -193,10 +193,10 @@
             </nav>
 
             <!-- 버튼 -->
-            <div class="buttons">
-                <a href="/login" class="btn btn-green">Sign in</a>
-                <a href="/signup" class="btn btn-black">Sign up</a>
-            </div>
+    <div class="buttons">
+        <a href="/member/login" class="btn btn-green">Sign in</a>
+        <a href="/member/signup" class="btn btn-black">Sign Up</a>
+    </div>
         </div>
     </header>
 </body>
