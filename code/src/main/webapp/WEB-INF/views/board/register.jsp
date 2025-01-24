@@ -24,8 +24,138 @@
         }
     </style>
     <!-- Google Maps API 키 추가 (유효한 키로 교체하세요) -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxtdZqbdS6d0jR-vYVhQOtICdiDXq8S_A&libraries=places&callback=initAutocomplete" async defer></script>
-    <script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxtdZqbdS6d0jR-vYVhQOtICdiDXq8S_A&libraries=places&callback=initAutocomplete" async defer></script> -->
+    
+</head>
+<body>
+<div class="register-container">
+    <h2 class="text-center">가게 등록</h2>
+    <form action="/store/register" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="storeName" class="form-label">가게 이름</label>
+            <input type="text" class="form-control" id="storeName" name="storeName" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="storeLocation" class="form-label">가게 위치</label>
+            <div class="input-group">
+                <input type="text" class="form-control" id="storeLocation" name="storeLocation" required>
+                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#mapModal">지도 보기</button>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="storeDescription" class="form-label">가게 설명</label>
+            <textarea class="form-control" id="storeDescription" name="storeDescription" rows="3" required></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="storeType" class="form-label">종류</label>
+            <select class="form-control" id="storeType" name="storeType" required>
+                <option value="">선택하세요</option>
+                <option value="한식">한식</option>
+                <option value="양식">양식</option>
+                <option value="중식">중식</option>
+                <option value="일식">일식</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="storePhone" class="form-label">전화번호</label>
+            <input type="tel" class="form-control" id="storePhone" name="storePhone" required placeholder="01012345678" pattern="^[0-9]{10,11}$" title="전화번호는 숫자만 입력해주세요.">
+            <small class="form-text text-muted">전화번호는 하이픈 없이 숫자만 입력해주세요.</small>
+        </div>
+
+        <div class="mb-3">
+            <label for="storeImage" class="form-label">가게 사진</label>
+            <input type="file" class="form-control" id="storeImage" name="storeImage" accept="image/*" required>
+            <small class="form-text text-muted">이미지 파일만 업로드 가능합니다.</small>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">등록하기</button>
+    </form>
+</div>
+
+<!-- 지도 모달 -->
+<div class="modal fade" id="mapModal" tabindex="-1" aria-labelledby="mapModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="mapModalLabel">위치 선택</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="map" style="height: 400px; width: 100%;"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="confirmLocation">확인</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2025 YourCompany. All rights reserved.</p>
+</footer>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Google Maps API -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxtdZqbdS6d0jR-vYVhQOtICdiDXq8S_A"></script>
+<script>
+    let map;
+    let marker;
+    const geocoder = new google.maps.Geocoder();
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const mapModal = document.getElementById('mapModal');
+        const storeLocationInput = document.getElementById('storeLocation');
+        const confirmLocationButton = document.getElementById('confirmLocation');
+
+        mapModal.addEventListener('shown.bs.modal', () => {
+            if (!map) {
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: { lat: 37.5665, lng: 126.9780 }, // 서울 기준
+                    zoom: 12,
+                });
+
+                marker = new google.maps.Marker({
+                    position: { lat: 37.5665, lng: 126.9780 },
+                    map: map,
+                    draggable: true,
+                });
+
+                map.addListener('click', (event) => {
+                    const position = event.latLng;
+                    marker.setPosition(position);
+                });
+            }
+        });
+
+        confirmLocationButton.addEventListener('click', () => {
+            if (marker) {
+                const position = marker.getPosition();
+                geocoder.geocode({ location: position }, (results, status) => {
+                    if (status === "OK" && results[0]) {
+                        storeLocationInput.value = results[0].formatted_address;
+                    } else {
+                        alert("주소를 가져올 수 없습니다. 다시 시도해주세요.");
+                    }
+                });
+                const modalInstance = bootstrap.Modal.getInstance(mapModal);
+                modalInstance.hide();
+            }
+        });
+    });
+</script>
+
+
+<!-- AIzaSyDxtdZqbdS6d0jR-vYVhQOtICdiDXq8S_A -->
+    
+    <!-- <script>
         // Google Places API 주소 자동 완성 초기화
         function initAutocomplete() {
             // storeLocation 입력 필드에 자동완성 기능을 설정합니다.
@@ -41,60 +171,6 @@
                 document.getElementById('storeLocation').value = place.formatted_address;
             });
         }
-    </script>
-</head>
-<body>
-    <div class="register-container">
-        <h2 class="text-center">가게 등록</h2>
-        <form action="/store/register" method="post" enctype="multipart/form-data">
-            <div class="mb-3">
-                <label for="storeName" class="form-label">가게 이름</label>
-                <input type="text" class="form-control" id="storeName" name="storeName" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="storeLocation" class="form-label">가게 위치</label>
-                <input type="text" class="form-control" id="storeLocation" name="storeLocation" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="storeDescription" class="form-label">가게 설명</label>
-                <textarea class="form-control" id="storeDescription" name="storeDescription" rows="3" required></textarea>
-            </div>
-
-            <div class="mb-3">
-                <label for="storeType" class="form-label">종류</label>
-                <select class="form-control" id="storeType" name="storeType" required>
-                    <option value="">선택하세요</option>
-                    <option value="한식">한식</option>
-                    <option value="양식">양식</option>
-                    <option value="중식">중식</option>
-                    <option value="일식">일식</option>
-                </select>
-            </div>
-
-            <div class="mb-3">
-                <label for="storePhone" class="form-label">전화번호</label>
-                <input type="tel" class="form-control" id="storePhone" name="storePhone" required placeholder="01012345678" pattern="^[0-9]{10,11}$" title="전화번호는 숫자만 입력해주세요.">
-                <small class="form-text text-muted">전화번호는 하이픈 없이 숫자만 입력해주세요.</small>
-            </div>
-
-            <div class="mb-3">
-                <label for="storeImage" class="form-label">가게 사진</label>
-                <input type="file" class="form-control" id="storeImage" name="storeImage" accept="image/*" required>
-                <small class="form-text text-muted">이미지 파일만 업로드 가능합니다.</small>
-            </div>
-
-            <button type="submit" class="btn btn-primary w-100">등록하기</button>
-        </form>
-    </div>
-
-    <footer>
-        <p>&copy; 2025 YourCompany. All rights reserved.</p>
-    </footer>
-
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    </script> -->
 </body>
 </html>
