@@ -16,23 +16,21 @@
             box-sizing: border-box;
             background-color: #f4f7fc;
         }
-
-        /* 헤더 스타일 */
-        header {
-            background-color: white;
-            border-bottom: 1px solid #e7e7e7;
-        }
-
-        /* 컨테이너 설정: 중앙 정렬 및 양쪽 여백 */
-        .head-container {
-            max-width: 1200px; /* 중앙 정렬의 최대 너비 설정 */
-            margin: 0 auto;    /* 화면 중앙에 정렬 */
-            padding: 10px 20px; /* 내부 여백 설정 */
-            display: flex;     /* 플렉스 레이아웃 적용 */
-            justify-content: space-between; /* 로고와 메뉴 간 공간 균등 분배 */
-            align-items: center; /* 세로 중앙 정렬 */
-        }
-
+	    /* 헤더 스타일 */
+	    header {
+	        background-color: white;
+	        border-bottom: 1px solid #e7e7e7;
+	    }
+	
+	    /* 컨테이너 설정: 중앙 정렬 및 양쪽 여백 */
+	    .head-container {
+	        max-width: 1200px; /* 중앙 정렬의 최대 너비 설정 */
+	        margin: 0 auto;    /* 화면 중앙에 정렬 */
+	        padding: 10px 10px; /* 내부 여백 설정 (좌우 여백을 10px로 줄임) */
+	        display: flex;     /* 플렉스 레이아웃 적용 */
+	        justify-content: space-between; /* 로고와 메뉴 간 공간 균등 분배 */
+	        align-items: center; /* 세로 중앙 정렬 */
+	    }
         /* 로고 스타일 */
         .logo {
             font-size: 24px;
@@ -73,7 +71,7 @@
         .dropdown-menu {
             display: none;
             position: absolute;
-            top: 30px;
+            top: 25px;
             left: 0;
             background-color: #f2f2f2;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
