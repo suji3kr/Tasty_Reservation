@@ -1,130 +1,136 @@
-<%@ page contentType="text/html; charset=UTF-8" language="java"%>
-<%@ include file="./includes/header.jsp"%>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<jsp:include page="./includes/header.jsp" />
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>홈 페이지</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>홈 페이지</title>
 
-<!-- Bootstrap CSS CDN -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<!-- Google Font -->
-<link
-	href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
-	rel="stylesheet">
-<!-- Custom CSS -->
-<style>
-body {
-	font-family: 'Roboto', sans-serif;
-	background-color: #f4f7fc;
-}
+    <!-- Custom CSS -->
+    <style>
+        /* 공통 스타일 */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-.hero-section {
-	background-color: #4e73df;
-	color: white;
-	padding: 100px 0;
-	text-align: center;
-	position: relative;
-}
+        /* 컨테이너 설정 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
-.hero-section h1 {
-	font-size: 3rem;
-	font-weight: 700;
-}
+        /* 상단 사진 3개 레이아웃 */
+        .top-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin: 20px 0;
+        }
 
-.card-deck .card {
-	transition: transform 0.3s ease-in-out;
-}
+        .photo-frame {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+        }
 
-.card-deck .card:hover {
-	transform: scale(1.05);
-}
+        /* 양쪽 사진은 동일한 크기로 */
+        .photo-frame.small {
+            flex: 2; 
+        }
 
-footer {
-	background-color: #343a40;
-	color: white;
-	text-align: center;
-	padding: 20px 0;
-}
+        /* 가운데 사진은 더 넓게 */
+        .photo-frame.large {
+            flex: 2; /* 두 배로 크기를 설정 */
+        }
 
-.auth-buttons {
-	position: absolute;
-	top: 20px;
-	right: 20px;
-}
-</style>
+        .photo-frame img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* 텍스트와 버튼 오버레이 스타일 */
+        .overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: center;
+            z-index: 1;
+        }
+
+        .overlay h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .overlay p {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+        }
+
+        .overlay button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #fff;
+            background-color: #ff7a00;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-shadow: none;
+        }
+
+        .overlay button:hover {
+            background-color: #e66800;
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <!-- 상단 사진 3개 -->
+        <div class="top-row">
+            <!-- 왼쪽 사진 -->
+            <div class="photo-frame small">
+                <img src="/resources/image/레스토랑1.png" alt="Image 1">
+            </div>
 
-	<!-- Hero Section -->
-	<section class="hero-section">
-		
-		<div class="container">
-			<h1>환영합니다!</h1>
-			<p>맛집에 대한 모든것.</p>
-			<a href="/board/list" class="btn btn-light btn-lg mt-4">지금 바로
-				먹으러가기</a>
-		</div>
-	</section>
+            <!-- 가운데 사진 (가로로 더 길게) -->
+            <div class="photo-frame large">
+                <img src="/resources/image/송아지스테이크.png" alt="Image 2">
+                <!-- 오버레이 콘텐츠 -->
+                <div class="overlay">
+                    <h1>Art Of Reservation</h1>
+                    <p>여행의 미학</p>
+                    <button>Where are you headed?</button>
+                </div>
+            </div>
 
-	<!-- Features Section -->
-	<section id="features" class="py-5">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-4 col-md-6 mb-4">
-					<a href="/ranking/ranking1" class="text-decoration-none">
-						<div class="card shadow-sm">
-							<img src="/resources/image/레스토랑1.png" class="card-img-top"
-								alt="본프레레">
-							<div class="card-body">
-								<h5 class="card-title">맛집 랭킹 1위</h5>
-								<p class="card-text">현재 가장 뜨거운 맛집 픽!.</p>
-							</div>
-						</div>
-					</a>
-				</div>
+            <!-- 오른쪽 사진 -->
+            <div class="photo-frame small">
+                <img src="/resources/image/연어레스토랑.png" alt="Image 3">
+            </div>
+        </div>
 
-				<div class="col-lg-4 col-md-6 mb-4">
-					<a href="/ranking/ranking2" class="text-decoration-none">
-						<div class="card shadow-sm">
-							<img src="/resources/image/송아지스테이크.png" class="card-img-top"
-								alt="스테이크하우스">
-							<div class="card-body">
-								<h5 class="card-title">맛집 랭킹 2위</h5>
-								<p class="card-text">평소에 자주 시켜먹는 맛집 픽!</p>
-							</div>
-						</div>
-					</a>
-				</div>
-				<div class="col-lg-4 col-md-6 mb-4">
-					<a href="/ranking/ranking3" class="text-decoration-none">
-						<div class="card shadow-sm">
-							<img src="/resources/image/연어레스토랑.png" class="card-img-top"
-								alt="연어상회">
-							<div class="card-body">
-								<h5 class="card-title">맛집 랭킹 3위</h5>
-								<p class="card-text">야식이 땡길땐? 여기로!</p>
-							</div>
-						</div>
-					</a>
-				</div>
-			</div>
-		</div>
-	</section>
+        <!-- 하단 큰 사진 -->
+        <div class="bottom-row">
+            <img src="/resources/image/과일스푼.png" alt="Image 4">
+        </div>
+    </div>
 
-	<!-- Footer -->
-	<footer>
-		<p>&copy; 2025 YourCompany. All rights reserved.</p>
-	</footer>
-
-	<!-- Bootstrap JS and dependencies -->
-	<script
-		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <!-- Footer -->
+    <footer>
+        <p style="text-align: center; padding: 20px; color: #666;">&copy; 2025 YourCompany. All rights reserved.</p>
+    </footer>
 </body>
 </html>
