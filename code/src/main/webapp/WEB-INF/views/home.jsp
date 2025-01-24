@@ -104,7 +104,7 @@
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
         }
 
-        .overlay button {
+        .overlay a {
             padding: 10px 20px;
             font-size: 1rem;
             color: #fff;
@@ -116,7 +116,7 @@
             text-decoration: none; /* 링크 텍스트 장식 제거 */
         }
 
-        .overlay button:hover {
+        .overlay a:hover {
             background-color: #e66800;
         }
     </style>
@@ -137,7 +137,8 @@
 				<div class="overlay">
 					<h1>Art Of Reservation</h1>
 					<p>여행의 미학</p>
-					<button>Where are you headed?</button>
+					<!-- 버튼을 링크로 변경 -->
+                    <a href="/board/list">지금 바로 예약하기</a>
 				</div>
 			</div>
 
