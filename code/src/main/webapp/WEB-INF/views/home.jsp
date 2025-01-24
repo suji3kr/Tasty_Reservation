@@ -47,6 +47,7 @@ body {
 }
 
 .photo-frame {
+	width : 300px;
 	position: relative;
 	border-radius: 15px;
 	overflow: hidden;
@@ -60,12 +61,28 @@ body {
 /* 가운데 사진은 더 넓게 */
 .photo-frame.large {
 	flex: 2; /* 두 배로 크기를 설정 */
-}
-
+} 
 .photo-frame img {
 	width: 100%;
-	height: auto;
-	display: block;
+	height: 300px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.bottom-row {
+	width : 1200px;
+	height : auto;
+	margin: 30px auto;
+	text-align: center;
+	
+	}
+
+.bottom-row img {
+	width : 100 %;
+	height : 100% ;
+	object-fit: cover; /* 이미지가 컨테이너를 꽉 채우도록 설정 */
+    object-position: center; /* 이미지의 중심을 기준으로 자르기 */
+    border-radius: 15px;
 }
 
 /* 텍스트와 버튼 오버레이 스타일 */
@@ -118,7 +135,7 @@ body {
 			</div>
 
 			<!-- 가운데 사진 (가로로 더 길게) -->
-			<div class="photo-frame large">
+			<div class="photo-frame small">
 				<img src="/resources/image/송아지스테이크.png" alt="Image 2">
 				<!-- 오버레이 콘텐츠 -->
 				<div class="overlay">
