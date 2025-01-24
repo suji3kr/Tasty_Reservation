@@ -23,6 +23,25 @@
             border-radius: 8px;
         }
     </style>
+    <!-- Google Maps API 키 추가 (유효한 키로 교체하세요) -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxtdZqbdS6d0jR-vYVhQOtICdiDXq8S_A&libraries=places&callback=initAutocomplete" async defer></script>
+    <script>
+        // Google Places API 주소 자동 완성 초기화
+        function initAutocomplete() {
+            // storeLocation 입력 필드에 자동완성 기능을 설정합니다.
+            var autocomplete = new google.maps.places.Autocomplete(document.getElementById('storeLocation'), {types: ['geocode']});
+            
+            // 주소 선택 후 이벤트 처리
+            autocomplete.addListener('place_changed', function() {
+                var place = autocomplete.getPlace();
+                if (!place.geometry) {
+                    return;
+                }
+                // 선택된 주소를 storeLocation 입력 필드에 자동으로 채웁니다.
+                document.getElementById('storeLocation').value = place.formatted_address;
+            });
+        }
+    </script>
 </head>
 <body>
     <div class="register-container">
@@ -56,12 +75,14 @@
 
             <div class="mb-3">
                 <label for="storePhone" class="form-label">전화번호</label>
-                <input type="tel" class="form-control" id="storePhone" name="storePhone" required placeholder="-없이 숫자만 입력">
+                <input type="tel" class="form-control" id="storePhone" name="storePhone" required placeholder="01012345678" pattern="^[0-9]{10,11}$" title="전화번호는 숫자만 입력해주세요.">
+                <small class="form-text text-muted">전화번호는 하이픈 없이 숫자만 입력해주세요.</small>
             </div>
 
             <div class="mb-3">
                 <label for="storeImage" class="form-label">가게 사진</label>
                 <input type="file" class="form-control" id="storeImage" name="storeImage" accept="image/*" required>
+                <small class="form-text text-muted">이미지 파일만 업로드 가능합니다.</small>
             </div>
 
             <button type="submit" class="btn btn-primary w-100">등록하기</button>
