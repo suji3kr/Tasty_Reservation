@@ -19,7 +19,7 @@ CREATE TABLE Restaurants (
 
 CREATE TABLE Reservations (
     reservation_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT,
+    id int,
     restaurant_id INT,
     reservation_date DATETIME NOT NULL,
     status VARCHAR(20) DEFAULT 'Pending',
@@ -35,7 +35,7 @@ CREATE TABLE Admins (
 
 CREATE TABLE Notifications (
     notification_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT,
+    id INT,
     message TEXT NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
@@ -48,3 +48,4 @@ CREATE TABLE Payments (
     payment_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (reservation_id) REFERENCES Reservations(reservation_id)
 );
+
