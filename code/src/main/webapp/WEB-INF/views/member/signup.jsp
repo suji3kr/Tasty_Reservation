@@ -92,46 +92,39 @@ body {
 			</div>
 
 			<script>
-				document
-						.addEventListener(
-								'DOMContentLoaded',
-								function() {
-									const birthdateInput = document
-											.getElementById('birthdate');
-									const ageInput = document
-											.getElementById('age');
-									birthdateInput
-											.addEventListener(
-													'change',
-													function() {
-														const birthdateValue = this.value;
-														if (birthdateValue) {
-															const birthdate = new Date(
-																	birthdateValue);
-															const today = new Date();
-															let age = today
-																	.getFullYear()
-																	- birthdate
-																			.getFullYear();
-															const monthDiff = today
-																	.getMonth()
-																	- birthdate
-																			.getMonth();
-
-															// 생년월일이 올해 아직 지나지 않은 경우 나이를 조정
-															if (monthDiff < 0
-																	|| (monthDiff === 0 && today
-																			.getDate() < birthdate
-																			.getDate())) {
-																age--;
-															}
-															ageInput.value = age;
-														} else {
-															ageInput.value = '';
-														}
-													});
-								});
+				document.addEventListener('DOMContentLoaded', function() {
+				    const birthdateInput = document.getElementById('birthdate');
+				    const ageInput = document.getElementById('age');
+				
+				    birthdateInput.addEventListener('change', function() {
+				        const birthdateValue = this.value;
+				
+				        if (birthdateValue) {
+				            const birthdate = new Date(birthdateValue);
+				            const today = new Date();
+				            let age = today.getFullYear() - birthdate.getFullYear();
+				            const monthDiff = today.getMonth() - birthdate.getMonth();
+				
+				            // 생년월일이 올해 아직 지나지 않은 경우 나이를 조정
+				            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthdate.getDate())) {
+				                age--;
+				            }
+				
+				            // 나이가 음수거나 200살이 넘는 경우 경고 표시 및 입력 초기화
+				            if (age < 0 || age > 200) {
+				                alert("올바른 생년월일을 입력해주세요. 나이는 0 이상 200 이하로 입력해야 합니다.");
+				                ageInput.value = ''; // 나이 필드를 비웁니다.
+				                birthdateInput.value = ''; // 잘못된 생년월일 입력을 초기화합니다.
+				            } else {
+				                ageInput.value = age; // 정상적인 나이를 입력합니다.
+				            }
+				        } else {
+				            ageInput.value = ''; // 생년월일이 비어있으면 나이 필드도 비웁니다.
+				        }
+				    });
+				});
 			</script>
+
 
 			<div class="mb-3">
 				<label for="phone" class="form-label">핸드폰번호</label> <input
