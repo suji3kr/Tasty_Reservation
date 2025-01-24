@@ -40,6 +40,12 @@
             overflow: hidden;
         }
 
+		.photo-frame {
+			width : 300px;
+			position: relative;
+			border-radius: 15px;
+			overflow: hidden;
+		}
         /* 양쪽 사진은 동일한 크기로 */
         .photo-frame.small {
             flex: 2; 
@@ -50,12 +56,30 @@
             flex: 2; /* 두 배로 크기를 설정 */
         }
 
-        .photo-frame img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
+		.photo-frame img {
+			width: 100%;
+			height: 300px;
+			display: flex;
+			justify-content: space-between;
+		}
+		
+		
+		.bottom-row {
+			width : 1200px;
+			height : auto;
+			margin: 30px auto;
+			text-align: center;
+			
+			}
+		
+		.bottom-row img {
+			width : 100 %;
+			height : 100% ;
+			object-fit: cover; /* 이미지가 컨테이너를 꽉 채우도록 설정 */
+		    object-position: center; /* 이미지의 중심을 기준으로 자르기 */
+		    border-radius: 15px;
+		}
+        
         /* 텍스트와 버튼 오버레이 스타일 */
         .overlay {
             position: absolute;
@@ -80,7 +104,7 @@
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
         }
 
-        .overlay a {
+        .overlay button {
             padding: 10px 20px;
             font-size: 1rem;
             color: #fff;
@@ -92,7 +116,7 @@
             text-decoration: none; /* 링크 텍스트 장식 제거 */
         }
 
-        .overlay a:hover {
+        .overlay button:hover {
             background-color: #e66800;
         }
     </style>
@@ -106,17 +130,16 @@
                 <img src="/resources/image/레스토랑1.png" alt="Image 1">
             </div>
 
-            <!-- 가운데 사진 (가로로 더 길게) -->
-            <div class="photo-frame large">
-                <img src="/resources/image/송아지스테이크.png" alt="Image 2">
-                <!-- 오버레이 콘텐츠 -->
-                <div class="overlay">
-                    <h1>Art Of Reservation</h1>
-                    <p>여행의 미학</p>
-                    <!-- 버튼을 링크로 변경 -->
-                    <a href="/board/list">지금 바로 예약하기</a>
-                </div>
-            </div>
+			<!-- 가운데 사진 (가로로 더 길게) -->
+			<div class="photo-frame small">
+				<img src="/resources/image/송아지스테이크.png" alt="Image 2">
+				<!-- 오버레이 콘텐츠 -->
+				<div class="overlay">
+					<h1>Art Of Reservation</h1>
+					<p>여행의 미학</p>
+					<button>Where are you headed?</button>
+				</div>
+			</div>
 
             <!-- 오른쪽 사진 -->
             <div class="photo-frame small">
