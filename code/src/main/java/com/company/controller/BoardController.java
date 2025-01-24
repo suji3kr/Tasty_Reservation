@@ -122,5 +122,10 @@ public class BoardController {
 		return "/board/favfood"; // view 이름
 	}
 	
+	@GetMapping("/familyreservation")
+	public String getFamilyReservation() {
+		return "/board/familyreservation"; // view 이름
+	}
+	
 	 
 }

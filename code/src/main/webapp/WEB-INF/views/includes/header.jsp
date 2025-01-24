@@ -163,7 +163,7 @@
                     <li>
                         <a href="#"><b>Thema</b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">가족/단체예약</a></li>
+                            <li><a href="/board/familyreservation">가족/단체예약</a></li>
                             <li><a href="#">프라이빗데이트</a></li>
                             <li><a href="#">키즈/노키즈</a></li>
                             <li><a href="#">파티룸</a></li>
