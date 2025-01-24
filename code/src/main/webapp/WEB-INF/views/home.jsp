@@ -104,7 +104,7 @@
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
         }
 
-        .overlay a {
+        .overlay button {
             padding: 10px 20px;
             font-size: 1rem;
             color: #fff;
@@ -116,7 +116,7 @@
             text-decoration: none; /* 링크 텍스트 장식 제거 */
         }
 
-        .overlay a:hover {
+        .overlay button:hover {
             background-color: #e66800;
         }
     </style>
