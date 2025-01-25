@@ -1,3 +1,10 @@
+use webdb;
+drop table if exists Users;
+drop table if exists reservations;
+drop table if exists admins;
+drop table if exists restaurants;
+drop table if exists store_registration;
+
 CREATE TABLE Users (
     id bigint primary key auto_increment,
     username VARCHAR(50) NOT NULL,
@@ -8,6 +15,13 @@ CREATE TABLE Users (
     gender ENUM('M', 'F') NOT NULL
 );
 
+CREATE TABLE Restaurants (
+    restaurant_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    location VARCHAR(255),
+    phone VARCHAR(20),
+    category VARCHAR(50)
+);
 
 CREATE TABLE store_registration (
     id INT AUTO_INCREMENT PRIMARY KEY,        -- 가게 고유 ID
@@ -21,13 +35,15 @@ CREATE TABLE store_registration (
 
 CREATE TABLE Reservations (
     reservation_id INT AUTO_INCREMENT PRIMARY KEY,
-    id int,
+    id BIGINT,  -- Users 테이블의 id 타입과 일치시킴
     restaurant_id INT,
     reservation_date DATETIME NOT NULL,
     status VARCHAR(20) DEFAULT 'Pending',
-    FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    FOREIGN KEY (id) REFERENCES Users(id),
     FOREIGN KEY (restaurant_id) REFERENCES Restaurants(restaurant_id)
 );
+
+
 
 CREATE TABLE Admins (
     admin_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -37,10 +53,10 @@ CREATE TABLE Admins (
 
 CREATE TABLE Notifications (
     notification_id INT AUTO_INCREMENT PRIMARY KEY,
-    id INT,
+    id bigint,
     message TEXT NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES Users(user_id)
+    FOREIGN KEY (id) REFERENCES Users(id)
 );
 
 CREATE TABLE Payments (
@@ -50,4 +66,5 @@ CREATE TABLE Payments (
     payment_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (reservation_id) REFERENCES Reservations(reservation_id)
 );
+
 
