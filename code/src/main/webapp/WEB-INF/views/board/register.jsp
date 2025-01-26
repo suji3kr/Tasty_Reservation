@@ -62,7 +62,7 @@
 
         <div class="mb-3">
             <label for="storePhone" class="form-label">전화번호</label>
-            <input type="tel" class="form-control" id="storePhone" name="storePhone" required placeholder="01012345678" pattern="^[0-9]{10,11}$" title="전화번호는 숫자만 입력해주세요.">
+            <input type="tel" class="form-control" id="storePhone" name="storePhone" required placeholder="01012345678" pattern="^[0-9]{10,11}$" title="전화번호는 10-11자 숫자만 입력해주세요.">
             <small class="form-text text-muted">전화번호는 하이픈 없이 숫자만 입력해주세요.</small>
         </div>
 
