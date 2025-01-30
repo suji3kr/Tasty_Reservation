@@ -1,3 +1,0 @@
-INDEX VERSION 1.131+C:\Users\home\Desktop\Tasty\.metadata\.plugins\org.eclipse.jdt.core
-1865797976.index
-1838168659.index

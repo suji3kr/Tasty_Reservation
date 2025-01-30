@@ -50,8 +50,13 @@
         </div>
 
         <div class="mb-3">
+<<<<<<< HEAD
+            <label for="storeType" class="form-label">종류</label>
+            <select class="form-control" id="storeType" name="storeType" required>
+=======
             <label for="storeCategory" class="form-label">종류</label>
             <select class="form-control" id="storeCategory" name="storeCategory" required>
+>>>>>>> main
                 <option value="">선택하세요</option>
                 <option value="한식">한식</option>
                 <option value="양식">양식</option>
@@ -61,8 +66,13 @@
         </div>
 
         <div class="mb-3">
+<<<<<<< HEAD
+            <label for="storePhone" class="form-label">전화번호</label>
+            <input type="tel" class="form-control" id="storePhone" name="storePhone" required placeholder="01012345678" pattern="^[0-9]{10,11}$" title="전화번호는 10-11자 숫자만 입력해주세요.">
+=======
             <label for="phoneNumber" class="form-label">전화번호</label>
             <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" required placeholder="01012345678" pattern="^[0-9]{10,11}$" title="전화번호는 10-11자 숫자만 입력해주세요.">
+>>>>>>> main
             <small class="form-text text-muted">전화번호는 하이픈 없이 숫자만 입력해주세요.</small>
         </div>
 

@@ -50,8 +50,8 @@
         </div>
 
         <div class="mb-3">
-            <label for="storeType" class="form-label">종류</label>
-            <select class="form-control" id="storeType" name="storeType" required>
+            <label for="storeCategory" class="form-label">종류</label>
+            <select class="form-control" id="storeCategory" name="storeCategory" required>
                 <option value="">선택하세요</option>
                 <option value="한식">한식</option>
                 <option value="양식">양식</option>
@@ -61,16 +61,29 @@
         </div>
 
         <div class="mb-3">
-            <label for="storePhone" class="form-label">전화번호</label>
-            <input type="tel" class="form-control" id="storePhone" name="storePhone" required placeholder="01012345678" pattern="^[0-9]{10,11}$" title="전화번호는 숫자만 입력해주세요.">
+            <label for="phoneNumber" class="form-label">전화번호</label>
+            <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" required placeholder="01012345678" pattern="^[0-9]{10,11}$" title="전화번호는 10-11자 숫자만 입력해주세요.">
             <small class="form-text text-muted">전화번호는 하이픈 없이 숫자만 입력해주세요.</small>
         </div>
 
-        <div class="mb-3">
-            <label for="storeImage" class="form-label">가게 사진</label>
-            <input type="file" class="form-control" id="storeImage" name="storeImage" accept="image/*" required>
-            <small class="form-text text-muted">이미지 파일만 업로드 가능합니다.</small>
-        </div>
+       <div class="mb-3">
+    	<label for="storeImage" class="form-label">가게 사진</label>
+	    <input type="file" class="form-control" id="storeImage" name="storeImage" accept="image/png, image/jpeg, image/jpg, image/gif, image/webp" required>
+	    <small class="form-text text-muted">이미지 파일(.jpg, .jpeg, .png, .gif, .webp)만 업로드 가능합니다.</small>
+	</div>
+	
+		<script>
+		    document.getElementById("storeImage").addEventListener("change", function() {
+		        const file = this.files[0];
+		        if (file) {
+		            const allowedExtensions = ["image/png", "image/jpeg", "image/jpg", "image/gif", "image/webp"];
+		            if (!allowedExtensions.includes(file.type)) {
+		                alert("이미지 파일(.jpg, .jpeg, .png, .gif, .webp)만 업로드 가능합니다.");
+		                this.value = ""; // 파일 입력 초기화
+		            }
+		        }
+		    });
+		</script>
 
         <button type="submit" class="btn btn-primary w-100">등록하기</button>
     </form>
@@ -85,6 +98,11 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <!-- 검색 입력창 + 검색 버튼 -->
+                <div class="input-group mb-2">
+                    <input id="locationSearch" class="form-control" type="text" placeholder="주소 또는 장소 검색">
+                    <button id="searchLocationBtn" class="btn btn-primary">검색</button>
+                </div>
                 <div id="map" style="height: 400px; width: 100%;"></div>
             </div>
             <div class="modal-footer">
@@ -96,7 +114,7 @@
 </div>
 
 <footer>
-    <p>&copy; 2025 YourCompany. All rights reserved.</p>
+    <p>&copy; 2025 Art Of Reservation. All rights reserved.</p>
 </footer>
 
 <!-- Bootstrap JS and dependencies -->
@@ -114,6 +132,8 @@
         const mapModal = document.getElementById('mapModal');
         const storeLocationInput = document.getElementById('storeLocation');
         const confirmLocationButton = document.getElementById('confirmLocation');
+        const locationSearch = document.getElementById('locationSearch');
+        const searchLocationBtn = document.getElementById('searchLocationBtn');
 
         mapModal.addEventListener('shown.bs.modal', () => {
             if (!map) {
@@ -129,12 +149,32 @@
                 });
 
                 map.addListener('click', (event) => {
-                    const position = event.latLng;
-                    marker.setPosition(position);
+                    marker.setPosition(event.latLng);
                 });
             }
         });
 
+        // 검색 버튼 클릭 시 실행
+        searchLocationBtn.addEventListener('click', () => {
+            const address = locationSearch.value;
+            if (!address) {
+                alert("검색할 주소를 입력하세요.");
+                return;
+            }
+
+            geocoder.geocode({ address: address }, (results, status) => {
+                if (status === "OK" && results[0]) {
+                    const location = results[0].geometry.location;
+                    map.setCenter(location);
+                    map.setZoom(15);
+                    marker.setPosition(location);
+                } else {
+                    alert("검색 결과를 찾을 수 없습니다.");
+                }
+            });
+        });
+
+        // 확인 버튼 클릭 시 위치 저장
         confirmLocationButton.addEventListener('click', () => {
             if (marker) {
                 const position = marker.getPosition();
