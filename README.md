@@ -1,4 +1,4 @@
-### *Tasty_Reservation*
+### *Art Of Reservation*
 
 -------------------------------
 <br>
@@ -13,10 +13,12 @@
 
 >* ### 작업 순서 정리 
 
+
+
 #### 미림 - Thema 와 Myprofile 목차 안에 들어갈 jsp 작업 진행 하기
 board/ ---- jsp
 
-#### 영웅 - Hotspot 과 Favorite 목차 안에 들어갈 jsp 작업 진행하기 
+#### 영웅 - Hotspot 과 Favorite 목차 안에 들어갈 jsp 작업 진행 하기 
 board/ ---- jsp
 
 #### 민우 - 가게 등록 sql, 데이터 DB에 저장되게 하는 것, API 수정

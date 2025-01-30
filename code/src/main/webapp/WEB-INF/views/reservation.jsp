@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="./includes/header.jsp" %>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
+
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -25,6 +27,8 @@
     </style>
 </head>
 <body>
+<!-- Tiles 헤더 삽입 -->
+<tiles:insertAttribute name="header" />
     <div class="reservation-container">
         <h2 class="text-center">예약하기</h2>
         <form action="/reservation/submit" method="post">
@@ -65,3 +69,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+<tiles:insertAttribute name="footer"/>

@@ -3,8 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<%@include file="../includes/header.jsp"%>
-
 <div class="row">
 	<div class="col-lg-12">
 		<h1 class="page-header">Board Read</h1>
@@ -351,4 +349,4 @@ $(document).ready(function() {
 
 	})
 </script>
-<%@include file="../includes/footer.jsp"%>
+

@@ -1,0 +1,7 @@
+INDEX VERSION 1.4+C:\Users\home\Desktop\Tasty\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+1838168659.index
+2836458698.index
+3672193805.index
+2835677723.index
+1935378236.index
+1361430598.index
