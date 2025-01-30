@@ -68,14 +68,14 @@ public class StoreController {
         StoreDTO storeDTO = new StoreDTO(storeName, storeLocation, storeDescription, storeCategory, phoneNumber, "/uploads/" + fileName);
         storeService.insertStore(storeDTO);
 
-        return "redirect:/store/storelist";  // 가게 목록으로 이동
+        return "redirect:/store/storeList";  // 가게 목록으로 이동
     }
 
     // 가게 목록 조회
-    @GetMapping("/storelist")
+    @GetMapping("/storeList")
     public String listStores(Model model) {
         List<StoreDTO> stores = storeService.getAllStores();
         model.addAttribute("stores", stores);
-        return "store/storelist";  // JSP 경로 수정 (store 폴더 안의 storelist.jsp로 연결)
+        return "store/storeList";  // JSP 경로 수정 (store 폴더 안의 storelist.jsp로 연결)
     }
 }
