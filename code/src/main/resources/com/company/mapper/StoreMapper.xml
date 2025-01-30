@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.company.mapper.StoreMapper">
+
+    <!-- 가게 정보 등록 -->
+    <insert id="insertStore" parameterType="com.company.domain.StoreDTO">
+        INSERT INTO store_registration 
+        (store_name, store_location, store_description, store_category, phone_number, store_image)
+        VALUES (#{storeName}, #{storeLocation}, #{storeDescription}, #{storeCategory}, #{phoneNumber}, #{storeImage});
+    </insert>
+
+    <!-- 모든 가게 조회 -->
+    <select id="getAllStores" resultType="com.company.domain.StoreDTO">
+        SELECT * FROM store_registration ORDER BY id DESC;
+    </select>
+
+</mapper>
