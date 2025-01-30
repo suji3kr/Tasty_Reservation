@@ -2,11 +2,8 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,macos,git,java,maven,eclipse,intellij,gradle,netbeans,visualstudiocode
 
 ### Eclipse ###
-!bin/
-!.classpath
-!.project
-
 .metadata
+bin/
 tmp/
 *.tmp
 *.bak
@@ -16,6 +13,7 @@ local.properties
 .settings/
 .loadpath
 .recommenders
+target/
 
 # External tool builders
 .externalToolBuilders/
@@ -140,7 +138,6 @@ cmake-build-*/
 *.iws
 
 # IntelliJ
-!.idea/
 out/
 
 # mpeltonen/sbt-idea plugin
@@ -261,7 +258,7 @@ Temporary Items
 *.icloud
 
 ### Maven ###
-!target/
+target/
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
@@ -283,6 +280,7 @@ buildNumber.properties
 **/nbproject/private/
 **/nbproject/Makefile-*.mk
 **/nbproject/Package-*.bash
+build/
 nbbuild/
 dist/
 nbdist/
@@ -335,7 +333,7 @@ $RECYCLE.BIN/
 
 ### Gradle ###
 .gradle
-!**/build/
+**/build/
 !src/**/build/
 
 # Ignore Gradle GUI config
