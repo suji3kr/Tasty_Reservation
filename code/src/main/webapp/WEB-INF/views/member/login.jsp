@@ -10,6 +10,8 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
 	rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/header.css">
 <style>
 body {
 	font-family: 'Roboto', sans-serif;
@@ -33,20 +35,18 @@ body {
 		<form action="/member/login" method="post">
 			<div class="mb-3">
 				<label for="email" class="form-label">이메일</label> <input
-					type="email" class="form-control" id="email" name="email" placeholder="이메일을 입력하세요." required>
+					type="email" class="form-control" id="email" name="email"
+					placeholder="이메일을 입력하세요." required>
 			</div>
 			<div class="mb-3">
 				<label for="password" class="form-label">비밀번호</label> <input
-					type="password" class="form-control" id="password" name="password" placeholder="비밀번호를 입력하세요."
-					required>
+					type="password" class="form-control" id="password" name="password"
+					placeholder="비밀번호를 입력하세요." required>
 			</div>
 			<button type="submit" class="btn btn-primary w-100">로그인</button>
 		</form>
 	</div>
-	<footer>
-		<p>&copy; 2025 YourCompany. All rights reserved.</p>
-	</footer>
-
+	<%@ include file="../includes/footer.jsp"%>
 	<!-- Bootstrap JS and dependencies -->
 	<script
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

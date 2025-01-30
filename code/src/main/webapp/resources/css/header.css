@@ -1,0 +1,124 @@
+body {
+	font-family: 'Roboto', sans-serif;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	background-color: #f4f7fc;
+}
+/* 헤더 스타일 */
+header {
+	background-color: white;
+	border-bottom: 1px solid #e7e7e7;
+}
+
+.head-container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 10px 10px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.logo {
+	font-size: 24px;
+	font-weight: bold;
+	color: #4e7300;
+	text-decoration: none;
+}
+
+nav {
+	display: flex;
+}
+
+nav ul {
+	list-style: none;
+	display: flex;
+	margin: 0;
+	padding: 0;
+}
+
+nav ul li {
+	position: relative;
+	margin-right: 20px;
+	font-size: 16px;
+}
+
+nav ul li a {
+	text-decoration: none;
+	color: #ccc;
+	padding: 5px 10px;
+}
+
+nav ul li a:hover {
+	color: #4e7300;
+}
+
+.dropdown-menu {
+	display: none;
+	position: absolute;
+	top: 25px;
+	left: 0;
+	background-color: #f2f2f2;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+	overflow: hidden;
+	z-index: 1000;
+	width: auto;
+	padding: 5px 10px;
+}
+
+.dropdown-menu li {
+	padding: 3px 0;
+}
+
+.dropdown-menu li a {
+	font-size: 12px;
+	color: gray;
+	text-decoration: none;
+	white-space: nowrap;
+	padding: 3px 10px;
+}
+
+.dropdown-menu li a:hover {
+	background-color: #e0e0e0;
+}
+
+nav ul li:hover .dropdown-menu {
+	display: block;
+}
+
+.buttons {
+	display: flex;
+	gap: 10px;
+}
+
+.buttons .btn {
+	padding: 6px 12px;
+	border-radius: 5px;
+	font-size: 13px;
+	font-weight: bold;
+	text-align: center;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.btn-green {
+	background-color: #4e7300;
+	color: white;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.btn-green:hover {
+	background-color: #3b5a00;
+}
+
+.btn-black {
+	background-color: black;
+	color: white;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.btn-black:hover {
+	background-color: #333;
+}

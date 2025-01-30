@@ -60,13 +60,13 @@ public class MemberController {
 		boolean loginResult = memberService.login(memberDTO);
 		if(loginResult) {
 			session.setAttribute("loginEmail", memberDTO.getEmail());
-			return "/member/main";
+			System.out.println("로그인되었습니다.");
+			return "redirect:/";
 		}else {
 			return "/member/login";
 		}
 	}
 	
-	// �긽�꽭議고쉶/member?id=1
 	@GetMapping
 	  public String findById(@RequestParam("id") Long id, Model model){
 	    MemberDTO memberDTO = memberService.findById(id);
@@ -77,7 +77,7 @@ public class MemberController {
 	@GetMapping("/delete")
 	  public String delete(@RequestParam("id") Long id){
 	    memberService.delete(id);
-	    return "/";
+	    return "redirect:/";
 	  }
 	
 	@GetMapping("/update")
