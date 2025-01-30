@@ -1,7 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java"%>
-<%@ include file="../includes/header.jsp"%>
+
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
+
+
 <!DOCTYPE html>
 <html lang="ko">
+<tiles:insertAttribute name="header"/>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -92,4 +96,6 @@
     </div>
 
 </body>
+
 </html>
+<tiles:insertAttribute name="footer"/>

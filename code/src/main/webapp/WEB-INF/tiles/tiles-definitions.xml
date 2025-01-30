@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+    "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+    <!-- 기본 템플릿 -->
+    <definition name="base" template="/WEB-INF/includes/layout.jsp">
+        <put-attribute name="header" value="/WEB-INF/includes/header.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/includes/footer.jsp" />
+    </definition>
+
+    <!-- Home 페이지 -->
+    <definition name="home" extends="base">
+        <put-attribute name="mainImage" value="/WEB-INF/includes/mainImage.jsp" />
+        <put-attribute name="content" value="/WEB-INF/includes/content.jsp" />
+    </definition>
+
+   <definition name="/board" extends="baseLayout">
+      <put-attribute name="title" value="게시판관리" />
+      <put-attribute name="body" value="/WEB-INF/views/member/boardForm.jsp" />
+   </definition>
+
+   <definition name="/product" extends="baseLayout">
+      <put-attribute name="title" value="상품관리" />
+      <put-attribute name="body" value="/WEB-INF/views/member/productForm.jsp" />
+   </definition>
+   
+</tiles-definitions>

@@ -2,12 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ include file="../includes/header.jsp"%>
+
 <div class="row">
 	<div class="col-lg-12">
 		<h1 class="page-header">Tables</h1>
 	</div>
-	<!-- /.col-lg-12 -->
+
 </div>
 <!-- /.row -->
 <div class="row">
@@ -139,7 +139,7 @@
 		</div>
 		<!-- /.panel -->
 	</div>
-	<!-- /.col-lg-6 -->
+
 </div>
 <!-- /.row -->
 <!-- jQuery 추가 -->
@@ -227,4 +227,4 @@
 					});
 </script>
 
-<%@ include file="../includes/footer.jsp"%>
+
