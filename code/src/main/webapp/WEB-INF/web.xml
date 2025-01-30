@@ -29,6 +29,13 @@
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
+		
+		<!-- multipart-config 추가 -->
+    <multipart-config>
+        <max-file-size>10485760</max-file-size> <!-- 최대 파일 크기 10MB -->
+        <max-request-size>20971520</max-request-size> <!-- 최대 요청 크기 20MB -->
+        <file-size-threshold>0</file-size-threshold> <!-- 즉시 메모리에 파일을 로드 -->
+    </multipart-config>
 	</servlet>
 
 	<servlet-mapping>
@@ -53,6 +60,8 @@
 		<filter-name>characterEncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	
 
+	
 
 </web-app>
