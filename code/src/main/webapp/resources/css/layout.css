@@ -1,0 +1,110 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* 전체 컨테이너 */
+#container {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* 헤더 스타일 */
+#header {
+    padding: 15px;
+    background-color: white;
+    border-bottom: 2px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: green;
+}
+/* 
+#nav-menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 15px;
+}
+
+#nav-menu li {
+    display: inline;
+    font-size: 14px;
+}
+
+#nav-menu a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+ */
+
+/* 메인 배너 */
+#main-banner {
+    width: 100%;
+    height: 250px;
+    background: url('/images/main-banner.jpg') center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* 카드형 UI */
+#card-section {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.card {
+    width: 200px;
+    height: 150px;
+    background-color: black;
+    border-radius: 10px;
+}
+
+/* 메인 컨텐츠 */
+#content {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+}
+
+/* 지도 및 정보 */
+#info-section {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    background-color: #f8f8f8;
+}
+
+#map {
+    width: 300px;
+    height: 200px;
+    background-color: #ddd;
+    margin-right: 20px;
+}
+
+#info-box {
+    width: 300px;
+    text-align: left;
+}
+
+/* 푸터 */
+#footer {
+    padding: 15px;
+  
+}

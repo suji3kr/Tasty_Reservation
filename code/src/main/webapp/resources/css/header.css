@@ -5,11 +5,7 @@ body {
 	box-sizing: border-box;
 	background-color: #f4f7fc;
 }
-/* 헤더 스타일 */
-header {
-	background-color: white;
-	border-bottom: 1px solid #e7e7e7;
-}
+
 
 .head-container {
 	max-width: 1200px;
@@ -121,4 +117,45 @@ nav ul li:hover .dropdown-menu {
 
 .btn-black:hover {
 	background-color: #333;
+}
+
+
+#nav-menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 15px;
+}
+
+#nav-menu li {
+    display: inline;
+    font-size: 14px;
+}
+
+#nav-menu a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+#auth-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+#auth-buttons a {
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+#login {
+    border: 1px solid green;
+    color: green;
+}
+
+#signup {
+    background-color: green;
+    color: white;
 }
