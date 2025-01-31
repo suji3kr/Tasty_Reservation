@@ -124,12 +124,9 @@ body {
 </head>
 <body>
 
-<!-- Tiles 헤더 삽입 -->
-    <tiles:insertAttribute name="header" />
 
     <!-- 메인 이미지 섹션 -->
     <section id="home">
-        <tiles:insertAttribute name="home"/>
 	
 		<div class="container">
 			<!-- 상단 사진 3개 -->
@@ -174,4 +171,3 @@ body {
 </body>
 </html>
 
-<tiles:insertAttribute name="footer"/>

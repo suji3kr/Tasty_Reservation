@@ -135,7 +135,12 @@
 		    <artifactId>tiles-jsp</artifactId>
 		    <version>3.0.8</version>
 		</dependency>
-		
+		<dependency>
+	        <groupId>org.apache.tiles</groupId>
+	        <artifactId>tiles-api</artifactId>
+	        <version>3.0.8</version> <!-- 버전은 적절하게 맞춰주세요 -->
+	    </dependency>
+	    
 
 		<!-- Test -->
 		<dependency>

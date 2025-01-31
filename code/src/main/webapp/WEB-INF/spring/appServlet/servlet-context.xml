@@ -15,22 +15,20 @@
     <mvc:resources mapping="/resources/**" location="/resources/" />
 
     <!-- Tiles 설정 추가 -->
-	<bean id="tilesConfigurer"
-	      class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
-	    <property name="definitions">
-	        <list>
-	            <value>/WEB-INF/tiles/tiles-definitions.xml</value>
-	        </list>
-	    </property>
-	    <property name="checkRefresh" value="tsrue"/>
-	</bean>
-    <!-- Tiles 뷰 리졸버 설정 -->
-    <bean id="viewResolver"
-          class="org.springframework.web.servlet.view.UrlBasedViewResolver">
-        <property name="viewClass"
-                  value="org.springframework.web.servlet.view.tiles3.TilesView" />
-        <property name="order" value="0"/>
+	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>classpath:tiles-definitions.xml</value> <!-- tiles 정의 파일 경로 -->
+            </list>
+        </property>
+      <property name="preparerFactoryClass"
+			value="org.springframework.web.servlet.view.tiles3.SpringBeanPreparerFactory" />
     </bean>
+    <bean class="org.springframework.web.servlet.view.tiles3.TilesViewResolver">
+        <property name="order" value="0"/> <!-- 뷰 리졸버 우선 순위 설정 -->
+    </bean>
+    
+
 
     <!-- MyBatis 매퍼 스캐너 설정 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
