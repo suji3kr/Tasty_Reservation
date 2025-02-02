@@ -1,12 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java"%>
-<%@ include file="../includes/header.jsp"%>
-<!DOCTYPE html>
-<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>즐겨찾는 맛집</title>
-
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -92,4 +85,6 @@
     </div>
 
 </body>
+<tiles:insertAttribute name="footer"/>
 </html>
+

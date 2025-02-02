@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ include file="./includes/header.jsp"%>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -122,37 +123,43 @@ body {
 </style>
 </head>
 <body>
-	<div class="container">
-		<!-- 상단 사진 3개 -->
-		<div class="top-row">
-			<!-- 왼쪽 사진 -->
-			<div class="photo-frame small">
-				<img src="/resources/image/레스토랑1.png" alt="Image 1">
-			</div>
 
-			<!-- 가운데 사진 (가로로 더 길게) -->
-			<div class="photo-frame small">
-				<img src="/resources/image/송아지스테이크.png" alt="Image 2">
-				<!-- 오버레이 콘텐츠 -->
-				<div class="overlay">
-					<h1>Art Of Reservation</h1>
-					<p>여행의 미학</p>
-					<!-- 버튼을 링크로 변경 -->
-					<a href="/board/list">지금 바로 예약하기</a>
+
+    <!-- 메인 이미지 섹션 -->
+    <section id="home">
+	
+		<div class="container">
+			<!-- 상단 사진 3개 -->
+			<div class="top-row">
+				<!-- 왼쪽 사진 -->
+				<div class="photo-frame small">
+					<img src="/resources/image/레스토랑1.png" alt="Image 1">
+				</div>
+	
+				<!-- 가운데 사진 (가로로 더 길게) -->
+				<div class="photo-frame small">
+					<img src="/resources/image/송아지스테이크.png" alt="Image 2">
+					<!-- 오버레이 콘텐츠 -->
+					<div class="overlay">
+						<h1>Art Of Reservation</h1>
+						<p>여행의 미학</p>
+						<!-- 버튼을 링크로 변경 -->
+						<a href="/board/list">지금 바로 예약하기</a>
+					</div>
+				</div>
+	
+				<!-- 오른쪽 사진 -->
+				<div class="photo-frame small">
+					<img src="/resources/image/연어레스토랑.png" alt="Image 3">
 				</div>
 			</div>
-
-			<!-- 오른쪽 사진 -->
-			<div class="photo-frame small">
-				<img src="/resources/image/연어레스토랑.png" alt="Image 3">
+	
+			<!-- 하단 큰 사진 -->
+			<div class="bottom-row">
+				<img src="/resources/image/과일스푼.png" alt="Image 4">
 			</div>
 		</div>
-
-		<!-- 하단 큰 사진 -->
-		<div class="bottom-row">
-			<img src="/resources/image/과일스푼.png" alt="Image 4">
-		</div>
-	</div>
+	</section>
 
 	<!-- 수정완료 후 메인으로 넘어갈 때 경고창으로 표시 -->
 	<c:if test="${not empty updateSuccess}">
@@ -160,7 +167,7 @@ body {
 			alert("수정이 완료되었습니다.");
 		</script>
 	</c:if>
-	
-	<%@ include file="./includes/footer.jsp"%>
+
 </body>
 </html>
+

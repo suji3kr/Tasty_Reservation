@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java"%>
-<%@ include file="../includes/header.jsp"%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -46,7 +46,7 @@ body {
 			<button type="submit" class="btn btn-primary w-100">로그인</button>
 		</form>
 	</div>
-	<%@ include file="../includes/footer.jsp"%>
+
 	<!-- Bootstrap JS and dependencies -->
 	<script
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

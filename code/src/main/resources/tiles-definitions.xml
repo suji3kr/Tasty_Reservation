@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+    "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+	<!-- 기본 템플릿 -->
+	<definition name="base"
+		template="/WEB-INF/includes/layout.jsp">
+		<put-attribute name="title" value="title sample" />
+		<put-attribute name="header"
+			value="/WEB-INF/includes/header.jsp" />
+		<put-attribute name="footer"
+			value="/WEB-INF/includes/footer.jsp" />
+	</definition>
+
+<!-- Home 페이지 -->
+	<definition name="home" extends="base">
+		<put-attribute name="title" value="home sample" />
+		<put-attribute name="mainImage"
+			value="/WEB-INF/includes/mainImage.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/home.jsp" />
+	</definition>
+
+<!-- board  -->
+	<definition name="board/list" extends="base">
+		<put-attribute name="title" value="가게 리스트" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/list.jsp" />
+	</definition>
+	<definition name="board/register" extends="base">
+		<put-attribute name="title" value="새로운 가게 등록" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/register.jsp" />
+	</definition>
+	<definition name="/board/favfood" extends="base">
+		<put-attribute name="title" value="즐겨찾는 맛집" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/favfood.jsp" />
+	</definition>
+	
+	
+<!-- member -->
+	<definition name="/member/login" extends="base">
+		<put-attribute name="login" value="로그인페이지" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/member/login.jsp" />
+	</definition>	
+	<definition name="/member/signup" extends="base">
+	    <put-attribute name="signup" value="회원가입 페이지" />
+	    <put-attribute name="body" value="/WEB-INF/views/member/signup.jsp" />
+	</definition>
+	
+	
+	
+	
+	
+	
+
+<!-- 황승현 영역 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 권민우 영역 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 박영웅 영역 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 강미림 영역 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</tiles-definitions>

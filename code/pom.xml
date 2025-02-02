@@ -11,7 +11,7 @@
 
 	<properties>
 		<java-version>11</java-version>
-		<org.springframework-version>5.0.8.RELEASE</org.springframework-version>
+		<org.springframework-version>5.3.26</org.springframework-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
@@ -115,6 +115,32 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
+		
+		<!-- tiles3 -->
+		
+		<dependency>
+		    <groupId>org.apache.tiles</groupId>
+		    <artifactId>tiles-core</artifactId>
+		    <version>3.0.8</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.apache.tiles</groupId>
+		    <artifactId>tiles-servlet</artifactId>
+		    <version>3.0.8</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.apache.tiles</groupId>
+		    <artifactId>tiles-jsp</artifactId>
+		    <version>3.0.8</version>
+		</dependency>
+		<dependency>
+	        <groupId>org.apache.tiles</groupId>
+	        <artifactId>tiles-api</artifactId>
+	        <version>3.0.8</version> <!-- 버전은 적절하게 맞춰주세요 -->
+	    </dependency>
+	    
 
 		<!-- Test -->
 		<dependency>
@@ -176,6 +202,16 @@
 			<version>2.9.8</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-request-servlet-wildcard</artifactId>
+			<version>1.0.7</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-digester</groupId>
+			<artifactId>commons-digester</artifactId>
+			<version>2.0</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

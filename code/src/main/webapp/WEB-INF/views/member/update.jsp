@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="../includes/header.jsp"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,6 +63,6 @@
 			<input type="button" value="수정" onclick="update()">
 		</form>
 	</div>
-	<%@ include file="../includes/footer.jsp"%>
+
 </body>
 </html>
