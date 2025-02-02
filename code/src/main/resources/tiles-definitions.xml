@@ -14,7 +14,7 @@
 			value="/WEB-INF/includes/footer.jsp" />
 	</definition>
 
-<!-- Home 페이지 -->
+	<!-- Home 페이지 -->
 	<definition name="home" extends="base">
 		<put-attribute name="title" value="home sample" />
 		<put-attribute name="mainImage"
@@ -23,7 +23,7 @@
 			value="/WEB-INF/views/home.jsp" />
 	</definition>
 
-<!-- board  -->
+	<!-- board -->
 	<definition name="board/list" extends="base">
 		<put-attribute name="title" value="가게 리스트" />
 		<put-attribute name="body"
@@ -39,26 +39,19 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/board/favfood.jsp" />
 	</definition>
-	
-	
-<!-- member -->
+
+
+	<!-- member -->
 	<definition name="/member/login" extends="base">
 		<put-attribute name="login" value="로그인페이지" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/member/login.jsp" />
-	</definition>	
-	<definition name="/member/signup" extends="base">
-	    <put-attribute name="signup" value="회원가입 페이지" />
-	    <put-attribute name="body" value="/WEB-INF/views/member/signup.jsp" />
 	</definition>
-	
-	
-	
-	
-	
-	
-
-<!-- 황승현 영역 -->
+	<definition name="/member/signup" extends="base">
+		<put-attribute name="signup" value="회원가입 페이지" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/member/signup.jsp" />
+	</definition>
 
 
 
@@ -66,17 +59,12 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-<!-- 권민우 영역 -->
+	<!-- 황승현 영역 -->
+	<definition name="/member/logout" extends="base">
+		<put-attribute name="logout" value="로그아웃페이지" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/member/logout.jsp" />
+	</definition>
 
 
 
@@ -93,10 +81,7 @@
 
 
 
-
-
-
-<!-- 박영웅 영역 -->
+	<!-- 권민우 영역 -->
 
 
 
@@ -116,10 +101,30 @@
 
 
 
+	<!-- 박영웅 영역 -->
 
 
 
-<!-- 강미림 영역 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- 강미림 영역 -->
 
 
 
