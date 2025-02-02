@@ -81,6 +81,8 @@
 
 
 
+
+
 	<!-- 권민우 영역 -->
 
 
@@ -125,8 +127,12 @@
 
 
 	<!-- 강미림 영역 -->
-
-
+	<!-- Home filter 추가 -->
+    <definition name="/board/familyreservation" extends="base">
+		<put-attribute name="title" value="단쳬예약" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/familyreservation.jsp" />
+	</definition>
 
 
 
