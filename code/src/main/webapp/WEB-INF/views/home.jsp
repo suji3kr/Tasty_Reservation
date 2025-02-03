@@ -237,10 +237,11 @@ body {
 									<c:forEach var="num" begin="1" end="12">
 										<option value="${num}">${num}명</option>
 									</c:forEach>
-									<option value="more">기타 (직접 입력)</option>
+									<option value="more">기타 </option>
 								</select> <input type="text" id="custom-guests" name="custom-guests"
 									placeholder="추가 인원 입력" style="display: none;">
 							</div>
+
 						</div>
 						<div class="section-divider">
 							<h3>별점 몇개 까지 허용하시겠습니까? 🚀</h3>
