@@ -96,6 +96,7 @@ body {
 	border-radius: 15px;
 	object-fit: cover;
 }
+
 </style>
 </head>
 <body>
@@ -155,12 +156,12 @@ body {
 							<option value="${num}">${num}명</option>
 						</c:forEach>
 						<option value="more">기타</option>
-					</select> <input type="text" id="kids" name="kids"
+					</select> <input type="text" id="custom-kids" name="custom-kids"
 						placeholder="추가 인원 입력" style="display: none;">
 				</div>
 			</div>
 			<div class="filter-group">
-				<button type="button"> 바로 찾아줄게 ✔</button>
+				<button type="button">바로 찾아줄게 ✔</button>
 			</div>
 		</div>
 
@@ -197,15 +198,7 @@ body {
 		locationSelect.value = 'seoul';
 	});
 
-	document
-			.getElementById('guests')
-			.addEventListener(
-					'change',
-					function() {
-						document.getElementById('custom-guests').style.display = (this.value === 'more') ? 'inline-block'
-								: 'none';
-					});
-
+	//지역 부가선택
 	document
 			.getElementById('location')
 			.addEventListener(
@@ -222,5 +215,63 @@ body {
 							subLocationSelect.innerHTML = "<option value='chungcheong'>충청도</option><option value='gangwon'>강원도</option><option value='jeolla'>전라도</option><option value='gyeongsang'>경상도</option><option value='jeju'>제주도</option>";
 						}
 					});
+
+	// 인원 입력 스크립트
+	document
+			.getElementById('guests')
+			.addEventListener(
+					'change',
+					function() {
+						// '기타'가 선택되면 'custom-guests' 입력 필드를 표시
+						document.getElementById('custom-guests').style.display = (this.value === 'more') ? 'inline-block'
+								: 'none';
+					});
+
+	// 'custom-guests' 입력 필드에 숫자만 입력할 수 있도록 하고, 입력 시 "명"을 자동으로 붙임
+	document.getElementById('custom-guests').addEventListener('input',
+			function(e) {
+				// 입력 값에서 "명"이 이미 붙어 있는지를 확인하고 제거
+				let value = e.target.value;
+				if (value.endsWith('명')) {
+					value = value.slice(0, -1);
+				}
+				// 입력 값 중 숫자가 아닌 모든 문자를 제거
+				value = value.replace(/\D/g, '');
+				// 숫자가 있을 경우에만 "명"을 붙여 입력 필드에 설정
+				if (value) {
+					e.target.value = value + '명';
+				} else {
+					e.target.value = '';
+				}
+			});
+
+	// 아이 인원 입력 스크립트
+	document
+			.getElementById('kids')
+			.addEventListener(
+					'change',
+					function() {
+						// '기타'가 선택되면 'custom-kids' 입력 필드를 표시
+						document.getElementById('custom-kids').style.display = (this.value === 'more') ? 'inline-block'
+								: 'none';
+					});
+
+	// 'custom-kids' 입력 필드에 숫자만 입력할 수 있도록 하고, 입력 시 "명"을 자동으로 붙임
+	document.getElementById('custom-kids').addEventListener('input',
+			function(e) {
+				// 입력 값에서 "명"이 이미 붙어 있는지를 확인하고 제거
+				let value = e.target.value;
+				if (value.endsWith('명')) {
+					value = value.slice(0, -1);
+				}
+				// 입력 값 중 숫자가 아닌 모든 문자를 제거
+				value = value.replace(/\D/g, '');
+				// 숫자가 있을 경우에만 "명"을 붙여 입력 필드에 설정
+				if (value) {
+					e.target.value = value + '명';
+				} else {
+					e.target.value = '';
+				}
+			});
 </script>
 </html>
