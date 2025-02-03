@@ -4,29 +4,45 @@
 <br>
 
 >
- ![Image](https://github.com/user-attachments/assets/6bafc097-eaae-49d9-98d8-8f975b83bbfe)
+![image](https://github.com/user-attachments/assets/b9df2b14-e421-48d4-8779-f7ce566bf330)
+
 
 <br><br>
 -------------
 <br>
 
 
->* ### 작업 순서 정리 
+> ### Tiles 설정 변동사항
 
+#### merge 전 체크할 부분 *공지사항읽어주세요 :) 
 
+  공동 수정할 파일부분에서 같은 영역에 동시수정되지
+않았는지 확인한다>>  오류나면 스스로 내용추합해야함.
 
-#### 미림 - Thema 와 Myprofile 목차 안에 들어갈 jsp 작업 진행 하기
-board/ ---- jsp
+* xml 변동있을시 단체톡방 또는 깃 이슈에 언급해서 실시간으로 올려주세요*  >> 동시올리실 분은 이미 올린해당브렌치 간 후 내것도 추가 수정해서 머지해야 오류가 덜납니다. 
 
-#### 영웅 - Hotspot 과 Favorite 목차 안에 들어갈 jsp 작업 진행 하기 
-board/ ---- jsp
+#### tiles_definitions.xml 
+동시수정 부분 영역 나눠두었습니다.  
+본인영역의 라인사용하고 상대부분 영역의 라인을 변경하지않게 수정하면 됩니다. 
 
-#### 민우 - 가게 등록 sql, 데이터 DB에 저장되게 하는 것, API 수정
-board/register
+##### tiles  3버전 관련소스가 적습니다. ✔️지금 3 쓰고있음
+Gpt가 2버전 소스를 제공하면 버전충돌 오류가 납니다. 
+ #servlet-context.xml 과 
+#pom.xml 에 있는  tiles버전 설정은  다른작업시 건들이지 않기로 합니다. 
 
-#### 승현 - 로그인 후  메인 창에 로그아웃 - 회원 정보 수정 버튼 ( 로그인 회원가입 제외_)     
-includes/header.jsp   
+코드 받고 추가된 라이브러리 설치가 안된다면 메이븐업데이트 후껐다킵니다.  maven리스트보고 tiles라이브러리설치리스트(4가지이상뜸) 확인합니다. 
 
+* definition에 경로지정만 수정해야하고, 
+   관련 버전변경하면 안됩니다.  
+(Gpt 답변대로 무조건 복붙하면 충돌나는경우를 보고 미리 침고하시라고 적어둡니다. ) 
+
+     <definition name="/board/favfood" extends="base">
+     		<put-attribute name="title" value="즐겨찾는 맛집" />
+     		<put-attribute name="body"
+     			value="/WEB-INF/views/board/favfood.jsp" />
+     	</definition> 
+
+위부분 복사해서 부분수정하시면됩니다. 🙌🏻
 
 <br><br>
 <br>
