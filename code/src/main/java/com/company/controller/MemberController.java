@@ -84,7 +84,7 @@ public class MemberController {
 	  public String updateForm(HttpSession session, Model model){
 	    String loginEmail = (String)session.getAttribute("loginEmail");
 	    MemberDTO memberDTO = memberService.findByMemberEmail(loginEmail);
-	    model.addAttribute("member", memberDTO);
+	    model.addAttribute("member", memberDTO);	
 	    return "/member/update";
 	  }
 	

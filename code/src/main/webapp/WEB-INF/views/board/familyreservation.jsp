@@ -12,31 +12,31 @@
     <title>예약</title>
 
     <style>
-        /* 버튼 컨테이너 스타일 /
+        /* 버튼 컨테이너 스타일 */
         .button-container {
             display: flex;
-            justify-content: space-between; / 버튼 사이 공간 분배 /
-            flex-wrap: wrap; / 화면 크기에 따라 줄바꿈 /
-            gap: 20px; / 버튼 간 간격 /
-            padding: 20px; / 내부 여백 /
-            background-color: #e0e0e0; / 배경색 */
+            justify-content: space-between; /* 버튼 사이 공간 분배 */
+            flex-wrap: wrap; /* 화면 크기에 따라 줄바꿈 */
+            gap: 20px; /* 버튼 간 간격 */
+            padding: 20px; /* 내부 여백 */
+            background-color: #e0e0e0; /* 배경색 */
         }
 
-        /* 버튼 스타일 /
+        /* 버튼 스타일 */
         .button-item {
-            flex: 1; / 동일한 비율로 버튼 크기 조정 /
-            max-width: 150px; / 버튼 최대 너비 /
-            text-align: center; / 텍스트 중앙 정렬 /
-            background-color: white; / 버튼 배경색 /
-            border-radius: 50%; / 원형 버튼 /
-            padding: 20px; / 내부 여백 /
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); / 그림자 효과 /
-            margin: 0 auto; / 가운데 정렬 */
+            flex: 1; /* 동일한 비율로 버튼 크기 조정 */
+            max-width: 150px; /* 버튼 최대 너비 */
+            text-align: center; /* 텍스트 중앙 정렬 */
+            background-color: white; /* 버튼 배경색 */
+            border-radius: 50%; /* 원형 버튼 */
+            padding: 20px; /* 내부 여백 */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+            margin: 0 auto; /* 가운데 정렬 */
         }
 
-        /* 아이콘 스타일 /
+        /* 아이콘 스타일 */
         .button-item img {
-            width: 50px; / 아이콘 크기 */
+            width: 50px; /* 아이콘 크기 */
             height: 50px;
             margin-bottom: 10px;
         }
@@ -50,6 +50,9 @@
     </style>
 </head>
 <body>
+
+<jsp:include page="/WEB-INF/views/board/filter.jsp" />
+
     <div class="button-container">
         <div class="button-item">
             <img src="checklist-icon.png" alt="Check List">

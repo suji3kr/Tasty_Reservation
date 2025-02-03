@@ -1,20 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
-
-
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>홈 페이지</title>
-
 <!-- Custom CSS -->
-<style>
-/* 공통 스타일 */
+
 body {
 	font-family: 'Roboto', sans-serif;
 	background-color: #f4f7fc;
@@ -121,50 +106,3 @@ body {
 .overlay a:hover {
 	background-color: #e66800;
 }
-</style>
-</head>
-<body>
-
-
-	<!-- 메인 이미지 섹션 -->
-	<section id="main-image">
-		<tiles:insertAttribute name="mainImage" ignore="true" />
-	</section>
-
-
-	<div class="container">
-		<!-- 상단 사진 3개 -->
-		<div class="top-row">
-			<!-- 왼쪽 사진 -->
-			<div class="photo-frame small">
-				<img src="/resources/image/레스토랑1.png" alt="Image 1">
-			</div>
-
-			<!-- 가운데 사진 (가로로 더 길게) -->
-			<div class="photo-frame small">
-				<img src="/resources/image/송아지스테이크.png" alt="Image 2">
-				<!-- 오버레이 콘텐츠 -->
-				<div class="overlay">
-					<h1>Art Of Reservation</h1>
-					<p>예약의 미학</p>
-					<a href="/board/list"> 예약하러가기 📑</a>
-				</div>
-			</div>
-
-			<!-- 오른쪽 사진 -->
-			<div class="photo-frame small">
-				<img src="/resources/image/연어레스토랑.png" alt="Image 3">
-			</div>
-		</div>
-
-		<!-- 하단 큰 사진 -->
-		<div class="bottom-row">
-			<img src="/resources/image/과일스푼.png" alt="Image 4">
-		</div>
-	</div>
-
-	<!-- Tiles 푸터 삽입 -->
-	<tiles:insertAttribute name="footer" />
-
-</body>
-</html>

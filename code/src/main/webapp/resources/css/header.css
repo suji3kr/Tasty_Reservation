@@ -1,14 +1,9 @@
 body {
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Arial, sans-serif'; /* 기본 폰트 설정 */
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 	background-color: #f4f7fc;
-}
-/* ��� ��Ÿ�� */
-header {
-	background-color: white;
-	border-bottom: 1px solid #e7e7e7;
 }
 
 .head-container {
@@ -25,10 +20,15 @@ header {
 	font-weight: bold;
 	color: #4e7300;
 	text-decoration: none;
+	flex-shrink: 0;
+	padding-right: 50px; /* 로고 우측 패딩 추가 */
 }
 
 nav {
+	flex-grow: 1;
 	display: flex;
+	justify-content: flex-end; /* 네비게이션 메뉴 우측 정렬 */
+	align-items: center;
 }
 
 nav ul {
@@ -36,18 +36,19 @@ nav ul {
 	display: flex;
 	margin: 0;
 	padding: 0;
+	gap: 20px;
 }
 
 nav ul li {
 	position: relative;
-	margin-right: 20px;
 	font-size: 16px;
 }
 
 nav ul li a {
 	text-decoration: none;
-	color: #ccc;
+	color: #666;
 	padding: 5px 10px;
+	transition: color 0.3s ease;
 }
 
 nav ul li a:hover {
@@ -57,27 +58,27 @@ nav ul li a:hover {
 .dropdown-menu {
 	display: none;
 	position: absolute;
-	top: 25px;
+	top: 100%;
 	left: 0;
 	background-color: #f2f2f2;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 	border-radius: 5px;
 	overflow: hidden;
 	z-index: 1000;
-	width: auto;
-	padding: 5px 10px;
+	width: max-content;
+	padding: 5px 0;
 }
 
 .dropdown-menu li {
-	padding: 3px 0;
+	padding: 5px 10px;
 }
 
 .dropdown-menu li a {
-	font-size: 12px;
+	font-size: 14px;
 	color: gray;
 	text-decoration: none;
 	white-space: nowrap;
-	padding: 3px 10px;
+	padding: 5px 10px;
 }
 
 .dropdown-menu li a:hover {
@@ -88,37 +89,52 @@ nav ul li:hover .dropdown-menu {
 	display: block;
 }
 
-.buttons {
+#info-section {
 	display: flex;
-	gap: 10px;
+	justify-content: space-between; /* 지도와 예약 기능을 양쪽으로 정렬 */
+	align-items: center;
+	padding: 20px;
+	background-color: #f8f8f8;
 }
 
-.buttons .btn {
-	padding: 6px 12px;
-	border-radius: 5px;
-	font-size: 13px;
+#map {
+	width: 400px;
+	height: 300px;
+	background-color: #ddd;
+}
+
+#info-box {
+	width: 500px;
+}
+
+#reservation-form {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	width: 300px;
+	background-color: white;
+	padding: 15px;
+	border-radius: 10px;
+	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#reservation-form label {
 	font-weight: bold;
-	text-align: center;
-	text-decoration: none;
+}
+
+#reservation-form select, #reservation-form input, #reservation-form button {
+	padding: 8px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+#reservation-form button {
+	background-color: #4e7300;
+	color: white;
+	font-weight: bold;
 	cursor: pointer;
 }
 
-.btn-green {
-	background-color: #4e7300;
-	color: white;
-	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-}
-
-.btn-green:hover {
+#reservation-form button:hover {
 	background-color: #3b5a00;
-}
-
-.btn-black {
-	background-color: black;
-	color: white;
-	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-}
-
-.btn-black:hover {
-	background-color: #333;
 }
