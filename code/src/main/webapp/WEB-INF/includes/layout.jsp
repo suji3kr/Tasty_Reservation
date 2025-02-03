@@ -10,15 +10,18 @@
 <meta charset="UTF-8">
 
 <title><tiles:insertAttribute name="title" /></title>
-<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/layout.css">
+<link rel="stylesheet" type="text/css"
+	href="${contextPath}/resources/css/layout.css">
 </head>
 <body>
-    <div id="container">
-    	<div id="header">
-            <tiles:insertAttribute name="header" />
-        </div>
-        <!-- 헤더 -->
-        <!-- <div id="header">
+	<div id="container">
+		<div id="header">
+			<tiles:insertAttribute name="header" />
+		</div>
+	</div>
+
+	<!-- 헤더 -->
+	<!-- <div id="header">
             <div id="logo">Art Of Reservation</div>
             <ul id="nav-menu">
                 <li><a href="#">Hot spot</a></li>
@@ -32,8 +35,8 @@
             </div>
         </div> -->
 
-        <!-- 메인 배너 -->
-<!--         <div id="main-banner">
+	<!-- 메인 배너 -->
+	<!--         <div id="main-banner">
             <p>We help you find the perfect reservation.</p>
         </div>
 
@@ -45,13 +48,13 @@
             <div class="card"></div>
         </div>
  -->
-        <!-- 메인 컨텐츠 -->
-        <div id="content">
-            <tiles:insertAttribute name="body" />
-        </div>
+	<!-- 메인 컨텐츠 -->
+	<div id="content">
+		<tiles:insertAttribute name="body" ignore="true"/>
+	</div>
 
-        <!-- 지도 및 정보 -->
-<!--     <div id="info-section">
+	<!-- 지도 및 정보 -->
+	<!--     <div id="info-section">
             <div id="map"></div>
             <div id="info-box">
                 <h3>Feature that is amazing</h3>
@@ -64,10 +67,10 @@
             </div>
         </div> -->
 
-        <!-- 푸터 -->
-        <div id="footer">
-            <tiles:insertAttribute name="footer" />
-        </div>
-    
+	<!-- 푸터 -->
+	<div id="footer">
+		<tiles:insertAttribute name="footer" />
+	</div>
+
 </body>
 </html>

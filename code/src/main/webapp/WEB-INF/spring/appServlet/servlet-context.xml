@@ -19,6 +19,7 @@
         <property name="definitions">
             <list>
                 <value>classpath:tiles-definitions.xml</value> <!-- tiles 정의 파일 경로 -->
+                
             </list>
         </property>
       <property name="preparerFactoryClass"
