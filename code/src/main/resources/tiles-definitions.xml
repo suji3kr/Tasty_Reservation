@@ -43,12 +43,12 @@
 
 	<!-- member -->
 	<definition name="/member/login" extends="base">
-		<put-attribute name="login" value="로그인페이지" />
+		<put-attribute name="title" value="로그인페이지" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/member/login.jsp" />
 	</definition>
 	<definition name="/member/signup" extends="base">
-		<put-attribute name="signup" value="회원가입 페이지" />
+		<put-attribute name="title" value="회원가입 페이지" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/member/signup.jsp" />
 	</definition>
