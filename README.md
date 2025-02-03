@@ -34,7 +34,7 @@ Gpt가 2버전 소스를 제공하면 버전충돌 오류가 납니다.
 
 * definition에 경로지정만 수정해야하고, 
    관련 버전변경하면 안됩니다.  
-(Gpt 답변대로 무조건 복붙하면 충돌나는경우를 보고 미리 침고하시라고 적어둡니다. ) 
+(Gpt 답변대로 무조건 복붙하면 충돌나는경우를 보고 미리 참고하시라고 적어둡니다. ) 
 
      <definition name="/board/favfood" extends="base">
      		<put-attribute name="title" value="즐겨찾는 맛집" />
