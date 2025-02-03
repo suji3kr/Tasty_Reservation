@@ -9,9 +9,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>홈 페이지</title>
+<title>당신의 맛집예약을 도와드립니다.</title>
 
-<!-- Custom CSS -->
 <style>
 /* 공통 스타일 */
 body {
@@ -27,20 +26,27 @@ body {
 	max-width: 1200px;
 	margin: 0 auto;
 	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center; /* 수평 중앙 정렬 */
+	justify-content: center; /* 수직 중앙 정렬 */
+	box-sizing: border-box;
 }
 
 /* 상단 사진 3개 레이아웃 */
-.top-row {
+.top-row, .bottom-row {
+	width: 100%; /* Use percentages or max-width instead of fixed width */
 	display: flex;
-	justify-content: space-between;
-	gap: 20px;
-	margin: 20px 0;
+	justify-content: center; /* Centers the child elements horizontally */
+	align-items: center; /* Centers the child elements vertically */
+	margin: 30px 0; /* Adjust as needed for spacing */
 }
 
 .photo-frame {
 	width: 400px;
 	position: relative;
-	border-radius: 15px;
+	display: flex;
+	margin : 0 30px;
 	overflow: hidden;
 }
 
@@ -48,14 +54,8 @@ body {
 	width: 100%;
 	height: 300px;
 	display: flex;
+	border-radius: 15px;
 	justify-content: space-between;
-}
-
-.bottom-row {
-	width: 1200px;
-	height: auto;
-	margin: 30px auto;
-	text-align: center;
 }
 
 .bottom-row img {
@@ -105,6 +105,56 @@ body {
 .overlay a:hover {
 	background-color: #e66800;
 }
+
+#info-section {
+	display: flex;
+	justify-content: space-around; /* 吏��룄�� �삁�빟 湲곕뒫�쓣 �뼇履쎌쑝濡� �젙�젹 */
+	align-items: center;
+	padding: 20px;
+	background-color: #f8f8f8;
+}
+
+#map {
+	width: 400px;
+	height: 300px;
+	background-color: #ddd;
+}
+
+#info-box {
+	width: 500px;
+}
+
+#reservation-form {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	width: 300px;
+	background-color: white;
+	padding: 15px;
+	border-radius: 10px;
+	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#reservation-form label {
+	font-weight: bold;
+}
+
+#reservation-form select, #reservation-form input, #reservation-form button {
+	padding: 8px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+#reservation-form button {
+	background-color: #4e7300;
+	color: white;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+#reservation-form button:hover {
+	background-color: #3b5a00;
+}
 </style>
 </head>
 <body>
@@ -132,13 +182,8 @@ body {
 					<div class="bottom-row">
 						<img src="/resources/image/과일스푼.png" alt="Image 4">
 					</div>
-				</div>
-			</section>
-
-		</div>
-		
-		
-			<!-- 지도 및 검색 섹션 (최상단) -->
+					
+					<!-- 지도 및 검색 섹션 (최상단) -->
 			<div id="info-section">
 				<div class="left-section">
 					<div id="map" style="width: 500px; height: 400px;"></div>
@@ -195,6 +240,8 @@ body {
 					</div>
 				</div>
 			</div>
+				</div>
+			</section>
 		
 		<script>
 
