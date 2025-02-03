@@ -4,6 +4,7 @@
 
 <mapper namespace="com.company.mapper.StoreMapper">
 
+
     <!-- 가게 정보 등록 -->
     <insert id="insertStore" parameterType="com.company.domain.StoreDTO">
         INSERT INTO store_registration 
@@ -13,7 +14,13 @@
 
     <!-- 모든 가게 조회 -->
     <select id="getAllStores" resultType="com.company.domain.StoreDTO">
-        SELECT * FROM store_registration ORDER BY id DESC;
+        SELECT
+        	id,
+        	store_name storeName, store_location storelocation, store_description storedescription, store_category storecategory, phone_number phonenumber,
+        	 store_image storeimage
+        FROM store_registration
+        ORDER BY id DESC;
     </select>
+
 
 </mapper>

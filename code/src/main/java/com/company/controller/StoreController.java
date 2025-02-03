@@ -76,6 +76,6 @@ public class StoreController {
     public String listStores(Model model) {
         List<StoreDTO> stores = storeService.getAllStores();
         model.addAttribute("storeList", stores);
-        return "store/storeList";  // JSP 경로 수정 (store 폴더 안의 storelist.jsp로 연결)
+        return "/store/storeList";  // JSP 경로 수정 (store 폴더 안의 storelist.jsp로 연결)
     }
 }
