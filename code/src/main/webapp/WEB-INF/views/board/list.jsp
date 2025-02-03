@@ -17,6 +17,7 @@
 				맛집 가게 페이지
 				<button id='regBtn' type="button"
 					class="btn btn-xs pull-right btn-info">새로운 가게 등록</button>
+					<a href="/store/storeList"> 가게 리스트 확인 📑</a>
 			</div>
 			<!-- /.panel-heading -->
 			<div class="panel-body">

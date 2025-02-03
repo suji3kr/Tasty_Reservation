@@ -212,10 +212,6 @@ body {
 			</div>
 		</section>
 
-		<div id="footer">
-			<tiles:insertAttribute name="footer" />
-		</div>
-
 	</div>
 	<script>
         document.getElementById('guests').addEventListener('change', function() {
