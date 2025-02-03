@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>update</title>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/header.css">
+
 <script>
 	const update = () => {
     const passwordDB = '${member.password}';
