@@ -65,6 +65,11 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/member/logout.jsp" />
 	</definition>
+	<definition name="/member/update" extends="base">
+		<put-attribute name="title" value="회원정보수정페이지" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/member/update.jsp" />
+	</definition>
 
 
 
