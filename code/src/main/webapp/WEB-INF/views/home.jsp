@@ -126,8 +126,7 @@ body {
 	display: flex;
 	justify-content: space-around; /* 吏��룄�� �삁�빟 湲곕뒫�쓣 �뼇履쎌쑝濡� �젙�젹 */
 	align-items: center;
-	padding: 0 20px;
-	background-color: #f8f8f8;
+	padding: 30px 20px;
 }
 
 #map {
