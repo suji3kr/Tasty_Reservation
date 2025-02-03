@@ -50,7 +50,7 @@
  -->
 	<!-- 메인 컨텐츠 -->
 	<div id="content">
-		<tiles:insertAttribute name="body" ignore="true"/>
+		<tiles:insertAttribute name="body"/>
 	</div>
 
 	<!-- 지도 및 정보 -->

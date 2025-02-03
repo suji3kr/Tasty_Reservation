@@ -5,7 +5,10 @@ import java.util.List;
 import com.company.domain.StoreDTO;
 
 public interface StoreService {
-    void registerStore(StoreDTO store);
-    List<StoreDTO> getAllStores();
-	void insertStore(StoreDTO storeDTO);
+	
+    public void registerStore(StoreDTO store);
+    
+    public List<StoreDTO> getAllStores();
+    
+	public void insertStore(StoreDTO storeDTO);
 }
