@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +17,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.company.domain.StoreDTO;
 import com.company.service.StoreService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 @RequestMapping("/store")
 public class StoreController {
@@ -25,13 +27,13 @@ public class StoreController {
     @Autowired
     private StoreService storeService;
 
-    // 가게 등록 폼 페이지
+    // ✅ 가게 등록 폼 페이지
     @GetMapping("/register")
     public String showRegisterForm() {
-        return "store/register";  // 올바른 JSP 파일 경로 사용
+        return "store/register"; // store/register.jsp 파일을 반환
     }
 
-    // 가게 등록 처리 (파일 업로드 기능 추가)
+    // ✅ 가게 등록 처리 (파일 업로드 포함)
     @PostMapping("/register")
     public String registerStore(
             @RequestParam("storeName") String storeName,
@@ -39,11 +41,11 @@ public class StoreController {
             @RequestParam("storeDescription") String storeDescription,
             @RequestParam("storeCategory") String storeCategory,
             @RequestParam("phoneNumber") String phoneNumber,
-            @RequestParam(value = "storeImage", required = false) MultipartFile storeImage,
-            HttpServletRequest request) throws IOException {
+            @RequestParam(value = "storeImage", required = false) MultipartFile storeImage
+    ) throws IOException {
 
-        // 디버깅 로그 추가
-        System.out.println("=== [디버깅] 컨트롤러에서 받은 데이터 ===");
+        // 디버깅 로그
+        System.out.println("=== [디버깅] 가게 등록 데이터 ===");
         System.out.println("가게 이름: " + storeName);
         System.out.println("가게 위치: " + storeLocation);
         System.out.println("가게 설명: " + storeDescription);
@@ -62,7 +64,6 @@ public class StoreController {
 
         // 파일 업로드 처리
         if (storeImage != null && !storeImage.isEmpty()) {
-            // 파일명 중복 방지를 위한 UUID 적용
             String originalFileName = storeImage.getOriginalFilename();
             String fileExtension = originalFileName.substring(originalFileName.lastIndexOf(".")); // 확장자 추출
             fileName = UUID.randomUUID().toString() + fileExtension; // 새로운 파일명 생성
@@ -74,17 +75,38 @@ public class StoreController {
         }
 
         // StoreDTO 객체 생성 및 저장
-        StoreDTO storeDTO = new StoreDTO(storeName, storeLocation, storeDescription, storeCategory, phoneNumber, "/uploads/" + fileName);
-        storeService.insertStore(storeDTO);
+        StoreDTO storeDTO = new StoreDTO(storeName, storeLocation, storeDescription, storeCategory, phoneNumber,
+                "/uploads/" + fileName);
+        storeService.registerStore(storeDTO);
 
-        return "redirect:/store/storeList";  // 가게 목록으로 이동
+        return "redirect:/store/storeList"; // 가게 목록으로 이동
     }
 
-    // 가게 목록 조회
+    // ✅ 가게 목록 조회
     @GetMapping("/storeList")
     public String listStores(Model model) {
         List<StoreDTO> stores = storeService.getAllStores();
         model.addAttribute("storeList", stores);
-        return "/store/storeList";  // JSP 경로 수정
+        return "/store/storeList"; // storeList.jsp 파일 반환
     }
+
+    @GetMapping("/detail")
+    public String storeDetail(@RequestParam("id") Long id, Model model) {
+        log.info("📌 요청된 가게 ID: " + id);
+
+        StoreDTO store = storeService.getStoreById(id);
+        
+        if (store == null) {
+            log.warn("❌ 가게 ID " + id + "를 찾을 수 없습니다.");
+            return "redirect:/store/storeList"; // 존재하지 않는 ID일 경우 목록으로 이동
+        }
+
+        log.info("✅ 가게 정보 로드 성공: " + store.getStoreName());
+
+        model.addAttribute("store", store);
+        
+        return "storeDetail"; // ✅ Tiles에 등록된 "storeDetail" 이름을 반환해야 함
+    }
+
+    
 }

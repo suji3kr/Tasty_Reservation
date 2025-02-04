@@ -10,5 +10,7 @@ public interface StoreService {
     
     public List<StoreDTO> getAllStores();
     
-	public void insertStore(StoreDTO storeDTO);
+//	public void insertStore(StoreDTO storeDTO);
+
+	public StoreDTO getStoreById(Long id);
 }

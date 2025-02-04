@@ -20,7 +20,7 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public void registerStore(StoreDTO store) {
         log.info("Registering store: " + store);
-        mapper.insertStore(store);
+        mapper.registerStore(store);
     }
 
     @Override
@@ -29,10 +29,11 @@ public class StoreServiceImpl implements StoreService {
         return mapper.getAllStores();
     }
 
-	@Override
-	public void insertStore(StoreDTO storeDTO) {
-		// TODO Auto-generated method stub
-		mapper.insertStore(storeDTO);
-		
-	}
+
+	// 특정 가게 조회 (추가)
+    @Override
+    public StoreDTO getStoreById(Long id) {
+        log.info("Fetching store by ID: " + id);
+        return mapper.getStoreById(id);
+    }
 }

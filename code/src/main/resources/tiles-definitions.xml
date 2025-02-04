@@ -95,6 +95,12 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/store/storeList.jsp" />
 	</definition>
+	
+	<definition name="storeDetail" extends="base">
+    <put-attribute name="title" value="가게 세부 정보" />
+    <put-attribute name="body" value="/WEB-INF/views/store/storeDetail.jsp" />
+	</definition>
+
 
 
 
@@ -108,6 +114,11 @@
 
 	<!-- 박영웅 영역 -->
 	
+	<definition name="/photoGallery" extends="base">
+		<put-attribute name="title" value="사진 게시판" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/photoGallery.jsp" />
+	</definition>
 
 
 

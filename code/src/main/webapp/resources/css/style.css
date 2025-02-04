@@ -1,0 +1,92 @@
+/* 페이지 기본 스타일 */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5; /* 배경색 */
+    margin: 0;
+    padding: 0;
+    color: #333; /* 기본 텍스트 색상 */
+}
+
+/* 제목 스타일 */
+h1 {
+    text-align: center;
+    margin-top: 30px;
+    color: #ff6347; /* 제목 색상 */
+    font-size: 36px;
+    font-weight: bold;
+}
+
+/* 갤러리 스타일 */
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* 갤러리 아이템 중앙 정렬 */
+    margin: 20px;
+    gap: 20px; /* 갤러리 아이템 간격 */
+}
+
+/* 각 사진 카드 스타일 */
+.photo-item {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+    border-radius: 10px; /* 모서리 둥글게 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    transition: transform 0.3s ease; /* 부드러운 확대 효과 */
+}
+
+/* 이미지에 hover 효과 */
+.photo-item:hover {
+    transform: scale(1.05); /* hover 시 확대 */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); /* hover 시 그림자 강화 */
+}
+
+/* 이미지 스타일 */
+.photo-item img {
+    width: 100%; /* 100% 너비 */
+    height: 100%; /* 100% 높이 */
+    object-fit: cover; /* 비율 유지하며 잘라내기 */
+    transition: opacity 0.3s ease; /* 이미지 페이드 효과 */
+}
+
+/* 텍스트 오버레이 스타일 */
+.overlay {
+    position: absolute;
+    bottom: 20px; /* 하단 여백 */
+    left: 20px; /* 왼쪽 여백 */
+    right: 20px; /* 오른쪽 여백 */
+    color: white; /* 텍스트 색상 */
+    font-size: 20px; /* 폰트 크기 */
+    font-weight: bold; /* 폰트 두께 */
+    background-color: rgba(0, 0, 0, 0.5); /* 반투명 배경색 */
+    padding: 10px; /* 패딩 */
+    border-radius: 5px; /* 둥근 모서리 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+    display: none; /* 기본적으로 숨김 */
+}
+
+/* hover 시 텍스트 오버레이 보이기 */
+.photo-item:hover .overlay {
+    display: block; /* hover 시 보이도록 설정 */
+}
+
+/* 뒤로 가는 버튼 스타일 */
+.back-btn {
+    display: block; /* 블록 요소로 설정 */
+    text-align: center; /* 중앙 정렬 */
+    margin-top: 50px; /* 상단 여백 */
+    font-size: 18px; /* 글자 크기 */
+    color: #ff6347; /* 텍스트 색상 */
+    text-decoration: none; /* 밑줄 제거 */
+    padding: 10px 20px; /* 패딩 */
+    background-color: #fff; /* 배경색 */
+    border: 2px solid #ff6347; /* 테두리 */
+    border-radius: 5px; /* 둥근 모서리 */
+    transition: background-color 0.3s, color 0.3s; /* 부드러운 효과 */
+}
+
+.back-btn:hover {
+    background-color: #ff6347; /* hover 시 배경색 */
+    color: white; /* hover 시 텍스트 색상 변경 */
+}
