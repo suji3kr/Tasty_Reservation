@@ -51,18 +51,18 @@ request.setCharacterEncoding("UTF-8");
 	</ul>
 
 	<!-- 로그인/회원가입 버튼 -->
-	<div class="buttons">
+	<div class="button-container">
 		<%
 		if (session.getAttribute("loginEmail") == null) {
 		%>
-		<a href="/member/login" class="btn btn-green">Sign in</a> <a
-			href="/member/signup" class="btn btn-black">Sign Up</a>
+		<a href="/member/login" class="btn btn-green">로그인</a> <a
+			href="/member/signup" class="btn btn-black">회원가입</a>
 
 		<%
 		} else {
 		%>
 		<a href="/member/update" class="btn btn-green">회원정보수정</a> <a
-			href="/member/logout" class="btn btn-black">Logout</a>
+			href="/member/logout" class="btn btn-black">로그아웃</a>
 		<%
 		}
 		%>
