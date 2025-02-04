@@ -22,5 +22,11 @@
         ORDER BY id DESC;
     </select>
 
+	<!-- 특정 가게 조회 -->
+    <select id="getStoreById" parameterType="long" resultType="com.company.domain.StoreDTO">
+        SELECT store_name storeName, store_location storelocation, store_description storedescription, store_category storecategory, phone_number phonenumber,
+        store_image storeimage
+         FROM store_registration WHERE id = #{id}
+    </select>
 
 </mapper>
