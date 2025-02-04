@@ -28,7 +28,11 @@
 							<option value="seoul">서울</option>
 							<option value="gyeonggi">경기</option>
 							<option value="other">그 외 지역</option>
-						</select> <select id="sub-location-select" style="display: none;"></select>
+						</select> <select id="sub-location-select">
+							<option value='gangnam'>강남</option>
+							<option value='hongdae'>홍대</option>
+							<option value='itaewon'>이태원</option>
+						</select>
 					</div>
 					<div class="inline-select">
 						<label for="date">날짜</label> <input type="date" id="date"
