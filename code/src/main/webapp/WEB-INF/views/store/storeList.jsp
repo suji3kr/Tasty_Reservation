@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -60,7 +60,9 @@ img {
 				<c:forEach var="store" items="${storeList}">
 					<tr>
 						<td>${store.id}</td>
-						<td>${store.storeName}</td>
+						<td><a href="/store/detail?id=${store.id}"
+							class="text-decoration-none"> ${store.storeName} </a></td>
+
 						<td>${store.storeLocation}</td>
 						<td>${store.storeCategory}</td>
 						<!-- 전화번호를 010-XXXX-XXXX 형식으로 변환 -->
