@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
@@ -41,9 +42,9 @@
 			<li><a href="#"><b>내정보</b></a>
 				<ul class="dropdown-menu">
 					<li><a href="${contextPath}/board/favfood">즐겨찾는 맛집</a></li>
-					<li><a href="#">예약 맛집</a></li>
-					<li><a href="#">예약 수정</a></li>
-					<li><a href="#">리뷰 관리</a></li>
+					<li><a href="#">예약맛집 관리</a></li>
+					<li><a href="${contextPath}/member/update">회원정보 수정</a></li>
+					<li><a href="${contextPath}/board/get">리뷰 관리</a></li>
 				</ul></li>
 		</c:if>
 	</ul>
@@ -59,8 +60,15 @@
 		<%
 		} else {
 		%>
-		<a href="/member/update" class="btn btn-green">회원정보수정</a> <a
-			href="/member/logout" class="btn btn-black">로그아웃</a>
+		<%
+		String loginEmail = (String) session.getAttribute("loginEmail");
+		String userName = (loginEmail != null) ? loginEmail.split("@")[0] : "";
+		%>
+
+		<p>
+			<strong><%=userName%></strong>님, 환영합니다 🐱‍🏍
+		</p>
+		<a href="/member/logout" class="btn btn-black">로그아웃</a>
 		<%
 		}
 		%>

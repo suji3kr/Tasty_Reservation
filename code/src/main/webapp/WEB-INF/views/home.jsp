@@ -189,7 +189,7 @@ body {
 					<div class="overlay">
 						<h1>Art Of Reservation</h1>
 						<p>예약의 미학</p>
-						<a href="/board/list"> 예약하러가기 📑</a>
+						<a href="/board/familyreservation"> 예약하러가기 📑</a>
 					</div>
 				</div>
 				<div class="photo-frame">
