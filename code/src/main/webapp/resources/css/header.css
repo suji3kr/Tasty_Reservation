@@ -6,17 +6,20 @@ body {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	background-color: #f4f7fc;
+	background-color: #ffffff;
+
+ 	
 }
 
 .head-container {
-	height: 36px;
-	max-width: 1200px;
-	margin: 0 30px;
-	padding: 10px 10px;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+	all: unset; /* Bootstrap 기본 스타일 초기화 */
+	height: 36px !important; 
+	max-width: 1200px !important;
+	margin: 0 30px !important;
+	padding: 10px 10px !important;
+	display: flex !important;
+	justify-content: space-between !important;
+	align-items: center !important;
 }
 
 .logo {
@@ -97,48 +100,48 @@ nav ul li:hover .dropdown-menu {
 
 /* 버튼들을 감싸는 부모 컨테이너 */
 .button-container {
-	display: flex; /* 버튼을 가로로 배치 */
-	gap: 10px; /* 버튼 사이 간격 */
-	justify-content: center; /* 가운데 정렬 */
-	align-items: center; /* 수직 중앙 정렬 */
+	display: flex !important; /* 버튼을 가로로 배치 */
+	gap: 10px !important; /* 버튼 사이 간격 */
+	justify-content: center !important; /* 가운데 정렬 */
+	align-items: center !important; /* 수직 중앙 정렬 */
 }
 
 /* 개별 버튼 스타일 */
 .btn {
-	display: inline-flex; /* 버튼이 가로로 나란히 정렬되도록 설정 */
-	justify-content: center; /* 수평 중앙 정렬 */
-	align-items: center; /* 수직 중앙 정렬 */
-	text-align: center; /* 텍스트 정렬 */
-	width: 80px; /* 버튼 너비 */
-	height: 30px; /* 버튼 높이 */
-	font-weight: bold; /* 글자 두께 */
-	border: none; /* 테두리 제거 */
-	border-radius: 8px; /* 버튼 모서리 둥글게 */
-	cursor: pointer; /* 마우스 포인터 변경 */
-	font-size: 14px;
+	display: inline-flex !important; /* 버튼이 가로로 나란히 정렬되도록 설정 */
+	justify-content: center !important; /* 수평 중앙 정렬 */
+	align-items: center !important; /* 수직 중앙 정렬 */
+	text-align: center !important; /* 텍스트 정렬 */
+	width: 80px !important; /* 버튼 너비 */
+	height: 30px !important; /* 버튼 높이 */
+	font-weight: bold !important; /* 글자 두께 */
+	border: none !important; /* 테두리 제거 */
+	border-radius: 8px !important; /* 버튼 모서리 둥글게 */
+	cursor: pointer !important; /* 마우스 포인터 변경 */
+	font-size: 14px !important;
 	text-decoration: none !important; /* 밑줄 제거 */
 }
 
 /* 초록색 버튼 스타일 */
 .btn-green {
 	background-color: #4e7300 !important;
-	color: white;
-	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+	color: white !important ;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7) !important;
 }
 
 /* 초록색 버튼 호버 효과 */
 .btn-green:hover {
-	background-color: #3b5a00;
+	background-color: #3b5a00 !important;
 }
 
 /* 검은색 버튼 스타일 */
 .btn-black {
 	background-color: black !important;
-	color: white;
+	color: white !important;
 /* 	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); */
 }
 
 /* 검은색 버튼 호버 효과 */
 .btn-black:hover {
-	background-color: #333;
+	background-color: #333 !important;
 }

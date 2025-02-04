@@ -15,10 +15,11 @@
 /* 공통 스타일 */
 body {
 	font-family: 'Roboto', sans-serif;
-	background-color: #f4f7fc;
+	background-color: #ffffff;
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+
 }
 
 /* 컨테이너 설정 */
