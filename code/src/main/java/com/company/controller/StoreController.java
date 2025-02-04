@@ -3,13 +3,13 @@ package com.company.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,7 +31,7 @@ public class StoreController {
         return "store/register";  // 올바른 JSP 파일 경로 사용
     }
 
-    // 가게 등록 처리
+    // 가게 등록 처리 (파일 업로드 기능 추가)
     @PostMapping("/register")
     public String registerStore(
             @RequestParam("storeName") String storeName,
@@ -50,18 +50,27 @@ public class StoreController {
         System.out.println("가게 종류: " + storeCategory);
         System.out.println("전화번호: " + phoneNumber);
 
-        // 파일 업로드 처리
-        String uploadDir = request.getServletContext().getRealPath("/uploads/");
+        // 업로드 경로 설정 (C:/uploads/)
+        String uploadDir = "C:/uploads/";
         File dir = new File(uploadDir);
         if (!dir.exists()) {
-            dir.mkdirs();
+            dir.mkdirs(); // 폴더가 없으면 생성
         }
 
-        String fileName = "default.jpg"; // 기본 이미지 설정
+        // 기본 이미지 설정
+        String fileName = "default.jpg";
+
+        // 파일 업로드 처리
         if (storeImage != null && !storeImage.isEmpty()) {
-            fileName = storeImage.getOriginalFilename();
+            // 파일명 중복 방지를 위한 UUID 적용
+            String originalFileName = storeImage.getOriginalFilename();
+            String fileExtension = originalFileName.substring(originalFileName.lastIndexOf(".")); // 확장자 추출
+            fileName = UUID.randomUUID().toString() + fileExtension; // 새로운 파일명 생성
+
             File uploadFile = new File(uploadDir, fileName);
-            storeImage.transferTo(uploadFile);
+            storeImage.transferTo(uploadFile); // 파일 저장
+
+            System.out.println("업로드된 파일명: " + fileName);
         }
 
         // StoreDTO 객체 생성 및 저장
@@ -76,6 +85,6 @@ public class StoreController {
     public String listStores(Model model) {
         List<StoreDTO> stores = storeService.getAllStores();
         model.addAttribute("storeList", stores);
-        return "/store/storeList";  // JSP 경로 수정 (store 폴더 안의 storelist.jsp로 연결)
+        return "/store/storeList";  // JSP 경로 수정
     }
 }
