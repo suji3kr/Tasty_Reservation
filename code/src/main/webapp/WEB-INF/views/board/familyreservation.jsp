@@ -47,7 +47,32 @@ body {
 	/* 	display: flex; */
 	flex-direction: column;
 	align-items: center;
-	padding: 5px 0;
+	padding: 3px 0;
+	justify-content: center; /* 세로 방향 중앙 정렬 */
+}
+.filter-stargroup{
+/* 	display: flex; */
+	flex-direction: column;
+	align-items: center;
+	padding-top: 6px; /* 위쪽 패딩 값 추가 */
+    padding-bottom: 5px; /* 아래쪽 패딩은 기존처럼 유지 */
+
+}
+.filter-checkgroup{
+/* 	display: flex; */
+	flex-direction: column;
+	align-items: center;
+	padding-top: 11px; /* 위쪽 패딩 값 추가 */
+    padding-bottom: 5px; /* 아래쪽 패딩은 기존처럼 유지 */
+
+}
+.filter-time-kids{
+/* 	display: flex; */
+	flex-direction: column;
+	align-items: center;
+	padding-top: 8px; /* 위쪽 패딩 값 추가 */
+    padding-bottom: 5px; /* 아래쪽 패딩은 기존처럼 유지 */
+
 }
 
 .filter-group label {
@@ -56,7 +81,7 @@ body {
 }
 
 .filter-group select, .filter-group input, .filter-group button {
-	padding: 8px;
+	padding: 3px;
 	border: 1px solid #ccc;
 	border-radius: 5px;
 }
@@ -109,7 +134,7 @@ body {
 	<div class="container">
 		<div class="filter-section">
 			<div class="filter-group">
-				<label for="location">지역 선택</label> <select id="location">
+				<label for="location"> 지 역</label> <select id="location">
 					<option value="seoul">서울</option>
 					<option value="gyeonggi">경기</option>
 					<option value="other">그 외 지역</option>
@@ -120,11 +145,11 @@ body {
 				</select>
 			</div>
 			<div class="filter-group">
-				<label for="date">날짜</label> <input type="date" id="date"
+				<label for="date">날 짜  </label> <input type="date" id="date"
 					name="date">
 			</div>
 			<div class="filter-group">
-				<label for="guests">인원</label> <select id="guests" name="guests">
+				<label for="guests">인 원  </label> <select id="guests" name="guests">
 					<c:forEach var="num" begin="6" end="12">
 						<option value="${num}">${num}명</option>
 					</c:forEach>
@@ -132,50 +157,52 @@ body {
 				</select> <input type="text" id="custom-guests" name="custom-guests"
 					placeholder="추가 인원 입력" style="display: none;">
 			</div>
-			<div class="filter-group">
-				<label>별점 허용</label> <input type="radio" name="rating" value="5">
+			<div class="filter-stargroup">
+				<label><b>별점 허용</b></label> <input type="radio" name="rating" value="5">
 				5점 <input type="radio" name="rating" value="4"> 4점대 <input
 					type="radio" name="rating" value="3"> 3점대
 			</div>
-			<div class="filter-group">
-				<label>메뉴 선택</label> <input type="checkbox" name="food-type"
+			<div class="filter-checkgroup">
+				<label><b>메 뉴</b></label> <input type="checkbox" name="food-type"
 					value="western"> 양식 <input type="checkbox" name="food-type"
 					value="korean"> 한식 <input type="checkbox" name="food-type"
 					value="dessert"> 일식 <input type="checkbox" name="food-type"
 					value="dessert"> 중식 <input type="checkbox" name="food-type"
 					value="dessert"> 디저트/카페
 			</div>
-			<div class="filter-group">
-				<label for="time">시간</label> <select id="time" name="time">
-					<c:forEach var="hour" begin="10" end="23">
-						<option value="${hour}:00">${hour}:00</option>
-						<option value="${hour}:30">${hour}:30</option>
-					</c:forEach>
-				</select>
-			</div>
-			<div class="filter-group">
-				<div class="inline-select">
-					<label for="kids">아이 손님</label> <select id="kids" name="kids">
-						<c:forEach var="num" begin="1" end="5">
-							<option value="${num}">${num}명</option>
+			<div class="filter-time-kids">
+				<div class="filter-group">
+					<label for="time">시 간</label> <select id="time" name="time">
+						<c:forEach var="hour" begin="10" end="23">
+							<option value="${hour}:00">${hour}:00</option>
+							<option value="${hour}:30">${hour}:30</option>
 						</c:forEach>
-						<option value="more">기타</option>
-					</select> <input type="text" id="custom-kids" name="custom-kids"
-						placeholder="추가 인원 입력" style="display: none;">
+					</select>
 				</div>
 			</div>
-			<div class="filter-group">
-				<button type="button">바로 찾아줄게 ✔</button>
-				<!-- 검색 폼 -->
+			<div class="filter-time-kids">
+				<div class="filter-group">
+					<div class="inline-select">
+						<label for="kids"> 아이 손님</label> <select id="kids" name="kids">
+							<c:forEach var="num" begin="1" end="5">
+								<option value="${num}">${num}명</option>
+							</c:forEach>
+							<option value="more">기타</option>
+						</select> <input type="text" id="custom-kids" name="custom-kids"
+							placeholder="추가 인원 입력" style="display: none;">
+					</div>
+				</div>
+			</div>
+			<div class="filter-time-kids">
+				<div class="filter-group">
+					<input type="text" class="form-control me-2" name="searchKeyword"
+						placeholder="가게명 검색">
+					<button type="button">바로 찾아줄게 ✔</button>
+					<!-- 검색 폼 -->
+				</div>
 			</div>
 
-			<div class="filter-group">
-				<input type="text" class="form-control me-2" name="searchKeyword"
-					placeholder="가게명 검색">
-				<button type="submit" class="btn btn-primary">검색</button>
-
-
-			</div>
+			
 		</div>
 
 		<div class="body">
