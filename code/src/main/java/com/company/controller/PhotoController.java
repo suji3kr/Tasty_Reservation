@@ -18,6 +18,6 @@ public class PhotoController {
         model.addAttribute("photo", photoService.getPhoto(id));
         model.addAttribute("comments", photoService.getComments(id));
         model.addAttribute("averageRating", photoService.getAverageRating(id));
-        return "photoView";
+        return "/photoView";
     }
 }

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 public class PhotoGalleryController {
@@ -22,7 +24,17 @@ public class PhotoGalleryController {
         model.addAttribute("comments", photoGalleryService.getComments());
         model.addAttribute("ratings", photoGalleryService.getRatings());
         model.addAttribute("images", photoGalleryService.getImages()); // 이미지 목록 추가
-        return "/photoGallery"; // photoGallery.jsp 파일로 이동
+
+        // 예시 데이터: 실제 데이터는 DB에서 가져와야 합니다.
+        List<String> photoList = Arrays.asList(
+            "/resources/image/photo1.jpg",
+            "/resources/image/photo2.jpg",
+            "/resources/image/photo3.jpg"
+        );
+        
+        model.addAttribute("photos", photoList);
+
+        return "/photoGallery"; // views/photoGallery.jsp로 이동
     }
 
     @PostMapping("/upload")

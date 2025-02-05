@@ -11,88 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 0;
-            color: #333;
-        }
-        h1 {
-            text-align: center;
-            margin-top: 30px;
-            color: #ff6347;
-            font-size: 36px;
-            font-weight: bold;
-        }
-        .gallery {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin: 20px;
-            gap: 20px;
-        }
-        .photo-item {
-            position: relative;
-            width: 300px;
-            height: 300px;
-            overflow: hidden;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-        .photo-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-        }
-        .photo-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: opacity 0.3s ease;
-        }
-        .overlay {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            right: 20px;
-            color: white;
-            font-size: 20px;
-            font-weight: bold;
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 10px;
-            border-radius: 5px;
-            text-align: center;
-            display: none;
-        }
-        .photo-item:hover .overlay {
-            display: block;
-        }
-        .back-btn {
-            display: block;
-            text-align: center;
-            margin-top: 50px;
-            font-size: 18px;
-            color: #ff6347;
-            text-decoration: none;
-            padding: 10px 20px;
-            background-color: #fff;
-            border: 2px solid #ff6347;
-            border-radius: 5px;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        .back-btn:hover {
-            background-color: #ff6347;
-            color: white;
-        }
-        .form-container {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
-            margin: 20px auto;
-        }
+        /* 스타일 정의 */
     </style>
 </head>
 <body>
@@ -102,12 +21,14 @@
 <h1>맛집 갤러리</h1>
 
 <div class="form-container text-center my-4">
-    <form action="/upload" method="post" enctype="multipart/form-data" class="mb-4">
+    <!-- 업로드 폼 -->
+    <form action="<c:url value='/upload'/>" method="post" enctype="multipart/form-data" class="mb-4">
         <input type="file" name="file" class="form-control mb-2">
         <button type="submit" class="btn btn-success w-100">이미지 업로드</button>
     </form>
 
-    <form action="/rate" method="post" class="mb-4">
+    <!-- 별점 폼 -->
+    <form action="<c:url value='/rate'/>" method="post" class="mb-4">
         <label for="rating" class="form-label">별점 남기기:</label>
         <select name="rating" id="rating" class="form-select mb-2">
             <option value="1">1</option>
@@ -119,7 +40,8 @@
         <button type="submit" class="btn btn-warning w-100">별점 제출</button>
     </form>
 
-    <form action="/comment" method="post">
+    <!-- 댓글 폼 -->
+    <form action="<c:url value='/comment'/>" method="post">
         <textarea name="comment" class="form-control mb-2" rows="3" placeholder="댓글을 남겨주세요"></textarea>
         <button type="submit" class="btn btn-primary w-100">댓글 제출</button>
     </form>
@@ -151,12 +73,9 @@
     </c:forEach>
 </div>
 
-
 <div>
     <a href="<c:url value='/'/>" class="back-btn">메인으로 돌아가기</a>
 </div>
-
-<jsp:include page="/WEB-INF/includes/footer.jsp" />
 
 </body>
 </html>
