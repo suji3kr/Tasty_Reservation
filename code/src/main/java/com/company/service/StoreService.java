@@ -2,6 +2,7 @@ package com.company.service;
 
 import java.util.List;
 
+import com.company.domain.Criteria;
 import com.company.domain.StoreDTO;
 
 public interface StoreService {
@@ -13,4 +14,9 @@ public interface StoreService {
 //	public void insertStore(StoreDTO storeDTO);
 
 	public StoreDTO getStoreById(Long id);
+
+	public List<StoreDTO> getList(Criteria cri);
+
+	public int getTotal(Criteria cri);
+
 }

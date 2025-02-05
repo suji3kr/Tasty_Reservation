@@ -35,34 +35,32 @@ package com.company.domain;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.extern.log4j.Log4j;
 
 @Getter
-@Setter
 @ToString
 public class Criteria {
     private int pageNum; // 페이지 번호
     private int amount;  // 페이지당 보여줄 개수
-
     private String type;    // 검색 조건
     private String keyword; // 검색 키워드
+    
+    private int offset;
 
-    public Criteria() {
-        this(1, 10); // 기본값: 페이지 번호 1, 페이지당 10개
-    }
+	
+	public Criteria() {
+		this(1,10);
+	}
 
     public Criteria(int pageNum, int amount) {
         this.pageNum = pageNum;
         this.amount = amount;
+        this.offset = (pageNum - 1) * amount;
     }
 
     // 검색 조건을 배열로 변환 (예: "TCW" → ["T", "C", "W"])
     public String[] getTypeArr() {
         return type == null ? new String[] {} : type.split(",");
-    }
-
-    // MyBatis에서 사용할 offset 값 계산
-    public int getOffset() {
-        return (pageNum - 1) * amount;
     }
 
     // MyBatis에서 사용할 limit 값 반환

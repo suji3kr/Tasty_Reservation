@@ -135,5 +135,25 @@ public class BoardController {
         return "/board/familyreservation";
 	}
 	
+	 // ✅ 가족 단체 예약 (페이징 추가)
+    @GetMapping("/familyreservation")
+    public String familyReservation(
+    		@RequestParam(name = "pageNum", required = false, defaultValue = "1") int pageNum,
+    		@RequestParam(name = "amount", required = false, defaultValue = "10") int amount,
+    		Model model) {
+    	Criteria cri = new Criteria(pageNum, amount);
+        log.info("familyreservation page: " + cri);
+        
+        // 페이징된 가게 목록 가져오기
+        List<StoreDTO> storeList = storeService.getList(cri);
+        model.addAttribute("storeList", storeList);
+
+        // 총 가게 수
+        int total = storeService.getTotal(cri);
+        log.info("total stores: " + total);
+        model.addAttribute("pageMaker", new PageDTO(cri, total));
+
+        return "/board/familyreservation";
+    }
 	 
 }
