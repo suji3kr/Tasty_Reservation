@@ -128,6 +128,7 @@ public class BoardController {
 	}
 	
 	@GetMapping("/familyreservation")
+	
 	 public String familyReservation(Model model) {
         List<StoreDTO> storeList = storeService.getAllStores(); // 기존 Store 데이터 가져오기
         model.addAttribute("storeList", storeList); // 모델에 추가하여 JSP에서 사용 가능

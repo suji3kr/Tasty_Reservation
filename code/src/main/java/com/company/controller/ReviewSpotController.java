@@ -1,0 +1,56 @@
+package com.company.controller;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.company.model.Review;
+import com.company.service.ReviewService;
+
+@Controller
+public class ReviewSpotController {
+
+    private final ReviewService reviewService;
+
+    public ReviewSpotController(ReviewService reviewService) {
+        this.reviewService = reviewService;
+    }
+
+    @GetMapping("/reviewSpot")
+    public String reviewSpotPage(Model model) {
+        model.addAttribute("reviews", reviewService.getAllReviews());
+        model.addAttribute("newReview", new Review());
+        return "reviewSpot/reviewSpot";
+    }
+
+    @PostMapping("/addReview")
+    public String addReview(@ModelAttribute Review newReview, @RequestParam("imageFile") MultipartFile imageFile) {
+        if (!imageFile.isEmpty()) {
+            String fileName = UUID.randomUUID().toString() + "_" + imageFile.getOriginalFilename();
+            String uploadDir = System.getProperty("user.dir") + "/uploads/";
+            File directory = new File(uploadDir);
+            if (!directory.exists()) {
+                directory.mkdirs(); // 전체 경로 생성
+            }
+
+            try {
+                File uploadFile = new File(uploadDir + fileName);
+                imageFile.transferTo(uploadFile);
+                newReview.setImagePath(fileName);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        
+        reviewService.addReview(newReview);
+        return "redirect:/reviewSpot";
+    }
+}
