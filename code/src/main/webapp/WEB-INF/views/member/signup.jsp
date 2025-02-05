@@ -27,6 +27,10 @@ body {
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 	border-radius: 8px;
 }
+
+#checkUsernameBtn {
+	padding :5px;
+}
 </style>
 <script
   src="https://code.jquery.com/jquery-3.7.1.min.js"
