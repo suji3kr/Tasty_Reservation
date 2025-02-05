@@ -226,9 +226,13 @@ body {
 						</tr>
 					</c:forEach>
 				</tbody>
+				
+
 
 			</table>
-
+			
+			
+		
 			<a href="/board/register" class="btn btn-success">새 가게 등록</a>
 		</div>
 
@@ -340,5 +344,28 @@ body {
 				}
 			});
 </script>
+<div class="pagination">
+			
+	<c:set var="amount" value="${not empty param.amount ? param.amount : 10}"></c:set>
+	<c:set var="pageNum" value="${not empty param.pageNum ? param.pageNum : 1}"></c:set>
+	
+    <c:if test="${pageMaker.prev}">
+        <a href="/board/familyreservation?pageNum=${pageMaker.startPage - 1}&amount=${amount}">이전</a>
+    </c:if>
 
+    <c:forEach var="i" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+        <c:choose>
+            <c:when test="${i == pageNum}">
+                <span class="current-page">${i}</span>
+            </c:when>
+            <c:otherwise>
+                <a href="/board/familyreservation?pageNum=${i}&amount=${amount}">${i}</a>
+            </c:otherwise>
+        </c:choose>
+    </c:forEach>
+
+    <c:if test="${pageMaker.next}">
+        <a href="/board/familyreservation?pageNum=${pageMaker.endPage + 1}&amount=${amount}">다음</a>
+    </c:if>
+</div>
 </html>

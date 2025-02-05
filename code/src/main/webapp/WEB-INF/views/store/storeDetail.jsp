@@ -52,7 +52,7 @@
         </div>
     </div>
 
-    <a href="/store/storeList" class="btn btn-secondary mt-3">목록으로 돌아가기</a>
+    <a href="/board/familyreservation" class="btn btn-secondary mt-3">목록으로 돌아가기</a>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

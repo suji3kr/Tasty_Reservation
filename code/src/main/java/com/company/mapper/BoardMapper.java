@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.company.domain.BoardVO;
 import com.company.domain.Criteria;
+import com.company.domain.StoreDTO;
 
 public interface BoardMapper {
 //	@Select("select * from tbl_board where bno > 0")//데이터가 없으면 출력X
@@ -26,5 +27,4 @@ public interface BoardMapper {
 	
 	public List<BoardVO> searchTest(Map<String, Map<String, String>> map);
 	
-
 }

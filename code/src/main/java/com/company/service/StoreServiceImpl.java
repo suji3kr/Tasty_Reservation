@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.company.domain.Criteria;
 import com.company.domain.StoreDTO;
 import com.company.mapper.StoreMapper;
 
@@ -14,6 +15,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @AllArgsConstructor
 public class StoreServiceImpl implements StoreService {
+
 
     private StoreMapper mapper;
 
@@ -35,5 +37,18 @@ public class StoreServiceImpl implements StoreService {
     public StoreDTO getStoreById(Long id) {
         log.info("Fetching store by ID: " + id);
         return mapper.getStoreById(id);
+    }
+    
+    @Override
+    public List<StoreDTO> getList(Criteria cri) {
+        log.info("Fetching store list with criteria: " + cri);
+        return mapper.getListWithPaging(cri);
+    }
+
+    // ✅ 총 가게 수 조회
+    @Override
+    public int getTotal(Criteria cri) {
+        log.info("Fetching total store count with criteria: " + cri);
+        return mapper.getTotalCount(cri);
     }
 }

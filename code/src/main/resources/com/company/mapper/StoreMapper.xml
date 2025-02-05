@@ -33,5 +33,19 @@
     <select id="getStoreById" parameterType="long" resultMap="storeResultMap">
         SELECT * FROM store_registration WHERE id = #{id}
     </select>
+    
+    <!-- ✅ 전체 가게 조회 (페이징 지원) -->
+    <select id="getListWithPaging" resultMap="storeResultMap">
+        SELECT *
+        FROM store_registration
+        ORDER BY id DESC
+        LIMIT #{cri.amount} OFFSET #{cri.offset}
+    </select>
+    
+     <!-- ✅ 전체 가게 수 조회 (페이징 계산을 위해 필요) -->
+    <select id="getTotalCount" resultType="int">
+        SELECT COUNT(*)
+        FROM store_registration
+    </select>
 
 </mapper>
