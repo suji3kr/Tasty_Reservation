@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
 
 
 <!DOCTYPE html>
@@ -9,6 +11,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>가족 단체예약</title>
+
 <style>
 body {
 	font-family: 'Roboto', sans-serif;
@@ -16,7 +19,7 @@ body {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	background-color: #cad291; 
+	background-color: #cad291;
 }
 
 .container {
@@ -99,6 +102,7 @@ body {
 	object-fit: cover;
 }
 </style>
+
 </head>
 <body>
 
@@ -162,9 +166,71 @@ body {
 			</div>
 			<div class="filter-group">
 				<button type="button">바로 찾아줄게 ✔</button>
+				<!-- 검색 폼 -->
+			</div>
+
+			<div class="filter-group">
+				<input type="text" class="form-control me-2" name="searchKeyword"
+					placeholder="가게명 검색">
+				<button type="submit" class="btn btn-primary">검색</button>
+
+
 			</div>
 		</div>
 
+		<div class="body">
+			<h2 class="text-center">가게 목록</h2>
+
+
+
+			<!-- 가게 리스트 -->
+			<table class="table table-bordered table-hover">
+				<thead class="table-dark">
+					<tr>
+						<th>ID</th>
+						<th>가게 이름</th>
+						<th>위치</th>
+						<th>종류</th>
+						<th>전화번호</th>
+						<th>사진</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="store" items="${storeList}">
+						<tr onclick="location.href='/store/detail?id=${store.id}'"
+							style="cursor: pointer;">
+							<td>${store.id}</td>
+							<td>${store.storeName}</td>
+							<td>${store.storeLocation}</td>
+							<td>${store.storeCategory}</td>
+							<!-- 전화번호를 010-XXXX-XXXX 형식으로 변환 -->
+							<td><c:choose>
+									<c:when test="${fn:length(store.phoneNumber) == 11}">
+                        ${fn:substring(store.phoneNumber, 0, 3)}-${fn:substring(store.phoneNumber, 3, 7)}-${fn:substring(store.phoneNumber, 7, 11)}
+                    </c:when>
+									<c:otherwise>
+                        ${store.phoneNumber} <!-- 11자리가 아닌 경우 그냥 출력 -->
+									</c:otherwise>
+								</c:choose></td>
+							<td><c:choose>
+									<c:when test="${not empty store.storeImage}">
+										<img src="${store.storeImage}" alt="가게 이미지" width="80"
+											height="80"
+											onerror="this.onerror=null; this.src='/resources/images/default.jpg'">
+									</c:when>
+									<c:otherwise>
+										<img src="/resources/images/default.jpg" alt="기본 이미지"
+											width="80" height="80">
+									</c:otherwise>
+								</c:choose></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+
+			</table>
+
+			<a href="/board/register" class="btn btn-success">새 가게 등록</a>
+		</div>
 
 
 		<div class="photo-section">
@@ -274,4 +340,5 @@ body {
 				}
 			});
 </script>
+
 </html>
