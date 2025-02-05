@@ -323,14 +323,6 @@ body {
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxtdZqbdS6d0jR-vYVhQOtICdiDXq8S_A">
 		</script>
 
-	<!-- 수정완료 후 메인으로 넘어갈 때 경고창으로 표시 -->
-	<c:if test="${not empty flashScope.updateSuccess}">
-		<script>
-    			alert("수정이 완료되었습니다.");
-    		</script>
-	</c:if>
-
-
 
 </body>
 </html>

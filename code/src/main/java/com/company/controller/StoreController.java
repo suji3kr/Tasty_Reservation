@@ -84,7 +84,9 @@ public class StoreController {
 
     // ✅ 가게 목록 조회
     @GetMapping("/storeList")
-    public String listStores(Model model) {
+    public String listStores(
+    		@RequestParam(name = "searchKeyword", required = false, defaultValue = "") String searchKeyword,
+    		Model model) {
         List<StoreDTO> stores = storeService.getAllStores();
         model.addAttribute("storeList", stores);
         return "/store/storeList"; // storeList.jsp 파일 반환
