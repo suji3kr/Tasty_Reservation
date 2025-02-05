@@ -27,11 +27,14 @@ body {
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 	border-radius: 8px;
 }
+
+#checkUsernameBtn {
+	padding :5px;
+}
 </style>
-<script
-  src="https://code.jquery.com/jquery-3.7.1.min.js"
-  integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-  crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+	crossorigin="anonymous">
 </script>
 </head>
 <body>
@@ -46,8 +49,8 @@ body {
 				</div>
 
 				<button type="button" class="btn btn-primary mt-2"
-					id="checkUsernameBtn" onclick="emailCheck()">중복 확인</button>
-					
+					id="checkUsernameBtn" onclick="emailCheck()">중복확인</button>
+
 				<div id="check-result"></div>
 
 			</div>
@@ -141,6 +144,8 @@ body {
 						name="gender" value="F" required> <label for="female">여성</label>
 				</div>
 			</div>
+	
+
 			<button type="submit" class="btn btn-primary w-100">가입하기</button>
 		</form>
 	</div>

@@ -127,6 +127,13 @@ public class BoardController {
 		return "/board/favfood"; // view 이름
 	}
 	
+	@GetMapping("/familyreservation")
+	
+	 public String familyReservation(Model model) {
+        List<StoreDTO> storeList = storeService.getAllStores(); // 기존 Store 데이터 가져오기
+        model.addAttribute("storeList", storeList); // 모델에 추가하여 JSP에서 사용 가능
+        return "/board/familyreservation";
+	}
 	
 	 // ✅ 가족 단체 예약 (페이징 추가)
     @GetMapping("/familyreservation")
