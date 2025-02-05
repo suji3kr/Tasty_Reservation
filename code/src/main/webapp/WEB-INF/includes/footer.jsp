@@ -5,13 +5,14 @@
 <!-- 푸터 스타일 추가 -->
 <style>
 #footer-container {
-	background-color: #f8f8f8;
+	background-color: #ffffff; 
 	border-top: 1px solid #e7e7e7;
 	padding: 30px 0;
 	text-align: center;
 	display: flex;
 	justify-content: center;
 	width: 100%;
+	box-shadow: inset 0 30px 0 #f4f7fc; /* padding 영역 색상 */
 }
 
 #footer-content {
@@ -95,9 +96,9 @@
 	</div>
 </div>
 <!-- 저작권 정보 -->
-	<div class="footer-bottom">
-		<p>&copy; 2025 Art Of Reservation. All Rights Reserved.</p>
-	</div>
+<div class="footer-bottom">
+	<p>&copy; 2025 Art Of Reservation. All Rights Reserved.</p>
+</div>
 
 <!-- JavaScript 및 플러그인 -->
 <script src="/resources/vendor/bootstrap/js/bootstrap.min.js"></script>

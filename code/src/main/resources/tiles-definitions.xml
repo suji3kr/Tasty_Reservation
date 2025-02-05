@@ -114,7 +114,17 @@
 
 	<!-- 박영웅 영역 -->
 	
-
+	<definition name="/photoGallery" extends="base">
+		<put-attribute name="title" value="사진 게시판" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/photoGallery.jsp" />
+	</definition>
+	
+	<definition name="/board/get" extends="base">
+		<put-attribute name="title" value="리뷰 관리" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/get.jsp" />
+	</definition>
 
 
 
@@ -139,7 +149,7 @@
 	<!-- 강미림 영역 -->
 	<!-- Home filter 추가 -->
     <definition name="/board/familyreservation" extends="base">
-		<put-attribute name="title" value="단쳬예약" />
+		<put-attribute name="title" value="단체예약" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/board/familyreservation.jsp" />
 	</definition>

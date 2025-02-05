@@ -15,10 +15,11 @@
 /* 공통 스타일 */
 body {
 	font-family: 'Roboto', sans-serif;
-	background-color: #f4f7fc;
+	background-color: #ffffff;
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+
 }
 
 /* 컨테이너 설정 */
@@ -188,7 +189,7 @@ body {
 					<div class="overlay">
 						<h1>Art Of Reservation</h1>
 						<p>예약의 미학</p>
-						<a href="/board/list"> 예약하러가기 📑</a>
+						<a href="/board/familyreservation"> 예약하러가기 📑</a>
 					</div>
 				</div>
 				<div class="photo-frame">
