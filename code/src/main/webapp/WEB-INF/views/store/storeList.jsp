@@ -38,7 +38,7 @@ img {
 		<h2 class="text-center">가게 목록</h2>
 
 		<!-- 검색 폼 -->
-		<form action="/store/storeList" method="get" class="d-flex mb-3">
+		<form action="/board/familyreservation" method="get" class="d-flex mb-3">
 			<input type="text" class="form-control me-2" name="searchKeyword"
 				placeholder="가게명 검색">
 			<button type="submit" class="btn btn-primary">검색</button>

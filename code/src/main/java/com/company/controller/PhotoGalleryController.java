@@ -20,6 +20,6 @@ public class PhotoGalleryController {
         );
 
         model.addAttribute("photos", photoList);
-        return "photoGallery"; // views/photoGallery.jsp로 이동
+        return "/photoGallery"; // views/photoGallery.jsp로 이동
     }
 }

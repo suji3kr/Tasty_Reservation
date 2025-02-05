@@ -4,29 +4,34 @@
 
 <mapper namespace="com.company.mapper.StoreMapper">
 
+	<resultMap id="storeResultMap" type="com.company.domain.StoreDTO">
+	    <id property="id" column="id"/>
+	    <result property="storeName" column="store_name"/>
+	    <result property="storeLocation" column="store_location"/>
+	    <result property="storeDescription" column="store_description"/>
+	    <result property="storeCategory" column="store_category"/>
+	    <result property="phoneNumber" column="phone_number"/>
+	    <result property="storeImage" column="store_image"/>
+	</resultMap>
 
     <!-- 가게 정보 등록 -->
-    <insert id="insertStore" parameterType="com.company.domain.StoreDTO">
+    <insert id="registerStore" parameterType="com.company.domain.StoreDTO">
         INSERT INTO store_registration 
         (store_name, store_location, store_description, store_category, phone_number, store_image)
         VALUES (#{storeName}, #{storeLocation}, #{storeDescription}, #{storeCategory}, #{phoneNumber}, #{storeImage});
     </insert>
 
     <!-- 모든 가게 조회 -->
-    <select id="getAllStores" resultType="com.company.domain.StoreDTO">
-        SELECT
-        	id,
-        	store_name storeName, store_location storelocation, store_description storedescription, store_category storecategory, phone_number phonenumber,
-        	 store_image storeimage
-        FROM store_registration
-        ORDER BY id DESC;
-    </select>
-
+    <select id="getAllStores" resultMap="storeResultMap">
+	    SELECT *
+	    FROM store_registration
+	    ORDER BY id DESC;
+	</select>
+    
+    
 	<!-- 특정 가게 조회 -->
-    <select id="getStoreById" parameterType="long" resultType="com.company.domain.StoreDTO">
-        SELECT store_name storeName, store_location storelocation, store_description storedescription, store_category storecategory, phone_number phonenumber,
-        store_image storeimage
-         FROM store_registration WHERE id = #{id}
+    <select id="getStoreById" parameterType="long" resultMap="storeResultMap">
+        SELECT * FROM store_registration WHERE id = #{id}
     </select>
 
 </mapper>

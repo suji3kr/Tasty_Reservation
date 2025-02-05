@@ -1,5 +1,7 @@
 package com.company.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +14,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.company.domain.BoardVO;
 import com.company.domain.Criteria;
 import com.company.domain.PageDTO;
+import com.company.domain.StoreDTO;
 import com.company.service.BoardService;
+import com.company.service.StoreService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -25,6 +29,7 @@ public class BoardController {
 
 	private BoardService service;
 	private BoardService boardservice;
+	private StoreService storeService;
 
 //	@GetMapping("/list")
 	//public void list(Model model) {
@@ -123,8 +128,10 @@ public class BoardController {
 	}
 	
 	@GetMapping("/familyreservation")
-	public String getFamilyReservation() {
-		return "/board/familyreservation"; // view 이름
+	 public String familyReservation(Model model) {
+        List<StoreDTO> storeList = storeService.getAllStores(); // 기존 Store 데이터 가져오기
+        model.addAttribute("storeList", storeList); // 모델에 추가하여 JSP에서 사용 가능
+        return "/board/familyreservation";
 	}
 	
 	 
