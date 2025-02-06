@@ -18,7 +18,7 @@
 				<li><a href="#">SNS 맛집</a></li>
 				<li><a href="${contextPath}/photoGallery">포토 스팟</a></li>
 				<li><a href="${contextPath}/reviewSpot">리뷰 스팟</a></li>
-				<li><a href="#">실시간 Ai추천</a></li>
+				<li><a href="${contextPath}/recommend">실시간 Ai추천</a></li>
 			</ul>
 		</li>
 		<li><a href="#"><b>테마</b></a>
@@ -65,7 +65,6 @@
 		String loginEmail = (String) session.getAttribute("loginEmail");
 		String userName = (loginEmail != null) ? loginEmail.split("@")[0] : "";
 		%>
-
 		<p>
 			<strong><%=userName%></strong>님, 환영합니다 🐱‍🏍
 		</p>

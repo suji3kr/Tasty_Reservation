@@ -20,4 +20,7 @@ public class ReviewService {
         review.setId(counter.incrementAndGet());
         reviews.add(review);
     }
+    public void deleteReview(Long reviewId) {
+        // review 삭제 로직
+    }
 }
