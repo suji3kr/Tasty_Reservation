@@ -50,29 +50,29 @@ body {
 	padding: 3px 0;
 	justify-content: center; /* 세로 방향 중앙 정렬 */
 }
-.filter-stargroup{
-/* 	display: flex; */
+
+.filter-stargroup {
+	/* 	display: flex; */
 	flex-direction: column;
 	align-items: center;
 	padding-top: 6px; /* 위쪽 패딩 값 추가 */
-    padding-bottom: 5px; /* 아래쪽 패딩은 기존처럼 유지 */
-
+	padding-bottom: 5px; /* 아래쪽 패딩은 기존처럼 유지 */
 }
-.filter-checkgroup{
-/* 	display: flex; */
+
+.filter-checkgroup {
+	/* 	display: flex; */
 	flex-direction: column;
 	align-items: center;
 	padding-top: 11px; /* 위쪽 패딩 값 추가 */
-    padding-bottom: 5px; /* 아래쪽 패딩은 기존처럼 유지 */
-
+	padding-bottom: 5px; /* 아래쪽 패딩은 기존처럼 유지 */
 }
-.filter-time-kids{
-/* 	display: flex; */
+
+.filter-time-kids {
+	/* 	display: flex; */
 	flex-direction: column;
 	align-items: center;
 	padding-top: 8px; /* 위쪽 패딩 값 추가 */
-    padding-bottom: 5px; /* 아래쪽 패딩은 기존처럼 유지 */
-
+	padding-bottom: 5px; /* 아래쪽 패딩은 기존처럼 유지 */
 }
 
 .filter-group label {
@@ -145,11 +145,11 @@ body {
 				</select>
 			</div>
 			<div class="filter-group">
-				<label for="date">날 짜  </label> <input type="date" id="date"
+				<label for="date">날 짜 </label> <input type="date" id="date"
 					name="date">
 			</div>
 			<div class="filter-group">
-				<label for="guests">인 원  </label> <select id="guests" name="guests">
+				<label for="guests">인 원 </label> <select id="guests" name="guests">
 					<c:forEach var="num" begin="6" end="12">
 						<option value="${num}">${num}명</option>
 					</c:forEach>
@@ -158,9 +158,9 @@ body {
 					placeholder="추가 인원 입력" style="display: none;">
 			</div>
 			<div class="filter-stargroup">
-				<label><b>별점 허용</b></label> <input type="radio" name="rating" value="5">
-				5점 <input type="radio" name="rating" value="4"> 4점대 <input
-					type="radio" name="rating" value="3"> 3점대
+				<label><b>별점 허용</b></label> <input type="radio" name="rating"
+					value="5"> 5점 <input type="radio" name="rating" value="4">
+				4점대 <input type="radio" name="rating" value="3"> 3점대
 			</div>
 			<div class="filter-checkgroup">
 				<label><b>메 뉴</b></label> <input type="checkbox" name="food-type"
@@ -202,7 +202,7 @@ body {
 				</div>
 			</div>
 
-			
+
 		</div>
 
 		<div class="body">
@@ -253,13 +253,13 @@ body {
 						</tr>
 					</c:forEach>
 				</tbody>
-				
+
 
 
 			</table>
 			
-			
-		
+
+
 			<a href="/board/register" class="btn btn-success">새 가게 등록</a>
 		</div>
 
@@ -372,27 +372,32 @@ body {
 			});
 </script>
 <div class="pagination">
-			
-	<c:set var="amount" value="${not empty param.amount ? param.amount : 10}"></c:set>
-	<c:set var="pageNum" value="${not empty param.pageNum ? param.pageNum : 1}"></c:set>
-	
-    <c:if test="${pageMaker.prev}">
-        <a href="/board/familyreservation?pageNum=${pageMaker.startPage - 1}&amount=${amount}">이전</a>
-    </c:if>
 
-    <c:forEach var="i" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-        <c:choose>
-            <c:when test="${i == pageNum}">
-                <span class="current-page">${i}</span>
-            </c:when>
-            <c:otherwise>
-                <a href="/board/familyreservation?pageNum=${i}&amount=${amount}">${i}</a>
-            </c:otherwise>
-        </c:choose>
-    </c:forEach>
+				<c:set var="amount"
+					value="${not empty param.amount ? param.amount : 10}"></c:set>
+				<c:set var="pageNum"
+					value="${not empty param.pageNum ? param.pageNum : 1}"></c:set>
 
-    <c:if test="${pageMaker.next}">
-        <a href="/board/familyreservation?pageNum=${pageMaker.endPage + 1}&amount=${amount}">다음</a>
-    </c:if>
-</div>
+				<c:if test="${pageMaker.prev}">
+					<a
+						href="/board/familyreservation?pageNum=${pageMaker.startPage - 1}&amount=${amount}">이전</a>
+				</c:if>
+
+				<c:forEach var="i" begin="${pageMaker.startPage}"
+					end="${pageMaker.endPage}">
+					<c:choose>
+						<c:when test="${i == pageNum}">
+							<span class="current-page">${i}</span>
+						</c:when>
+						<c:otherwise>
+							<a href="/board/familyreservation?pageNum=${i}&amount=${amount}">${i}</a>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+
+				<c:if test="${pageMaker.next}">
+					<a
+						href="/board/familyreservation?pageNum=${pageMaker.endPage + 1}&amount=${amount}">다음</a>
+				</c:if>
+			</div>
 </html>
