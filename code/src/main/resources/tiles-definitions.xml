@@ -125,6 +125,16 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/board/get.jsp" />
 	</definition>
+	<definition name="/reviewSpot/reviewSpot" extends="base">
+		<put-attribute name="title" value="리뷰" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/reviewSpot/reviewSpot.jsp" />
+	</definition>
+	<definition name="/board/recommend" extends="base">
+		<put-attribute name="title" value="Ai 추천" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/recommend.jsp" />
+	</definition>
 
 
 

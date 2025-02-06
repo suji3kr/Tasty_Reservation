@@ -88,9 +88,9 @@
 		<div class="footer-column">
 			<h3>Contact</h3>
 			<ul>
-				<li>Email: support@artofreservation.com</li>
-				<li>Phone: +1 234 567 890</li>
-				<li>Address: 1234 Main St, City, Country</li>
+				<li>이메일: support@artofreservation.com</li>
+				<li>핸드폰 번호: 010-1234-5678</li>
+				<li>주소: 대한민국</li>
 			</ul>
 		</div>
 	</div>
