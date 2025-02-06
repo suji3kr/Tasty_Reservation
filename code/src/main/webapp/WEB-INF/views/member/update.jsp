@@ -74,6 +74,11 @@ h2 {
 button {
 	margin: 0 auto;;
 }
+
+.id-class {
+	display : none;
+}
+
 </style>
 </head>
 <body>
@@ -86,7 +91,9 @@ button {
 			<h2>회원정보 수정</h2>
 
 			<form action="/member/update" method="post" name="updateForm">
-
+				<p class = "id-class">
+					아 이 디 : <input type="text" name="id" value="${member.id}" readonly>
+				</p>
 				<p>
 					이 메 일 <input type="text" name="email" value="${member.email}"
 						readonly>
