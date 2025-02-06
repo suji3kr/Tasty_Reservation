@@ -33,16 +33,17 @@ CREATE TABLE store_registration (
     store_image VARCHAR(255)                   -- 가게 사진 (파일 경로)
 );
 
-CREATE TABLE Reservations (
-    reservation_id INT AUTO_INCREMENT PRIMARY KEY,
-    id BIGINT,  -- Users 테이블의 id 타입과 일치시킴
-    restaurant_id INT,
-    reservation_date DATETIME NOT NULL,
-    status VARCHAR(20) DEFAULT 'Pending',
-    FOREIGN KEY (id) REFERENCES Users(id),
-    FOREIGN KEY (restaurant_id) REFERENCES Restaurants(restaurant_id)
-);
-
+CREATE TABLE reservations (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    store_id INT NOT NULL,
+    customer_name VARCHAR(255) NOT NULL,
+    phone_number VARCHAR(20) NOT NULL,
+    reservation_date DATE NOT NULL,
+    reservation_time TIME NOT NULL,
+    people_count INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (store_id) REFERENCES store_registration(id) ON DELETE CASCADE
+);d
 
 
 CREATE TABLE Admins (
