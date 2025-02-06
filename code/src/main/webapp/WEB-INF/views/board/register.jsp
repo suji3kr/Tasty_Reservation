@@ -22,6 +22,29 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
         }
+        
+        .map-btn {
+        	padding: 5px 0;
+        	border: none;
+        	border-radius: 5px;
+        	width: 85px; 
+        	height: 40px;
+        	margin: auto;
+        	background: #95bb46;
+        	color: #fff;
+        	font-weight: bold;
+        }
+        
+        .resigter-btn {
+        	width: 100%;
+        	height: 50px;
+        	border: none;
+        	border-radius: 15px;
+        	background: #95bb46;
+        	color: #fff;
+        	font-weight: bold;
+        }
+        
     </style>
     <!-- Google Maps API 키 추가 (유효한 키로 교체하세요) -->
     <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxtdZqbdS6d0jR-vYVhQOtICdiDXq8S_A&libraries=places&callback=initAutocomplete" async defer></script> -->
@@ -40,7 +63,7 @@
             <label for="storeLocation" class="form-label">가게 위치</label>
             <div class="input-group">
                 <input type="text" class="form-control" id="storeLocation" name="storeLocation" required>
-                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#mapModal">지도 보기</button>
+                <button type="button" class="map-btn" data-bs-toggle="modal" data-bs-target="#mapModal">지도 보기</button>
             </div>
         </div>
 
@@ -86,7 +109,7 @@
 		    });
 		</script>
 
-        <button type="submit" class="btn btn-primary w-100">등록하기</button>
+        <button type="submit" class="resigter-btn">등록하기</button>
     </form>
 </div>
 
@@ -113,10 +136,6 @@
         </div>
     </div>
 </div>
-
-<footer>
-    <p>&copy; 2025 Art Of Reservation. All rights reserved.</p>
-</footer>
 
 <!-- Bootstrap JS and dependencies -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
