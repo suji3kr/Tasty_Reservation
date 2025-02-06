@@ -28,17 +28,19 @@ public class ReviewSpotController {
     public String reviewSpotPage(Model model) {
         model.addAttribute("reviews", reviewService.getAllReviews());
         model.addAttribute("newReview", new Review());
-        return "reviewSpot/reviewSpot";
+        return "/reviewSpot/reviewSpot";
     }
 
     @PostMapping("/addReview")
-    public String addReview(@ModelAttribute Review newReview, @RequestParam("imageFile") MultipartFile imageFile) {
+    public String addReview(@ModelAttribute Review newReview, @RequestParam("imageFile") MultipartFile imageFile, Model model) {
         if (!imageFile.isEmpty()) {
             String fileName = UUID.randomUUID().toString() + "_" + imageFile.getOriginalFilename();
             String uploadDir = System.getProperty("user.dir") + "/uploads/";
             File directory = new File(uploadDir);
-            if (!directory.exists()) {
-                directory.mkdirs(); // 전체 경로 생성
+           
+            if (!directory.exists() && !directory.mkdirs()) {
+                model.addAttribute("errorMessage", "Could not create upload directory!");
+                return "reviewSpot/reviewSpot"; // Return to the review page on failure
             }
 
             try {
@@ -47,9 +49,11 @@ public class ReviewSpotController {
                 newReview.setImagePath(fileName);
             } catch (IOException e) {
                 e.printStackTrace();
+                model.addAttribute("errorMessage", "File upload failed!");
+                return "reviewSpot/reviewSpot"; // Return to the review page on failure
             }
         }
-        
+
         reviewService.addReview(newReview);
         return "redirect:/reviewSpot";
     }

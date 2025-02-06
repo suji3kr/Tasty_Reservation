@@ -20,9 +20,9 @@ body {
 #header {
 	height: 90px;
 	padding: 15px;
- 	background-color: white; 
+ 	background-color: 3dfdcaf; 
 /* 	background-color: #d9deaf; */
-	/*     border-bottom: 2px solid #ddd; */
+
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -30,9 +30,9 @@ body {
 }
 
 #logo {
-	font-size: 24px;
+	font-size: 22px;
 	font-weight: bold;
-	color: green;
+	color: darkgreen;
 	text-decoration: none !important; /* 밑줄 제거 */
 }
 /* 

@@ -32,7 +32,7 @@ body {
 }
 
 .filter-section {
-	width: 100%;
+	width: 1002px;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-around;
@@ -214,11 +214,11 @@ body {
 			<table class="table table-bordered table-hover">
 				<thead class="table-dark">
 					<tr>
-						<th>ID</th>
+				<!-- 		<th>ID</th> -->
 						<th>가게 이름</th>
-						<th>위치</th>
+		<!-- 				<th>위치</th>
 						<th>종류</th>
-						<th>전화번호</th>
+						<th>전화번호</th> -->
 						<th>사진</th>
 					</tr>
 				</thead>
@@ -226,19 +226,19 @@ body {
 					<c:forEach var="store" items="${storeList}">
 						<tr onclick="location.href='/store/detail?id=${store.id}'"
 							style="cursor: pointer;">
-							<td>${store.id}</td>
+						<%-- 	<td>${store.id}</td> --%>
 							<td>${store.storeName}</td>
-							<td>${store.storeLocation}</td>
-							<td>${store.storeCategory}</td>
+	<%-- 						<td>${store.storeLocation}</td>
+							<td>${store.storeCategory}</td> --%>
 							<!-- 전화번호를 010-XXXX-XXXX 형식으로 변환 -->
-							<td><c:choose>
+							<%-- <td><c:choose>
 									<c:when test="${fn:length(store.phoneNumber) == 11}">
                         ${fn:substring(store.phoneNumber, 0, 3)}-${fn:substring(store.phoneNumber, 3, 7)}-${fn:substring(store.phoneNumber, 7, 11)}
                     </c:when>
 									<c:otherwise>
                         ${store.phoneNumber} <!-- 11자리가 아닌 경우 그냥 출력 -->
 									</c:otherwise>
-								</c:choose></td>
+								</c:choose></td> --%>
 							<td><c:choose>
 									<c:when test="${not empty store.storeImage}">
 										<img src="${store.storeImage}" alt="가게 이미지" width="80"
@@ -371,33 +371,34 @@ body {
 				}
 			});
 </script>
+
+<!-- 페이징처리 -->
 <div class="pagination">
 
-				<c:set var="amount"
-					value="${not empty param.amount ? param.amount : 10}"></c:set>
-				<c:set var="pageNum"
-					value="${not empty param.pageNum ? param.pageNum : 1}"></c:set>
+	<c:set var="amount"
+		value="${not empty param.amount ? param.amount : 10}"></c:set>
+	<c:set var="pageNum"
+		value="${not empty param.pageNum ? param.pageNum : 1}"></c:set>
+	<c:if test="${pageMaker.prev}">
+		<a
+			href="/board/familyreservation?pageNum=${pageMaker.startPage - 1}&amount=${amount}">이전</a>
+	</c:if>
 
-				<c:if test="${pageMaker.prev}">
-					<a
-						href="/board/familyreservation?pageNum=${pageMaker.startPage - 1}&amount=${amount}">이전</a>
-				</c:if>
+	<c:forEach var="i" begin="${pageMaker.startPage}"
+		end="${pageMaker.endPage}">
+		<c:choose>
+			<c:when test="${i == pageNum}">
+				<span class="current-page">${i}</span>
+			</c:when>
+			<c:otherwise>
+				<a href="/board/familyreservation?pageNum=${i}&amount=${amount}">${i}</a>
+			</c:otherwise>
+		</c:choose>
+	</c:forEach>
 
-				<c:forEach var="i" begin="${pageMaker.startPage}"
-					end="${pageMaker.endPage}">
-					<c:choose>
-						<c:when test="${i == pageNum}">
-							<span class="current-page">${i}</span>
-						</c:when>
-						<c:otherwise>
-							<a href="/board/familyreservation?pageNum=${i}&amount=${amount}">${i}</a>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
-
-				<c:if test="${pageMaker.next}">
-					<a
-						href="/board/familyreservation?pageNum=${pageMaker.endPage + 1}&amount=${amount}">다음</a>
-				</c:if>
-			</div>
+	<c:if test="${pageMaker.next}">
+		<a
+			href="/board/familyreservation?pageNum=${pageMaker.endPage + 1}&amount=${amount}">다음</a>
+	</c:if>
+</div>
 </html>
