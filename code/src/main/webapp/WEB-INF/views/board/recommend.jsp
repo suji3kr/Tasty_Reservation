@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<jsp:include page="/WEB-INF/includes/header.jsp" />
 
 <html>
 <head>
@@ -55,4 +54,4 @@
 </body>
 </html>
 
-<jsp:include page="/WEB-INF/includes/footer.jsp" />
+

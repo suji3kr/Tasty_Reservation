@@ -11,8 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <title>맛집 갤러리</title>
-<!-- 스타일 시트 링크 -->
-<link rel="stylesheet" href="<c:url value='/resources/css/style.css'/>">
+
 
 <style>
 /* 페이지 기본 스타일 */
