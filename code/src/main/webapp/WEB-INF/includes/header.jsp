@@ -65,7 +65,6 @@
 		String loginEmail = (String) session.getAttribute("loginEmail");
 		String userName = (loginEmail != null) ? loginEmail.split("@")[0] : "";
 		%>
-
 		<p>
 			<strong><%=userName%></strong>님, 환영합니다 🐱‍🏍
 		</p>

@@ -40,7 +40,8 @@ body {
 	height: 38px;
 	margin-bottom: 5px;
 	border-radius: 15px;
-	border: none; background : #0d6efd;
+	border: none; 
+	background : #0d6efd;
 	color: #fff;
 	background: #0d6efd;
 	font-weight: bold;
