@@ -95,5 +95,5 @@
         <extension>gif</extension>
         <mime-type>image/gif</mime-type>
     </mime-mapping>
-
+    
 </web-app>

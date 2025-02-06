@@ -1,48 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:mvc="http://www.springframework.org/schema/mvc"
-    xmlns:context="http://www.springframework.org/schema/context"
-    xsi:schemaLocation="
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
            http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
            http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
            http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!-- Spring MVC 설정 -->
-    <mvc:annotation-driven />
+	<!-- Spring MVC 설정 -->
+	<mvc:annotation-driven />
 
-    <!-- 정적 리소스 매핑 -->
-    <mvc:resources mapping="/resources/**" location="/resources/" />
+	<!-- 정적 리소스 매핑 -->
+	<mvc:resources mapping="/resources/**"
+		location="/resources/" />
 
-    <!-- Tiles 설정 추가 -->
-    <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
-        <property name="definitions">
-            <list>
-                <value>classpath:tiles-definitions.xml</value> <!-- tiles 정의 파일 경로 -->
-            </list>
-        </property>
-        <property name="preparerFactoryClass" value="org.springframework.web.servlet.view.tiles3.SpringBeanPreparerFactory" />
-    </bean>
-    <bean class="org.springframework.web.servlet.view.tiles3.TilesViewResolver">
-        <property name="order" value="1" /> <!-- 뷰 리졸버 우선 순위 설정 -->
-    </bean>
+	<!-- Tiles 설정 추가 -->
+	<bean id="tilesConfigurer"
+		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>classpath:tiles-definitions.xml</value> <!-- tiles 정의 파일 경로 -->
+			</list>
+		</property>
+		<property name="preparerFactoryClass"
+			value="org.springframework.web.servlet.view.tiles3.SpringBeanPreparerFactory" />
+	</bean>
+	<bean
+		class="org.springframework.web.servlet.view.tiles3.TilesViewResolver">
+		<property name="order" value="1" /> <!-- 뷰 리졸버 우선 순위 설정 -->
+	</bean>
 
-    <!-- MyBatis 매퍼 스캐너 설정 -->
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.company.mapper" />
-    </bean>
-    
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/views/" />
-        <property name="suffix" value=".jsp" />
-    </bean>
+	<!-- MyBatis 매퍼 스캐너 설정 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.company.mapper" />
+	</bean>
 
-    <!-- Handles multipart file uploads -->
-    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
-    
-    <!-- Component Scan -->
-    <context:component-scan base-package="com.company.*" />
-    
-    <mvc:resources mapping="/uploads/**" location="file:${user.dir}/uploads/" />
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<!-- Handles multipart file uploads -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+
+	<!-- Component Scan -->
+	<context:component-scan
+		base-package="com.company.*" />
+
+	<context:component-scan
+		base-package="com.company.controller" />
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<mvc:resources mapping="/uploads/**"
+		location="file:${user.dir}/uploads/" />
 
 </beans>
