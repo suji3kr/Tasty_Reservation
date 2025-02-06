@@ -106,8 +106,9 @@ public class MemberController {
 			// 홈페이지로 리다이렉트
 			return "redirect:/";} 
 		else {
-			// 업데이트 실패 시 멤버 인덱스 페이지로 돌아감 return
-			return "/member/index";
+			System.out.println("수정실패하였습니다."); // 업데이트 실패를 나타내는 콘솔 로그 추가
+			// 업데이트 실패 시 멤버 업데이트 페이지로 돌아감 return
+			return "/member/update";
 		}
 	}
 
