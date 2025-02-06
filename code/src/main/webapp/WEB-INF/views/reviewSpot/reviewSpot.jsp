@@ -1,17 +1,114 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<html>
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-<title>리뷰</title>
-<link rel="stylesheet" type="text/css"
-    href="${pageContext.request.contextPath}/resources/css/reviewSpot.css">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<head>
+<meta charset="UTF-8">
+<title>리뷰 </title>
+
+
+<style>
+/* reviewSpot.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+.review-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+
+.review-item {
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 60%;
+    margin: 10px 0;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.review-item h2 {
+    margin-top: 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+
+form input[type="text"],
+form textarea {
+    width: 50%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+form button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+form button:hover {
+    background-color: #45a049;
+}
+
+/* 별점 스타일 추가 */
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+}
+
+.rating input {
+    display: none;
+}
+
+.rating label {
+    font-size: 2em;
+    color: #ddd;
+    cursor: pointer;
+}
+
+.rating input:checked ~ label {
+    color: #f5b301;
+}
+
+.rating label:hover,
+.rating label:hover ~ label {
+    color: #f5b301;
+}
+
+
+</style>
 </head>
 <body>
 
-    <%@ include file="/WEB-INF/includes/header.jsp" %>
+
 
     <h1>리뷰</h1>
 
@@ -68,7 +165,6 @@
         <button type="submit">확인</button>
     </form>
 
-    <%@ include file="/WEB-INF/includes/footer.jsp" %>
 
 </body>
 

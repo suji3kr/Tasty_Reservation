@@ -28,7 +28,7 @@ public class ReviewSpotController {
     public String reviewSpotPage(Model model) {
         model.addAttribute("reviews", reviewService.getAllReviews());
         model.addAttribute("newReview", new Review());
-        return "reviewSpot/reviewSpot";
+        return "/reviewSpot/reviewSpot";
     }
 
     @PostMapping("/addReview")

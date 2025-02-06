@@ -135,6 +135,27 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/board/recommend.jsp" />
 	</definition>
+	<definition name="/category/korean" extends="base">
+		<put-attribute name="title" value="korean" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/category/korean.jsp" />
+	</definition>
+	<definition name="/category/meat" extends="base">
+		<put-attribute name="title" value="meat" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/category/meat.jsp" />
+	</definition>
+	<definition name="/category/vegetarian" extends="base">
+		<put-attribute name="title" value="vegetarian" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/category/vegetarian.jsp" />
+	</definition>
+	<definition name="/category/world" extends="base">
+		<put-attribute name="title" value="world" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/category/world.jsp" />
+	</definition>
+	
 
 
 

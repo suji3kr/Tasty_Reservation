@@ -20,6 +20,6 @@ public class RestaurantController {
         Random random = new Random();
         String recommended = restaurants.get(random.nextInt(restaurants.size()));
         model.addAttribute("restaurant", recommended);
-        return "board/recommend";
+        return "/board/recommend";
     }
 }
