@@ -3,8 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
-
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -15,11 +13,11 @@
 <style>
 body {
 	font-family: 'Roboto', sans-serif;
-	background-color: #f4f7fc;
+	background-color: #e5ebbc;
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	background-color: #cad291;
+	background-color: #f7f9e9;
 }
 
 .container {
@@ -201,44 +199,26 @@ body {
 					<!-- 검색 폼 -->
 				</div>
 			</div>
+<<<<<<< Updated upstream
 
 
+=======
+>>>>>>> Stashed changes
 		</div>
-
 		<div class="body">
-			<h2 class="text-center">가게 목록</h2>
-
-
-
+			<h2 class="text-center"></h2>
 			<!-- 가게 리스트 -->
 			<table class="table table-bordered table-hover">
 				<thead class="table-dark">
 					<tr>
-				<!-- 		<th>ID</th> -->
-						<th>가게 이름</th>
-		<!-- 				<th>위치</th>
-						<th>종류</th>
-						<th>전화번호</th> -->
-						<th>사진</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach var="store" items="${storeList}">
 						<tr onclick="location.href='/store/detail?id=${store.id}'"
 							style="cursor: pointer;">
-						<%-- 	<td>${store.id}</td> --%>
 							<td>${store.storeName}</td>
-	<%-- 						<td>${store.storeLocation}</td>
-							<td>${store.storeCategory}</td> --%>
 							<!-- 전화번호를 010-XXXX-XXXX 형식으로 변환 -->
-							<%-- <td><c:choose>
-									<c:when test="${fn:length(store.phoneNumber) == 11}">
-                        ${fn:substring(store.phoneNumber, 0, 3)}-${fn:substring(store.phoneNumber, 3, 7)}-${fn:substring(store.phoneNumber, 7, 11)}
-                    </c:when>
-									<c:otherwise>
-                        ${store.phoneNumber} <!-- 11자리가 아닌 경우 그냥 출력 -->
-									</c:otherwise>
-								</c:choose></td> --%>
 							<td><c:choose>
 									<c:when test="${not empty store.storeImage}">
 										<img src="${store.storeImage}" alt="가게 이미지" width="80"
@@ -253,6 +233,7 @@ body {
 						</tr>
 					</c:forEach>
 				</tbody>
+<<<<<<< Updated upstream
 
 
 
@@ -260,19 +241,24 @@ body {
 			
 
 
+=======
+			</table>
+>>>>>>> Stashed changes
 			<a href="/board/register" class="btn btn-success">새 가게 등록</a>
 		</div>
 
-
 		<div class="photo-section">
 			<div class="photo-frame">
-				<img src="/resources/image/뷔페.jpg" alt="뷔페">
+				<a href="http://localhost:8092/store/detail?id=4"><img
+					src="/resources/image/뷔페.jpg" alt="뷔페"></a>
 			</div>
 			<div class="photo-frame">
-				<img src="/resources/image/국물요리.jpg" alt="국물요리">
+				<a href="http://localhost:8092/store/detail?id=2"><img
+					src="/resources/image/베트남요리.png" alt="베트남요리"></a>
 			</div>
 			<div class="photo-frame">
-				<img src="/resources/image/관자요리.jpg" alt="관자요리">
+				<a href="http://localhost:8092/store/detail?id=3"><img
+					src="/resources/image/관자요리.jpg" alt="관자요리"></a>
 			</div>
 		</div>
 		<div class="time-buttons">
@@ -379,11 +365,20 @@ body {
 		value="${not empty param.amount ? param.amount : 10}"></c:set>
 	<c:set var="pageNum"
 		value="${not empty param.pageNum ? param.pageNum : 1}"></c:set>
+<<<<<<< Updated upstream
 	<c:if test="${pageMaker.prev}">
 		<a
 			href="/board/familyreservation?pageNum=${pageMaker.startPage - 1}&amount=${amount}">이전</a>
 	</c:if>
 
+=======
+
+	<c:if test="${pageMaker.prev}">
+		<a
+			href="/board/familyreservation?pageNum=${pageMaker.startPage - 1}&amount=${amount}">이전</a>
+	</c:if>
+
+>>>>>>> Stashed changes
 	<c:forEach var="i" begin="${pageMaker.startPage}"
 		end="${pageMaker.endPage}">
 		<c:choose>

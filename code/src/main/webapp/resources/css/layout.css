@@ -20,12 +20,10 @@ body {
 #header {
 	height: 90px;
 	padding: 15px;
- 	background-color: 3dfdcaf; 
-/* 	background-color: #d9deaf; */
-
+ 	background-color: #d9deaf; 
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
+ 	align-items: center; 
 	box-sizing: border-box;
 }
 
@@ -88,6 +86,57 @@ body {
 	padding: 20px;
 }
 
-#footer {
-	padding: 15px;
+#footer-container {
+	border-top: 1px solid #ccc; /* 위쪽에 얇은 테두리 */
+	border-bottom: 1px solid #ccc; /* 아래쪽에도 적용 가능 */
+	background-color: #ffffff;
+	border-top: 1px solid #e7e7e7;
+	padding: 0 30px;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	width: 100%;
+/* } */
+
+#footer-content {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	flex-wrap: wrap;
+	max-width: 1200px;
+	width: 100%;
+	text-align: left;
+}
+
+.footer-column {
+	width: 30%;
+	padding: 10px;
+}
+
+.footer-column h3 {
+	font-size: 16px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.footer-column ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+.footer-column ul li {
+	margin-bottom: 5px;
+}
+
+.footer-column ul li a {
+	text-decoration: none;
+	color: #333;
+	font-size: 14px;
+}
+
+.footer-bottom {
+	text-align: center;
+	margin-top: 20px;
+	font-size: 14px;
+	color: #777;
 }

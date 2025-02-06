@@ -5,14 +5,15 @@
 <!-- 푸터 스타일 추가 -->
 <style>
 #footer-container {
-	background-color: #ffffff; 
+	border-top: 1px solid #ccc; /* 위쪽에 얇은 테두리 */
+	border-bottom: 1px solid #ccc; /* 아래쪽에도 적용 가능 */
+	background-color: #ffffff;
 	border-top: 1px solid #e7e7e7;
-	padding: 30px 0;
+	padding: 0 30px;
 	text-align: center;
 	display: flex;
 	justify-content: center;
 	width: 100%;
-	box-shadow: inset 0 30px 0 #f4f7fc; /* padding 영역 색상 */
 }
 
 #footer-content {
