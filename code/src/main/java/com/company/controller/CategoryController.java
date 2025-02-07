@@ -7,27 +7,27 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class CategoryController {
 
-    @GetMapping("/category/meat")
+    @GetMapping("/category/japen")
     public String meatCategory(Model model) {
-        model.addAttribute("category", "육식파");
-        return "/category/meat";
+        model.addAttribute("category", "일식");
+        return "/category/japen";
     }
 
     @GetMapping("/category/korean")
     public String koreanCategory(Model model) {
-        model.addAttribute("category", "한식파");
+        model.addAttribute("category", "한식");
         return "/category/korean";
     }
 
-    @GetMapping("/category/vegetarian")
+    @GetMapping("/category/china")
     public String vegetarianCategory(Model model) {
-        model.addAttribute("category", "채식파");
-        return "/category/vegetarian";
+        model.addAttribute("category", "중식");
+        return "/category/china";
     }
 
-    @GetMapping("/category/world")
+    @GetMapping("/category/western")
     public String worldCategory(Model model) {
-        model.addAttribute("category", "세계 요리");
-        return "/category/world";
+        model.addAttribute("category", "양식");
+        return "/category/western";
     }
 }

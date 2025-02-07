@@ -4,7 +4,7 @@
 
 <html>
 <head>
-    <title>한식파 추천</title>
+    <title>한식</title>
     <style>
         .container {
             max-width: 1200px;
@@ -42,7 +42,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>한식파를 위한 추천 맛집</h1>
+        <h1>한식 맛집</h1>
         
         <div class="card">
             <a href="https://kimbab1009.com/" target="_blank">
@@ -55,22 +55,22 @@
         </div>
         
         <div class="card">
-            <a href="https://example.com/kimchi-house" target="_blank">
-                <img src="${contextPath}/resources/image/해물덮밥.png" alt="Kimchi House">
+            <a href="http://www.mdkj.co.kr/" target="_blank">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNTmLAs0WWU1KWvBlUDat-U6jHqNRMpf4e3w&s" alt="Kimchi House">
             </a>
             <div class="card-body">
-                <div class="card-title">김치 하우스</div>
-                <div class="card-text">다양한 김치 요리를 맛볼 수 있는 곳.</div>
+                <div class="card-title">명동 교자</div>
+                <div class="card-text">미슐랭에도 나온 맛집</div>
             </div>
         </div>
         
         <div class="card">
-            <a href="https://example.com/bibimbap-spot" target="_blank">
-                <img src="${contextPath}/resources/image/미소야알밥.png" alt="Bibimbap Spot">
+            <a href="http://gaoriand.com/" target="_blank">
+                <img src="https://cdn.imweb.me/thumbnail/20201103/d3c6b71d82cf7.jpg" alt="Bibimbap Spot">
             </a>
             <div class="card-body">
-                <div class="card-title">비빔밥 스팟</div>
-                <div class="card-text">신선한 재료로 만든 비빔밥의 진수!</div>
+                <div class="card-title">가오리와 방패연</div>
+                <div class="card-text">정갈한 한정식집</div>
             </div>
         </div>
         

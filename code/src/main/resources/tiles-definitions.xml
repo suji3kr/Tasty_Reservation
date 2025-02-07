@@ -17,8 +17,8 @@
 	<!-- Home 페이지 -->
 	<definition name="home" extends="base">
 		<put-attribute name="title" value="home sample" />
-<!-- 		<put-attribute name="mainImage"
-			value="/WEB-INF/includes/mainImage.jsp" /> -->
+		<!-- <put-attribute name="mainImage" value="/WEB-INF/includes/mainImage.jsp" 
+			/> -->
 		<put-attribute name="body"
 			value="/WEB-INF/views/home.jsp" />
 	</definition>
@@ -95,10 +95,11 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/store/storeList.jsp" />
 	</definition>
-	
+
 	<definition name="storeDetail" extends="base">
-    <put-attribute name="title" value="가게 세부 정보" />
-    <put-attribute name="body" value="/WEB-INF/views/store/storeDetail.jsp" />
+		<put-attribute name="title" value="가게 세부 정보" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/store/storeDetail.jsp" />
 	</definition>
 
 
@@ -113,13 +114,13 @@
 
 
 	<!-- 박영웅 영역 -->
-	
+
 	<definition name="/photoGallery" extends="base">
 		<put-attribute name="title" value="사진 게시판" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/photoGallery.jsp" />
 	</definition>
-	
+
 	<definition name="/board/get" extends="base">
 		<put-attribute name="title" value="리뷰 관리" />
 		<put-attribute name="body"
@@ -140,22 +141,27 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/category/korean.jsp" />
 	</definition>
-	<definition name="/category/meat" extends="base">
-		<put-attribute name="title" value="meat" />
+	<definition name="/category/japen" extends="base">
+		<put-attribute name="title" value="japen" />
 		<put-attribute name="body"
-			value="/WEB-INF/views/category/meat.jsp" />
+			value="/WEB-INF/views/category/japen.jsp" />
 	</definition>
-	<definition name="/category/vegetarian" extends="base">
-		<put-attribute name="title" value="vegetarian" />
+	<definition name="/category/china" extends="base">
+		<put-attribute name="title" value="china" />
 		<put-attribute name="body"
-			value="/WEB-INF/views/category/vegetarian.jsp" />
+			value="/WEB-INF/views/category/china.jsp" />
 	</definition>
-	<definition name="/category/world" extends="base">
-		<put-attribute name="title" value="world" />
+	<definition name="/category/western" extends="base">
+		<put-attribute name="title" value="western" />
 		<put-attribute name="body"
-			value="/WEB-INF/views/category/world.jsp" />
+			value="/WEB-INF/views/category/western.jsp" />
 	</definition>
-	
+	<definition name="/recommendations" extends="base">
+		<put-attribute name="title" value="western" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/recommendations.jsp" />
+	</definition>
+
 
 
 
@@ -179,12 +185,12 @@
 
 	<!-- 강미림 영역 -->
 	<!-- Home filter 추가 -->
-    <definition name="/board/familyreservation" extends="base">
+	<definition name="/board/familyreservation" extends="base">
 		<put-attribute name="title" value="단체예약" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/board/familyreservation.jsp" />
 	</definition>
-	
+
 
 
 
