@@ -12,7 +12,7 @@ import java.util.Random;
 public class RestaurantController {
 
     private List<String> restaurants = Arrays.asList(
-        "육식파", "한식파", "채식파", "세계 요리"
+        "중식", "한식", "일식", "양식"
     );
 
     @GetMapping("/recommend")
