@@ -86,19 +86,15 @@ body {
 	animation-duration: 1s;
 }
 
-@
-keyframes show1 { 0% {
+@keyframes show1 { 0% {
 	opacity: 0;
 }
 
-100
-%
-{
-opacity
-:
-1;
+100% {
+opacity: 1;
 }
 }
+
 #sns ul li {
 	width: 300px;
 	height: 70px;
@@ -167,22 +163,33 @@ p.message2 {
 	text-align: center;
 	font-size: 13px;
 }
+
+.error-message {
+	color: red;
+	font-weight: bold;
+	text-align: center;
+	margin-bottom: 10px;
+}
 </style>
 </head>
 <body>
 
 	<div class="login-container">
 		<h2 class="text-center">로그인</h2>
+
+		<!-- 로그인 실패 시 메시지 표시 -->
+		<c:if test="${not empty errorMessage}">
+			<p class="error-message">${errorMessage}</p>
+		</c:if>
+
 		<form action="/member/login" method="post">
 			<div class="mb-3">
-				<label for="email" class="form-label">이메일</label> <input
-					type="email" class="form-control" id="email" name="email"
-					placeholder="이메일을 입력하세요." required>
+				<label for="email" class="form-label">이메일</label> 
+				<input type="email" class="form-control" id="email" name="email" placeholder="이메일을 입력하세요." required>
 			</div>
 			<div class="mb-3">
-				<label for="password" class="form-label">비밀번호</label> <input
-					type="password" class="form-control" id="password" name="password"
-					placeholder="비밀번호를 입력하세요." required>
+				<label for="password" class="form-label">비밀번호</label> 
+				<input type="password" class="form-control" id="password" name="password" placeholder="비밀번호를 입력하세요." required>
 			</div>
 			<button type="submit" class="login-button">로그인</button>
 		
@@ -191,36 +198,26 @@ p.message2 {
 				<a href="#a" onclick="document.getElementById('sns').style.display='block'">SNS 간편 로그인</a>
 			</p>
 
-
+			<!-- SNS 로그인 팝업 -->
 			<div id="sns">
-
 				<ul>
-					<li><img src="/resources/image/google_icon.jpg"> <span></span>구글
-						간편 로그인</li>
-					<li><img src="/resources/image/naver_icon.jpg"> <span></span>네이버
-						간편 로그인</li>
-					<li><img src="/resources/image/kakao_icon.jpg"> <span></span>카카오톡
-						간편 로그인</li>
-					<li><img src="/resources/image/facebook_icon.jpg"> <span></span>페이스북
-						간편 로그인</li>
-					<li><img src="/resources/image/apple_icon.jpg"> <span></span>Apple
-						간편 로그인</li>
-
-					<p class="close"
-						onclick="document.getElementById('sns').style.display='none'">x</p>
+					<li><img src="/resources/image/google_icon.jpg"> <span></span>구글 간편 로그인</li>
+					<li><img src="/resources/image/naver_icon.jpg"> <span></span>네이버 간편 로그인</li>
+					<li><img src="/resources/image/kakao_icon.jpg"> <span></span>카카오톡 간편 로그인</li>
+					<li><img src="/resources/image/facebook_icon.jpg"> <span></span>페이스북 간편 로그인</li>
+					<li><img src="/resources/image/apple_icon.jpg"> <span></span>Apple 간편 로그인</li>
+					<p class="close" onclick="document.getElementById('sns').style.display='none'">x</p>
 				</ul>
 			</div>
 				
 			<p class="message1">📢회원이 아니신가요? 지금 바로 가입하세요!📢</p>
 			<p class="message2"><a href="/member/signup">회원가입하러가기</a></p>
-			</form>
+		</form>
 	</div>
 
 	<!-- Bootstrap JS and dependencies -->
-	<script
-		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 
 </body>
 </html>

@@ -17,7 +17,7 @@
 	<ul id="nav-menu">
 		<li><a href="#"><b>사진 및 리뷰</b></a>
 			<ul class="dropdown-menu">
-				<li><a href="#">SNS 맛집</a></li>
+				<li><a href="${contextPath}/recommendations">SNS 맛집</a></li>
 				<li><a href="${contextPath}/photoGallery">포토 스팟</a></li>
 				<li><a href="${contextPath}/reviewSpot">리뷰 스팟</a></li>
 				<li><a href="${contextPath}/recommend">실시간 Ai추천</a></li>
@@ -31,10 +31,10 @@
 			</ul></li>
 		<li><a href="#"><b>음식 분류</b></a>
 			<ul class="dropdown-menu">
-				<li><a href="${contextPath}/category/meat">육식파</a></li>
-				<li><a href="${contextPath}/category/korean">한식파</a></li>
-				<li><a href="${contextPath}/category/vegetarian">채식파</a></li>
-				<li><a href="${contextPath}/category/world">세계 요리</a></li>
+				<li><a href="${contextPath}/category/japen">일식</a></li>
+				<li><a href="${contextPath}/category/korean">한식</a></li>
+				<li><a href="${contextPath}/category/china">중식</a></li>
+				<li><a href="${contextPath}/category/western">양식</a></li>
 			</ul></li>
 
 		<c:if test="${not empty sessionScope.loginEmail}">

@@ -1,43 +1,52 @@
 package com.company.service;
 
-import com.company.model.Comment;
-import com.company.model.Photo;
-import com.company.model.Rating;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.company.model.Comment;
+import com.company.model.Photo;
+import com.company.model.Rating;
 
 @Service
 public class PhotoGalleryService {
 
     private final List<Comment> comments = new ArrayList<>();
     private final List<Rating> ratings = new ArrayList<>();
-    private final List<Photo> photos = new ArrayList<>(); // 이미지 목록
+    private static final String UPLOAD_DIR = "C:/upload"; // 저장 경로
 
     public void uploadImage(MultipartFile file) throws IOException {
-        String uploadDir = "src/main/resources/static/image/";
-        Path uploadPath = Paths.get(uploadDir);
+        Path uploadPath = Paths.get(UPLOAD_DIR);
 
         if (!Files.exists(uploadPath)) {
             Files.createDirectories(uploadPath);
         }
 
-        File transferFile = new File(uploadDir + file.getOriginalFilename());
+        File transferFile = new File(UPLOAD_DIR + "/" + file.getOriginalFilename());
         file.transferTo(transferFile);
-
-        // 업로드된 이미지를 목록에 추가
-        photos.add(new Photo((long) (photos.size() + 1), "/resources/static/image/" + file.getOriginalFilename(), "업로드된 이미지"));
     }
+    
 
     public List<Photo> getImages() {
-        return new ArrayList<>(photos); // 이미지 목록 반환
+        File folder = new File(UPLOAD_DIR);
+        File[] listOfFiles = folder.listFiles();
+        if (listOfFiles != null) {
+            return Arrays.stream(listOfFiles)
+                    .filter(File::isFile)
+                    .map(file -> new Photo((long) (file.hashCode()), "/upload/" + file.getName(), "업로드된 이미지"))
+                    .collect(Collectors.toList());
+        }
+        
+        return new ArrayList<>();
     }
 
     public void addComment(String user, String text) {
