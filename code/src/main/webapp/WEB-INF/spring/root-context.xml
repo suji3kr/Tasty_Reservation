@@ -16,8 +16,8 @@
 		<property name="driverClassName"
 			value="com.mysql.cj.jdbc.Driver" />
 		<property name="jdbcUrl"
-			value="jdbc:mysql://localhost:3306/webdb?serverTimezone=UTC" />
-		<property name="username" value="dbuser" />
+			value="jdbc:mysql://localhost:3306/restdb?serverTimezone=UTC" />
+		<property name="username" value="restuser" />
 		<property name="password" value="12345" />
 	</bean>
 

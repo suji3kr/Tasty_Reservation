@@ -7,8 +7,8 @@
 
     <!-- 예약 저장 -->
     <insert id="save" parameterType="com.company.domain.ReservationDTO">
-        INSERT INTO reservations (store_id, customer_name, phone_number, reservation_date, reservation_time, people_count)
-        VALUES (#{storeId}, #{customerName}, #{phoneNumber}, #{reservationDate}, #{reservationTime}, #{peopleCount})
+        INSERT INTO reservations (store_id, username, phone, reservation_date, reservation_time, people_count)
+        VALUES (#{storeId}, #{userName}, #{phone}, #{reservationDate}, #{reservationTime}, #{peopleCount})
     </insert>
 
     <!-- 특정 가게의 예약 목록 조회 -->
