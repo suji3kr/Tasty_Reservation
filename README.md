@@ -31,7 +31,8 @@
 
 
 > Insights 진행현황 
-![image](https://github.com/user-attachments/assets/b9df2b14-e421-48d4-8779-f7ce566bf330)
+![image](https://github.com/user-attachments/assets/bb351f4a-9719-4f67-b4cc-9e0183a976ba)
+
 
 
 <br><br>
@@ -39,7 +40,7 @@
 <br>
 
 
-> ### Tiles 설정 변동사항
+> ### Tiles 설정 
 
 #### merge 전 체크할 부분 *공지사항읽어주세요 :) 
 
