@@ -86,32 +86,51 @@ body {
 	border-radius: 5px;
 }
 
-/* 버튼 스타일 */
-.time-buttons {
+.photo-frame {
+	position: relative;
+	display: inline-block;
+}
+
+.time-buttons-container {
+	gap: 10px; /* 버튼 간격 */
+	position: absolute;
+	top: 248px;
+	left: 50%;
+	transform: translateX(-50%);
+	background: rgb(226 203 145/ 70%);
+	padding: 10px;
+	border-radius: 8px;
+	display: none;
+	text-align: center;/* 내부 요소 가운데 정렬 */
+	z-index: 10;
+	text-align: center;
+}
+
+.time-title {
+	color: #445e54;
+	font-size: 19px;
+	margin-bottom: 5px;
+	font-weight: bold;
+}
+
+.time-button {
 	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	gap: 10px;
-	margin-top: 10px;
-}
-
-.time-buttons button {
-	padding: 10px 15px;
-	background-color: #4e7300;
-	color: white;
+	justify-content: center; /* 버튼들을 가운데 정렬 */
+	font-size: 14px;
 	border: none;
-	border-radius: 5px;
+	background-color: #ff99005e;
+	color: black;
 	cursor: pointer;
+	border-radius: 10px;
+	margin: 2px 0;
 	transition: all 0.3s ease-in-out;
-	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+	padding: 6px 5px;
 }
 
-/* 버튼 호버 효과 */
-.time-buttons button:hover {
-	background-color: #3b5a00;
-	transform: scale(1.1); /* 살짝 커지는 효과 */
+.time-button:hover {
+	background-color: #ff9900;
+	transform: scale(1.1);
 }
-
 /* 버튼 클릭 효과 */
 .time-buttons button:active {
 	transform: scale(0.95); /* 살짝 눌리는 효과 */
@@ -240,7 +259,7 @@ to {
 							</c:forEach>
 							<option value="more">기타</option>
 						</select> <input type="text" id="custom-kids" name="custom-kids"
-							placeholder="추가 인원 입력" style="display: none;">
+							placeholder="아이 인원 입력" style="display: none;">
 					</div>
 
 				</div>
@@ -256,7 +275,7 @@ to {
 				</div>
 			</div>
 		</div>
-		
+
 		<!-- 스토어 리스트 -->
 		<div class="body">
 			<h2 class="text-center"></h2>
@@ -270,7 +289,7 @@ to {
 									onerror="this.onerror=null; this.src='/resources/images/default.jpg'">
 							</c:when>
 							<c:otherwise>
-								<img src="/resources/image/뷔페.jpg" alt="뷔페">
+								<img src="/resources/image/default.jpg" alt="default">
 							</c:otherwise>
 						</c:choose>
 					</div>
@@ -281,34 +300,75 @@ to {
 		</div>
 
 		<div class="photo-section">
-			<div class="photo-frame">
-				<a href="http://localhost:8092/store/detail?id=4"><img
-					src="/resources/image/뷔페.jpg" alt="뷔페"></a>
+			<div class="photo-frame" data-store-id="4">
+				<a href="#"><img src="/resources/image/뷔페.jpg" alt="뷔페"></a>
+				<div class="time-buttons-container"></div>
 			</div>
-			<div class="photo-frame">
-				<a href="http://localhost:8092/store/detail?id=2"><img
-					src="/resources/image/베트남요리.png" alt="베트남요리"></a>
+			<div class="photo-frame" data-store-id="2">
+				<a href="#"><img src="/resources/image/베트남요리.png" alt="베트남요리"></a>
+				<div class="time-buttons-container"></div>
 			</div>
-			<div class="photo-frame">
-				<a href="http://localhost:8092/store/detail?id=3"><img
-					src="/resources/image/관자요리.jpg" alt="관자요리"></a>
+			<div class="photo-frame" data-store-id="3">
+				<a href="#"><img src="/resources/image/관자요리.jpg" alt="관자요리"></a>
+				<div class="time-buttons-container"></div>
 			</div>
 		</div>
-		<div class="time-buttons">
-			<button>
-				<a href="/board/register">새 가게 등록</a>
-			</button>
-			<button>6:30</button>
-			<button>7:30</button>
-			<button>8:30</button>
-			<button>9:30</button>
-		</div>
+
+
+		<!-- 시간 선택 버튼 -->
+		<div class="time-buttons" id="timeButtons"></div>
+
+		<button>
+			<a href="/board/register">새 가게 등록</a>
+		</button>
+
 	</div>
 
 </body>
 
 
 <script>
+	document.addEventListener("DOMContentLoaded", function () {
+	    const photoFrames = document.querySelectorAll(".photo-frame");
+	
+	    // 가게별 예약 가능한 시간 데이터 (예제)
+	    const availableTimes = {
+	        4: ["6:30", "7:30", "8:30", "9:30"],
+	        2: ["5:00", "6:00", "7:00", "8:00"],
+	        3: ["12:00", "1:00", "2:00", "3:00"]
+	    };
+	
+	    photoFrames.forEach(frame => {
+	        frame.addEventListener("click", function () {
+	            const storeId = this.getAttribute("data-store-id");
+	            const times = availableTimes[storeId] || [];
+	            const timeContainer = this.querySelector(".time-buttons-container");
+	
+	            // 기존 버튼 제거 후 새로 추가
+	            timeContainer.innerHTML = "";
+	
+	            // 예약 가능 시간 제목 추가
+	            const title = document.createElement("div");
+	            title.textContent = " 🕑 "
+	            timeContainer.appendChild(title);
+	
+	            // 시간 버튼 생성
+	            times.forEach(time => {
+	                const button = document.createElement("button");
+	                button.textContent = time;
+	                button.classList.add("time-button");
+	                button.addEventListener("click", function () {
+	                    alert(`예약 시간: ${time} 선택됨!`);
+	                });
+	                timeContainer.appendChild(button);
+	            });
+	
+	            // 버튼 컨테이너 표시
+	            timeContainer.style.display = "flex";
+	        });
+	    });
+	});
+
 	// 날짜 선택 시 오늘 이전 날짜 선택 제한
 	const dateInput = document.getElementById('date');
 	const today = new Date().toISOString().split('T')[0];

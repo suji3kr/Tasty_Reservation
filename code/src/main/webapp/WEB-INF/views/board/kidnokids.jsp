@@ -263,7 +263,7 @@ to {
                         <option value="more">기타</option>
                     </select>
                     <input type="text" id="custom-kids" name="custom-kids"
-                           placeholder="추가 인원 입력" style="display: none;">
+                           placeholder="인원 입력" style="display: none;">
                 </div>
             </div>
         </div>
