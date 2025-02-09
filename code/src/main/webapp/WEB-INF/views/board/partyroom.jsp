@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>가족 단체예약</title>
+<title>파티룸</title>
 
 <style>
 body {

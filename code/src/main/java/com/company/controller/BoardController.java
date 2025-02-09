@@ -32,43 +32,43 @@ public class BoardController {
 	private StoreService storeService;
 
 //	@GetMapping("/list")
-	//public void list(Model model) {
+	// public void list(Model model) {
 //
-	//	log.info("list");
-	//	model.addAttribute("list", service.getList());
+	// log.info("list");
+	// model.addAttribute("list", service.getList());
 //	}
-	
+
 	@GetMapping("/list")
 	public void list(Criteria cri, Model model) {
-		
+
 		log.info("list: " + cri);
 		model.addAttribute("list", service.getList(cri));
-		//model.addAttribute("pageMaker", new PageDTO(cri, 123));
-		
+		// model.addAttribute("pageMaker", new PageDTO(cri, 123));
+
 		int total = service.getTotal(cri);
-		
+
 		log.info("total: " + total);
-		
+
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
 	}
 
 	// 등록 처리
 	@PostMapping("/register")
 	public String register(BoardVO vo, RedirectAttributes rttr) {
-	       log.info("register......." +vo);
-	       boardservice.register(vo);
-	       // "result"라는 키로 vo.getBno() 값을 Flash 속성에 추가
-	       rttr.addFlashAttribute("result", vo.getBno());
-	       // "/board/list"로 리다이렉트
-	        return "redirect:/board/list";
+		log.info("register......." + vo);
+		boardservice.register(vo);
+		// "result"라는 키로 vo.getBno() 값을 Flash 속성에 추가
+		rttr.addFlashAttribute("result", vo.getBno());
+		// "/board/list"로 리다이렉트
+		return "redirect:/board/list";
 	}
 
 	// 조회 처리
-	
-	@GetMapping({"/get", "/modify"})
+
+	@GetMapping({ "/get", "/modify" })
 	public void get(@RequestParam("bno") Long bno, @ModelAttribute("cri") Criteria cri, Model model) {
-		  log.info("/get or modify");
-	      model.addAttribute("board", boardservice.get(bno));
+		log.info("/get or modify");
+		model.addAttribute("board", boardservice.get(bno));
 	}
 
 	/*
@@ -96,7 +96,7 @@ public class BoardController {
 		rttr.addAttribute("amount", cri.getAmount());
 		rttr.addAttribute("type", cri.getType());
 		rttr.addAttribute("keyword", cri.getKeyword());
-		
+
 		return "redirect:/board/list";
 
 	}
@@ -112,7 +112,7 @@ public class BoardController {
 		rttr.addAttribute("amount", cri.getAmount());
 		rttr.addAttribute("type", cri.getType());
 		rttr.addAttribute("keyword", cri.getKeyword());
-		
+
 		return "redirect:/board/list";
 	}
 
@@ -121,12 +121,12 @@ public class BoardController {
 	public void resister() {
 
 	}
-	
+
 	@GetMapping("/favfood")
 	public String getFavFood() {
 		return "/board/favfood"; // view 이름
 	}
-	
+
 	/*
 	 * @GetMapping("/familyreservation")
 	 * 
@@ -135,25 +135,77 @@ public class BoardController {
 	 * model.addAttribute("storeList", storeList); // 모델에 추가하여 JSP에서 사용 가능 return
 	 * "/board/familyreservation"; }
 	 */
-	 // ✅ 가족 단체 예약 (페이징 추가)
-    @GetMapping("/familyreservation")
-    public String familyReservation(
-    		@RequestParam(name = "pageNum", required = false, defaultValue = "1") int pageNum,
-    		@RequestParam(name = "amount", required = false, defaultValue = "10") int amount,
-    		Model model) {
-    	Criteria cri = new Criteria(pageNum, amount);
-        log.info("familyreservation page: " + cri);
-        
-        // 페이징된 가게 목록 가져오기
-        List<StoreDTO> storeList = storeService.getList(cri);
-        model.addAttribute("storeList", storeList);
+	// ✅ 가족 단체 예약 (페이징 추가)
+	@GetMapping("/familyreservation")
+	public String familyReservation(@RequestParam(name = "pageNum", required = false, defaultValue = "1") int pageNum,
+			@RequestParam(name = "amount", required = false, defaultValue = "10") int amount, Model model) {
+		Criteria cri = new Criteria(pageNum, amount);
+		log.info("familyreservation page: " + cri);
 
-        // 총 가게 수
-        int total = storeService.getTotal(cri);
-        log.info("total stores: " + total);
-        model.addAttribute("pageMaker", new PageDTO(cri, total));
+		// 페이징된 가게 목록 가져오기
+		List<StoreDTO> storeList = storeService.getList(cri);
+		model.addAttribute("storeList", storeList);
 
-        return "/board/familyreservation";
-    }
-	 
+		// 총 가게 수
+		int total = storeService.getTotal(cri);
+		log.info("total stores: " + total);
+		model.addAttribute("pageMaker", new PageDTO(cri, total));
+
+		return "/board/familyreservation";
+	}
+
+	@GetMapping("/board/kidnokids")
+	public String getKidnokids() {
+/*			@RequestParam(name = "pageNum", required = false, defaultValue = "1") int pageNum,
+			@RequestParam(name = "amount", required = false, defaultValue = "10") int amount, Model model) {
+
+		Criteria cri = new Criteria(pageNum, amount);
+		log.info("kidnokids page: " + cri);
+
+		// 페이징된 가게 목록 가져오기
+		List<StoreDTO> storeList = storeService.getList(cri);
+		model.addAttribute("storeList", storeList);
+
+		// 총 가게 수
+		int total = storeService.getTotal(cri);
+		log.info("total stores: " + total);
+		model.addAttribute("pageMaker", new PageDTO(cri, total));*/
+
+		return "/board/kidnokids";
+	}
+
+	@GetMapping("/board/partyroom")
+	public String getPartyroom(@RequestParam(name = "pageNum", required = false, defaultValue = "1") int pageNum,
+			@RequestParam(name = "amount", required = false, defaultValue = "10") int amount, Model model) {
+
+		Criteria cri = new Criteria(pageNum, amount);
+		log.info("partyroom page: " + cri);
+
+		List<StoreDTO> storeList = storeService.getList(cri);
+		model.addAttribute("storeList", storeList);
+
+		int total = storeService.getTotal(cri);
+		log.info("total stores: " + total);
+		model.addAttribute("pageMaker", new PageDTO(cri, total));
+
+		return "/board/partyroom";
+	}
+
+	@GetMapping("/board/privateroom")
+	public String getPrivateRoom(@RequestParam(name = "pageNum", required = false, defaultValue = "1") int pageNum,
+			@RequestParam(name = "amount", required = false, defaultValue = "10") int amount, Model model) {
+
+		Criteria cri = new Criteria(pageNum, amount);
+		log.info("privateroom page: " + cri);
+
+		List<StoreDTO> storeList = storeService.getList(cri);
+		model.addAttribute("storeList", storeList);
+
+		int total = storeService.getTotal(cri);
+		log.info("total stores: " + total);
+		model.addAttribute("pageMaker", new PageDTO(cri, total));
+
+		return "/board/privateroom";
+	}
+
 }

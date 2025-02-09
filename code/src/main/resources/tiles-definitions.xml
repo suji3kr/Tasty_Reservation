@@ -39,6 +39,38 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/board/favfood.jsp" />
 	</definition>
+	<definition name="/board/get" extends="base">
+		<put-attribute name="title" value="리뷰 관리" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/get.jsp" />
+	</definition>
+	<definition name="/board/recommend" extends="base">
+		<put-attribute name="title" value="Ai 추천" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/recommend.jsp" />
+	</definition>
+	<!-- filter -->
+	<definition name="/board/familyreservation" extends="base">
+		<put-attribute name="title" value="단체예약" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/familyreservation.jsp" />
+	</definition>
+	<definition name="/board/kidnokids" extends="base">
+		<put-attribute name="title" value="키즈노키즈" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/kidnokids.jsp" />
+	</definition>
+	<definition name="/board/partyroom" extends="base">
+		<put-attribute name="title" value="파티룸" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/partyroom.jsp" />
+	</definition>
+	<definition name="/board/privateroom" extends="base">
+		<put-attribute name="title" value="프라이빗룸" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/privateroom.jsp" />
+	</definition>
+
 
 
 	<!-- member -->
@@ -47,23 +79,15 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/member/login.jsp" />
 	</definition>
-	<definition name="/member/signup" extends="base">
-		<put-attribute name="title" value="회원가입 페이지" />
-		<put-attribute name="body"
-			value="/WEB-INF/views/member/signup.jsp" />
-	</definition>
-
-
-
-
-
-
-
-	<!-- 황승현 영역 -->
 	<definition name="/member/logout" extends="base">
 		<put-attribute name="logout" value="로그아웃페이지" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/member/logout.jsp" />
+	</definition>
+	<definition name="/member/signup" extends="base">
+		<put-attribute name="title" value="회원가입 페이지" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/member/signup.jsp" />
 	</definition>
 	<definition name="/member/update" extends="base">
 		<put-attribute name="title" value="회원정보수정페이지" />
@@ -72,30 +96,12 @@
 	</definition>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	<!-- 권민우 영역 -->
-
+	<!-- store -->
 	<definition name="/store/storeList" extends="base">
 		<put-attribute name="title" value="가게 목록" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/store/storeList.jsp" />
 	</definition>
-
 	<definition name="storeDetail" extends="base">
 		<put-attribute name="title" value="가게 세부 정보" />
 		<put-attribute name="body"
@@ -103,39 +109,7 @@
 	</definition>
 
 
-
-
-
-
-
-
-
-
-
-
-	<!-- 박영웅 영역 -->
-
-	<definition name="/photoGallery" extends="base">
-		<put-attribute name="title" value="사진 게시판" />
-		<put-attribute name="body"
-			value="/WEB-INF/views/photoGallery.jsp" />
-	</definition>
-
-	<definition name="/board/get" extends="base">
-		<put-attribute name="title" value="리뷰 관리" />
-		<put-attribute name="body"
-			value="/WEB-INF/views/board/get.jsp" />
-	</definition>
-	<definition name="/reviewSpot/reviewSpot" extends="base">
-		<put-attribute name="title" value="리뷰" />
-		<put-attribute name="body"
-			value="/WEB-INF/views/reviewSpot/reviewSpot.jsp" />
-	</definition>
-	<definition name="/board/recommend" extends="base">
-		<put-attribute name="title" value="Ai 추천" />
-		<put-attribute name="body"
-			value="/WEB-INF/views/board/recommend.jsp" />
-	</definition>
+	<!-- category -->
 	<definition name="/category/korean" extends="base">
 		<put-attribute name="title" value="korean" />
 		<put-attribute name="body"
@@ -156,6 +130,19 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/category/western.jsp" />
 	</definition>
+
+
+	<!-- 사진 및 리뷰 -->
+	<definition name="/photoGallery" extends="base">
+		<put-attribute name="title" value="사진 게시판" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/photoGallery.jsp" />
+	</definition>
+	<definition name="/reviewSpot/reviewSpot" extends="base">
+		<put-attribute name="title" value="리뷰" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/reviewSpot/reviewSpot.jsp" />
+	</definition>
 	<definition name="/recommendations" extends="base">
 		<put-attribute name="title" value="western" />
 		<put-attribute name="body"
@@ -172,24 +159,8 @@
 
 
 
+	<!-- 추가되는 부분 -->
 
-
-
-
-
-
-
-
-
-
-
-	<!-- 강미림 영역 -->
-	<!-- Home filter 추가 -->
-	<definition name="/board/familyreservation" extends="base">
-		<put-attribute name="title" value="단체예약" />
-		<put-attribute name="body"
-			value="/WEB-INF/views/board/familyreservation.jsp" />
-	</definition>
 
 
 

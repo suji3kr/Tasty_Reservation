@@ -10,7 +10,7 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>관리자 로그인 페이지</title>
 
-<!-- <style>
+<style>
 body {
 	font-family: 'Roboto', sans-serif;
 	background-color: #e5ebbc;
@@ -123,7 +123,7 @@ body {
 	height: 300px;
 	border-radius: 15px;
 	object-fit: cover;
-} -->
+}
 </style>
 </head>
 <body>
@@ -140,93 +140,91 @@ body {
 			<img src="/resources/image/관자요리.jpg" alt="관자요리">
 		</div>
 		<div class="time-buttons">
+		<h2>우리가게 예약 손님 확인하기</h2>
+			<button>6:00</button>
 			<button>6:30</button>
+			<button>7:00</button>
 			<button>7:30</button>
+			<button>8:00</button>
 			<button>8:30</button>
+			<button>9:00</button>
 			<button>9:30</button>
 		</div>
 	</div>
-	<div class="body">
 
+	<div class="container">
 		<h2 class="text-center">가게 목록</h2>
+
 		<!-- 가게 리스트 -->
 		<table class="table table-bordered table-hover">
 			<thead class="table-dark">
 				<tr>
 					<th>ID</th>
-					<th>예약자</th>
+					<th>가게명</th>
 					<th>위치</th>
-					<th>메뉴</th>
+					<th>카테고리</th>
 					<th>전화번호</th>
 					<th>사진</th>
+					<th>관리</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="store" items="${storeList}">
-					<tr onclick="location.href='/store/detail?id=${store.id}'"
-						style="cursor: pointer;">
+					<tr>
 						<td>${store.id}</td>
 						<td>${store.storeName}</td>
 						<td>${store.storeLocation}</td>
 						<td>${store.storeCategory}</td>
-						<!-- 전화번호를 010-XXXX-XXXX 형식으로 변환 -->
 						<td><c:choose>
 								<c:when test="${fn:length(store.phoneNumber) == 11}">
-                        ${fn:substring(store.phoneNumber, 0, 3)}-${fn:substring(store.phoneNumber, 3, 7)}-${fn:substring(store.phoneNumber, 7, 11)}
-                    </c:when>
-								<c:otherwise>
-                        ${store.phoneNumber} <!-- 11자리가 아닌 경우 그냥 출력 -->
-								</c:otherwise>
+                                    ${fn:substring(store.phoneNumber, 0, 3)}-${fn:substring(store.phoneNumber, 3, 7)}-${fn:substring(store.phoneNumber, 7, 11)}
+                                </c:when>
+								<c:otherwise>${store.phoneNumber}</c:otherwise>
 							</c:choose></td>
-						<td><c:choose>
-								<c:when test="${not empty store.storeImage}">
-									<img src="${store.storeImage}" alt="가게 이미지" width="80"
-										height="80"
-										onerror="this.onerror=null; this.src='/resources/images/default.jpg'">
-								</c:when>
-								<c:otherwise>
-									<img src="/resources/images/default.jpg" alt="기본 이미지"
-										width="80" height="80">
-								</c:otherwise>
-							</c:choose></td>
+						<td><img src="${store.storeImage}" alt="가게 이미지" width="80"
+							height="80"
+							onerror="this.onerror=null; this.src='/resources/images/default.jpg'">
+						</td>
+						<td><a href="/store/edit?id=${store.id}"
+							class="btn btn-primary btn-sm">수정</a> <a
+							href="/store/delete?id=${store.id}" class="btn btn-danger btn-sm"
+							onclick="return confirm('삭제하시겠습니까?')">삭제</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
-		<a href="/board/register" class="btn btn-success">새 가게 등록</a>
+
+		<a href="/store/register" class="btn btn-success">새 가게 등록</a> <a
+			href="/admin/reservations" class="btn btn-info">예약 관리</a>
 	</div>
+	<!-- 페이징처리 -->
+	<div class="pagination">
 
-</body>
+		<c:set var="amount"
+			value="${not empty param.amount ? param.amount : 10}"></c:set>
+		<c:set var="pageNum"
+			value="${not empty param.pageNum ? param.pageNum : 1}"></c:set>
 
-<!-- 페이징처리 -->
-<div class="pagination">
+		<c:if test="${pageMaker.prev}">
+			<a
+				href="/board/familyreservation?pageNum=${pageMaker.startPage - 1}&amount=${amount}">이전</a>
+		</c:if>
 
-	<c:set var="amount"
-		value="${not empty param.amount ? param.amount : 10}"></c:set>
-	<c:set var="pageNum"
-		value="${not empty param.pageNum ? param.pageNum : 1}"></c:set>
+		<c:forEach var="i" begin="${pageMaker.startPage}"
+			end="${pageMaker.endPage}">
+			<c:choose>
+				<c:when test="${i == pageNum}">
+					<span class="current-page">${i}</span>
+				</c:when>
+				<c:otherwise>
+					<a href="/board/familyreservation?pageNum=${i}&amount=${amount}">${i}</a>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
 
-	<c:if test="${pageMaker.prev}">
-		<a
-			href="/board/familyreservation?pageNum=${pageMaker.startPage - 1}&amount=${amount}">이전</a>
-	</c:if>
-
-	<c:forEach var="i" begin="${pageMaker.startPage}"
-		end="${pageMaker.endPage}">
-		<c:choose>
-			<c:when test="${i == pageNum}">
-				<span class="current-page">${i}</span>
-			</c:when>
-			<c:otherwise>
-				<a href="/board/familyreservation?pageNum=${i}&amount=${amount}">${i}</a>
-			</c:otherwise>
-		</c:choose>
-	</c:forEach>
-
-	<c:if test="${pageMaker.next}">
-		<a
-			href="/board/familyreservation?pageNum=${pageMaker.endPage + 1}&amount=${amount}">다음</a>
-	</c:if>
-</div>
-
+		<c:if test="${pageMaker.next}">
+			<a
+				href="/board/familyreservation?pageNum=${pageMaker.endPage + 1}&amount=${amount}">다음</a>
+		</c:if>
+	</div>
 </html>

@@ -80,6 +80,8 @@ body {
 					class="form-text text-muted">전화번호는 하이픈 없이 숫자만 입력해주세요.</small>
 			</div>
 			<div class="mb-3">
+			
+			<!-- 추가수정 -->
 				<label for="store-time" class="form-label">영업시간</label>
 				<div class="input-group">
 					<input type="time" class="form-control" id="storeTimeStart"
