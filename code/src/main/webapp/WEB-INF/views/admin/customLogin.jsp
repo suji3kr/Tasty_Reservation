@@ -86,27 +86,10 @@ body {
 }
 
 @
-keyframes show1 { 0% {
-	opacity: 0;
-}
+keyframes show1 {
+ 0% {opacity: 0;}
+100%{opacity:1;}}
 
-100
-
-
-%
-{
-opacity
-
-
-:
-
-
-1
-;
-
-
-}
-}
 #sns ul li {
 	width: 300px;
 	height: 70px;
