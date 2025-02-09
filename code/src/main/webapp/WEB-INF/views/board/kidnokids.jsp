@@ -29,6 +29,7 @@ body {
 	align-items: center;
 }
 
+/* 필터 섹션 */
 .filter-section {
 	width: 1002px;
 	display: flex;
@@ -39,14 +40,15 @@ body {
 	border-radius: 10px;
 	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 	margin-bottom: 20px;
+	animation: slideUp 0.8s ease-in-out; /* 슬라이드 업 애니메이션 */
 }
 
+/* 필터 그룹 */
 .filter-group {
-	/* 	display: flex; */
 	flex-direction: column;
 	align-items: center;
 	padding: 3px 0;
-	justify-content: center; /* 세로 방향 중앙 정렬 */
+	justify-content: center;
 }
 
 .filter-stargroup {
@@ -84,6 +86,7 @@ body {
 	border-radius: 5px;
 }
 
+/* 버튼 스타일 */
 .time-buttons {
 	display: flex;
 	flex-wrap: wrap;
@@ -93,29 +96,40 @@ body {
 }
 
 .time-buttons button {
-	padding: 10px;
+	padding: 10px 15px;
 	background-color: #4e7300;
 	color: white;
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
+	transition: all 0.3s ease-in-out;
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+/* 버튼 호버 효과 */
 .time-buttons button:hover {
 	background-color: #3b5a00;
+	transform: scale(1.1); /* 살짝 커지는 효과 */
 }
 
+/* 버튼 클릭 효과 */
+.time-buttons button:active {
+	transform: scale(0.95); /* 살짝 눌리는 효과 */
+	box-shadow: none;
+}
+
+/* 사진 섹션 */
 .photo-section {
 	width: 100%;
 	display: flex;
 	justify-content: center;
-	/* 	flex-wrap: wrap; */
 	gap: 20px;
 }
 
 .photo-frame {
 	width: 400px;
 	position: relative;
+	animation: fadeIn 1.5s ease-in-out; /* 사진도 페이드 인 */
 }
 
 .photo-frame img {
@@ -123,6 +137,43 @@ body {
 	height: 300px;
 	border-radius: 15px;
 	object-fit: cover;
+	transition: transform 0.3s ease-in-out;
+}
+
+/* 이미지 호버 효과 */
+.photo-frame img:hover {
+	transform: scale(1.05); /* 살짝 확대 */
+	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 테이블 애니메이션 */
+table {
+	width: 100%;
+	border-collapse: collapse;
+	animation: fadeIn 1s ease-in-out;
+}
+
+/* 페이드 인 애니메이션 */
+@
+keyframes fadeIn {from { opacity:0;
+	
+}
+
+to {
+	opacity: 1;
+}
+
+}
+
+/* 슬라이드 업 애니메이션 */
+@
+keyframes slideUp {from { transform:translateY(20px);
+	opacity: 0;
+}
+
+to {
+	transform: translateY(0);
+	opacity: 1;
 }
 </style>
 

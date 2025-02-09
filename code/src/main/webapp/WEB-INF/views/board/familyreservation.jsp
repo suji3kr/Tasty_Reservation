@@ -29,6 +29,7 @@ body {
 	align-items: center;
 }
 
+/* 필터 섹션 */
 .filter-section {
 	width: 1002px;
 	display: flex;
@@ -39,14 +40,15 @@ body {
 	border-radius: 10px;
 	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 	margin-bottom: 20px;
+	animation: slideUp 0.8s ease-in-out; /* 슬라이드 업 애니메이션 */
 }
 
+/* 필터 그룹 */
 .filter-group {
-	/* 	display: flex; */
 	flex-direction: column;
 	align-items: center;
 	padding: 3px 0;
-	justify-content: center; /* 세로 방향 중앙 정렬 */
+	justify-content: center;
 }
 
 .filter-stargroup {
@@ -84,6 +86,7 @@ body {
 	border-radius: 5px;
 }
 
+/* 버튼 스타일 */
 .time-buttons {
 	display: flex;
 	flex-wrap: wrap;
@@ -93,29 +96,40 @@ body {
 }
 
 .time-buttons button {
-	padding: 10px;
+	padding: 10px 15px;
 	background-color: #4e7300;
 	color: white;
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
+	transition: all 0.3s ease-in-out;
+	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+/* 버튼 호버 효과 */
 .time-buttons button:hover {
 	background-color: #3b5a00;
+	transform: scale(1.1); /* 살짝 커지는 효과 */
 }
 
+/* 버튼 클릭 효과 */
+.time-buttons button:active {
+	transform: scale(0.95); /* 살짝 눌리는 효과 */
+	box-shadow: none;
+}
+
+/* 사진 섹션 */
 .photo-section {
 	width: 100%;
 	display: flex;
 	justify-content: center;
-	/* 	flex-wrap: wrap; */
 	gap: 20px;
 }
 
 .photo-frame {
 	width: 400px;
 	position: relative;
+	animation: fadeIn 1.5s ease-in-out; /* 사진도 페이드 인 */
 }
 
 .photo-frame img {
@@ -123,6 +137,43 @@ body {
 	height: 300px;
 	border-radius: 15px;
 	object-fit: cover;
+	transition: transform 0.3s ease-in-out;
+}
+
+/* 이미지 호버 효과 */
+.photo-frame img:hover {
+	transform: scale(1.05); /* 살짝 확대 */
+	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 테이블 애니메이션 */
+table {
+	width: 100%;
+	border-collapse: collapse;
+	animation: fadeIn 1s ease-in-out;
+}
+
+/* 페이드 인 애니메이션 */
+@
+keyframes fadeIn {from { opacity:0;
+	
+}
+
+to {
+	opacity: 1;
+}
+
+}
+
+/* 슬라이드 업 애니메이션 */
+@
+keyframes slideUp {from { transform:translateY(20px);
+	opacity: 0;
+}
+
+to {
+	transform: translateY(0);
+	opacity: 1;
 }
 </style>
 
@@ -205,36 +256,28 @@ body {
 				</div>
 			</div>
 		</div>
+		
+		<!-- 스토어 리스트 -->
 		<div class="body">
 			<h2 class="text-center"></h2>
-			<!-- 가게 리스트 -->
-			<table class="table table-bordered table-hover">
-				<thead class="table-dark">
-					<tr>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="store" items="${storeList}">
-						<tr onclick="location.href='/store/detail?id=${store.id}'"
-							style="cursor: pointer;">
-							<td>${store.storeName}</td>
-							<!-- 전화번호를 010-XXXX-XXXX 형식으로 변환 -->
-							<td><c:choose>
-									<c:when test="${not empty store.storeImage}">
-										<img src="${store.storeImage}" alt="가게 이미지" width="80"
-											height="80"
-											onerror="this.onerror=null; this.src='/resources/images/default.jpg'">
-									</c:when>
-									<c:otherwise>
-										<img src="/resources/images/default.jpg" alt="기본 이미지"
-											width="80" height="80">
-									</c:otherwise>
-								</c:choose></td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-			<a href="/board/register" class="btn btn-success">새 가게 등록</a>
+			<div class="photo-section">
+				<c:forEach var="store" items="${storeList}">
+					<div class="photo-frame"
+						onclick="location.href='/store/detail?id=${store.id}'">
+						<c:choose>
+							<c:when test="${not empty store.storeImage}">
+								<img src="${store.storeImage}" alt="가게 이미지"
+									onerror="this.onerror=null; this.src='/resources/images/default.jpg'">
+							</c:when>
+							<c:otherwise>
+								<img src="/resources/image/뷔페.jpg" alt="뷔페">
+							</c:otherwise>
+						</c:choose>
+					</div>
+				</c:forEach>
+			</div>
+
+
 		</div>
 
 		<div class="photo-section">
@@ -252,6 +295,9 @@ body {
 			</div>
 		</div>
 		<div class="time-buttons">
+			<button>
+				<a href="/board/register">새 가게 등록</a>
+			</button>
 			<button>6:30</button>
 			<button>7:30</button>
 			<button>8:30</button>
@@ -263,6 +309,11 @@ body {
 
 
 <script>
+	// 날짜 선택 시 오늘 이전 날짜 선택 제한
+	const dateInput = document.getElementById('date');
+	const today = new Date().toISOString().split('T')[0];
+	dateInput.setAttribute('min', today);
+
 	window.addEventListener('load', function() {
 		var locationSelect = document.getElementById('location');
 		var subLocationSelect = document.getElementById('sub-location-select');

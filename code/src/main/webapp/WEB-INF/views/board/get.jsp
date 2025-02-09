@@ -3,10 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<tiles:insertDefinition name="template">
-    <tiles:putAttribute name="title" value="Review Page" />
-    
-    <tiles:putAttribute name="content">
         <div class="container mt-4">
             <h2 class="mb-4">Review Details</h2>
 
@@ -100,9 +96,6 @@
             </div>
 
         </div>
-    </tiles:putAttribute>
-</tiles:insertDefinition>
-
 <script src="/resources/js/reply.js"></script>
 <script>
 $(document).ready(function() {
