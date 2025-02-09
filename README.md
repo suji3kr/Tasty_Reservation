@@ -34,6 +34,19 @@
 ![image](https://github.com/user-attachments/assets/bb351f4a-9719-4f67-b4cc-9e0183a976ba)
 
 
+<br>
+<br>
+
+>시퀀스 다이어그램
+![image](https://github.com/user-attachments/assets/23b846a4-6746-457c-aa52-ef0bce6690e6)
+
+
+<br>
+<br>
+
+>논리적설계
+>![image](https://github.com/user-attachments/assets/e3e8d7a1-e2e3-4f3b-a3da-859926cbb80c)
+
 
 <br><br>
 -------------
