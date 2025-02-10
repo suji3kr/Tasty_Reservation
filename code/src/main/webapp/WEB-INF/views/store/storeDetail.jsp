@@ -39,7 +39,7 @@ img {
 </head>
 <body>
 	<div class="container mt-5">
-		<h2 class="text-center">${store.storeName}상세정보</h2>
+		<h2 class="text-center">${store.storeName}</h2>
 
 		<div class="row">
 			<div class="col-md-6">
@@ -54,24 +54,47 @@ img {
 				</c:choose>
 			</div>
 			<div class="col-md-6">
-				<ul class="list-group">
-					<li class="list-group-item"><strong>이름:</strong>
-						${store.storeName}</li>
-					<li class="list-group-item"><strong>위치:</strong>
-						${store.storeLocation}</li>
-					<li class="list-group-item"><strong>설명:</strong>
-						${store.storeDescription}</li>
-					<li class="list-group-item"><strong>종류:</strong>
-						${store.storeCategory}</li>
-					<li class="list-group-item"><strong>전화번호:</strong> <c:choose>
-							<c:when test="${fn:length(store.phoneNumber) == 11}">
-                                ${fn:substring(store.phoneNumber, 0, 3)}-${fn:substring(store.phoneNumber, 3, 7)}-${fn:substring(store.phoneNumber, 7, 11)}
-                            </c:when>
-							<c:otherwise>
-                                ${store.phoneNumber}
-                            </c:otherwise>
-						</c:choose></li>
-				</ul>
+				<form>
+					<div class="mb-3">
+						<label for="storeName" class="form-label"><strong>상호:</strong></label>
+						<input type="text" class="form-control" id="storeName"
+							name="storeName" value="${store.storeName}" readonly>
+					</div>
+
+					<div class="mb-3">
+						<label for="storeLocation" class="form-label"><strong>위치:</strong></label>
+						<input type="text" class="form-control" id="storeLocation"
+							name="storeLocation" value="${store.storeLocation}" readonly>
+					</div>
+
+					<div class="mb-3">
+						<label for="storeDescription" class="form-label"><strong>설명:</strong></label>
+						<textarea class="form-control" id="storeDescription"
+							name="storeDescription" rows="3" readonly>${store.storeDescription}</textarea>
+					</div>
+
+					<div class="mb-3">
+						<label for="storeCategory" class="form-label"><strong>종류:</strong></label>
+						<input type="text" class="form-control" id="storeCategory"
+							name="storeCategory" value="${store.storeCategory}" readonly>
+					</div>
+
+					<div class="mb-3">
+						<label for="phoneNumber" class="form-label"><strong>전화번호:</strong></label>
+						<input type="text" class="form-control" id="phoneNumber"
+							name="phoneNumber"
+							value="<c:choose>
+                        <c:when test='${fn:length(store.phoneNumber) == 11}'>
+                            ${fn:substring(store.phoneNumber, 0, 3)}-${fn:substring(store.phoneNumber, 3, 7)}-${fn:substring(store.phoneNumber, 7, 11)}
+                        </c:when>
+                        <c:otherwise>
+                            ${store.phoneNumber}
+                        </c:otherwise>
+                    </c:choose>"
+							readonly>
+					</div>
+				</form>
+
 			</div>
 		</div>
 
@@ -99,9 +122,9 @@ img {
 						%>
 
 						<div class="mb-3">
-							<label for="loginUserName" class="form-label">이름</label>
-							<input
-								type="text" class="form-control" id="loginUserName" name="loginUserName"
+							<label for="loginUserName" class="form-label">이름</label> <input
+								type="text" class="form-control" id="loginUserName"
+								name="loginUserName"
 								value="<%=(loginUserName != null) ? loginUserName : ""%>"
 								disabled>
 						</div>

@@ -155,8 +155,8 @@ public class BoardController {
 	}
 
 	@GetMapping("/board/kidnokids")
-	public String getKidnokids() {
-/*			@RequestParam(name = "pageNum", required = false, defaultValue = "1") int pageNum,
+	public String getKidnokids(
+			@RequestParam(name = "pageNum", required = false, defaultValue = "1") int pageNum,
 			@RequestParam(name = "amount", required = false, defaultValue = "10") int amount, Model model) {
 
 		Criteria cri = new Criteria(pageNum, amount);
@@ -169,7 +169,7 @@ public class BoardController {
 		// 총 가게 수
 		int total = storeService.getTotal(cri);
 		log.info("total stores: " + total);
-		model.addAttribute("pageMaker", new PageDTO(cri, total));*/
+		model.addAttribute("pageMaker", new PageDTO(cri, total));
 
 		return "/board/kidnokids";
 	}

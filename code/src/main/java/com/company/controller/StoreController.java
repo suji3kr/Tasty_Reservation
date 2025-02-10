@@ -40,16 +40,23 @@ public class StoreController {
             @RequestParam("storeLocation") String storeLocation,
             @RequestParam("storeDescription") String storeDescription,
             @RequestParam("storeCategory") String storeCategory,
+            @RequestParam(value = "customCategory", required = false) String customCategory,
             @RequestParam("phoneNumber") String phoneNumber,
-            @RequestParam(value = "storeImage", required = false) MultipartFile storeImage
+            @RequestParam(value = "storeImage", required = false) MultipartFile storeImage,
+            @RequestParam(value = "existingImage", required = false) String existingImage // 기존 이미지
     ) throws IOException {
+
+        // "기타" 선택 시 customCategory 값을 storeCategory로 대체
+        if (storeCategory == null || storeCategory.trim().isEmpty()) {
+            storeCategory = customCategory;
+        }
 
         // 디버깅 로그
         System.out.println("=== [디버깅] 가게 등록 데이터 ===");
         System.out.println("가게 이름: " + storeName);
         System.out.println("가게 위치: " + storeLocation);
         System.out.println("가게 설명: " + storeDescription);
-        System.out.println("가게 종류: " + storeCategory);
+        System.out.println("선택된 가게 종류: " + storeCategory);
         System.out.println("전화번호: " + phoneNumber);
 
         // 업로드 경로 설정 (C:/uploads/)
@@ -59,11 +66,20 @@ public class StoreController {
             dir.mkdirs(); // 폴더가 없으면 생성
         }
 
-        // 기본 이미지 설정
-        String fileName = "default.jpg";
+        // 기존 이미지 유지 (새로운 파일이 없으면 기존 이미지 사용)
+        String fileName = (existingImage != null && !existingImage.isEmpty()) ? existingImage : "default.jpg";
 
-        // 파일 업로드 처리
+        // 새로운 파일 업로드 처리
         if (storeImage != null && !storeImage.isEmpty()) {
+            // 기존 이미지 삭제 (기본 이미지가 아닐 경우만)
+            if (existingImage != null && !existingImage.equals("default.jpg")) {
+                File oldFile = new File(uploadDir, existingImage);
+                if (oldFile.exists()) {
+                    oldFile.delete(); // 기존 파일 삭제
+                }
+            }
+
+            // 새로운 파일 저장
             String originalFileName = storeImage.getOriginalFilename();
             String fileExtension = originalFileName.substring(originalFileName.lastIndexOf(".")); // 확장자 추출
             fileName = UUID.randomUUID().toString() + fileExtension; // 새로운 파일명 생성
@@ -71,7 +87,7 @@ public class StoreController {
             File uploadFile = new File(uploadDir, fileName);
             storeImage.transferTo(uploadFile); // 파일 저장
 
-            System.out.println("업로드된 파일명: " + fileName);
+            System.out.println("새로운 업로드된 파일명: " + fileName);
         }
 
         // StoreDTO 객체 생성 및 저장

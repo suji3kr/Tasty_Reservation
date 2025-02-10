@@ -17,8 +17,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.company.domain.MemberDTO;
 import com.company.service.MemberService;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+@Getter
 @Controller
 @RequestMapping("/member/*")
 @RequiredArgsConstructor
@@ -56,24 +58,40 @@ public class MemberController {
 	}
 
 	@PostMapping("/login")
+	public String login(
+	        @RequestParam("email") String email,
+	        @RequestParam("password") String password,
+	        HttpSession session,
+	        Model model) {
 
-	public String login(@ModelAttribute MemberDTO memberDTO, HttpSession session, Model model) {
-		
-		MemberDTO loginResult = memberService.login(memberDTO);
-		if (loginResult != null) {
-			session.setAttribute("loginEmail", loginResult.getEmail());
-			session.setAttribute("loginUserName", loginResult.getUsername());
-			System.out.println("세션에 저장된 로그인 이름: " + session.getAttribute("loginUserName"));
-			System.out.println("세션에 저장된 로그인 이름: " + session.getAttribute("loginEmail"));
-			System.out.println("로그인되었습니다.");
-			return "redirect:/";
-		} else {
-	        // 로그인 실패 시, errorMessage를 Model에 추가
+		MemberDTO memberDTO = new MemberDTO();
+	    memberDTO.setEmail(email);
+	    memberDTO.setPassword(password);
+	    
+	    MemberDTO loginResult = memberService.login(memberDTO, session, model);
+
+	    if (loginResult != null) {
+	        // 세션에 로그인 정보 저장
+	        session.setAttribute("loginEmail", loginResult.getEmail());
+	        session.setAttribute("loginUserName", loginResult.getUsername());
+
+	        // 사용자 역할(role) 저장 (예: "admin" 또는 "user")
+	        session.setAttribute("userRole", loginResult.getRole());
+
+	        // 디버깅 로그 출력
+	        System.out.println("세션에 저장된 로그인 이메일: " + session.getAttribute("loginEmail"));
+	        System.out.println("세션에 저장된 로그인 이름: " + session.getAttribute("loginUserName"));
+	        System.out.println("세션에 저장된 사용자 역할: " + session.getAttribute("userRole"));
+	        System.out.println("로그인되었습니다.");
+
+	        return "redirect:/";  // 로그인 성공 시 메인 페이지로 이동
+	    } else {
+	        // 로그인 실패 시 에러 메시지 추가 후 로그인 페이지로 이동
 	        model.addAttribute("errorMessage", "이메일 또는 비밀번호가 맞지 않습니다.");
-	        return "/member/login";  // 로그인 페이지로 다시 이동
+	        return "/member/login";
 	    }
-
 	}
+
 
 
 	@GetMapping

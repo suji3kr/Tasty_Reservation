@@ -88,67 +88,9 @@ body {
 
 .photo-frame {
 	position: relative;
-	display: inline-block;
-}
-
-.time-buttons-container {
-	gap: 10px; /* 버튼 간격 */
-	position: absolute;
-	top: 248px;
-	left: 50%;
-	transform: translateX(-50%);
-	background: rgb(226 203 145/ 70%);
-	padding: 10px;
-	border-radius: 8px;
-	display: none;
-	text-align: center;/* 내부 요소 가운데 정렬 */
-	z-index: 10;
-	text-align: center;
-}
-
-.time-title {
-	color: #445e54;
-	font-size: 19px;
-	margin-bottom: 5px;
-	font-weight: bold;
-}
-
-.time-button {
-	display: flex;
-	justify-content: center; /* 버튼들을 가운데 정렬 */
-	font-size: 14px;
-	border: none;
-	background-color: #ff99005e;
-	color: black;
-	cursor: pointer;
-	border-radius: 10px;
-	margin: 2px 0;
-	transition: all 0.3s ease-in-out;
-	padding: 6px 5px;
-}
-
-.time-button:hover {
-	background-color: #ff9900;
-	transform: scale(1.1);
-}
-/* 버튼 클릭 효과 */
-.time-buttons button:active {
-	transform: scale(0.95); /* 살짝 눌리는 효과 */
-	box-shadow: none;
-}
-
-/* 사진 섹션 */
-.photo-section {
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	gap: 20px;
-}
-
-.photo-frame {
-	width: 400px;
-	position: relative;
-	animation: fadeIn 1.5s ease-in-out; /* 사진도 페이드 인 */
+	overflow: hidden;
+	border-radius: 15px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .photo-frame img {
@@ -157,6 +99,68 @@ body {
 	border-radius: 15px;
 	object-fit: cover;
 	transition: transform 0.3s ease-in-out;
+}
+
+/* 예약 가능한 시간 버튼 컨테이너 */
+.time-buttons-container {
+	position: absolute;
+	bottom: 10px;
+	left: 50%;
+	transform: translateX(-50%);
+	background: rgb(223 212 182/ 85%); /* 반투명 배경 */
+	padding: 8px 10px;
+	border-radius: 15px;
+	display: none;
+	text-align: center;
+	z-index: 10;
+	width: 90%;
+	display: flex;
+	justify-content: center;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.time-title {
+	font-size: 16px;
+	font-weight: bold;
+	color: #444;
+	margin-bottom: 5px;
+}
+
+/* 시간 버튼 스타일 */
+.time-button {
+	font-size: 14px;
+	border: none;
+	background-color: rgb(46 89 43/ 76%); /* 연한 오렌지색 */
+	color: black;
+	cursor: pointer;
+	border-radius: 8px;
+	padding: 6px 10px;
+	transition: all 0.3s ease-in-out;
+}
+
+.time-button:hover {
+	background-color: #ff9900;
+	transform: scale(1.1);
+}
+
+/* 사진 섹션 */
+.photo-section {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 20px;
+}
+
+@media ( max-width : 768px) {
+	.photo-section {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media ( max-width : 480px) {
+	.photo-section {
+		grid-template-columns: 1fr;
+	}
 }
 
 /* 이미지 호버 효과 */
@@ -281,25 +285,23 @@ to {
 			<h2 class="text-center"></h2>
 			<div class="photo-section">
 				<c:forEach var="store" items="${storeList}">
-					<div class="photo-frame"
-						onclick="location.href='/store/detail?id=${store.id}'">
-						<c:choose>
-							<c:when test="${not empty store.storeImage}">
-								<img src="${store.storeImage}" alt="가게 이미지"
-									onerror="this.onerror=null; this.src='/resources/images/default.jpg'">
-							</c:when>
-							<c:otherwise>
-								<img src="/resources/image/default.jpg" alt="default">
-							</c:otherwise>
-						</c:choose>
+					<div class="photo-frame" data-store-id="${store.id}">
+						<a href="/store/detail?id=${store.id}"> <c:choose>
+								<c:when test="${not empty store.storeImage}">
+									<img src="${store.storeImage}" alt="가게 이미지"
+										onerror="this.onerror=null; this.src='/resources/images/default.jpg'">
+								</c:when>
+								<c:otherwise>
+									<img src="/resources/images/default.jpg" alt="default">
+								</c:otherwise>
+							</c:choose>
+						</a>
+						<div class="time-buttons-container"></div>
 					</div>
 				</c:forEach>
 			</div>
-
-
 		</div>
-
-		<div class="photo-section">
+		<!-- 		<div class="photo-section">
 			<div class="photo-frame" data-store-id="4">
 				<a href="#"><img src="/resources/image/뷔페.jpg" alt="뷔페"></a>
 				<div class="time-buttons-container"></div>
@@ -314,13 +316,15 @@ to {
 			</div>
 		</div>
 
-
+ -->
 		<!-- 시간 선택 버튼 -->
-		<div class="time-buttons" id="timeButtons"></div>
+		<div class="time-buttons" id="timeButtons">
+			<button>
+				<a href="/board/register">새 가게 등록</a>
+			</button>
+		</div>
 
-		<button>
-			<a href="/board/register">새 가게 등록</a>
-		</button>
+
 
 	</div>
 
@@ -328,55 +332,61 @@ to {
 
 
 <script>
-	document.addEventListener("DOMContentLoaded", function () {
-	    const photoFrames = document.querySelectorAll(".photo-frame");
-	
-	    // 가게별 예약 가능한 시간 데이터 (예제)
-	    const availableTimes = {
-	        4: ["6:30", "7:30", "8:30", "9:30"],
-	        2: ["5:00", "6:00", "7:00", "8:00"],
-	        3: ["12:00", "1:00", "2:00", "3:00"]
-	    };
-	
-	    photoFrames.forEach(frame => {
-	        frame.addEventListener("click", function () {
-	            const storeId = this.getAttribute("data-store-id");
-	            const times = availableTimes[storeId] || [];
-	            const timeContainer = this.querySelector(".time-buttons-container");
-	
-	            // 기존 버튼 제거 후 새로 추가
-	            timeContainer.innerHTML = "";
-	
-	            // 예약 가능 시간 제목 추가
-	            const title = document.createElement("div");
-	            title.textContent = " 🕑 "
-	            timeContainer.appendChild(title);
-	
-	            // 시간 버튼 생성
-	            times.forEach(time => {
-	                const button = document.createElement("button");
-	                button.textContent = time;
-	                button.classList.add("time-button");
-	                button.addEventListener("click", function () {
-	                    alert(`예약 시간: ${time} 선택됨!`);
-	                });
-	                timeContainer.appendChild(button);
-	            });
-	
-	            // 버튼 컨테이너 표시
-	            timeContainer.style.display = "flex";
-	        });
-	    });
-	});
+document.addEventListener("DOMContentLoaded", function () {
+    const photoFrames = document.querySelectorAll(".photo-frame");
 
-	// 날짜 선택 시 오늘 이전 날짜 선택 제한
-	const dateInput = document.getElementById('date');
-	const today = new Date().toISOString().split('T')[0];
-	dateInput.setAttribute('min', today);
+    // 가게별 예약 가능한 시간 데이터 (예제)
+    const availableTimes = {
+        1: ["6:30", "7:30", "8:30", "9:30"],
+        2: ["5:00", "6:00", "7:00", "8:00"],
+        3: ["12:00", "1:00", "2:00", "3:00"]
+        // 추가적인 가게 ID와 시간을 여기에 추가
+    };
 
-	window.addEventListener('load', function() {
-		var locationSelect = document.getElementById('location');
-		var subLocationSelect = document.getElementById('sub-location-select');
+    photoFrames.forEach(frame => {
+        const storeId = frame.getAttribute("data-store-id");
+        const times = availableTimes[storeId] || [];
+        const timeContainer = frame.querySelector(".time-buttons-container");
+
+        // 예약 가능 시간 제목 추가
+        const title = document.createElement("div");
+        title.innerHTML = "⏰"; // 아이콘 추가
+        title.classList.add("time-title");
+        timeContainer.appendChild(title);
+
+        // 시간 버튼 생성
+        times.forEach(time => {
+            const button = document.createElement("button");
+            button.textContent = time;
+            button.classList.add("time-button");
+            button.addEventListener("click", function (event) {
+                event.stopPropagation(); // 부모 요소로의 클릭 이벤트 전파 방지
+                alert(`예약 시간: ${time} 선택됨!`);
+            });
+            timeContainer.appendChild(button);
+        });
+
+        // 마우스 호버 시 시간 버튼 표시
+        frame.addEventListener("mouseenter", function () {
+            timeContainer.style.display = "flex";
+        });
+
+        // 마우스 아웃 시 시간 버튼 숨기기
+        frame.addEventListener("mouseleave", function () {
+            timeContainer.style.display = "none";
+        });
+    });
+});
+
+
+// 날짜 선택 시 오늘 이전 날짜 선택 제한
+const dateInput = document.getElementById('date');
+const today = new Date().toISOString().split('T')[0];
+dateInput.setAttribute('min', today);
+
+window.addEventListener('load', function() {
+	var locationSelect = document.getElementById('location');
+	var subLocationSelect = document.getElementById('sub-location-select');
 
 		// 페이지가 로드될 때 locationSelect의 값을 'seoul'로 설정
 		locationSelect.value = 'seoul';
