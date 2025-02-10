@@ -11,4 +11,9 @@ public class ReservationDTO {
     private String reservationDate;
     private String reservationTime;
     private int peopleCount;
+	public Object getCustomerEmail() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }

@@ -40,11 +40,20 @@
 		<c:if test="${not empty sessionScope.loginEmail}">
 			<li><a href="#"><b>내정보</b></a>
 				<ul class="dropdown-menu">
-					<li><a href="${contextPath}/board/favfood">즐겨찾는 맛집</a></li>
+					<!-- 즐겨찾는 맛집 / 내가게 히스토리 (Admin vs User 분기) -->
+					<c:choose>
+						<c:when test="${sessionScope.userRole eq 'admin'}">
+							<li><a href="${contextPath}/board/favfood_admin">가게 추천리스트</a></li>
+						</c:when>
+						<c:otherwise>
+							<li><a href="${contextPath}/board/favfood">즐겨찾는 맛집</a></li>
+						</c:otherwise>
+					</c:choose>
+					
 					<!-- 예약 맛집 관리 (Admin vs User 분기) -->
 					<c:choose>
 						<c:when test="${sessionScope.userRole eq 'admin'}">
-							<li><a href="${contextPath}/board/reservation_admin">예약맛집
+							<li><a href="${contextPath}/board/reservation_admin">예약손님
 									관리</a></li>
 						</c:when>
 						<c:otherwise>
@@ -52,7 +61,16 @@
 									관리</a></li>
 						</c:otherwise>
 					</c:choose>
-					<li><a href="${contextPath}/member/update">회원정보 수정</a></li>
+					
+					<!-- 회원정보 수정/ 가게정보 관리/수정 (Admin vs User 분기) -->
+					<c:choose>
+						<c:when test="${sessionScope.userRole eq 'admin'}">
+							<li><a href="${contextPath}/board/register">가게정보 관리</a></li>
+						</c:when>
+						<c:otherwise>
+							<li><a href="${contextPath}/member/update">회원정보 수정</a></li>
+						</c:otherwise>
+					</c:choose>
 					<li><a href="${contextPath}/board/get">리뷰 관리</a></li>
 				</ul></li>
 		</c:if>

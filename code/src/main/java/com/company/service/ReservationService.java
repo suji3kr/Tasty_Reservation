@@ -39,4 +39,15 @@ public class ReservationService {
         // 데이터베이스에서 해당 날짜의 예약 조회
         return reservationRepository.findByReservationDate(formattedDate);
     }
+
+	public void updateReservation(ReservationDTO reservation) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public ReservationDTO getReservationById(Long reservationId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

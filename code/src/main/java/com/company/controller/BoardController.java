@@ -56,10 +56,14 @@ public class BoardController {
 
     /** ✅ 게시글 상세 조회 & 수정 페이지 */
     @GetMapping({ "/get", "/modify" })
-    public void get(@RequestParam("bno") Long bno, @ModelAttribute("cri") Criteria cri, Model model) {
+    public String get(@RequestParam("bno") Long bno, @ModelAttribute("cri") Criteria cri, Model model) {
         log.info("/get or modify");
+        // 게시글 조회
         model.addAttribute("board", boardservice.get(bno));
+        model.addAttribute("cri", cri);  // Criteria도 모델에 추가
+        return "board/modify";  // 수정 페이지로 직접 이동
     }
+
 
     /** ✅ 게시글 수정 처리 */
     @PostMapping("/modify")
@@ -101,6 +105,12 @@ public class BoardController {
     @GetMapping("/favfood")
     public String getFavFood() {
         return "/board/favfood";
+    }
+    
+    /** ✅ 우리가게 추천리스트 */
+    @GetMapping("/favfood_admin")
+    public String getFavFood_admin() {
+        return "/board/favfood_admin";
     }
 
     /*

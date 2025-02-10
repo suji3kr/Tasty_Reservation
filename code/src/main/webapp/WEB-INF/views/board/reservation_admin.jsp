@@ -17,6 +17,7 @@ body {
 	font-family: 'Roboto', sans-serif;
 	background-color: #f4f7fc;
 }
+
 .container {
 	margin-top: 50px;
 	background: white;
@@ -24,12 +25,62 @@ body {
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 	border-radius: 8px;
 }
+
+.button-container {
+	margin-top: 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+/* 예약 등록 버튼 */
+.custom-btn-success {
+	padding-top: 8px; /* 위쪽 패딩 값 추가 */
+	width: 120px;
+	border: 8px;
+	background: #cbddad; /* 부트스트랩의 success 컬러 */
+	color: #fff;
+	font-weight: bold;
+	text-align: center;
+	transition: background 0.3s ease-in-out;
+	width: 180px;
+}
+
+.custom-btn-success:hover {
+	background: #54925b;
+}
+/* 검색 버튼 스타일 */
+.custom-btn-search {
+	padding-top: 8px; /* 위쪽 패딩 값 추가 */
+	width: 120px;
+	height: 38px;
+	border-radius: 8px;
+	border: none;
+	background: #cbddad;; /* 부트스트랩의 primary 색상 */
+	color: #fff;
+	font-weight: bold;
+	text-align: center;
+	transition: background 0.3s ease-in-out;
+	width: 130px; /* 버튼 너비 */
+}
+
+.custom-btn-search:hover {
+	background: #54925b; /* 호버 시 색상 변경 */
+}
+
+/* 버튼 컨테이너 */
+.button-container {
+	margin-top: 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
 </style>
 </head>
 <body>
 	<div class="container">
-		<h3 class="text-center">오늘의 예약 손님 리스트</h3>
-		
+		<h3 class="text-center">예약 손님 리스트</h3>
+
 		<!-- 예약 검색 폼 -->
 		<form action="/reservation/list" method="get" class="mb-3">
 			<div class="row g-3 align-items-center">
@@ -37,13 +88,13 @@ body {
 					<label for="reservationDate" class="col-form-label">예약 날짜:</label>
 				</div>
 				<div class="col-auto">
-					<input type="date" class="form-control" id="reservationDate" 
-						   name="searchDate" 
-						   value="<fmt:formatDate value='${currentDate}' pattern='yyyy-MM-dd'/>"
-						   required>
+					<input type="date" class="form-control" id="reservationDate"
+						name="searchDate"
+						value="<fmt:formatDate value='${currentDate}' pattern='yyyy-MM-dd'/>"
+						required>
 				</div>
 				<div class="col-auto">
-					<button type="submit" class="btn btn-primary">검색</button>
+					<button type="submit" class="btn custom-btn-search">검색</button>
 				</div>
 			</div>
 		</form>
@@ -65,24 +116,20 @@ body {
 					<c:when test="${not empty reservationList}">
 						<c:forEach var="reservation" items="${reservationList}">
 							<tr>
-								<td>
-									<fmt:formatDate value="${reservation.reservationTime}" pattern="HH:mm"/>
-								</td>
+								<td><fmt:formatDate value="${reservation.reservationTime}"
+										pattern="HH:mm" /></td>
 								<td>${reservation.storeName}</td>
 								<td>${reservation.customerName}</td>
 								<td>${reservation.peopleCount}명</td>
-								<td>
-									<c:choose>
+								<td><c:choose>
 										<c:when test="${fn:length(reservation.phoneNumber) == 11}">
 											${fn:substring(reservation.phoneNumber, 0, 3)}-${fn:substring(reservation.phoneNumber, 3, 7)}-${fn:substring(reservation.phoneNumber, 7, 11)}
 										</c:when>
 										<c:otherwise>
 											${reservation.phoneNumber}
 										</c:otherwise>
-									</c:choose>
-								</td>
-								<td>
-									<c:choose>
+									</c:choose></td>
+								<td><c:choose>
 										<c:when test="${reservation.status == 'CONFIRMED'}">
 											<span class="badge bg-success">확정</span>
 										</c:when>
@@ -95,8 +142,7 @@ body {
 										<c:otherwise>
 											<span class="badge bg-secondary">미정</span>
 										</c:otherwise>
-									</c:choose>
-								</td>
+									</c:choose></td>
 							</tr>
 						</c:forEach>
 					</c:when>
@@ -110,16 +156,17 @@ body {
 		</table>
 
 		<!-- 추가 액션 버튼 -->
-		<div class="d-flex justify-content-between">
-			<a href="/reservation/create" class="btn btn-success">새 예약 등록</a>
+		<div class="button-container d-flex justify-content-between">
+			<a href="/reservation/create" class="btn custom-btn-success">
+				예약손님등록🍀</a>
 			<div>
 				<span class="me-2">총 예약 건수: ${fn:length(reservationList)}건</span>
 			</div>
 		</div>
-	</div>
 
-	<!-- Bootstrap JS -->
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+		<!-- Bootstrap JS -->
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -41,16 +41,38 @@ public class MemberController {
 	}
 
 	@PostMapping("/signup")
-	public String signup(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
-		int saveResult = memberService.signup(memberDTO);
-		session.setAttribute("loginUserName", memberDTO.getUsername());
-		if (saveResult > 0) {
-			return "/member/login";
-		} else {
-			return "/member/signup";
-		}
+	public String signup(@ModelAttribute MemberDTO memberDTO, 
+	                     @RequestParam(required = false) String isAdmin, 
+	                     HttpSession session) {
+	    
+	    // 관리자 체크 여부 확인 후 역할(role) 설정
+	    if (isAdmin != null) {
+	        memberDTO.setRole("admin");
+	    } else {
+	        memberDTO.setRole("user");
+	    }
 
+	    // 회원가입 처리
+	    int saveResult = memberService.signup(memberDTO);
+
+	    if (saveResult > 0) {
+	        // 회원가입 성공 시 자동 로그인 처리
+	        session.setAttribute("loginEmail", memberDTO.getEmail());
+	        session.setAttribute("loginUserName", memberDTO.getUsername());
+	        session.setAttribute("userRole", memberDTO.getRole());  // 역할 저장
+
+	        // 디버깅 로그 출력
+	        System.out.println("회원가입 완료 - 역할: " + memberDTO.getRole());
+	        System.out.println("세션에 저장된 로그인 이메일: " + session.getAttribute("loginEmail"));
+	        System.out.println("세션에 저장된 로그인 이름: " + session.getAttribute("loginUserName"));
+	        System.out.println("세션에 저장된 사용자 역할: " + session.getAttribute("userRole"));
+
+	        return "redirect:/";  // 회원가입 후 메인 페이지로 이동
+	    } else {
+	        return "/member/signup";  // 회원가입 실패 시 다시 회원가입 페이지로 이동
+	    }
 	}
+
 
 	@GetMapping("/login")
 	public String loginForm() {

@@ -19,7 +19,7 @@ body {
 }
 
 .signup-container {
-	max-width: 500px;
+	max-width: 600px;
 	margin: 50px auto;
 	background: white;
 	padding: 20px;
@@ -28,18 +28,32 @@ body {
 }
 
 #checkUsernameBtn {
-	padding :5px;
+	width: 130px;
+	height: 38px;
+	margin-bottom: 5px;
+	border-radius: 15px;
+	border: none;
+	background: #f0c43cc9;
+	color: #fff;
+	font-weight: bold;
+}
+
+.btn signup.btn {
+	width: 360px;
+	height: 38px;
+	margin-bottom: 5px;
+	border-radius: 15px;
+	border: none;
+	background: #cbddad;
+	color: #fff;
+	font-weight: bold;
 }
 </style>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"
-	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-	crossorigin="anonymous">
-</script>
 </head>
 <body>
 
 	<div class="signup-container">
-		<h2 class="text-center">회원가입</h2>
+		<h3 class="text-center">회원 가입</h3>
 		<form action="/member/signup" method="post" accept-charset="UTF-8">
 			<div class="mb-3">
 				<div class="mb-3">
@@ -47,11 +61,15 @@ body {
 						type="email" class="form-control" id="email" name="email" required>
 				</div>
 
-				<button type="button" class="btn btn-primary mt-2"
-					id="checkUsernameBtn" onclick="emailCheck()">중복확인</button>
+				<button type="button" class="btn signup" id="checkUsernameBtn"
+					onclick="emailCheck()">중복확인🍕🍕</button>
 
 				<div id="check-result"></div>
 
+			</div>
+			<div class="mb-3">
+				<input type="checkbox" id="isAdmin" name="isAdmin"> <label
+					for="isAdmin">맛집 관리 사장님으로 가입 시 체크해주세요 🤗</label>
 			</div>
 			<div class="mb-3">
 				<label for="username" class="form-label">이름</label> <input
@@ -96,38 +114,61 @@ body {
 			</div>
 
 			<script>
-				document.addEventListener('DOMContentLoaded', function() {
-				    const birthdateInput = document.getElementById('birthdate');
-				    const ageInput = document.getElementById('age');
-				
-				    birthdateInput.addEventListener('change', function() {
-				        const birthdateValue = this.value;
-				
-				        if (birthdateValue) {
-				            const birthdate = new Date(birthdateValue);
-				            const today = new Date();
-				            let age = today.getFullYear() - birthdate.getFullYear();
-				            const monthDiff = today.getMonth() - birthdate.getMonth();
-				
-				            // 생년월일이 올해 아직 지나지 않은 경우 나이를 조정
-				            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthdate.getDate())) {
-				                age--;
-				            }
-				
-				            // 나이가 음수거나 200살이 넘는 경우 경고 표시 및 입력 초기화
-				            if (age < 0 || age > 200) {
-				                alert("올바른 생년월일을 입력해주세요. 나이는 0 이상 200 이하로 입력해야 합니다.");
-				                ageInput.value = ''; // 나이 필드를 비웁니다.
-				                birthdateInput.value = ''; // 잘못된 생년월일 입력을 초기화합니다.
-				            } else {
-				                ageInput.value = age; // 정상적인 나이를 입력합니다.
-				            }
-				        } else {
-				            ageInput.value = ''; // 생년월일이 비어있으면 나이 필드도 비웁니다.
-				        }
-				    });
-				});
-			</script>
+					document.addEventListener('DOMContentLoaded', function() {
+					    const birthdateInput = document.getElementById('birthdate');
+					    const ageInput = document.getElementById('age');
+					
+					    // 생년월일을 입력하면 나이를 자동 계산
+					    birthdateInput.addEventListener('change', function() {
+					        const birthdateValue = this.value;
+					
+					        if (birthdateValue) {
+					            const birthdate = new Date(birthdateValue);
+					            const today = new Date();
+					            let age = today.getFullYear() - birthdate.getFullYear();
+					            const monthDiff = today.getMonth() - birthdate.getMonth();
+					
+					            // 생년월일이 아직 안 지난 경우 나이를 조정
+					            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthdate.getDate())) {
+					                age--;
+					            }
+					
+					            // 나이 범위 검증
+					            if (age < 0 || age > 200) {
+					                alert("올바른 생년월일을 입력해주세요. 나이는 0 이상 200 이하로 입력해야 합니다.");
+					                birthdateInput.value = '';
+					                ageInput.value = '';
+					            } else {
+					                ageInput.value = age;
+					            }
+					        } else {
+					            ageInput.value = '';
+					        }
+					    });
+					
+					    // 나이를 직접 입력하면 생년월일 자동 계산
+					    ageInput.addEventListener('input', function() {
+					        const ageValue = parseInt(this.value, 10);
+					
+					        if (!isNaN(ageValue) && ageValue >= 0 && ageValue <= 200) {
+					            const today = new Date();
+					            const birthYear = today.getFullYear() - ageValue;
+					            let birthMonth = today.getMonth() + 1;
+					            let birthDay = today.getDate();
+					
+					            // 날짜 형식 맞추기 (YYYY-MM-DD)
+					            if (birthMonth < 10) birthMonth = "0" + birthMonth;
+					            if (birthDay < 10) birthDay = "0" + birthDay;
+					
+					            birthdateInput.value = `${birthYear}-${birthMonth}-${birthDay}`;
+					        } else if (this.value !== "") {
+					            alert("올바른 나이를 입력해주세요. (0~200)");
+					            this.value = '';
+					        }
+					    });
+					});
+					</script>
+
 
 
 			<div class="mb-3">
@@ -143,11 +184,12 @@ body {
 						name="gender" value="F" required> <label for="female">여성</label>
 				</div>
 			</div>
-	
-
-			<button type="submit" class="btn btn-primary w-100">가입하기</button>
+			<button type="submit" class="btn signup.btn">가입하기</button>
 		</form>
 	</div>
+	<!-- jQuery CDN 추가 -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 	<!-- Bootstrap JS and dependencies -->
 	<script

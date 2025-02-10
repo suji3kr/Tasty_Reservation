@@ -1,20 +1,19 @@
-use restdb;
-drop table reservations;
-drop table reviews;
-drop table restaurants;
-drop table admins;
-drop table users;
+USE restdb;
 
+-- 기존 테이블 삭제 (데이터가 있는 경우 주의)
+DROP TABLE IF EXISTS Reservations;
+DROP TABLE IF EXISTS Reviews;
+DROP TABLE IF EXISTS Restaurants;
+DROP TABLE IF EXISTS Admins;
+DROP TABLE IF EXISTS Users;
 
--- role(admin, user 구분하여 나타냄 )
-
--- Users 테이블
+-- Users 테이블 (username의 UNIQUE 제약 제거)
 CREATE TABLE Users (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) NOT NULL UNIQUE,
+    username VARCHAR(50) NOT NULL,  -- UNIQUE 제거
     password VARCHAR(255) NOT NULL,
     age INT,
-    email VARCHAR(100) UNIQUE,
+    email VARCHAR(100) UNIQUE,  -- email만 UNIQUE 유지
     phone VARCHAR(20),
     gender ENUM('M', 'F'),
     role ENUM('admin', 'user') NOT NULL DEFAULT 'user' -- 역할 추가
@@ -29,7 +28,7 @@ CREATE TABLE Admins (
 -- Restaurants 테이블
 CREATE TABLE Restaurants (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    admin_id bigint,
+    admin_id BIGINT,
     store_name VARCHAR(255) NOT NULL,
     store_location VARCHAR(255),
     store_description TEXT,
@@ -39,18 +38,19 @@ CREATE TABLE Restaurants (
     FOREIGN KEY (admin_id) REFERENCES Admins(id) ON DELETE SET NULL
 );
 
--- Reservations 테이블
+-- Reservations 테이블 (username 대신 user_id 사용)
 CREATE TABLE Reservations (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    store_id bigINT,
-    username VARCHAR(255) NOT NULL,
+    store_id BIGINT,
+    user_id BIGINT NOT NULL,  -- username 대신 user_id 사용
     phone VARCHAR(20),
     reservation_date DATE NOT NULL,
     reservation_time TIME NOT NULL,
     people_count INT NOT NULL,
     FOREIGN KEY (store_id) REFERENCES Restaurants(id) ON DELETE CASCADE,
-    FOREIGN KEY (username) REFERENCES Users(username) ON DELETE CASCADE
+    FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
 );
+
 
 -- Reviews 테이블
 CREATE TABLE Reviews (
