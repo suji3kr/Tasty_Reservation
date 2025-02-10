@@ -24,4 +24,9 @@ public class ReservationRepository {
 	public List<ReservationDTO> findByStoreId(int storeId) {
 		return sql.selectList("reservation.findByStoreId", storeId);
 	}
+
+	// 특정 날짜의 예약 목록 조회 (수정됨)
+    public List<ReservationDTO> findByReservationDate(String formattedDate) {
+        return sql.selectList("reservation.findByReservationDate", formattedDate);
+    }
 }

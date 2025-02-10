@@ -1,15 +1,15 @@
 package com.company.service;
 
-import org.springframework.stereotype.Service;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.company.domain.ReservationDTO;
-import com.company.mapper.ReservationMapper;
 import com.company.repository.ReservationRepository;
-
-import java.util.Date;
-import java.util.List;
 
 @Service
 public class ReservationService {
@@ -31,11 +31,12 @@ public class ReservationService {
     }
     
     
-    @Autowired
-    private ReservationMapper reservationMapper; // ReservationMapper를 주입받음
-
-    public List<ReservationDTO> getReservationDate(Date searchDate) {
+    public List getReservationDate(Date searchDate) {
+        // Date → String 변환
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDate = dateFormat.format(searchDate);
+        
         // 데이터베이스에서 해당 날짜의 예약 조회
-        return reservationMapper.selectReservationsByDate(searchDate);
+        return reservationRepository.findByReservationDate(formattedDate);
     }
 }

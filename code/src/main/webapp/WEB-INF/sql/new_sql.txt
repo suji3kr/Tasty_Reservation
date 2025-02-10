@@ -5,6 +5,9 @@ drop table restaurants;
 drop table admins;
 drop table users;
 
+
+-- role(admin, user 구분하여 나타냄 )
+
 -- Users 테이블
 CREATE TABLE Users (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -13,11 +16,14 @@ CREATE TABLE Users (
     age INT,
     email VARCHAR(100) UNIQUE,
     phone VARCHAR(20),
-    gender ENUM('M', 'F')
+    gender ENUM('M', 'F'),
+    role ENUM('admin', 'user') NOT NULL DEFAULT 'user' -- 역할 추가
 );
+
 -- Admins 테이블
 CREATE TABLE Admins (
-    id BIGINT PRIMARY KEY references Users(id)
+    id BIGINT PRIMARY KEY REFERENCES Users(id),
+    UNIQUE (id) -- 중복 방지
 );
 
 -- Restaurants 테이블
