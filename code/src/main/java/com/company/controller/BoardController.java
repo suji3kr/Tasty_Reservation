@@ -103,23 +103,81 @@ public class BoardController {
         return "/board/favfood";
     }
 
-    /** ✅ 가족 단체 예약 페이지 (페이징 추가) */
-    @GetMapping("/familyreservation")
-    public String familyReservation(@RequestParam(name = "pageNum", required = false, defaultValue = "1") int pageNum,
-                                    @RequestParam(name = "amount", required = false, defaultValue = "10") int amount, 
-                                    Model model) {
-        Criteria cri = new Criteria(pageNum, amount);
-        log.info("familyreservation page: " + cri);
+    /*
+	 * @GetMapping("/familyreservation")
+	 * 
+	 * public String familyReservation(Model model) { List<StoreDTO> storeList =
+	 * storeService.getAllStores(); // 기존 Store 데이터 가져오기
+	 * model.addAttribute("storeList", storeList); // 모델에 추가하여 JSP에서 사용 가능 return
+	 * "/board/familyreservation"; }
+	 */
+	// ✅ 가족 단체 예약 (페이징 추가)
+	@GetMapping("/familyreservation")
+	public String familyReservation(
+	        @RequestParam(name = "pageNum", required = false, defaultValue = "1") int pageNum,
+	        @RequestParam(name = "amount", required = false, defaultValue = "10") int amount,
+	        @RequestParam(name = "keyword", required = false) String keyword,
+	        @RequestParam(name = "store_category", required = false) List<String> storeCategories,
+	        Model model) {
+	    
+	    Criteria cri = new Criteria(pageNum, amount);
+	    cri.setKeyword(keyword);
 
-        List<StoreDTO> storeList = storeService.getList(cri);
-        model.addAttribute("storeList", storeList);
+	    log.info("🔍 검색 키워드: " + keyword);
+	    log.info("🔎 선택된 카테고리: " + storeCategories);
 
-        int total = storeService.getTotal(cri);
-        log.info("total stores: " + total);
-        model.addAttribute("pageMaker", new PageDTO(cri, total));
+	    List<StoreDTO> storeList;
+	    int total;
 
-        return "/board/familyreservation";
-    }
+	    if (storeCategories != null && !storeCategories.isEmpty()) {
+	        storeList = storeService.getStoresByCategories(cri, storeCategories);
+	        total = storeService.getTotalByCategories(cri, storeCategories);
+	    } else {
+	        storeList = storeService.getList(cri);
+	        total = storeService.getTotal(cri);
+	    }
+
+	    model.addAttribute("storeList", storeList);
+	    model.addAttribute("pageMaker", new PageDTO(cri, total));
+	    model.addAttribute("keyword", keyword);
+	    model.addAttribute("selectedCategories", storeCategories);
+
+	    return "/board/familyreservation";
+	}
+	
+	@GetMapping("/search")
+	public String searchStores(
+	        @RequestParam(name = "keyword", required = false) String keyword,
+	        @RequestParam(name = "pageNum", required = false, defaultValue = "1") int pageNum,
+	        @RequestParam(name = "amount", required = false, defaultValue = "10") int amount,
+	        @RequestParam(name = "store_category", required = false) List<String> storeCategories,
+	        Model model) {
+
+	    Criteria cri = new Criteria(pageNum, amount);
+	    cri.setKeyword(keyword);
+
+	    log.info("🔍 검색 요청 - 키워드: " + keyword + ", 카테고리: " + storeCategories);
+
+	    List<StoreDTO> storeList;
+	    int total;
+
+	    if (storeCategories != null && !storeCategories.isEmpty()) {
+	        storeList = storeService.getStoresByCategories(cri, storeCategories);
+	        total = storeService.getTotalByCategories(cri, storeCategories);
+	    } else {
+	        storeList = storeService.getList(cri);
+	        total = storeService.getTotal(cri);
+	    }
+
+	    model.addAttribute("storeList", storeList);
+	    model.addAttribute("pageMaker", new PageDTO(cri, total));
+	    model.addAttribute("keyword", keyword);
+	    model.addAttribute("selectedCategories", storeCategories);
+
+	    return "/board/familyreservation";  // ✅ 검색 결과를 같은 페이지에 렌더링
+	}
+	
+	
 
     /** ✅ 유아동반 가능한 맛집 페이지 */
     @GetMapping("/kidnokids")

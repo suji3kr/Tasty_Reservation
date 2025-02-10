@@ -86,11 +86,72 @@ body {
 	border-radius: 5px;
 }
 
+
+.time-buttons-container {
+	gap: 10px; /* 버튼 간격 */
+	position: absolute;
+	top: 248px;
+	left: 50%;
+	transform: translateX(-50%);
+	background: rgb(226 203 145/ 70%);
+	padding: 10px;
+	border-radius: 8px;
+	display: none;
+	text-align: center;/* 내부 요소 가운데 정렬 */
+	z-index: 10;
+	text-align: center;
+}
+
+.time-title {
+	color: #445e54;
+	font-size: 19px;
+	margin-bottom: 5px;
+	font-weight: bold;
+}
+
+.time-button {
+	display: flex;
+	justify-content: center; /* 버튼들을 가운데 정렬 */
+	font-size: 14px;
+	border: none;
+	background-color: #ff99005e;
+	color: black;
+	cursor: pointer;
+	border-radius: 10px;
+	margin: 2px 0;
+	transition: all 0.3s ease-in-out;
+	padding: 6px 5px;
+}
+
+.time-button:hover {
+	background-color: #ff9900;
+	transform: scale(1.1);
+}
+/* 버튼 클릭 효과 */
+.time-buttons button:active {
+	transform: scale(0.95); /* 살짝 눌리는 효과 */
+	box-shadow: none;
+}
+
+/* 사진 섹션 */
+.photo-section {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 20px;
+}
+
 .photo-frame {
-	position: relative;
+	width: 380px;
 	overflow: hidden;
+	position: relative;
+	display: inline-block;
+	animation: fadeIn 1.5s ease-in-out; /* 사진도 페이드 인 */
 	border-radius: 15px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	
+
 }
 
 .photo-frame img {
@@ -203,7 +264,8 @@ to {
 </head>
 <body>
 
-	<div class="container">
+<div class="container">
+	<form action="/board/search" method="get">
 		<div class="filter-section">
 			<div class="filter-group">
 				<label for="location"> 지 역</label> <select id="location">
@@ -234,14 +296,22 @@ to {
 					value="5"> 5점 <input type="radio" name="rating" value="4">
 				4점대 <input type="radio" name="rating" value="3"> 3점대
 			</div>
-			<div class="filter-checkgroup">
-				<label><b>메 뉴</b></label> <input type="checkbox" name="food-type"
-					value="western"> 양식 <input type="checkbox" name="food-type"
-					value="korean"> 한식 <input type="checkbox" name="food-type"
-					value="japanese"> 일식 <input type="checkbox"
-					name="food-type" value="chinese"> 중식 <input type="checkbox"
-					name="food-type" value="dessert"> 디저트/카페
-			</div>
+			<!-- ✅ 메뉴 체크박스 추가 -->
+    <div class="filter-checkgroup">
+        <label><b>메뉴</b></label>
+        <c:set var="selectedCategories" value="${paramValues.store_category}" />
+        
+        <input type="checkbox" name="store_category" value="양식" 
+               <c:if test="${fn:contains(selectedCategories, '양식')}">checked</c:if>> 양식
+        <input type="checkbox" name="store_category" value="한식" 
+               <c:if test="${fn:contains(selectedCategories, '한식')}">checked</c:if>> 한식
+        <input type="checkbox" name="store_category" value="일식" 
+               <c:if test="${fn:contains(selectedCategories, '일식')}">checked</c:if>> 일식
+        <input type="checkbox" name="store_category" value="중식" 
+               <c:if test="${fn:contains(selectedCategories, '중식')}">checked</c:if>> 중식
+        <input type="checkbox" name="store_category" value="디저트/카페" 
+               <c:if test="${fn:contains(selectedCategories, '디저트/카페')}">checked</c:if>> 디저트/카페
+    </div>
 			<div class="filter-time-kids">
 				<div class="filter-group">
 					<label for="time">시 간</label> <select id="time" name="time">
@@ -270,16 +340,16 @@ to {
 			</div>
 			<div class="filter-time-kids">
 				<div class="filter-group">
-					<form action="/search" method="get">
-						<input type="text" class="form-control me-2" name="searchKeyword"
+					
+						<input type="text" class="form-control me-2" name="keyword" value="${param.keyword}"
 							placeholder="가게명 검색">
 						<button type="submit">바로 찾아줄게 ✔</button>
-					</form>
+					
 					<!-- 검색 폼 -->
 				</div>
 			</div>
-		</div>
-
+		</div><!-- .filter-section -->
+</form>
 		<!-- 스토어 리스트 -->
 		<div class="body">
 			<h2 class="text-center"></h2>
@@ -303,15 +373,15 @@ to {
 		</div>
 		<!-- 		<div class="photo-section">
 			<div class="photo-frame" data-store-id="4">
-				<a href="#"><img src="/resources/image/뷔페.jpg" alt="뷔페"></a>
+				<a href="javascript:void(0)"><img src="/resources/image/뷔페.jpg" alt="뷔페"></a>
 				<div class="time-buttons-container"></div>
 			</div>
 			<div class="photo-frame" data-store-id="2">
-				<a href="#"><img src="/resources/image/베트남요리.png" alt="베트남요리"></a>
+				<a href="javascript:void(0)"><img src="/resources/image/베트남요리.png" alt="베트남요리"></a>
 				<div class="time-buttons-container"></div>
 			</div>
 			<div class="photo-frame" data-store-id="3">
-				<a href="#"><img src="/resources/image/관자요리.jpg" alt="관자요리"></a>
+				<a href="javascript:void(0)"><img src="/resources/image/관자요리.jpg" alt="관자요리"></a>
 				<div class="time-buttons-container"></div>
 			</div>
 		</div>
@@ -468,6 +538,7 @@ window.addEventListener('load', function() {
 				}
 			});
 </script>
+
 
 <!-- 페이징처리 -->
 <div class="pagination">
