@@ -176,12 +176,12 @@ public class BoardController {
     }
 
     /** ✅ 예약 관리 페이지 (관리자 & 사용자 구분) */
-    @GetMapping("/reservationAdmin")
+    @GetMapping("/reservation_admin")
     public String reservationAdmin() {
         return "/board/reservation_admin";
     }
 
-    @GetMapping("/reservationUser")
+    @GetMapping("/reservation_user")
     public String reservationUser() {
         return "/board/reservation_user";
     }
@@ -192,9 +192,9 @@ public class BoardController {
         String role = (String) session.getAttribute("userRole");
 
         if ("admin".equals(role)) {
-            return "redirect:/board/reservationAdmin";  // 관리자 페이지 이동
+            return "redirect:/board/reservation_admin";  // 관리자 페이지 이동
         } else {
-            return "redirect:/board/reservationUser";   // 사용자 페이지 이동
+            return "redirect:/board/reservation_user";   // 사용자 페이지 이동
         }
     }
 }
