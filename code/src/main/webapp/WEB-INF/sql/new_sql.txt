@@ -1,0 +1,66 @@
+use restdb;
+drop table reservations;
+drop table reviews;
+drop table restaurants;
+drop table admins;
+drop table users;
+
+-- Users 테이블
+CREATE TABLE Users (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    age INT,
+    email VARCHAR(100) UNIQUE,
+    phone VARCHAR(20),
+    gender ENUM('M', 'F')
+);
+-- Admins 테이블
+CREATE TABLE Admins (
+    id BIGINT PRIMARY KEY references Users(id)
+);
+
+-- Restaurants 테이블
+CREATE TABLE Restaurants (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    admin_id bigint,
+    store_name VARCHAR(255) NOT NULL,
+    store_location VARCHAR(255),
+    store_description TEXT,
+    store_category VARCHAR(50),
+    phone_number VARCHAR(20),
+    store_image VARCHAR(255),
+    FOREIGN KEY (admin_id) REFERENCES Admins(id) ON DELETE SET NULL
+);
+
+-- Reservations 테이블
+CREATE TABLE Reservations (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    store_id bigINT,
+    username VARCHAR(255) NOT NULL,
+    phone VARCHAR(20),
+    reservation_date DATE NOT NULL,
+    reservation_time TIME NOT NULL,
+    people_count INT NOT NULL,
+    FOREIGN KEY (store_id) REFERENCES Restaurants(id) ON DELETE CASCADE,
+    FOREIGN KEY (username) REFERENCES Users(username) ON DELETE CASCADE
+);
+
+-- Reviews 테이블
+CREATE TABLE Reviews (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    store_id bigINT NOT NULL,
+    title VARCHAR(200),
+    content TEXT,
+    user_id BIGINT NOT NULL,
+    regdate DATE NOT NULL DEFAULT (CURRENT_DATE),
+    FOREIGN KEY (store_id) REFERENCES Restaurants(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
+);
+select * from users;
+
+select * from reservations;
+
+select users.*
+	from admins inner join users
+	on admins.id = users.id;

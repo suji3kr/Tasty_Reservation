@@ -6,8 +6,8 @@ import lombok.Data;
 public class ReservationDTO {
     private int id;
     private int storeId;
-    private String customerName;
-    private String phoneNumber;
+    private String userName;
+    private String phone;
     private String reservationDate;
     private String reservationTime;
     private int peopleCount;

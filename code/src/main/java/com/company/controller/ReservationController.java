@@ -8,6 +8,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.company.domain.ReservationDTO;
 import com.company.service.ReservationService;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Controller
@@ -19,18 +21,18 @@ public class ReservationController {
     @PostMapping("/reservation")
     public String makeReservation(
             @RequestParam("storeId") int storeId,
-            @RequestParam("customerName") String customerName,
-            @RequestParam("phoneNumber") String phoneNumber,
+            @RequestParam("phone") String phone,
             @RequestParam("reservationDate") String reservationDate,
             @RequestParam("reservationTime") String reservationTime,
             @RequestParam("peopleCount") int peopleCount,
-            RedirectAttributes redirectAttributes) {
+            RedirectAttributes redirectAttributes,
+            HttpSession session) {
         
         // 올바르게 DTO 객체 생성
         ReservationDTO reservation = new ReservationDTO();
         reservation.setStoreId(storeId);
-        reservation.setCustomerName(customerName);
-        reservation.setPhoneNumber(phoneNumber);
+        reservation.setUserName((String)session.getAttribute("loginUserName"));
+        reservation.setPhone(phone);
         reservation.setReservationDate(reservationDate);
         reservation.setReservationTime(reservationTime);
         reservation.setPeopleCount(peopleCount);

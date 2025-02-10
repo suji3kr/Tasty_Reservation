@@ -39,8 +39,9 @@ public class MemberController {
 	}
 
 	@PostMapping("/signup")
-	public String signup(@ModelAttribute MemberDTO memberDTO) {
+	public String signup(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
 		int saveResult = memberService.signup(memberDTO);
+		session.setAttribute("loginUserName", memberDTO.getUsername());
 		if (saveResult > 0) {
 			return "/member/login";
 		} else {
@@ -55,17 +56,23 @@ public class MemberController {
 	}
 
 	@PostMapping("/login")
+
 	public String login(@ModelAttribute MemberDTO memberDTO, HttpSession session, Model model) {
-	    boolean loginResult = memberService.login(memberDTO);
-	    if (loginResult) {
-	        session.setAttribute("loginEmail", memberDTO.getEmail());
-	        System.out.println("로그인되었습니다.");
-	        return "redirect:/";
-	    } else {
+		
+		MemberDTO loginResult = memberService.login(memberDTO);
+		if (loginResult != null) {
+			session.setAttribute("loginEmail", loginResult.getEmail());
+			session.setAttribute("loginUserName", loginResult.getUsername());
+			System.out.println("세션에 저장된 로그인 이름: " + session.getAttribute("loginUserName"));
+			System.out.println("세션에 저장된 로그인 이름: " + session.getAttribute("loginEmail"));
+			System.out.println("로그인되었습니다.");
+			return "redirect:/";
+		} else {
 	        // 로그인 실패 시, errorMessage를 Model에 추가
 	        model.addAttribute("errorMessage", "이메일 또는 비밀번호가 맞지 않습니다.");
 	        return "/member/login";  // 로그인 페이지로 다시 이동
 	    }
+
 	}
 
 

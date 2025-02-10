@@ -19,13 +19,8 @@ public class MemberService {
 		return memberRepository.signup(memberDTO);
 	}
 
-	public boolean login(MemberDTO memberDTO) {
-		MemberDTO loginMember = memberRepository.login(memberDTO);
-		if(loginMember != null) {
-			return true;
-		}else {
-			return false;	
-		}		
+	public MemberDTO login(MemberDTO memberDTO) {
+		return memberRepository.login(memberDTO);
 	}
 
 	public List<MemberDTO> findAll() {

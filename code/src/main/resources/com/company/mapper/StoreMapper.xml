@@ -16,7 +16,7 @@
 
     <!-- 가게 정보 등록 -->
     <insert id="registerStore" parameterType="com.company.domain.StoreDTO">
-        INSERT INTO store_registration 
+        INSERT INTO Restaurants
         (store_name, store_location, store_description, store_category, phone_number, store_image)
         VALUES (#{storeName}, #{storeLocation}, #{storeDescription}, #{storeCategory}, #{phoneNumber}, #{storeImage});
     </insert>
@@ -24,20 +24,20 @@
     <!-- 모든 가게 조회 -->
     <select id="getAllStores" resultMap="storeResultMap">
 	    SELECT *
-	    FROM store_registration
+	    FROM Restaurants
 	    ORDER BY id DESC;
 	</select>
     
     
 	<!-- 특정 가게 조회 -->
     <select id="getStoreById" parameterType="long" resultMap="storeResultMap">
-        SELECT * FROM store_registration WHERE id = #{id}
+        SELECT * FROM Restaurants WHERE id = #{id}
     </select>
     
     <!-- ✅ 전체 가게 조회 (페이징 지원) -->
     <select id="getListWithPaging" resultMap="storeResultMap">
         SELECT *
-        FROM store_registration
+        FROM Restaurants
         ORDER BY id DESC
         LIMIT #{cri.amount} OFFSET #{cri.offset}
     </select>
@@ -45,7 +45,7 @@
      <!-- ✅ 전체 가게 수 조회 (페이징 계산을 위해 필요) -->
     <select id="getTotalCount" resultType="int">
         SELECT COUNT(*)
-        FROM store_registration
+        FROM Restaurants
     </select>
 
 </mapper>
