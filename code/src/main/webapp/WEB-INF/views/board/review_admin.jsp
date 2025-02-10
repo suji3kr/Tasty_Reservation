@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>예약 관리 reservation_user</title>
+<title>예약 관리 reservation_admin</title>
 <!-- Bootstrap CSS CDN -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
@@ -267,6 +267,12 @@ body {
             }
         });
     });
+</script>
+
+
+	<!-- AIzaSyDxtdZqbdS6d0jR-vYVhQOtICdiDXq8S_A -->
+
+	<!-- <script>
         // Google Places API 주소 자동 완성 초기화
         function initAutocomplete() {
             // storeLocation 입력 필드에 자동완성 기능을 설정합니다.
@@ -282,6 +288,6 @@ body {
                 document.getElementById('storeLocation').value = place.formatted_address;
             });
         }
-    </script> 
+    </script> -->
 </body>
 </html>
