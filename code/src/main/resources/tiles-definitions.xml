@@ -160,6 +160,18 @@
 
 
 	<!-- 추가되는 부분 -->
+	<definition name="/board/reservation_user" extends="base">
+		<put-attribute name="title" value="예약관리_user" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/reservation_user.jsp" />
+	</definition>
+	<definition name="/board/reservation_admin" extends="base">
+		<put-attribute name="title" value="예약관리_admin" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/reservation_admin.jsp" />
+	</definition>
+
+
 
 
 
