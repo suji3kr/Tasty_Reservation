@@ -67,4 +67,8 @@ public class Criteria {
     public int getLimit() {
         return amount;
     }
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;		
+	}
 }

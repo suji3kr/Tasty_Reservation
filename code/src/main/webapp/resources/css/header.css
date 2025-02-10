@@ -115,27 +115,28 @@ nav ul li:hover .dropdown-menu {
     cursor: pointer; /* 마우스 포인터 변경 */
     font-size: 14px;
     text-decoration: none; /* 밑줄 제거 */
+    padding: 0 !important;
 }
 
 /* 초록색 버튼 스타일 */
-.btn-green {
+.btn.btn-green {
     background-color: #4e7300;
     color: white;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
 /* 초록색 버튼 호버 효과 */
-.btn-green:hover {
+.btn.btn-green:hover {
     background-color: #3b5a00;
 }
 
 /* 검은색 버튼 스타일 */
-.btn-black {
+.btn.btn-black {
     background-color: black;
     color: white;
 }
 
 /* 검은색 버튼 호버 효과 */
-.btn-black:hover {
+.btn.btn-black:hover {
     background-color: #333;
 }

@@ -4,48 +4,93 @@
 
 <mapper namespace="com.company.mapper.StoreMapper">
 
-	<resultMap id="storeResultMap" type="com.company.domain.StoreDTO">
-	    <id property="id" column="id"/>
-	    <result property="storeName" column="store_name"/>
-	    <result property="storeLocation" column="store_location"/>
-	    <result property="storeDescription" column="store_description"/>
-	    <result property="storeCategory" column="store_category"/>
-	    <result property="phoneNumber" column="phone_number"/>
-	    <result property="storeImage" column="store_image"/>
-	</resultMap>
+    <resultMap id="storeResultMap" type="com.company.domain.StoreDTO">
+        <id property="id" column="id"/>
+        <result property="storeName" column="store_name"/>
+        <result property="storeLocation" column="store_location"/>
+        <result property="storeDescription" column="store_description"/>
+        <result property="storeCategory" column="store_category"/>
+        <result property="phoneNumber" column="phone_number"/>
+        <result property="storeImage" column="store_image"/>
+    </resultMap>
 
-    <!-- 가게 정보 등록 -->
+    <!-- ✅ 가게 정보 등록 -->
     <insert id="registerStore" parameterType="com.company.domain.StoreDTO">
         INSERT INTO Restaurants
         (store_name, store_location, store_description, store_category, phone_number, store_image)
         VALUES (#{storeName}, #{storeLocation}, #{storeDescription}, #{storeCategory}, #{phoneNumber}, #{storeImage});
     </insert>
 
-    <!-- 모든 가게 조회 -->
+    <!-- ✅ 모든 가게 조회 -->
     <select id="getAllStores" resultMap="storeResultMap">
-	    SELECT *
-	    FROM Restaurants
-	    ORDER BY id DESC;
-	</select>
-    
-    
-	<!-- 특정 가게 조회 -->
+        SELECT *
+        FROM Restaurants
+        ORDER BY id DESC;
+    </select>
+
+    <!-- ✅ 특정 가게 조회 -->
     <select id="getStoreById" parameterType="long" resultMap="storeResultMap">
         SELECT * FROM Restaurants WHERE id = #{id}
     </select>
-    
-    <!-- ✅ 전체 가게 조회 (페이징 지원) -->
+
+    <!-- ✅ 전체 가게 조회 (페이징 + 검색 지원) -->
     <select id="getListWithPaging" resultMap="storeResultMap">
         SELECT *
         FROM Restaurants
+        WHERE 1=1
+        <if test="cri.keyword != null and cri.keyword != ''">
+            AND store_name LIKE CONCAT('%', #{cri.keyword}, '%')
+        </if>
         ORDER BY id DESC
         LIMIT #{cri.amount} OFFSET #{cri.offset}
     </select>
-    
-     <!-- ✅ 전체 가게 수 조회 (페이징 계산을 위해 필요) -->
+
+    <!-- ✅ 전체 가게 수 조회 (검색 적용) -->
     <select id="getTotalCount" resultType="int">
         SELECT COUNT(*)
         FROM Restaurants
+        WHERE 1=1
+        <if test="cri.keyword != null and cri.keyword != ''">
+            AND store_name LIKE CONCAT('%', #{cri.keyword}, '%')
+        </if>
+    </select>
+
+    <!-- ✅ 선택된 카테고리에 따른 가게 조회 (페이징 적용) -->
+    <select id="getStoresByCategories" resultMap="storeResultMap">
+        SELECT *
+        FROM Restaurants
+        WHERE 1=1
+        <if test="keyword != null and keyword != ''">
+            AND store_name LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="storeCategories != null and storeCategories.size() > 0">
+            <trim prefix="AND" prefixOverrides="AND">
+                store_category IN
+                <foreach item="category" collection="storeCategories" open="(" separator="," close=")">
+                    #{category}
+                </foreach>
+            </trim>
+        </if>
+        ORDER BY id DESC
+        LIMIT #{amount} OFFSET #{offset}
+    </select>
+
+    <!-- ✅ 선택된 카테고리에 따른 가게 개수 조회 -->
+    <select id="getTotalByCategories" resultType="int">
+        SELECT COUNT(*)
+        FROM Restaurants
+        WHERE 1=1
+        <if test="keyword != null and keyword != ''">
+            AND store_name LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        <if test="storeCategories != null and storeCategories.size() > 0">
+            <trim prefix="AND" prefixOverrides="AND">
+                store_category IN
+                <foreach item="category" collection="storeCategories" open="(" separator="," close=")">
+                    #{category}
+                </foreach>
+            </trim>
+        </if>
     </select>
 
 </mapper>
