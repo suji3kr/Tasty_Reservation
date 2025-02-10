@@ -1,3 +1,8 @@
+
+![image](https://github.com/user-attachments/assets/6fc19fb3-2b6c-4d45-b9cc-2c73c295ae86)
+
+>02.10 현 진행해야 할 프로젝트 보고서 상황
+
 ## *Monthly project Plan*
 
 <br>
