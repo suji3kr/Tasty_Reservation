@@ -47,6 +47,7 @@ INSERT INTO Users (username, password, age, email, phone, gender, role) VALUES
 
 
 
+
 -- Restaurants 테이블
 CREATE TABLE Restaurants (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -89,6 +90,8 @@ CREATE TABLE Reviews (
 );
 
 
+
+
 -- PhotoGallery 테이블
 CREATE TABLE PhotoGallery (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -107,3 +110,65 @@ SELECT users.*
     FROM Admins 
     INNER JOIN Users ON Admins.id = Users.id;
 SELECT * FROM PhotoGallery;
+
+
+
+
+----------------------------------------
+--  Restaurants 테이블 (맛집 정보)
+
+INSERT INTO Restaurants (id, admin_id, store_name, store_location, store_description, store_category, phone_number, store_image)
+VALUES 
+(1, 1, '포베이 쌀국수', '서울 강남구', '쌀국수가 맛있는 곳', '베트남 음식', '02-1234-5678', '/images/store1.jpg'),
+(2, 2, '레스토랑 디저트', '서울 종로구', '디저트가 유명한 레스토랑', '카페 & 디저트', '02-8765-4321', '/images/store2.jpg'),
+(3, 1, '송아지 스테이크', '서울 용산구', '스테이크가 맛있는 곳', '양식', '02-5678-1234', '/images/store3.jpg');
+
+
+-----------------------------------------
+
+--  Reservations 테이블 (예약 정보)
+
+INSERT INTO Reservations (id, store_id, user_id, phone, reservation_date, reservation_time, people_count)
+VALUES 
+(1, 1, 1, '010-1111-2222', '2025-02-15', '18:30:00', 2),
+(2, 2, 2, '010-3333-4444', '2025-02-16', '19:00:00', 4),
+(3, 3, 3, '010-5555-6666', '2025-02-17', '20:00:00', 3);
+
+
+---------------------------------------
+
+--  Reviews 테이블 (리뷰)
+
+INSERT INTO Reviews (id, store_id, title, content, user_id, rating, imagePath, regdate)
+VALUES 
+(1, 1, '맛있는 쌀국수', '정말 맛있는 쌀국수였습니다!', 1, 5, '/images/review1.jpg', '2025-02-10'),
+(2, 2, '디저트 천국', '디저트가 정말 맛있어요!', 2, 4, '/images/review2.jpg', '2025-02-11'),
+(3, 3, '스테이크 최고', '고기가 정말 부드럽고 맛있습니다.', 3, 5, '/images/review3.jpg', '2025-02-12');
+
+
+-------------------------------------------
+
+
+--  PhotoGallery 테이블 (사진 갤러리)
+
+INSERT INTO PhotoGallery (id, user_id, photo_title, photo_description, photo_path, upload_date)
+VALUES 
+(1, 1, '맛있는 쌀국수', '이 쌀국수 정말 맛있어요!', '/images/gallery1.jpg', '2025-02-10'),
+(2, 2, '디저트 파라다이스', '카페에서 찍은 디저트 사진', '/images/gallery2.jpg', '2025-02-11'),
+(3, 3, '스테이크 한입', '스테이크가 정말 부드럽고 맛있어요!', '/images/gallery3.jpg', '2025-02-12');
+
+
+
+-- 삽입된 데이터 확인
+
+SELECT * FROM Users;
+SELECT * FROM Admins;
+SELECT * FROM Restaurants;
+SELECT * FROM Reservations;
+SELECT * FROM Reviews;
+SELECT * FROM PhotoGallery;
+
+
+
+
+
