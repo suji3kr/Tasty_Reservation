@@ -38,8 +38,8 @@ body {
 	font-weight: bold;
 }
 
-.btn signup.btn {
-	width: 360px;
+.signup-btn {
+	width: 100%;
 	height: 38px;
 	margin-bottom: 5px;
 	border-radius: 15px;
@@ -184,7 +184,7 @@ body {
 						name="gender" value="F" required> <label for="female">여성</label>
 				</div>
 			</div>
-			<button type="submit" class="btn signup.btn">가입하기</button>
+			<button type="submit" class="signup-btn">가입하기</button>
 		</form>
 	</div>
 	<!-- jQuery CDN 추가 -->
