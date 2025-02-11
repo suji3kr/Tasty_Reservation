@@ -120,6 +120,5 @@ body {
 			href="https://twitter.com" target="_blank"><i
 			class="fab fa-twitter"></i></a>
 	</div>
-
 </body>
 </html>
