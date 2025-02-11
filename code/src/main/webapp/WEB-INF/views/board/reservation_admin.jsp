@@ -119,30 +119,33 @@ body {
 								<td><fmt:formatDate value="${reservation.reservationTime}"
 										pattern="HH:mm" /></td>
 								<td>${reservation.storeName}</td>
-								<td>${reservation.customerName}</td>
+								<td>${reservation.userName}</td>
 								<td>${reservation.peopleCount}명</td>
 								<td><c:choose>
-										<c:when test="${fn:length(reservation.phoneNumber) == 11}">
-											${fn:substring(reservation.phoneNumber, 0, 3)}-${fn:substring(reservation.phoneNumber, 3, 7)}-${fn:substring(reservation.phoneNumber, 7, 11)}
+										<c:when test="${fn:length(reservation.phone) == 11}">
+											${fn:substring(reservation.phone, 0, 3)}-${fn:substring(reservation.phone, 3, 7)}-${fn:substring(reservation.phone, 7, 11)}
 										</c:when>
 										<c:otherwise>
-											${reservation.phoneNumber}
+											${reservation.phone}
 										</c:otherwise>
 									</c:choose></td>
-								<td><c:choose>
-										<c:when test="${reservation.status == 'CONFIRMED'}">
-											<span class="badge bg-success">확정</span>
-										</c:when>
-										<c:when test="${reservation.status == 'PENDING'}">
-											<span class="badge bg-warning">대기</span>
-										</c:when>
-										<c:when test="${reservation.status == 'CANCELLED'}">
-											<span class="badge bg-danger">취소</span>
-										</c:when>
-										<c:otherwise>
-											<span class="badge bg-secondary">미정</span>
-										</c:otherwise>
-									</c:choose></td>
+								<td>
+								<span class="badge bg-success">확정</span>
+								<%-- <c:choose>
+									<c:when test="${reservation.status == 'CONFIRMED'}">
+										<span class="badge bg-success">확정</span>
+									</c:when>
+									<c:when test="${reservation.status == 'PENDING'}">
+										<span class="badge bg-warning">대기</span>
+									</c:when>
+									<c:when test="${reservation.status == 'CANCELLED'}">
+										<span class="badge bg-danger">취소</span>
+									</c:when>
+									<c:otherwise>
+										<span class="badge bg-secondary">미정</span>
+									</c:otherwise>
+								</c:choose> --%>
+								</td>
 							</tr>
 						</c:forEach>
 					</c:when>

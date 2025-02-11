@@ -6,14 +6,40 @@
 <mapper namespace="reservation">
 
     <!-- 예약 저장 -->
-    <insert id="save" parameterType="com.company.domain.ReservationDTO">
-        INSERT INTO reservations (store_id, username, phone, reservation_date, reservation_time, people_count)
-        VALUES (#{storeId}, #{userName}, #{phone}, #{reservationDate}, #{reservationTime}, #{peopleCount})
-    </insert>
+<insert id="save" parameterType="com.company.domain.ReservationDTO">
+    INSERT INTO reservations (store_id, user_name, phone, reservation_date, reservation_time, people_count)
+    VALUES (#{storeId}, #{userName}, #{phone}, #{reservationDate}, #{reservationTime}, #{peopleCount})
+</insert>
 
-    <!-- 특정 가게의 예약 목록 조회 -->
-    <select id="findByStoreId" parameterType="int" resultType="com.company.domain.ReservationDTO">
-        SELECT * FROM reservations WHERE store_id = #{storeId}
-    </select>
+<!-- 특정 가게의 예약 목록 조회 -->
+<select id="findByStoreId" parameterType="int" resultMap="reservationResultMap">
+    SELECT * FROM reservations WHERE store_id = #{storeId}
+</select>
+
+
+<resultMap id="reservationResultMap" type="com.company.domain.ReservationDTO">
+    <id column="id" property="id"/>
+    <result column="store_id" property="storeId"/>
+    <result column="store_name" property="storeName"/>
+    <result column="user_name" property="userName"/>
+    <result column="phone" property="phone"/>
+    <result column="reservation_date" property="reservationDate"/>
+    <result column="reservation_time" property="reservationTime"/>
+    <result column="people_count" property="peopleCount"/>
+</resultMap>
+
+<!-- 전체 예약 목록 조회 -->
+<select id="findAllReservations" resultMap="reservationResultMap">
+    SELECT * FROM reservations
+    ORDER BY reservation_date ASC, reservation_time ASC;
+</select>
+
+<!-- 특정 날짜의 예약 목록 조회 -->
+<select id="findByReservationDate" resultMap="reservationResultMap">
+    SELECT * FROM reservations
+    WHERE DATE(reservation_date) = #{reservationDate}
+    ORDER BY reservation_time ASC;
+</select>
+
 
 </mapper>

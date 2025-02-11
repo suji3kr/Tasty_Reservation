@@ -298,9 +298,8 @@ to {
 			</div>
 			<!-- ✅ 메뉴 체크박스 추가 -->
     <div class="filter-checkgroup">
-        <label><b>메뉴</b></label>
+        <label><b> 메뉴</b></label>
         <c:set var="selectedCategories" value="${paramValues.store_category}" />
-        
         <input type="checkbox" name="store_category" value="양식" 
                <c:if test="${fn:contains(selectedCategories, '양식')}">checked</c:if>> 양식
         <input type="checkbox" name="store_category" value="한식" 
@@ -409,7 +408,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const availableTimes = {
         1: ["6:30", "7:30", "8:30", "9:30"],
         2: ["5:00", "6:00", "7:00", "8:00"],
-        3: ["12:00", "1:00", "2:00", "3:00"]
+        3: ["12:00", "1:00", "2:00", "3:00"],
+         4: ["12:00", "1:00", "2:00", "3:00"]
         // 추가적인 가게 ID와 시간을 여기에 추가
     };
 
