@@ -31,25 +31,25 @@
 			</ul></li>
 		<li><a href="#"><b>음식 분류</b></a>
 			<ul class="dropdown-menu">
-				<li><a href="${contextPath}/category/japen">일식</a></li>
-				<li><a href="${contextPath}/category/korean">한식</a></li>
-				<li><a href="${contextPath}/category/china">중식</a></li>
-				<li><a href="${contextPath}/category/western">양식</a></li>
+				<li><a href="${contextPath}/category/japen">일식맛집추천</a></li>
+				<li><a href="${contextPath}/category/korean">한식맛집추천</a></li>
+				<li><a href="${contextPath}/category/china">중식맛집추천</a></li>
+				<li><a href="${contextPath}/category/western">양식맛집추천</a></li>
 			</ul></li>
-
+			
 		<c:if test="${not empty sessionScope.loginEmail}">
-			<li><a href="#"><b>내정보</b></a>
+			<li><a href="#"><b>${sessionScope.userRole eq 'admin' ? '가게정보관리' : '내정보'}</b></a>
 				<ul class="dropdown-menu">
 					<!-- 즐겨찾는 맛집 / 내가게 히스토리 (Admin vs User 분기) -->
 					<c:choose>
 						<c:when test="${sessionScope.userRole eq 'admin'}">
-							<li><a href="${contextPath}/board/favfood_admin">가게 추천리스트</a></li>
+							<li><a href="${contextPath}/board/favfood_admin">등록된 스토어</a></li>
 						</c:when>
 						<c:otherwise>
 							<li><a href="${contextPath}/board/favfood">즐겨찾는 맛집</a></li>
 						</c:otherwise>
 					</c:choose>
-					
+
 					<!-- 예약 맛집 관리 (Admin vs User 분기) -->
 					<c:choose>
 						<c:when test="${sessionScope.userRole eq 'admin'}">
@@ -61,19 +61,20 @@
 									관리</a></li>
 						</c:otherwise>
 					</c:choose>
-					
+
 					<!-- 회원정보 수정/ 가게정보 관리/수정 (Admin vs User 분기) -->
 					<c:choose>
 						<c:when test="${sessionScope.userRole eq 'admin'}">
-							<li><a href="${contextPath}/board/register">가게정보 관리</a></li>
+							<li><a href="${contextPath}/board/register">맛집가게 등록</a></li>
 						</c:when>
 						<c:otherwise>
-							<li><a href="${contextPath}/member/update">회원정보 수정</a></li>
+							<li><a href="${contextPath}/member/update">회원정보수정</a></li>
 						</c:otherwise>
 					</c:choose>
-					<li><a href="${contextPath}/board/get">리뷰 관리</a></li>
+					<li><a href="${contextPath}/board/get">맛집리뷰 관리</a></li>
 				</ul></li>
 		</c:if>
+
 	</ul>
 
 	<!-- 로그인/회원가입 버튼 -->
