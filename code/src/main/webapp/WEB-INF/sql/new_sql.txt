@@ -71,12 +71,13 @@ CREATE TABLE Reservations (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     store_id BIGINT,
     user_id BIGINT NOT NULL,
+    username VARCHAR(20) NOT NULL,  
     phone VARCHAR(20),
     reservation_date DATE NOT NULL,
     reservation_time TIME NOT NULL,
     people_count INT NOT NULL,
     FOREIGN KEY (store_id) REFERENCES Restaurants(id) ON DELETE CASCADE,
-    FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
+    FOREIGN KEY (id) REFERENCES Users(id) ON DELETE CASCADE
 );
 
 -- Reservations 테이블에 데이터 삽입
@@ -102,16 +103,8 @@ CREATE TABLE Reviews (
     FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
 );
 
--- Reviews 테이블에 데이터 삽입
-INSERT INTO Reviews (store_id, title, content, user_id, rating, imagePath, regdate)
-VALUES 
-((SELECT id FROM Restaurants WHERE store_name='포베이 쌀국수'), '맛있는 쌀국수', '정말 맛있는 쌀국수였습니다!', (SELECT id FROM Users WHERE username='john_doe'), 5, '/images/review1.jpg', '2025-02-10'),
-((SELECT id FROM Restaurants WHERE store_name='레스토랑 디저트'), '디저트 천국', '디저트가 정말 맛있어요!', (SELECT id FROM Users WHERE username='jane_doe'), 4, '/images/review2.jpg', '2025-02-11'),
-((SELECT id FROM Restaurants WHERE store_name='송아지 스테이크'), '스테이크 최고', '고기가 정말 부드럽고 맛있습니다.', (SELECT id FROM Users WHERE username='alice'), 5, '/images/review3.jpg', '2025-02-12');
 
--------------------------------------
--- 6. PhotoGallery 테이블 생성 (Users 참조)
--------------------------------------
+-- PhotoGallery 테이블
 CREATE TABLE PhotoGallery (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     user_id BIGINT NOT NULL,
@@ -121,6 +114,17 @@ CREATE TABLE PhotoGallery (
     upload_date DATE NOT NULL DEFAULT (CURRENT_DATE),
     FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
 );
+select * from users;
+
+
+-- Reviews 테이블에 데이터 삽입
+INSERT INTO Reviews (store_id, title, content, user_id, rating, imagePath, regdate)
+VALUES 
+((SELECT id FROM Restaurants WHERE store_name='포베이 쌀국수'), '맛있는 쌀국수', '정말 맛있는 쌀국수였습니다!', (SELECT id FROM Users WHERE username='john_doe'), 5, '/images/review1.jpg', '2025-02-10'),
+((SELECT id FROM Restaurants WHERE store_name='레스토랑 디저트'), '디저트 천국', '디저트가 정말 맛있어요!', (SELECT id FROM Users WHERE username='jane_doe'), 4, '/images/review2.jpg', '2025-02-11'),
+((SELECT id FROM Restaurants WHERE store_name='송아지 스테이크'), '스테이크 최고', '고기가 정말 부드럽고 맛있습니다.', (SELECT id FROM Users WHERE username='alice'), 5, '/images/review3.jpg', '2025-02-12');
+
+
 
 -- PhotoGallery 테이블에 데이터 삽입
 INSERT INTO PhotoGallery (user_id, photo_title, photo_description, photo_path, upload_date)
@@ -138,3 +142,21 @@ SELECT * FROM Restaurants;
 SELECT * FROM Reservations;
 SELECT * FROM Reviews;
 SELECT * FROM PhotoGallery;
+
+select users.*
+	from admins inner join users
+	on admins.id = users.id;
+    
+-- Users 테이블에 더미 데이터 삽입
+INSERT INTO Users (username, password, age, email, phone, gender, role) VALUES
+('john_doe', 'hashed_password_1', 30, 'john@example.com', '010-1234-5678', 'M', 'user'),
+('jane_doe', 'hashed_password_2', 28, 'jane@example.com', '010-8765-4321', 'F', 'user'),
+('alice', 'hashed_password_3', 25, 'alice@example.com', '010-5555-1234', 'F', 'admin'),
+('bob', 'hashed_password_4', 35, 'bob@example.com', '010-7777-5678', 'M', 'user'),
+('charlie', 'hashed_password_5', 40, 'charlie@example.com', '010-9999-1111', 'M', 'user'),
+('david', 'hashed_password_6', 29, 'david@example.com', '010-2222-3333', 'M', 'admin'),
+('eve', 'hashed_password_7', 33, 'eve@example.com', '010-4444-5555', 'F', 'user'),
+('frank', 'hashed_password_8', 31, 'frank@example.com', '010-6666-7777', 'M', 'user'),
+('grace', 'hashed_password_9', 27, 'grace@example.com', '010-8888-9999', 'F', 'user'),
+('john_doe', 'hashed_password_10', 22, 'john2@example.com', '010-1234-5679', 'M', 'user'); 
+
