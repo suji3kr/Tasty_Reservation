@@ -1,6 +1,7 @@
 USE restdb;
 
 -- 기존 테이블 삭제 (데이터가 있는 경우 주의)
+DROP TABLE IF EXISTS PhotoGallery;
 DROP TABLE IF EXISTS Reservations;
 DROP TABLE IF EXISTS Reviews;
 DROP TABLE IF EXISTS Restaurants;
@@ -73,21 +74,36 @@ CREATE TABLE Reservations (
 );
 
 
--- Reviews 테이블
+-- 리뷰테이블
 CREATE TABLE Reviews (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    store_id bigINT NOT NULL,
+    store_id BIGINT NOT NULL,
     title VARCHAR(200),
     content TEXT,
     user_id BIGINT NOT NULL,
+    rating INT CHECK (rating BETWEEN 1 AND 5), -- 평점 (1~5 범위)
+    imagePath VARCHAR(255), -- 이미지 파일 경로
     regdate DATE NOT NULL DEFAULT (CURRENT_DATE),
     FOREIGN KEY (store_id) REFERENCES Restaurants(id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
 );
-select * from users;
 
-select * from reservations;
 
-select users.*
-	from admins inner join users
-	on admins.id = users.id;
+-- PhotoGallery 테이블
+CREATE TABLE PhotoGallery (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT NOT NULL,
+    photo_title VARCHAR(255),
+    photo_description TEXT,
+    photo_path VARCHAR(255) NOT NULL,
+    upload_date DATE NOT NULL DEFAULT (CURRENT_DATE),
+    FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
+);
+
+-- 데이터 조회 예시
+SELECT * FROM Users;
+SELECT * FROM Reservations;
+SELECT users.*
+    FROM Admins 
+    INNER JOIN Users ON Admins.id = Users.id;
+SELECT * FROM PhotoGallery;

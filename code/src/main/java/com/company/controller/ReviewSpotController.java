@@ -35,12 +35,12 @@ public class ReviewSpotController {
     public String addReview(@ModelAttribute Review newReview, @RequestParam("imageFile") MultipartFile imageFile, Model model) {
         if (!imageFile.isEmpty()) {
             String fileName = UUID.randomUUID().toString() + "_" + imageFile.getOriginalFilename();
-            String uploadDir = System.getProperty("user.dir") + "/uploads/";
+            String uploadDir = "C:\\uploads\\"; // Windows 경로 설정
             File directory = new File(uploadDir);
-           
+
             if (!directory.exists() && !directory.mkdirs()) {
                 model.addAttribute("errorMessage", "Could not create upload directory!");
-                return "reviewSpot/reviewSpot"; // Return to the review page on failure
+                return "/reviewSpot/reviewSpot"; // Return to the review page on failure
             }
 
             try {
@@ -50,7 +50,7 @@ public class ReviewSpotController {
             } catch (IOException e) {
                 e.printStackTrace();
                 model.addAttribute("errorMessage", "File upload failed!");
-                return "reviewSpot/reviewSpot"; // Return to the review page on failure
+                return "/reviewSpot/reviewSpot"; // Return to the review page on failure
             }
         }
 
