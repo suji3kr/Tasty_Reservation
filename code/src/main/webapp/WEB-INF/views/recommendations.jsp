@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -30,6 +29,7 @@ h1 {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
+/* 추천 목록 스타일 */
 .recommendation {
     max-width: 600px;
     margin: 20px auto;
@@ -39,6 +39,7 @@ h1 {
     overflow: hidden;
 }
 
+/* 이미지 스타일 (스토어 리스트 방식 적용) */
 .recommendation img {
     width: 100%;
     height: auto;
@@ -93,15 +94,27 @@ h1 {
 
     <h1>SNS 맛집 추천</h1>
 
-    <c:forEach var="recommendation" items="${recommendations}">
+    <!-- 스토어 리스트 연동 -->
+    <c:forEach var="store" items="${storeList}">
         <div class="recommendation">
-            <img src="<c:url value='/resources/image/${recommendation.image}'/>"
-                alt="${recommendation.name}">
+            <!-- 스토어 리스트 방식으로 이미지 로딩 -->
+            <a href="/store/detail?id=${store.id}">
+                <c:choose>
+                    <c:when test="${not empty store.storeImage}">
+                        <img src="${store.storeImage}" alt="가게 이미지"
+                            onerror="this.onerror=null; this.src='/resources/images/default.jpg'">
+                    </c:when>
+                    <c:otherwise>
+                        <img src="/resources/images/default.jpg" alt="default">
+                    </c:otherwise>
+                </c:choose>
+            </a>
+
             <div class="recommendation-content">
-                <h2>${recommendation.name}</h2>
-                <p>${recommendation.description}</p>
+                <h2>${store.name}</h2>
+                <p>${store.description}</p>
                 <div class="tags">
-                    <c:forEach var="tag" items="${recommendation.tags}">
+                    <c:forEach var="tag" items="${store.tags}">
                         <span class="tag">${tag}</span>
                     </c:forEach>
                 </div>

@@ -19,11 +19,32 @@ CREATE TABLE Users (
     role ENUM('admin', 'user') NOT NULL DEFAULT 'user' -- 역할 추가
 );
 
+
+
+
 -- Admins 테이블
 CREATE TABLE Admins (
     id BIGINT PRIMARY KEY REFERENCES Users(id),
     UNIQUE (id) -- 중복 방지
 );
+
+
+
+
+-- Users 테이블에 더미 데이터 삽입
+INSERT INTO Users (username, password, age, email, phone, gender, role) VALUES
+('john_doe', 'hashed_password_1', 30, 'john@example.com', '010-1234-5678', 'M', 'user'),
+('jane_doe', 'hashed_password_2', 28, 'jane@example.com', '010-8765-4321', 'F', 'user'),
+('alice', 'hashed_password_3', 25, 'alice@example.com', '010-5555-1234', 'F', 'admin'),
+('bob', 'hashed_password_4', 35, 'bob@example.com', '010-7777-5678', 'M', 'user'),
+('charlie', 'hashed_password_5', 40, 'charlie@example.com', '010-9999-1111', 'M', 'user'),
+('david', 'hashed_password_6', 29, 'david@example.com', '010-2222-3333', 'M', 'admin'),
+('eve', 'hashed_password_7', 33, 'eve@example.com', '010-4444-5555', 'F', 'user'),
+('frank', 'hashed_password_8', 31, 'frank@example.com', '010-6666-7777', 'M', 'user'),
+('grace', 'hashed_password_9', 27, 'grace@example.com', '010-8888-9999', 'F', 'user'),
+('john_doe', 'hashed_password_10', 22, 'john2@example.com', '010-1234-5679', 'M', 'user'); 
+
+
 
 -- Restaurants 테이블
 CREATE TABLE Restaurants (
