@@ -85,7 +85,6 @@ body {
 <body>
 
 	<h1 style="text-align: center; color: #ff6347;">SNS 맛집 추천</h1>
-
 	<!-- 사진 갤러리 -->
 	<div class="photo-gallery">
 		<c:forEach var="store" items="${storeList}">
