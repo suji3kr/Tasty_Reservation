@@ -1,97 +1,35 @@
+USE restdb;
 
-use webdb;
-drop table if exists Users;
-drop table if exists reservations;
-drop table if exists admins;
-drop table if exists restaurants;
-drop table if exists store_registration;
+-- 기존 테이블 삭제 (데이터가 있는 경우 주의)
+DROP TABLE IF EXISTS Reservations;
+DROP TABLE IF EXISTS Reviews;
+DROP TABLE IF EXISTS Restaurants;
+DROP TABLE IF EXISTS Admins;
+DROP TABLE IF EXISTS photogallery;
+DROP TABLE IF EXISTS Users;
 
+-- Users 테이블 (username의 UNIQUE 제약 제거)
 CREATE TABLE Users (
-    id bigint primary key auto_increment,
-    username VARCHAR(50) NOT NULL,
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,  -- UNIQUE 제거
     password VARCHAR(255) NOT NULL,
     age INT,
-    email VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE,  -- email만 UNIQUE 유지
     phone VARCHAR(20),
-    gender ENUM('M', 'F') NOT NULL
+    gender ENUM('M', 'F'),
+    role ENUM('admin', 'user') NOT NULL DEFAULT 'user' -- 역할 추가
 );
 
-CREATE TABLE Restaurants (
-    restaurant_id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    location VARCHAR(255),
-    phone VARCHAR(20),
-    category VARCHAR(50)
-);
-
-CREATE TABLE store_registration (
-    id INT AUTO_INCREMENT PRIMARY KEY,        -- 가게 고유 ID
-    store_name VARCHAR(255) NOT NULL,          -- 가게 이름
-    store_location VARCHAR(255) NOT NULL,      -- 가게 위치
-    store_description TEXT,                    -- 가게 설명
-    store_category VARCHAR(50),                -- 가게 종류
-    phone_number VARCHAR(20),                  -- 전화번호
-    store_image VARCHAR(255)                   -- 가게 사진 (파일 경로)
-);
-
-CREATE TABLE reservations (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    store_id INT NOT NULL,
-    customer_name VARCHAR(255) NOT NULL,
-    phone_number VARCHAR(20) NOT NULL,
-    reservation_date DATE NOT NULL,
-    reservation_time TIME NOT NULL,
-    people_count INT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (store_id) REFERENCES store_registration(id) ON DELETE CASCADE
-);d
-
-
-CREATE TABLE Admins (
-    admin_id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) NOT NULL,
-    password VARCHAR(255) NOT NULL
-);
-
-
-
---------------------------------------------------------------------------------------------
-
-
-
-//루트에 아래 명령어를 입력하고 새로운 커넥션추가 (db이름 = restdb, 사용자이름 = restuser, 비밀번호 = 12345
-
-Create database restdb;
-
-create user 'restuser'@'localhost' identified by '12345';
-
-grant all privileges on restdb.* to 'restuser'@'localhost';
-
-
-use restdb;
-drop table users;
 -- Admins 테이블
 CREATE TABLE Admins (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL
-);
-
--- Users 테이블
-CREATE TABLE Users (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
-    age INT,
-    email VARCHAR(100) UNIQUE,
-    phone VARCHAR(20),
-    gender ENUM('M', 'F')
+    id BIGINT PRIMARY KEY REFERENCES Users(id),
+    UNIQUE (id) -- 중복 방지
 );
 
 -- Restaurants 테이블
 CREATE TABLE Restaurants (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    admin_id bigint,
+    admin_id BIGINT,
     store_name VARCHAR(255) NOT NULL,
     store_location VARCHAR(255),
     store_description TEXT,
@@ -101,17 +39,19 @@ CREATE TABLE Restaurants (
     FOREIGN KEY (admin_id) REFERENCES Admins(id) ON DELETE SET NULL
 );
 
--- Reservations 테이블
+-- Reservations 테이블 (username 대신 user_id 사용)
 CREATE TABLE Reservations (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    store_id bigINT,
-    user_name VARCHAR(255) NOT NULL,
+    store_id BIGINT,
+    username VARCHAR(20) NOT NULL,  -- username 대신 user_id 사용
     phone VARCHAR(20),
     reservation_date DATE NOT NULL,
     reservation_time TIME NOT NULL,
     people_count INT NOT NULL,
-    FOREIGN KEY (store_id) REFERENCES Restaurants(id) ON DELETE CASCADE
+    FOREIGN KEY (store_id) REFERENCES Restaurants(id) ON DELETE CASCADE,
+    FOREIGN KEY (id) REFERENCES Users(id) ON DELETE CASCADE
 );
+
 
 -- Reviews 테이블
 CREATE TABLE Reviews (
@@ -125,3 +65,51 @@ CREATE TABLE Reviews (
     FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
 );
 
+
+-- PhotoGallery 테이블
+CREATE TABLE PhotoGallery (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT NOT NULL,
+    photo_title VARCHAR(255),
+    photo_description TEXT,
+    photo_path VARCHAR(255) NOT NULL,
+    upload_date DATE NOT NULL DEFAULT (CURRENT_DATE),
+    FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
+);
+select * from users;
+
+select * from reservations;
+
+select users.*
+	from admins inner join users
+	on admins.id = users.id;
+    
+-- Users 테이블에 더미 데이터 삽입
+INSERT INTO Users (username, password, age, email, phone, gender, role) VALUES
+('john_doe', 'hashed_password_1', 30, 'john@example.com', '010-1234-5678', 'M', 'user'),
+('jane_doe', 'hashed_password_2', 28, 'jane@example.com', '010-8765-4321', 'F', 'user'),
+('alice', 'hashed_password_3', 25, 'alice@example.com', '010-5555-1234', 'F', 'admin'),
+('bob', 'hashed_password_4', 35, 'bob@example.com', '010-7777-5678', 'M', 'user'),
+('charlie', 'hashed_password_5', 40, 'charlie@example.com', '010-9999-1111', 'M', 'user'),
+('david', 'hashed_password_6', 29, 'david@example.com', '010-2222-3333', 'M', 'admin'),
+('eve', 'hashed_password_7', 33, 'eve@example.com', '010-4444-5555', 'F', 'user'),
+('frank', 'hashed_password_8', 31, 'frank@example.com', '010-6666-7777', 'M', 'user'),
+('grace', 'hashed_password_9', 27, 'grace@example.com', '010-8888-9999', 'F', 'user'),
+('john_doe', 'hashed_password_10', 22, 'john2@example.com', '010-1234-5679', 'M', 'user'); 
+
+select * from restaurants;
+
+INSERT INTO restaurants (id, admin_id, store_name, store_location, store_description, store_category, phone_number, store_image) VALUES
+(1, NULL, '돈가스', '돈가스', '돈가스 전문점', '양식', '01011111111', '/uploads/store1.jpg'),
+(2, NULL, '김밥천국', '서울 강남구 테헤란로', '다양한 한식 분식', '한식', '01022222222', '/uploads/store2.jpg'),
+(3, NULL, '스타벅스', '서울 강남구 강남대로', '커피와 디저트 전문점', '디저트/카페', '01033333333', '/uploads/store3.jpg'),
+(4, NULL, 'BBQ 치킨', '서울 마포구 홍대입구', '바삭한 프라이드 치킨', '양식', '01044444444', '/uploads/store4.jpg'),
+(5, NULL, '이삭토스트', '서울 중구 명동', '토스트 전문점', '디저트/카페', '01055555555', '/uploads/store5.jpg'),
+(6, NULL, '피자헛', '서울 서초구 반포동', '전통 이탈리안 피자', '양식', '01066666666', '/uploads/store6.jpg'),
+(7, NULL, '홍콩반점', '서울 종로구 종각', '짜장면과 짬뽕 전문점', '중식', '01077777777', '/uploads/store7.jpg'),
+(8, NULL, '스시로', '서울 강남구 논현동', '신선한 초밥', '일식', '01088888888', '/uploads/store8.jpg'),
+(9, NULL, '봉구스밥버거', '서울 송파구 잠실', '간편한 한끼 밥버거', '한식', '01099999999', '/uploads/store9.jpg'),
+(10, NULL, '버거킹', '서울 용산구 한강로', '수제 햄버거 전문점', '양식', '01012345678', '/uploads/store10.jpg');
+
+INSERT INTO Users (username, password, age, email, phone, gender, role) VALUES
+('admin', '$2a$10$m8g9rFhSQKUk87HqzEWI/Oe8hoGkUd8RL6j2i4mKuNvH2PhJC0c1y', 30, 'admin@aor.com', '0105555555', 'F', 'admin');

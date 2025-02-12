@@ -71,7 +71,6 @@
 							<li><a href="${contextPath}/member/update">회원정보수정</a></li>
 						</c:otherwise>
 					</c:choose>
-					<li><a href="${contextPath}/board/get">맛집리뷰 관리</a></li>
 				</ul></li>
 		</c:if>
 
