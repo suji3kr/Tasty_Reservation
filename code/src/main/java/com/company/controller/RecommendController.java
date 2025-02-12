@@ -67,7 +67,7 @@ public class RecommendController {
         
         model.addAttribute("food", food);
         model.addAttribute("restaurants", restaurants);
-        return "board/recommend";  // JSP 파일로 데이터 전달
+        return "/board/recommend";  // JSP 파일로 데이터 전달
     }
 
     // ✅ 랜덤 음식 추천
