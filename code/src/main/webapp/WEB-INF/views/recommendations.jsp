@@ -24,12 +24,12 @@
 	width: 300px;
 	margin: 10px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	transition: transform 0.2s;
 	border-radius: 8px;
 }
 
-.card:hover {
-	transform: scale(1.05);
+.card img:hover {
+	transform: scale(1.2);
+	transition: transform 0.4s;
 }
 
 .card img {
@@ -52,6 +52,13 @@
 	font-size: 14px;
 	color: #555;
 }
+
+.sns-icons i {
+    font-size: 24px; /* 아이콘 크기 */
+    margin: 0 10px; /* 좌우 여백 추가 */
+    color: #333; /* 아이콘 색상 */
+}
+
 </style>
 </head>
 <body>
