@@ -1,6 +1,7 @@
 package com.company.service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,33 +22,57 @@ public class ReservationService {
         this.reservationRepository = reservationRepository;
     }
 
+    // 예약 저장
     @Transactional
     public void saveReservation(ReservationDTO reservation) {
         reservationRepository.saveReservation(reservation);
     }
 
+    // 특정 가게의 예약 목록 조회
     public List<ReservationDTO> getReservationsByStoreId(int storeId) {
         return reservationRepository.findByStoreId(storeId);
     }
-    
-    
-    public List getReservationDate(Date searchDate) {
-        // Date → String 변환
+
+    // 특정 날짜의 예약 목록 조회
+    public List<ReservationDTO> getReservationDate(Date searchDate) {
+        // Date → String 변환 (YYYY-MM-DD)
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDate = dateFormat.format(searchDate);
-        
+
+        // 디버깅 로그
+        System.out.println("🔍 검색 날짜 (Service): " + formattedDate);
+
         // 데이터베이스에서 해당 날짜의 예약 조회
-        return reservationRepository.findByReservationDate(formattedDate);
+        List<ReservationDTO> reservations = reservationRepository.findByReservationDate(formattedDate);
+
+        // 디버깅 로그
+        System.out.println("🔍 조회된 예약 개수: " + reservations.size());
+
+        return reservations;
     }
 
-	public void updateReservation(ReservationDTO reservation) {
-		// TODO Auto-generated method stub
-		
-	}
+    // 예약 정보 수정
+    @Transactional
+    public void updateReservation(ReservationDTO reservation) {
+        reservationRepository.updateReservation(reservation);
+    }
 
-	public ReservationDTO getReservationById(Long reservationId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    // 특정 예약 정보 조회
+    public ReservationDTO getReservationById(Long reservationId) {
+        return reservationRepository.findById(reservationId);
+    }
+    
+    public List<ReservationDTO> getAllReservations() {
+        System.out.println("🔍 [Service] 전체 예약 목록 조회");
+        List<ReservationDTO> reservations = reservationRepository.findAllReservations();
+
+        if (reservations == null) {
+            System.out.println("🚨 [Service] reservations가 null입니다! 빈 리스트 반환");
+            return new ArrayList<>();
+        }
+
+        System.out.println("🔍 [Service] 조회된 전체 예약 개수: " + reservations.size());
+        return reservations;
+    }
 
 }

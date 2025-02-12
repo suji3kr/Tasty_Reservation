@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
@@ -9,123 +9,115 @@
 <title>SNS 맛집 추천</title>
 
 <!-- Font Awesome for SNS icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 <style>
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f9;
-    margin: 0;
-    padding: 0;
-    color: #333;
+	font-family: 'Roboto', sans-serif;
+	margin: 0;
+	padding: 0;
+	background-color: #ffffff;
 }
 
-h1 {
-    text-align: center;
-    margin-top: 30px;
-    color: #ff6347;
-    font-size: 36px;
-    font-weight: bold;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+.photo-gallery {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 20px;
+	padding: 40px 20px;
 }
 
-/* 추천 목록 스타일 */
-.recommendation {
-    max-width: 600px;
-    margin: 20px auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    overflow: hidden;
+.photo-frame {
+	width: 320px;
+	text-align: center;
+	background: #fff;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	padding: 10px;
 }
 
-/* 이미지 스타일 (스토어 리스트 방식 적용) */
-.recommendation img {
-    width: 100%;
-    height: auto;
+.photo-frame img {
+	width: 100%;
+	height: 200px;
+	border-radius: 10px;
+	object-fit: cover;
+	transition: transform 0.3s ease-in-out;
 }
 
-.recommendation-content {
-    padding: 20px;
+.photo-frame img:hover {
+	transform: scale(1.05);
 }
 
-.recommendation h2 {
-    margin: 0;
-    font-size: 24px;
-    color: #333;
+/* 별점 스타일 */
+.star-rating {
+	color: #ffd700;
+	font-size: 1.2rem;
+	margin-top: 5px;
 }
 
-.recommendation p {
-    font-size: 16px;
-    color: #666;
-}
-
-.tags {
-    margin-top: 10px;
-}
-
-.tag {
-    display: inline-block;
-    background-color: #ff6347;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-    margin-right: 5px;
-    font-size: 14px;
+.description {
+	text-align: center;
+	font-size: 1.5rem;
+	font-weight: bold;
+	margin-top: 20px;
+	color: #333;
 }
 
 .sns-icons {
-    margin-top: 10px;
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	margin-top: 20px;
 }
 
 .sns-icons a {
-    margin-right: 10px;
-    color: #333;
-    font-size: 20px;
-    transition: color 0.3s;
+	color: #333;
+	font-size: 24px;
+	transition: color 0.3s;
 }
 
 .sns-icons a:hover {
-    color: #ff6347;
+	color: #ff6347;
 }
 </style>
 </head>
 <body>
 
-    <h1>SNS 맛집 추천</h1>
+	<h1 style="text-align: center; color: #ff6347;">SNS 맛집 추천</h1>
+	<!-- 사진 갤러리 -->
+	<div class="photo-gallery">
+		<c:forEach var="store" items="${storeList}">
+			<div class="photo-frame">
+				<img src="${store.storeImage}" alt="${store.name}">
+				<h3>${store.name}</h3>
+				
+				<!-- 별점 표시 (평균 점수 기반) -->
+				<div class="star-rating">
+					<c:forEach begin="1" end="${store.rating}">
+						<i class="fas fa-star"></i>
+					</c:forEach>
+					<c:forEach begin="${store.rating + 1}" end="5">
+						<i class="far fa-star"></i>
+					</c:forEach>
+				</div>
 
-    <!-- 스토어 리스트 연동 -->
-    <c:forEach var="store" items="${storeList}">
-        <div class="recommendation">
-            <!-- 스토어 리스트 방식으로 이미지 로딩 -->
-            <a href="/store/detail?id=${store.id}">
-                <c:choose>
-                    <c:when test="${not empty store.storeImage}">
-                        <img src="${store.storeImage}" alt="가게 이미지"
-                            onerror="this.onerror=null; this.src='/resources/images/default.jpg'">
-                    </c:when>
-                    <c:otherwise>
-                        <img src="/resources/images/default.jpg" alt="default">
-                    </c:otherwise>
-                </c:choose>
-            </a>
+				<!-- 순위 표시 -->
+				<p style="color: #777; font-size: 14px;">순위: ${store.rank}위</p>
+			</div>
+		</c:forEach>
+	</div>
 
-            <div class="recommendation-content">
-                <h2>${store.name}</h2>
-                <p>${store.description}</p>
-                <div class="tags">
-                    <c:forEach var="tag" items="${store.tags}">
-                        <span class="tag">${tag}</span>
-                    </c:forEach>
-                </div>
-                <div class="sns-icons">
-                    <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
-                    <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
-                </div>
-            </div>
-        </div>
-    </c:forEach>
-
+	<!-- 설명 -->
+	<div class="description">SNS 맛집 추천🐱‍🏍</div>
+ 
+	<!-- SNS 아이콘 -->
+	<div class="sns-icons">
+		<a href="https://facebook.com" target="_blank"><i
+			class="fab fa-facebook"></i></a> <a href="https://instagram.com"
+			target="_blank"><i class="fab fa-instagram"></i></a> <a
+			href="https://twitter.com" target="_blank"><i
+			class="fab fa-twitter"></i></a>
+	</div>
 </body>
 </html>

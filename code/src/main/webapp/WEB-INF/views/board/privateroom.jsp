@@ -272,7 +272,7 @@ to {
 				<form action="/privateroom/search" method="get">
 					<input type="text" class="form-control me-2" name="searchKeyword"
 						placeholder="프라이빗 룸 검색">
-					<button type="submit" class="btn btn-primary">바로 찾아줄게 ✔</button>
+					<button type="submit" class="btn btn-primary"> 찾아줄게 ✔</button>
 				</form>
 			</div>
 		</div>

@@ -137,24 +137,24 @@ h1 {
 
     <h1>맛집 갤러리</h1>
 
-    <!-- 갤러리 이미지 리스트 -->
-    <div class="gallery">
-        <c:forEach var="photo" items="${photos}">
-            <div class="photo-item">
-                <img src="<c:url value='/upload/${photo}'/>" alt="맛있는 음식">
-                <div class="overlay">${photo}</div>
-            </div>
-        </c:forEach>
-    </div>
+<!-- 갤러리 이미지 리스트 -->
+<div class="gallery">
+    <c:forEach var="photo" items="${photos}">
+        <div class="photo-item">
+            <img src="<c:url value='/resources/image/${photo}'/>" alt="맛있는 음식">
+            <div class="overlay">${photo}</div>
+        </div>
+    </c:forEach>
+</div>
 
-    <!-- 사진 업로드 폼 -->
-    <div class="upload-form">
-        <h2>사진 업로드</h2>
-        <form action="upload" method="post" enctype="multipart/form-data">
-            <input type="file" name="file" accept="image/*" required>
-            <button type="submit">업로드</button>
-        </form>
-    </div>
+<!-- 사진 업로드 폼 --> 
+<div class="upload-form">
+    <h2>사진 업로드</h2>
+    <form action="uploadImage" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*" required>
+        <button type="submit">업로드</button>
+    </form>
+</div>
 
     <!-- 뒤로 가는 버튼 -->
     <div>

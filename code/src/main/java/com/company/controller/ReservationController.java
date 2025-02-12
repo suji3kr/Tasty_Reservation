@@ -1,4 +1,7 @@
 package com.company.controller;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -30,8 +33,8 @@ public class ReservationController {
     public String makeReservation(
             @RequestParam("storeId") int storeId,
             @RequestParam("phone") String phone,
-            @RequestParam("reservationDate") String reservationDate,
-            @RequestParam("reservationTime") String reservationTime,
+            @RequestParam("reservationDate") Date reservationDate,
+            @RequestParam("reservationTime") Date reservationTime,
             @RequestParam("peopleCount") int peopleCount,
             RedirectAttributes redirectAttributes,
             HttpSession session) {
@@ -52,21 +55,37 @@ public class ReservationController {
         return "redirect:/store/detail?id=" + storeId;
     }
 
-    // 예약 리스트 (기존 코드)
     @GetMapping("/list")
-    public String listReservations(@RequestParam(required = false) Date searchDate, Model model) {
-        if (searchDate == null) {
-            searchDate = new Date(); // Default to today's date
+    public String listReservations(@RequestParam(value = "searchDate", required = false) String searchDateStr, Model model) {
+        System.out.println("🔍 [Controller] 검색 요청이 들어옴!");
+
+        List<ReservationDTO> reservations;
+
+        if (searchDateStr == null || searchDateStr.isEmpty()) {
+            System.out.println("🔍 [Controller] 전체 예약 목록 조회");
+            reservations = reservationService.getAllReservations(); // 전체 예약 조회
+        } else {
+            System.out.println("🔍 [Controller] 특정 날짜 예약 조회: " + searchDateStr);
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                Date searchDate = sdf.parse(searchDateStr);
+                model.addAttribute("currentDate", searchDate);
+                reservations = reservationService.getReservationDate(searchDate);
+            } catch (ParseException e) {
+                reservations = new ArrayList<>();
+            }
         }
-        
-        List<ReservationDTO> reservations = reservationService.getReservationDate(searchDate);
-        // 예약 시간순으로 정렬
-        Collections.sort(reservations, (r1, r2) -> r1.getReservationTime().compareTo(r2.getReservationTime()));
-        
+
+        System.out.println("🔍 [Controller] 조회된 예약 개수: " + reservations.size());
+        for(var reservation : reservations) {
+        	System.out.println(reservation);
+        }
         model.addAttribute("reservationList", reservations);
-        model.addAttribute("currentDate", searchDate);
-        return "/reservation/list";
+       
+
+        return "/board/reservation_admin";
     }
+
 
     // 예약 수정 페이지로 이동 (GET)
     @GetMapping("/edit/{reservationId}")
@@ -89,7 +108,7 @@ public class ReservationController {
     // 예약 수정 처리 (POST)
     @PostMapping("/update")
     public String updateReservation(@RequestParam("reservationId") Long reservationId, 
-                                    @RequestParam("reservationTime") String reservationTime, 
+                                    @RequestParam("reservationTime") Date reservationTime, 
                                     @RequestParam("peopleCount") int peopleCount, 
                                     @RequestParam("phoneNumber") String phoneNumber, 
                                     HttpSession session) {
