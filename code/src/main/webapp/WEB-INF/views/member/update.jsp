@@ -76,9 +76,8 @@ button {
 }
 
 .id-class {
-	display : none;
+	display: none;
 }
-
 </style>
 </head>
 <body>
@@ -91,38 +90,41 @@ button {
 			<h2>회원정보 수정</h2>
 
 			<form action="/member/update" method="post" name="updateForm">
-				<p class = "id-class">
+				<p class="id-class">
 					아 이 디 : <input type="text" name="id" value="${member.id}" readonly>
 				</p>
 				<p>
-					이 메 일 <input type="text" name="email" value="${member.email}"
+					이 메 일 : <input type="text" name="email" value="${member.email}"
 						readonly>
 				</p>
 				<p>
-					비 밀 번 호 <input type="text" name="password" id="password"<%--  value="${member.memberPassword}" --%>>
+					비밀번호 : <input type="password" name="currentPassword" required>
 				</p>
 				<p>
-					이 름 <input type="text" name="username" value="${member.username}"
+					이 름 : <input type="text" name="username" value="${member.username}"
 						readonly>
 				</p>
 				<p>
-					나 이 <input type="text" name="age" value="${member.age}">
+					나 이 : <input type="text" name="age" value="${member.age}">
 				</p>
 				<p>
-					전화번호 <input type="text" name="phone" value="${member.phone}">
+					전화번호 : <input type="text" name="phone" value="${member.phone}">
 				</p>
 				<p>
-					성 별 <input type="text" name="gender" value="${member.gender}"
+					성 별 : <input type="text" name="gender" value="${member.gender}"
 						readonly>
+				</p>
+				<p class="id-class">
+					권 한 : <input type="text" name="role" value="${member.role}" readonly>
 				</p>
 
 				<div class="button-wrapper">
-					<button type="button" class="btn btn-update" onclick="update()">수정</button>
+					<button type="submit" class="btn btn-update">수정</button>
 					<button type="button" class="btn btn-cancel"
 						onclick="cancelUpdate()">취소</button>
 				</div>
-
 			</form>
+
 
 		</div>
 
@@ -132,16 +134,18 @@ button {
 </body>
 
 <script>
-	const update = () => {
+
+/* const update = () => {
     const passwordDB = '${member.password}';
     const password = document.getElementById("password").value;
     if (passwordDB === password) {
     	alert("수정완료 되었습니다🚀");
        document.updateForm.submit();
     } else {
-        alert("비밀번호가 일치하지 않습니다.");
+        alert("비밀번호가 일치하지 않습니다.🚀");
     }
-}
+} 
+ */
 </script>
 
 </html>
