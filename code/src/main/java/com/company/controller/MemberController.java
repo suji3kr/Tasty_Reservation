@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,8 +26,10 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/member/*")
 @RequiredArgsConstructor
 public class MemberController {
+    private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 
 	private final MemberService memberService;
+	private final PasswordEncoder passwordEncoder;
 
 	@GetMapping("/")
 	public String findAll(Model model) {
@@ -47,6 +52,10 @@ public class MemberController {
 	    } else {
 	        memberDTO.setRole("user");
 	    }
+
+	    // 비밀번호 암호화
+	    String encodedPassword = passwordEncoder.encode(memberDTO.getPassword());
+	    memberDTO.setPassword(encodedPassword);
 
 	    int saveResult = memberService.signup(memberDTO);
 
@@ -73,11 +82,10 @@ public class MemberController {
 
 		MemberDTO memberDTO = new MemberDTO();
 	    memberDTO.setEmail(email);
-	    memberDTO.setPassword(password);
 	    
-	    MemberDTO loginResult = memberService.login(memberDTO, session, model);
-
-	    if (loginResult != null) {
+	    // 로그인 시 비밀번호 확인
+	    MemberDTO loginResult = memberService.findByMemberEmail(email);
+	    if (loginResult != null && passwordEncoder.matches(password, loginResult.getPassword())) {
 	        session.setAttribute("loginEmail", loginResult.getEmail());
 	        session.setAttribute("loginUserName", loginResult.getUsername());
 	        session.setAttribute("userRole", loginResult.getRole());
@@ -88,7 +96,6 @@ public class MemberController {
 	        return "/member/login";
 	    }
 	}
-
 
 	@GetMapping("/delete")
 	public String delete(@RequestParam("id") Long id) {

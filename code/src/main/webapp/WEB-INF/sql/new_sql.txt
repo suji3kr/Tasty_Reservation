@@ -23,12 +23,10 @@ CREATE TABLE Users (
     role ENUM('admin', 'user') NOT NULL DEFAULT 'user'
 );
 
--- Users 테이블에 데이터 삽입
+-- Users 테이블에 admin 데이터 삽입
 INSERT INTO Users (username, password, age, email, phone, gender, role) VALUES
-('john_doe', 'hashed_password_1', 30, 'john@example.com', '010-1234-5678', 'M', 'user'),
-('jane_doe', 'hashed_password_2', 28, 'jane@example.com', '010-8765-4321', 'F', 'user'),
-('alice', 'hashed_password_3', 25, 'alice@example.com', '010-5555-1234', 'F', 'admin'),
-('david', 'hashed_password_6', 29, 'david@example.com', '010-2222-3333', 'M', 'admin');
+('admin', '$2a$10$m8g9rFhSQKUk87HqzEWI/Oe8hoGkUd8RL6j2i4mKuNvH2PhJC0c1y', 30, 'admin@aor.com', '0105555555', 'F', 'admin');
+
 
 -------------------------------------
 -- 2. Admins 테이블 생성 (Users 참조)
@@ -124,8 +122,6 @@ VALUES
 ((SELECT id FROM Restaurants WHERE store_name='레스토랑 디저트'), '디저트 천국', '디저트가 정말 맛있어요!', (SELECT id FROM Users WHERE username='jane_doe'), 4, '/images/review2.jpg', '2025-02-11'),
 ((SELECT id FROM Restaurants WHERE store_name='송아지 스테이크'), '스테이크 최고', '고기가 정말 부드럽고 맛있습니다.', (SELECT id FROM Users WHERE username='alice'), 5, '/images/review3.jpg', '2025-02-12');
 
-
-
 -- PhotoGallery 테이블에 데이터 삽입
 INSERT INTO PhotoGallery (user_id, photo_title, photo_description, photo_path, upload_date)
 VALUES 
@@ -146,17 +142,5 @@ SELECT * FROM PhotoGallery;
 select users.*
 	from admins inner join users
 	on admins.id = users.id;
-    
--- Users 테이블에 더미 데이터 삽입
-INSERT INTO Users (username, password, age, email, phone, gender, role) VALUES
-('john_doe', 'hashed_password_1', 30, 'john@example.com', '010-1234-5678', 'M', 'user'),
-('jane_doe', 'hashed_password_2', 28, 'jane@example.com', '010-8765-4321', 'F', 'user'),
-('alice', 'hashed_password_3', 25, 'alice@example.com', '010-5555-1234', 'F', 'admin'),
-('bob', 'hashed_password_4', 35, 'bob@example.com', '010-7777-5678', 'M', 'user'),
-('charlie', 'hashed_password_5', 40, 'charlie@example.com', '010-9999-1111', 'M', 'user'),
-('david', 'hashed_password_6', 29, 'david@example.com', '010-2222-3333', 'M', 'admin'),
-('eve', 'hashed_password_7', 33, 'eve@example.com', '010-4444-5555', 'F', 'user'),
-('frank', 'hashed_password_8', 31, 'frank@example.com', '010-6666-7777', 'M', 'user'),
-('grace', 'hashed_password_9', 27, 'grace@example.com', '010-8888-9999', 'F', 'user'),
-('john_doe', 'hashed_password_10', 22, 'john2@example.com', '010-1234-5679', 'M', 'user'); 
+
 

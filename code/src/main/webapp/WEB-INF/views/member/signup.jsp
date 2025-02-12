@@ -67,10 +67,12 @@ body {
 				<div id="check-result"></div>
 
 			</div>
+			
 			<div class="mb-3">
 				<input type="checkbox" id="isAdmin" name="isAdmin"> <label
 					for="isAdmin">맛집 관리 사장님으로 가입 시 체크해주세요 🤗</label>
 			</div>
+			
 			<div class="mb-3">
 				<label for="username" class="form-label">이름</label> <input
 					type="text" class="form-control" id="username" name="username"
