@@ -148,14 +148,13 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/recommendations.jsp" />
 	</definition>
-
-
-
-
-
-
-
-
+	
+	<!-- 회사소개 -->
+	<definition name="company" extends="base">
+		<put-attribute name="title" value="회사정보" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/company.jsp" />
+	</definition>
 
 
 
@@ -180,6 +179,9 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/reservation/edit.jsp" />
 	</definition>
+
+
+
 
 
 

@@ -43,7 +43,7 @@
 					<!-- 즐겨찾는 맛집 / 내가게 히스토리 (Admin vs User 분기) -->
 					<c:choose>
 						<c:when test="${sessionScope.userRole eq 'admin'}">
-							<li><a href="${contextPath}/board/favfood_admin">등록된 스토어</a></li>
+							<li><a href="${contextPath}/store/storeList">등록된 스토어</a></li>
 						</c:when>
 						<c:otherwise>
 							<li><a href="${contextPath}/board/favfood">즐겨찾는 맛집</a></li>

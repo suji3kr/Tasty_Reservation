@@ -8,8 +8,8 @@
   <select id="getList" resultType="com.company.domain.BoardVO">
     <![CDATA[
       SELECT * 
-      FROM tbl_board 
-      WHERE bno > 0 
+      FROM Reviews 
+      WHERE id > 0 
       ORDER BY bno DESC
     ]]>
   </select>
@@ -17,8 +17,8 @@
   <!-- 게시글 삽입 -->
   <insert id="insertSelectKey" useGeneratedKeys="true" keyProperty="bno">
     <![CDATA[
-      INSERT INTO tbl_board (title, content, writer)
-      VALUES (#{title}, #{content}, #{writer})
+      INSERT INTO Reviews (title, content)
+      VALUES (#{title}, #{content})
     ]]>
   </insert>
   
@@ -26,28 +26,28 @@
   <select id="read" resultType="com.company.domain.BoardVO">
     <![CDATA[
       SELECT * 
-      FROM tbl_board 
-      WHERE bno = #{bno}
+      FROM Reviews 
+      WHERE id = #{id}
     ]]>
   </select>
   
   <!-- 게시글 삭제 -->
   <delete id="delete">
     <![CDATA[
-      DELETE FROM tbl_board 
-      WHERE bno = #{bno}
+      DELETE FROM Reviews 
+      WHERE id = #{id}
     ]]>
   </delete>
   
   <!-- 게시글 수정 -->
   <update id="update">
     <![CDATA[
-      UPDATE tbl_board
+      UPDATE Reviews
       SET title = #{title},
           content = #{content},
           writer = #{writer},
           updatedate = NOW()
-      WHERE bno = #{bno}
+      WHERE id = #{id}
     ]]>
   </update>
   
@@ -92,12 +92,12 @@
   <!-- 페이징 처리된 게시글 목록 -->
   <select id="getListWithPaging" resultType="com.company.domain.BoardVO">
     <![CDATA[
-      SELECT bno, title, content, writer, regdate, updatedate
-      FROM tbl_board
+      SELECT id, title, content, writer, regdate, updatedate
+      FROM Reviews
     ]]>
     <include refid="criterial"/>
     <![CDATA[
-      ORDER BY bno DESC
+      ORDER BY id DESC
       LIMIT #{limit} OFFSET #{offset}
     ]]>
   </select>
@@ -106,7 +106,7 @@
   <select id="getTotalCount" resultType="int">
     <![CDATA[
       SELECT COUNT(*) 
-      FROM tbl_board 
+      FROM Reviews 
     ]]>
     <include refid="criterial"/>
   </select>
