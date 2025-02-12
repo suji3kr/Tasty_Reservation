@@ -7,4 +7,6 @@
 			alias="member" />
 		<typeAlias type="com.company.domain.StoreDTO" alias="store" />
 	</typeAliases>
+
+
 </configuration>

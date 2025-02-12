@@ -1,4 +1,5 @@
 package com.company.controller;
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -9,9 +10,12 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,28 +28,35 @@ import com.company.service.ReservationService;
 @Controller
 @RequestMapping("/reservation")
 public class ReservationController {
-
-    @Autowired
+	
+	
+	    @Autowired
     private ReservationService reservationService;
 
+	    
+	private Date parseDateString(String searchDateStr) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date searchDate = sdf.parse(searchDateStr);
+        return searchDate;
+	}
     // 예약 만들기 (기존 코드)
     @PostMapping("")
     public String makeReservation(
             @RequestParam("storeId") int storeId,
             @RequestParam("phone") String phone,
-            @RequestParam("reservationDate") Date reservationDate,
-            @RequestParam("reservationTime") Date reservationTime,
+            @RequestParam("reservationDate") String reservationDate,
+            @RequestParam("reservationTime") String reservationTime,
             @RequestParam("peopleCount") int peopleCount,
             RedirectAttributes redirectAttributes,
-            HttpSession session) {
+            HttpSession session) throws ParseException {
         
         // 올바르게 DTO 객체 생성
         ReservationDTO reservation = new ReservationDTO();
         reservation.setStoreId(storeId);
         reservation.setUserName((String)session.getAttribute("loginUserName"));
         reservation.setPhone(phone);
-        reservation.setReservationDate(reservationDate);
-        reservation.setReservationTime(reservationTime);
+        reservation.setReservationDate(parseDateString(reservationDate));
+        reservation.setReservationTime(Time.valueOf(reservationTime + ":00"));
         reservation.setPeopleCount(peopleCount);
         // 서비스 계층에 예약 정보 저장
         reservationService.saveReservation(reservation);
@@ -67,8 +78,7 @@ public class ReservationController {
         } else {
             System.out.println("🔍 [Controller] 특정 날짜 예약 조회: " + searchDateStr);
             try {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                Date searchDate = sdf.parse(searchDateStr);
+            	Date searchDate = parseDateString(searchDateStr);
                 model.addAttribute("currentDate", searchDate);
                 reservations = reservationService.getReservationDate(searchDate);
             } catch (ParseException e) {
@@ -117,7 +127,7 @@ public class ReservationController {
 
         // 예약자가 본인 예약인지 확인
         if (reservation != null && reservation.getCustomerEmail().equals(userEmail)) {
-            reservation.setReservationTime(reservationTime);
+            reservation.setReservationTime((Time) reservationTime);
             reservation.setPeopleCount(peopleCount);
             reservation.setPhone(phoneNumber);
             reservationService.updateReservation(reservation);

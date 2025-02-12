@@ -2,6 +2,7 @@ package com.company.domain;
 
 
 
+import java.sql.Time;
 import java.util.Date;
 
 import lombok.Data;
@@ -14,7 +15,7 @@ public class ReservationDTO {
     private String userName;
     private String phone;
     private Date reservationDate;
-    private Date reservationTime;
+    private Time reservationTime;
     private int peopleCount;
 	public Object getCustomerEmail() {
 		// TODO Auto-generated method stub
