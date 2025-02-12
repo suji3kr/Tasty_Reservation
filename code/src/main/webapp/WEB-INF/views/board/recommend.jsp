@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <html>
 <head>
@@ -24,11 +24,39 @@
         h1 {
             color: #333;
         }
-        p {
+        .restaurant-list {
+            margin-top: 20px;
+        }
+        .restaurant-card {
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .restaurant-card h3 {
+            margin: 0;
             font-size: 18px;
+        }
+        .restaurant-card p {
+            margin: 5px 0;
             color: #555;
         }
+        .restaurant-card a {
+            display: inline-block;
+            margin-top: 5px;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .restaurant-card a:hover {
+            background-color: #0056b3;
+        }
         button {
+            margin-top: 20px;
             padding: 10px 20px;
             font-size: 16px;
             color: #fff;
@@ -43,16 +71,26 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h1>AI 랜덤 음식 추천</h1>
-        <p>지금 이 음식이 땡긴다: <strong>${restaurant}</strong></p>
+        <h2>"${food}" 관련 가게 추천 리스트</h2>
+
+        <div class="restaurant-list">
+            <c:forEach var="restaurant" items="${restaurants}">
+                <div class="restaurant-card">
+                    <h3>${restaurant.name}</h3>
+                    <p>${restaurant.address}</p>
+                    <a href="${restaurant.link}" target="_blank">네이버에서 검색 결과 보기</a>
+                </div>
+            </c:forEach>
+        </div>
+
+        <!-- 새로운 랜덤 추천 버튼 -->
         <form action="recommend" method="get">
-            <button type="submit">다른 음식이 땡긴다</button>
+            <button type="submit">다른 음식 추천 받기</button>
         </form>
     </div>
 </body>
-
 </html>
-
-

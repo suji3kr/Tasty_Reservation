@@ -1,50 +1,32 @@
--- 데이터베이스 선택 (이미 존재한다면 필요 없음)
 USE restdb;
 
--- 기존 테이블 삭제 (참조 순서 고려)
+-- 기존 테이블 삭제 (데이터가 있는 경우 주의)
 DROP TABLE IF EXISTS PhotoGallery;
-DROP TABLE IF EXISTS Reviews;
 DROP TABLE IF EXISTS Reservations;
+DROP TABLE IF EXISTS Reviews;
 DROP TABLE IF EXISTS Restaurants;
 DROP TABLE IF EXISTS Admins;
 DROP TABLE IF EXISTS Users;
 
--------------------------------------
--- 1. Users 테이블 생성 (먼저 생성)
--------------------------------------
+-- Users 테이블 (username의 UNIQUE 제약 제거)
 CREATE TABLE Users (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) NOT NULL,
+    username VARCHAR(50) NOT NULL,  -- UNIQUE 제거
     password VARCHAR(255) NOT NULL,
     age INT,
-    email VARCHAR(100) UNIQUE,
+    email VARCHAR(100) UNIQUE,  -- email만 UNIQUE 유지
     phone VARCHAR(20),
     gender ENUM('M', 'F'),
-    role ENUM('admin', 'user') NOT NULL DEFAULT 'user'
+    role ENUM('admin', 'user') NOT NULL DEFAULT 'user' -- 역할 추가
 );
 
--- Users 테이블에 데이터 삽입
-INSERT INTO Users (username, password, age, email, phone, gender, role) VALUES
-('john_doe', 'hashed_password_1', 30, 'john@example.com', '010-1234-5678', 'M', 'user'),
-('jane_doe', 'hashed_password_2', 28, 'jane@example.com', '010-8765-4321', 'F', 'user'),
-('alice', 'hashed_password_3', 25, 'alice@example.com', '010-5555-1234', 'F', 'admin'),
-('david', 'hashed_password_6', 29, 'david@example.com', '010-2222-3333', 'M', 'admin');
-
--------------------------------------
--- 2. Admins 테이블 생성 (Users 참조)
--------------------------------------
+-- Admins 테이블
 CREATE TABLE Admins (
-    id BIGINT PRIMARY KEY,
-    FOREIGN KEY (id) REFERENCES Users(id) ON DELETE CASCADE
+    id BIGINT PRIMARY KEY REFERENCES Users(id),
+    UNIQUE (id) -- 중복 방지
 );
 
--- Users 테이블에서 role='admin'인 사용자 ID를 Admins 테이블에 삽입
-INSERT INTO Admins (id)
-SELECT id FROM Users WHERE role = 'admin';
-
--------------------------------------
--- 3. Restaurants 테이블 생성 (Admins 참조)
--------------------------------------
+-- Restaurants 테이블
 CREATE TABLE Restaurants (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     admin_id BIGINT,
@@ -57,47 +39,29 @@ CREATE TABLE Restaurants (
     FOREIGN KEY (admin_id) REFERENCES Admins(id) ON DELETE SET NULL
 );
 
--- Restaurants 테이블에 데이터 삽입
-INSERT INTO Restaurants (admin_id, store_name, store_location, store_description, store_category, phone_number, store_image)
-VALUES 
-((SELECT id FROM Admins WHERE id = 3), '포베이 쌀국수', '서울 강남구', '쌀국수가 맛있는 곳', '베트남 음식', '02-1234-5678', '/images/store1.jpg'),
-((SELECT id FROM Admins WHERE id = 4), '레스토랑 디저트', '서울 종로구', '디저트가 유명한 레스토랑', '카페 & 디저트', '02-8765-4321', '/images/store2.jpg'),
-((SELECT id FROM Admins WHERE id = 3), '송아지 스테이크', '서울 용산구', '스테이크가 맛있는 곳', '양식', '02-5678-1234', '/images/store3.jpg');
-
--------------------------------------
--- 4. Reservations 테이블 생성 (Users, Restaurants 참조)
--------------------------------------
+-- Reservations 테이블 (username 대신 user_id 사용)
 CREATE TABLE Reservations (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     store_id BIGINT,
-    user_id BIGINT NOT NULL,
-    username VARCHAR(20) NOT NULL,  
+    user_id BIGINT NOT NULL,  -- username 대신 user_id 사용
     phone VARCHAR(20),
     reservation_date DATE NOT NULL,
     reservation_time TIME NOT NULL,
     people_count INT NOT NULL,
     FOREIGN KEY (store_id) REFERENCES Restaurants(id) ON DELETE CASCADE,
-    FOREIGN KEY (id) REFERENCES Users(id) ON DELETE CASCADE
+    FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
 );
 
--- Reservations 테이블에 데이터 삽입
-INSERT INTO Reservations (store_id, user_id, phone, reservation_date, reservation_time, people_count)
-VALUES 
-((SELECT id FROM Restaurants WHERE store_name='포베이 쌀국수'), (SELECT id FROM Users WHERE username='john_doe'), '010-1111-2222', '2025-02-15', '18:30:00', 2),
-((SELECT id FROM Restaurants WHERE store_name='레스토랑 디저트'), (SELECT id FROM Users WHERE username='jane_doe'), '010-3333-4444', '2025-02-16', '19:00:00', 4),
-((SELECT id FROM Restaurants WHERE store_name='송아지 스테이크'), (SELECT id FROM Users WHERE username='alice'), '010-5555-6666', '2025-02-17', '20:00:00', 3);
 
--------------------------------------
--- 5. Reviews 테이블 생성 (Users, Restaurants 참조)
--------------------------------------
+-- 리뷰테이블
 CREATE TABLE Reviews (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     store_id BIGINT NOT NULL,
     title VARCHAR(200),
     content TEXT,
     user_id BIGINT NOT NULL,
-    rating INT CHECK (rating BETWEEN 1 AND 5),
-    imagePath VARCHAR(255),
+    rating INT CHECK (rating BETWEEN 1 AND 5), -- 평점 (1~5 범위)
+    imagePath VARCHAR(255), -- 이미지 파일 경로
     regdate DATE NOT NULL DEFAULT (CURRENT_DATE),
     FOREIGN KEY (store_id) REFERENCES Restaurants(id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
@@ -114,49 +78,18 @@ CREATE TABLE PhotoGallery (
     upload_date DATE NOT NULL DEFAULT (CURRENT_DATE),
     FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
 );
-select * from users;
 
-
--- Reviews 테이블에 데이터 삽입
-INSERT INTO Reviews (store_id, title, content, user_id, rating, imagePath, regdate)
-VALUES 
-((SELECT id FROM Restaurants WHERE store_name='포베이 쌀국수'), '맛있는 쌀국수', '정말 맛있는 쌀국수였습니다!', (SELECT id FROM Users WHERE username='john_doe'), 5, '/images/review1.jpg', '2025-02-10'),
-((SELECT id FROM Restaurants WHERE store_name='레스토랑 디저트'), '디저트 천국', '디저트가 정말 맛있어요!', (SELECT id FROM Users WHERE username='jane_doe'), 4, '/images/review2.jpg', '2025-02-11'),
-((SELECT id FROM Restaurants WHERE store_name='송아지 스테이크'), '스테이크 최고', '고기가 정말 부드럽고 맛있습니다.', (SELECT id FROM Users WHERE username='alice'), 5, '/images/review3.jpg', '2025-02-12');
-
-
-
--- PhotoGallery 테이블에 데이터 삽입
-INSERT INTO PhotoGallery (user_id, photo_title, photo_description, photo_path, upload_date)
-VALUES 
-((SELECT id FROM Users WHERE username='john_doe'), '맛있는 쌀국수', '이 쌀국수 정말 맛있어요!', '/images/gallery1.jpg', '2025-02-10'),
-((SELECT id FROM Users WHERE username='jane_doe'), '디저트 파라다이스', '카페에서 찍은 디저트 사진', '/images/gallery2.jpg', '2025-02-11'),
-((SELECT id FROM Users WHERE username='alice'), '스테이크 한입', '스테이크가 정말 부드럽고 맛있어요!', '/images/gallery3.jpg', '2025-02-12');
-
--------------------------------------
--- 7. 삽입된 데이터 확인
--------------------------------------
-SELECT * FROM Users;
-SELECT * FROM Admins;
-SELECT * FROM Restaurants;
-SELECT * FROM Reservations;
-SELECT * FROM Reviews;
-SELECT * FROM PhotoGallery;
-
-select users.*
-	from admins inner join users
-	on admins.id = users.id;
-    
 -- Users 테이블에 더미 데이터 삽입
 INSERT INTO Users (username, password, age, email, phone, gender, role) VALUES
-('john_doe', 'hashed_password_1', 30, 'john@example.com', '010-1234-5678', 'M', 'user'),
-('jane_doe', 'hashed_password_2', 28, 'jane@example.com', '010-8765-4321', 'F', 'user'),
-('alice', 'hashed_password_3', 25, 'alice@example.com', '010-5555-1234', 'F', 'admin'),
-('bob', 'hashed_password_4', 35, 'bob@example.com', '010-7777-5678', 'M', 'user'),
-('charlie', 'hashed_password_5', 40, 'charlie@example.com', '010-9999-1111', 'M', 'user'),
-('david', 'hashed_password_6', 29, 'david@example.com', '010-2222-3333', 'M', 'admin'),
-('eve', 'hashed_password_7', 33, 'eve@example.com', '010-4444-5555', 'F', 'user'),
-('frank', 'hashed_password_8', 31, 'frank@example.com', '010-6666-7777', 'M', 'user'),
-('grace', 'hashed_password_9', 27, 'grace@example.com', '010-8888-9999', 'F', 'user'),
-('john_doe', 'hashed_password_10', 22, 'john2@example.com', '010-1234-5679', 'M', 'user'); 
+('admin', '$2a$10$m8g9rFhSQKUk87HqzEWI/Oe8hoGkUd8RL6j2i4mKuNvH2PhJC0c1y', 30, 'admin@aor.com', '0105555555', 'F', 'admin');
 
+
+
+-- 데이터 조회 예시
+SELECT * FROM Users;
+SELECT * FROM Reservations;
+SELECT users.*
+    FROM Admins 
+    INNER JOIN Users ON Admins.id = Users.id;
+SELECT * FROM Reviews;
+SELECT * FROM PhotoGallery;
