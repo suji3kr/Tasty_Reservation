@@ -58,6 +58,12 @@
 	font-size: 14px;
 	color: #777;
 }
+
+.mail {
+	font: 16px;
+	color: #000;
+}
+
 </style>
 
 <!-- 푸터 영역 -->
@@ -67,7 +73,7 @@
 		<div class="footer-column">
 			<h3>Company</h3>
 			<ul>
-				<li><a href="#">About</a></li>
+				<li><a href="/company">About</a></li>
 				<li><a href="#">Careers</a></li>
 				<li><a href="#">Press</a></li>
 				<li><a href="#">Blog</a></li>
@@ -78,10 +84,10 @@
 		<div class="footer-column">
 			<h3>Resources</h3>
 			<ul>
-				<li><a href="#">Product</a></li>
-				<li><a href="#">Features</a></li>
-				<li><a href="#">Support</a></li>
-				<li><a href="#">Documentation</a></li>
+				<li><a href="/board/familyreservation">Reservation</a></li>
+				<li><a href="/recommendations">SNS</a></li>
+				<li><a href="/reviewSpot">Review</a></li>
+				<li><a href="/member/update">MyProfile</a></li>
 			</ul>
 		</div>
 
@@ -89,7 +95,8 @@
 		<div class="footer-column">
 			<h3>Contact</h3>
 			<ul>
-				<li>이메일: support@artofreservation.com</li>
+				<li><a href="mailto:support@artofreservation.com" class="mail" style="font-size: 16px; color: #000;">
+					이메일: support@artofreservation.com</a></li>
 				<li>핸드폰 번호: 010-1234-5678</li>
 				<li>주소: 대한민국</li>
 			</ul>
