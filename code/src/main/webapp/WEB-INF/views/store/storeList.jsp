@@ -37,13 +37,6 @@ img {
 	<div class="container">
 		<h2 class="text-center">가게 목록</h2>
 
-		<!-- 검색 폼 -->
-		<form action="/board/familyreservation" method="get" class="d-flex mb-3">
-			<input type="text" class="form-control me-2" name="searchKeyword"
-				placeholder="가게명 검색">
-			<button type="submit" class="btn btn-primary">검색</button>
-		</form>
-
 		<!-- 가게 리스트 -->
 		<table class="table table-bordered table-hover">
 			<thead class="table-dark">
@@ -91,7 +84,7 @@ img {
 			</tbody>
 		</table>
 
-		<a href="/board/register" class="btn btn-success">새 가게 등록</a>
+		<a href="/board/register" class="btn btn-success">가게 등록</a>
 	</div>
 
 	<!-- Bootstrap JS -->
