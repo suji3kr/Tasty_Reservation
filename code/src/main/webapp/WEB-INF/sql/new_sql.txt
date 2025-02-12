@@ -23,9 +23,9 @@ CREATE TABLE Users (
     role ENUM('admin', 'user') NOT NULL DEFAULT 'user'
 );
 
--- Users 테이블에 데이터 삽입
-INSERT INTO members (id, username, password, age, email, phone, gender, role) 
-VALUES (1, 'admin', '$2a$10$m8g9rFhSQKUk87HqzEWI/Oe8hoGkUd8RL6j2i4mKuNvH2PhJC0c1y', 30, 'admin@aor.com', '0105555555', 'F', 'admin');
+-- Users 테이블에 admin 데이터 삽입
+INSERT INTO Users (username, password, age, email, phone, gender, role) VALUES
+('admin', '$2a$10$m8g9rFhSQKUk87HqzEWI/Oe8hoGkUd8RL6j2i4mKuNvH2PhJC0c1y', 30, 'admin@aor.com', '0105555555', 'F', 'admin');
 
 
 -------------------------------------
@@ -122,8 +122,6 @@ VALUES
 ((SELECT id FROM Restaurants WHERE store_name='레스토랑 디저트'), '디저트 천국', '디저트가 정말 맛있어요!', (SELECT id FROM Users WHERE username='jane_doe'), 4, '/images/review2.jpg', '2025-02-11'),
 ((SELECT id FROM Restaurants WHERE store_name='송아지 스테이크'), '스테이크 최고', '고기가 정말 부드럽고 맛있습니다.', (SELECT id FROM Users WHERE username='alice'), 5, '/images/review3.jpg', '2025-02-12');
 
-
-
 -- PhotoGallery 테이블에 데이터 삽입
 INSERT INTO PhotoGallery (user_id, photo_title, photo_description, photo_path, upload_date)
 VALUES 
@@ -144,4 +142,5 @@ SELECT * FROM PhotoGallery;
 select users.*
 	from admins inner join users
 	on admins.id = users.id;
+
 
