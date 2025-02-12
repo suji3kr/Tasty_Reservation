@@ -7,7 +7,7 @@
 
     <!-- 예약 저장 -->
 <insert id="save" parameterType="com.company.domain.ReservationDTO">
-    INSERT INTO reservations (store_id, user_name, phone, reservation_date, reservation_time, people_count)
+    INSERT INTO reservations (store_id, username, phone, reservation_date, reservation_time, people_count)
     VALUES (#{storeId}, #{userName}, #{phone}, #{reservationDate}, #{reservationTime}, #{peopleCount})
 </insert>
 
@@ -20,11 +20,11 @@
 <resultMap id="reservationResultMap" type="com.company.domain.ReservationDTO">
     <id column="id" property="id"/>
     <result column="store_id" property="storeId"/>
-    <result column="store_name" property="storeName"/>
-    <result column="user_name" property="userName"/>
+    <result column="storename" property="storeName"/>
+    <result column="username" property="userName"/>
     <result column="phone" property="phone"/>
-    <result column="reservation_date" property="reservationDate"/>
-    <result column="reservation_time" property="reservationTime"/>
+    <result column="reservation_date" property="reservationDate" jdbcType="DATE"/>
+    <result column="reservation_time" property="reservationTime" jdbcType="TIME"/>
     <result column="people_count" property="peopleCount"/>
 </resultMap>
 

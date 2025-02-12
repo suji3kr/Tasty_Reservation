@@ -1,5 +1,7 @@
 package com.company.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -16,8 +18,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.company.domain.BoardVO;
 import com.company.domain.Criteria;
 import com.company.domain.PageDTO;
+import com.company.domain.ReservationDTO;
 import com.company.domain.StoreDTO;
 import com.company.service.BoardService;
+import com.company.service.ReservationService;
 import com.company.service.StoreService;
 
 import lombok.AllArgsConstructor;
@@ -32,6 +36,7 @@ public class BoardController {
     private BoardService service;
     private BoardService boardservice;
     private StoreService storeService;
+    private ReservationService reservationService;
 
     /** ✅ 게시글 목록 조회 */
     @GetMapping("/list")
@@ -245,9 +250,18 @@ public class BoardController {
 
     /** ✅ 예약 관리 페이지 (관리자 & 사용자 구분) */
     @GetMapping("/reservation_admin")
-    public String reservationAdmin() {
+    public String showReservationAdminPage(Model model) {
+        System.out.println("🔍 [BoardController] 예약 관리자 페이지 접근");
+
+        // ✅ 전체 예약 조회 (날짜 필터링 없이)
+        List<ReservationDTO> reservations = reservationService.getAllReservations();
+        model.addAttribute("reservationList", reservations);
+
+        System.out.println("🔍 [BoardController] 전체 예약 개수: " + reservations.size());
+
         return "/board/reservation_admin";
     }
+
 
     @GetMapping("/reservation_user")
     public String reservationUser() {
@@ -266,3 +280,4 @@ public class BoardController {
         }
     }
 }
+   
