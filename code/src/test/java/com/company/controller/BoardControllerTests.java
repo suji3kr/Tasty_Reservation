@@ -163,7 +163,7 @@ public class BoardControllerTests {
     /** ✅ 예약 관리 페이지 (관리자) 테스트 */
     @Test
     public void testReservationAdminPage() {
-        String result = boardController.reservationAdmin();
+        String result = boardController.showReservationAdminPage(null);
         assertEquals("/board/reservation_admin", result);
     }
 
