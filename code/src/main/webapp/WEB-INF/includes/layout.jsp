@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title><tiles:insertAttribute name="title" /></title>
+<title>AOR</title>
 <link rel="stylesheet" type="text/css"
 	href="${contextPath}/resources/css/layout.css">
 </head>
