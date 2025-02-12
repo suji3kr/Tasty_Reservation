@@ -1,99 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
-    <!-- Root Spring Container 설정 -->
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/spring/root-context.xml</param-value>
-    </context-param>
+	<!-- Root Spring Container 설정 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/spring/root-context.xml</param-value>
+	</context-param>
 
-    <!-- Spring Container Listener -->
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
+	<context-param>
+		<param-name>user.timezone</param-name>
+		<param-value>Asia/Seoul</param-value>
+	</context-param>
 
-    <!-- DispatcherServlet 정의 -->
-    <servlet>
-        <servlet-name>appServlet</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <init-param>
-            <param-name>contextConfigLocation</param-name>
-            <param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
 
-        <!-- Multipart 설정 -->
-        <multipart-config>
-            <max-file-size>10485760</max-file-size> <!-- 최대 파일 크기 10MB -->
-            <max-request-size>20971520</max-request-size> <!-- 최대 요청 크기 20MB -->
-            <file-size-threshold>0</file-size-threshold> <!-- 즉시 메모리에 파일을 로드 -->
-        </multipart-config>
-    </servlet>
+	<!-- Spring Container Listener -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
 
-    <servlet-mapping>
-        <servlet-name>appServlet</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
+	<!-- DispatcherServlet 정의 -->
+	<servlet>
+		<servlet-name>appServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
 
-    <!-- Character Encoding Filter -->
-    <filter>
-        <filter-name>characterEncodingFilter</filter-name>
-        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-        <init-param>
-            <param-name>encoding</param-name>
-            <param-value>UTF-8</param-value>
-        </init-param>
-        <init-param>
-            <param-name>forceEncoding</param-name>
-            <param-value>true</param-value>
-        </init-param>
-    </filter>
+		<!-- Multipart 설정 -->
+		<multipart-config>
+			<max-file-size>10485760</max-file-size> <!-- 최대 파일 크기 10MB -->
+			<max-request-size>20971520</max-request-size> <!-- 최대 요청 크기 20MB -->
+			<file-size-threshold>0</file-size-threshold> <!-- 즉시 메모리에 파일을 로드 -->
+		</multipart-config>
+	</servlet>
 
-    <filter-mapping>
-        <filter-name>characterEncodingFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
+	<servlet-mapping>
+		<servlet-name>appServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
 
-    <!-- 정적 파일 서빙 설정 (업로드된 파일 접근 가능하도록 설정) -->
-    <servlet>
-        <servlet-name>default</servlet-name>
-        <servlet-class>org.apache.catalina.servlets.DefaultServlet</servlet-class>
-        <init-param>
-            <param-name>debug</param-name>
-            <param-value>1</param-value>
-        </init-param>
-        <init-param>
-            <param-name>listings</param-name>
-            <param-value>true</param-value>  <!-- ✅ 디렉토리 리스팅 허용 -->
-        </init-param>
-    </servlet>
+	<!-- Character Encoding Filter -->
+	<filter>
+		<filter-name>characterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
 
-    <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>/uploads/*</url-pattern>
-    </servlet-mapping>
+	<filter-mapping>
+		<filter-name>characterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 
-    <!-- MIME 타입 추가 (PNG, JPG 등 이미지 확장자 서빙 가능) -->
-    <mime-mapping>
-        <extension>png</extension>
-        <mime-type>image/png</mime-type>
-    </mime-mapping>
+	<!-- 정적 파일 서빙 설정 (업로드된 파일 접근 가능하도록 설정) -->
+	<servlet>
+		<servlet-name>default</servlet-name>
+		<servlet-class>org.apache.catalina.servlets.DefaultServlet</servlet-class>
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>1</param-value>
+		</init-param>
+		<init-param>
+			<param-name>listings</param-name>
+			<param-value>true</param-value>  <!-- ✅ 디렉토리 리스팅 허용 -->
+		</init-param>
+	</servlet>
 
-    <mime-mapping>
-        <extension>jpg</extension>
-        <mime-type>image/jpeg</mime-type>
-    </mime-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>/uploads/*</url-pattern>
+	</servlet-mapping>
 
-    <mime-mapping>
-        <extension>jpeg</extension>
-        <mime-type>image/jpeg</mime-type>
-    </mime-mapping>
+	<!-- MIME 타입 추가 (PNG, JPG 등 이미지 확장자 서빙 가능) -->
+	<mime-mapping>
+		<extension>png</extension>
+		<mime-type>image/png</mime-type>
+	</mime-mapping>
 
-    <mime-mapping>
-        <extension>gif</extension>
-        <mime-type>image/gif</mime-type>
-    </mime-mapping>
-    
+	<mime-mapping>
+		<extension>jpg</extension>
+		<mime-type>image/jpeg</mime-type>
+	</mime-mapping>
+
+	<mime-mapping>
+		<extension>jpeg</extension>
+		<mime-type>image/jpeg</mime-type>
+	</mime-mapping>
+
+	<mime-mapping>
+		<extension>gif</extension>
+		<mime-type>image/gif</mime-type>
+	</mime-mapping>
+
 </web-app>

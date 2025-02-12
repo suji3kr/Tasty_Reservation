@@ -26,7 +26,7 @@
 
 	<select id="findByMemberEmail" parameterType="String"
 		resultType="member">
-		SELECT id, email, password, username, age, phone, gender
+		SELECT id, email, password, username, age, phone, gender, role
 		FROM Users WHERE email=#{loginEmail}
 	</select>
 

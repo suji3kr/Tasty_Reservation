@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -37,5 +38,16 @@ public class HomeController {
         model.addAttribute("serverTime", formattedDate);
 
         return "home";
+    }
+    
+ // 회사 소개 페이지 요청 처리
+    @GetMapping("/company")
+    public String getCompanyInfo(Model model) {
+        model.addAttribute("companyName", "Art of Reservation");
+        model.addAttribute("description", "Art of Reservation은 최고의 맛집 예약 서비스입니다.");
+        model.addAttribute("established", "2020년");
+        model.addAttribute("location", "서울특별시 강남구");
+
+        return "company"; // Tiles 정의에 있는 "company" 사용
     }
 }
