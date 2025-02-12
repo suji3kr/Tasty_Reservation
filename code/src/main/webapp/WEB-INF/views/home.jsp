@@ -317,6 +317,11 @@ body {
             slides[currentSlide].style.display = 'block';
         }
         setInterval(showSlides, 3000);
+        
+        <%-- 수정 성공 메시지가 있을 경우 alert 띄우기 --%>
+        <% if (request.getAttribute("updateSuccess") != null) { %>
+            alert("수정이 완료되었습니다! 🚀");
+        <% } %>
     </script>
 
 	<script

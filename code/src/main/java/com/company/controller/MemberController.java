@@ -26,7 +26,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/member/*")
 @RequiredArgsConstructor
 public class MemberController {
-    private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 
 	private final MemberService memberService;
 	private final PasswordEncoder passwordEncoder;
@@ -44,30 +44,29 @@ public class MemberController {
 	}
 
 	@PostMapping("/signup")
-	public String signup(@ModelAttribute MemberDTO memberDTO, 
-	                     @RequestParam(required = false) String isAdmin, 
-	                     HttpSession session) {
-	    if (isAdmin != null) {
-	        memberDTO.setRole("admin");
-	    } else {
-	        memberDTO.setRole("user");
-	    }
+	public String signup(@ModelAttribute MemberDTO memberDTO, @RequestParam(required = false) String isAdmin,
+			HttpSession session) {
+		if (isAdmin != null) {
+			memberDTO.setRole("admin");
+		} else {
+			memberDTO.setRole("user");
+		}
 
-	    // 비밀번호 암호화
-	    String encodedPassword = passwordEncoder.encode(memberDTO.getPassword());
-	    memberDTO.setPassword(encodedPassword);
+		// 비밀번호 암호화
+		String encodedPassword = passwordEncoder.encode(memberDTO.getPassword());
+		memberDTO.setPassword(encodedPassword);
 
-	    int saveResult = memberService.signup(memberDTO);
+		int saveResult = memberService.signup(memberDTO);
 
-	    if (saveResult > 0) {
-	        session.setAttribute("loginEmail", memberDTO.getEmail());
-	        session.setAttribute("loginUserName", memberDTO.getUsername());
-	        session.setAttribute("userRole", memberDTO.getRole());
+		if (saveResult > 0) {
+			session.setAttribute("loginEmail", memberDTO.getEmail());
+			session.setAttribute("loginUserName", memberDTO.getUsername());
+			session.setAttribute("userRole", memberDTO.getRole());
 
-	        return "redirect:/";
-	    } else {
-	        return "/member/signup";
-	    }
+			return "redirect:/";
+		} else {
+			return "/member/signup";
+		}
 	}
 
 	@GetMapping("/login")
@@ -76,25 +75,24 @@ public class MemberController {
 	}
 
 	@PostMapping("/login")
-	public String login(@RequestParam("email") String email,
-	                    @RequestParam("password") String password,
-	                    HttpSession session, Model model) {
+	public String login(@RequestParam("email") String email, @RequestParam("password") String password,
+			HttpSession session, Model model) {
 
 		MemberDTO memberDTO = new MemberDTO();
-	    memberDTO.setEmail(email);
-	    
-	    // 로그인 시 비밀번호 확인
-	    MemberDTO loginResult = memberService.findByMemberEmail(email);
-	    if (loginResult != null && passwordEncoder.matches(password, loginResult.getPassword())) {
-	        session.setAttribute("loginEmail", loginResult.getEmail());
-	        session.setAttribute("loginUserName", loginResult.getUsername());
-	        session.setAttribute("userRole", loginResult.getRole());
+		memberDTO.setEmail(email);
 
-	        return "redirect:/";
-	    } else {
-	        model.addAttribute("errorMessage", "이메일 또는 비밀번호가 맞지 않습니다.");
-	        return "/member/login";
-	    }
+		// 로그인 시 비밀번호 확인
+		MemberDTO loginResult = memberService.findByMemberEmail(email);
+		if (loginResult != null && passwordEncoder.matches(password, loginResult.getPassword())) {
+			session.setAttribute("loginEmail", loginResult.getEmail());
+			session.setAttribute("loginUserName", loginResult.getUsername());
+			session.setAttribute("userRole", loginResult.getRole());
+
+			return "redirect:/";
+		} else {
+			model.addAttribute("errorMessage", "이메일 또는 비밀번호가 맞지 않습니다.");
+			return "/member/login";
+		}
 	}
 
 	@GetMapping("/delete")
@@ -112,15 +110,42 @@ public class MemberController {
 	}
 
 	@PostMapping("/update")
-	public String update(@ModelAttribute MemberDTO memberDTO, RedirectAttributes redirectAttributes) {
+	public String update(@ModelAttribute MemberDTO memberDTO, @RequestParam("currentPassword") String currentPassword,
+			RedirectAttributes redirectAttributes, HttpSession session) {
+		String loginEmail = (String) session.getAttribute("loginEmail");
+		MemberDTO existingMember = memberService.findByMemberEmail(loginEmail);
+
+		if (existingMember == null) {
+			redirectAttributes.addFlashAttribute("errorMessage", "회원 정보를 찾을 수 없습니다.");
+			return "redirect:/member/update";
+		}
+
+		// 현재 비밀번호 확인
+		if (!passwordEncoder.matches(currentPassword, existingMember.getPassword())) {
+			redirectAttributes.addFlashAttribute("errorMessage", "현재 비밀번호가 일치하지 않습니다.");
+			return "redirect:/member/update";
+		}
+
+		// 기존 비밀번호 유지 (비밀번호 변경 없음)
+		memberDTO.setPassword(existingMember.getPassword());
+
 		boolean result = memberService.update(memberDTO);
+
 		if (result) {
-			redirectAttributes.addFlashAttribute("updateSuccess", true);
-			return "redirect:/";
+			redirectAttributes.addFlashAttribute("updateSuccess", "true"); // 수정 성공 메시지 추가
+			return "redirect:/"; // 메인 페이지 또는 마이페이지로 리디렉트
 		} else {
 			return "/member/update";
 		}
 	}
+
+	/*
+	 * @PostMapping("/update") public String update(@ModelAttribute MemberDTO
+	 * memberDTO, RedirectAttributes redirectAttributes) { boolean result =
+	 * memberService.update(memberDTO); if (result) {
+	 * redirectAttributes.addFlashAttribute("updateSuccess", true); return
+	 * "redirect:/"; } else { return "/member/update"; } }
+	 */
 
 	@PostMapping("/email-check")
 	public @ResponseBody String emailCheck(@RequestParam("email") String email) {
@@ -129,7 +154,7 @@ public class MemberController {
 
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
-	    session.invalidate();
-	    return "redirect:/";
+		session.invalidate();
+		return "redirect:/";
 	}
 }
