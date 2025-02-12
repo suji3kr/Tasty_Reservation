@@ -42,7 +42,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>한식 맛집</h1>
+        <h2>한식 맛집</h2>
         
         <div class="card">
             <a href="https://kimbab1009.com/" target="_blank">

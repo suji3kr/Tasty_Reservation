@@ -49,7 +49,7 @@
 </head>
 <body>
 	<div class="container">
-		<h1>양식 맛집</h1>
+		<h2>양식 맛집</h2>
 
 		<div class="card">
 			<a href="https://www.outback.co.kr/" target="_blank"> <img

@@ -52,7 +52,7 @@
 </head>
 <body>
 	<div class="container">
-		<h1>일식 맛집</h1>
+		<h2>일식 맛집</h2>
 
 		<div class="card">
 			<a href="https://map.naver.com/p/entry/place/34550318?lng=127.0368945&lat=37.521843&placePath=%2Fhome&entry=plt&searchType=place&c=15.00,0,0,0,dh" target="_blank"> <img

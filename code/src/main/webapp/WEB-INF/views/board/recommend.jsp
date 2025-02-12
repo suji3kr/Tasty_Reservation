@@ -20,6 +20,7 @@
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
+            border-radius: 8px;
         }
         h1 {
             color: #333;

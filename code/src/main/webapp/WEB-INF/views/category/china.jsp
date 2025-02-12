@@ -49,7 +49,7 @@
 </head>
 <body>
 	<div class="container">
-		<h1>중식 맛집</h1>
+		<h2>중식 맛집</h2>
 
 		<div class="card">
 			<a

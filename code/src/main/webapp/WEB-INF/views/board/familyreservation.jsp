@@ -386,14 +386,6 @@ to {
 		</div>
 
  -->
-		<!-- 시간 선택 버튼 -->
-		<div class="time-buttons" id="timeButtons">
-			<button>
-				<a href="/board/register">새 가게 등록</a>
-			</button>
-		</div>
-
-
 
 	</div>
 
