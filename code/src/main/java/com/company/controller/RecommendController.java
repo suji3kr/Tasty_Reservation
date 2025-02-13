@@ -5,12 +5,21 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.company.service.NaverImageSearchService;
+
 @Controller
 public class RecommendController {
+	
+	private final NaverImageSearchService naverImageSearchService;
+	
+	public RecommendController(NaverImageSearchService naverImageSearchService) {
+        this.naverImageSearchService = naverImageSearchService;
+    }
 
 	private static final String[] FOOD_LIST = {
 		    // ✅ 한식 (Korean)
@@ -20,7 +29,7 @@ public class RecommendController {
 		    "전복죽", "콩나물국밥", "오징어볶음", "잔치국수", "비빔냉면", "물냉면", "수제비", "칼국수", "동태찌개", "고등어조림",
 
 		    // ✅ 중식 (Chinese)
-		    "짜장면", "짬뽕", "탕수육", "깐풍기", "양장피", "마라탕", "마라샹궈", "북경오리", "유산슬", "고추잡채",
+		    "짜장면", "짬뽕", "탕수육", "깐풍기", "양장피", "마라탕", "마라샹궈", "베이징덕", "유산슬", "고추잡채",
 		    "칠리새우", "멘보샤", "양꼬치", "딤섬", "훠궈", "마파두부", "홍샤오러우", "고량주 안주", "차슈덮밥", "우육면",
 
 		    // ✅ 일식 (Japanese)
@@ -29,15 +38,15 @@ public class RecommendController {
 
 		    // ✅ 서양식 (Western)
 		    "스테이크", "파스타", "햄버거", "피자", "크림파스타", "까르보나라", "봉골레파스타", "리조또", "스프", "미트볼",
-		    "바베큐립", "포크찹", "칠리콘카르네", "클램차우더", "시저샐러드", "그리스식 샐러드", "오믈렛", "클럽샌드위치", "베이글",
+		    "바베큐 폭립", "포크찹", "칠리콘카르네", "클램차우더", "시저샐러드", "그릭 샐러드", "오믈렛", "클럽샌드위치", "베이글",
 
 		    // ✅ 동남아 음식 (Southeast Asian)
-		    "팟타이", "똠얌꿍", "카오팟", "나시고랭", "바쿠테", "베트남 쌀국수", "분짜", "반미", "미고렝", "사테",
+		    "팟타이", "똠얌꿍", "카오팟", "나시고랭", "바쿠테", "베트남 쌀국수", "분짜", "반미", "미고렝", "사테꼬치",
 		    "락사", "바비큐 치킨", "카레라이스", "캉콩볶음", "송탄카레", "말레이시아 닭고기 덮밥", "싱가포르 칠리크랩",
 
 		    // ✅ 중동 & 인도 (Middle Eastern & Indian)
 		    "케밥", "훔무스", "팔라펠", "샤와르마", "카레", "난", "탄두리 치킨", "마살라", "달카레", "사모사",
-		    "비리야니", "로티", "파니르 버터 마살라", "도사", "라씨", "할루미 치즈 샐러드", "무사카", "파코라",
+		    "비리야니", "로티", "파니르 버터 마살라", "라씨", "할루미 치즈 샐러드", "무사카", "파코라",
 
 		    // ✅ 남미 음식 (South American)
 		    "타코", "퀘사디아", "부리또", "엔칠라다", "세비체", "아사도", "엠파나다", "빠에야", "감바스 알 아히요",
@@ -52,23 +61,28 @@ public class RecommendController {
 		    "콜드프레스 주스", "채식 버거", "두유 요거트", "바질페스토 파스타", "토푸 마파두부",
 
 		    // ✅ 다양한 간식류 (Snacks)
-		    "치킨 너겟", "프렌치프라이", "핫도그", "떡꼬치", "어묵", "튀김만두", "순대", "옥수수 구이", "감자튀김",
+		    "치킨 너겟", "핫도그", "떡꼬치", "어묵", "튀김만두", "순대", "옥수수 구이", "감자튀김",
 		    "팝콘", "바게트 샌드위치", "핫윙", "도리아", "치즈볼",
 
 		    // ✅ 이색 음식 (Exotic Foods)
-		    "에스카르고", "랍스터", "캐비어", "푸아그라", "올리브 테이프", "스네일 수프", "카르파초", "사시미", "문어 숙회",
+		    "에스카르고", "랍스터", "캐비어", "푸아그라", "타프나드", "스네일 수프", "카르파초", "사시미", "문어 숙회",
 		    "말고기 스테이크", "블루치즈 샐러드", "프로슈토"
 		};
 
-    @RequestMapping("/recommend")
-    public String recommend(Model model) {
-        String food = getRandomFood();
-        List<Restaurant> restaurants = getNaverSearchResults(food);
-        
-        model.addAttribute("food", food);
-        model.addAttribute("restaurants", restaurants);
-        return "/board/recommend";  // JSP 파일로 데이터 전달
-    }
+	@RequestMapping("/recommend")
+	public String recommend(Model model) {
+	    String food = getRandomFood();
+	    List<Restaurant> restaurants = getNaverSearchResults(food);
+
+	    // 네이버 API를 통해 음식 이미지 검색
+	    String imageUrl = naverImageSearchService.searchImage(food);
+
+	    model.addAttribute("food", food);
+	    model.addAttribute("restaurants", restaurants);
+	    model.addAttribute("imageUrl", imageUrl);
+	    return "/board/recommend";
+	}
+
 
     // ✅ 랜덤 음식 추천
     private String getRandomFood() {
