@@ -1,5 +1,9 @@
 package com.company.controller;
 
+import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -8,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -280,7 +285,7 @@ public class BoardController {
 
         model.addAttribute("reservationList", reservationList);
         model.addAttribute("searchDate", searchDate); // 검색 날짜를 JSP에서 유지하도록 추가
-        return "board/reservation_user";  // JSP 페이지 경로
+        return "/board/reservation_user";  // JSP 페이지 경로
     }
     /** ✅ 로그인한 사용자에 따라 예약 관리 페이지 이동 */
     @GetMapping("/reservation")
@@ -292,6 +297,13 @@ public class BoardController {
         } else {
             return "redirect:/board/reservation_user";   // 사용자 페이지 이동
         }
+    }
+
+    // 예약 삭제 처리
+    @GetMapping("/delete/{id}")
+    public String deleteReservation(@PathVariable("id") Long id) {
+        reservationService.deleteReservation(id);
+        return "redirect:/board/reservation_user"; // 삭제 후 리스트로 이동
     }
 }
    
