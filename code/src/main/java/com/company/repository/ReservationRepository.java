@@ -34,11 +34,6 @@ public class ReservationRepository {
         System.out.println("🔍 조회된 예약 개수: " + reservations.size());
         return reservations;
     }
-    
- // 예약 수정
-    public int updateReservation(ReservationDTO reservation) {
-        return sql.update("reservation.updateReservation", reservation);
-    }
 
     // 특정 예약 조회 (ID로 조회)
     public ReservationDTO findById(Long reservationId) {
@@ -68,5 +63,14 @@ public class ReservationRepository {
         return sql.selectList("reservation.findByUserNameAndDate", params);
     }
     
+ // 예약 수정
+    public int updateReservation(ReservationDTO reservation) {
+        return sql.update("reservation.updateReservation", reservation);
+    }
+
+    // 예약 삭제
+    public int deleteReservation(Long id) {
+        return sql.delete("reservation.deleteReservation", id);
+    }
 
 }

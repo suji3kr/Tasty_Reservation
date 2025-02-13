@@ -51,12 +51,6 @@ public class ReservationService {
         return reservations;
     }
 
-    // 예약 정보 수정
-    @Transactional
-    public void updateReservation(ReservationDTO reservation) {
-        reservationRepository.updateReservation(reservation);
-    }
-
     // 특정 예약 정보 조회
     public ReservationDTO getReservationById(Long reservationId) {
         return reservationRepository.findById(reservationId);
@@ -81,6 +75,19 @@ public class ReservationService {
  // 특정 사용자와 특정 날짜에 해당하는 예약 조회
     public List<ReservationDTO> findByUserNameAndDate(String userName, String searchDate) {
         return reservationRepository.findByUserNameAndDate(userName, searchDate);
+    }
+ // 특정 예약 조회
+    public ReservationDTO findById(Long id) {
+        return reservationRepository.findById(id);
+    }
+ // 예약 수정
+    public boolean updateReservation(ReservationDTO reservation) {
+        return reservationRepository.updateReservation(reservation) > 0;
+    }
+
+    // 예약 삭제
+    public boolean deleteReservation(Long id) {
+        return reservationRepository.deleteReservation(id) > 0;
     }
 
 }

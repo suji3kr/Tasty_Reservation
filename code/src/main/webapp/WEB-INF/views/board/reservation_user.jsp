@@ -85,39 +85,32 @@ body {
 
 		<!-- 예약 검색 폼 -->
 		<form action="/board/reservation_user" method="get" class="mb-3">
-			<div class="row g-3 align-items-center">
-				<div class="col-auto">
-					<label for="reservationDate" class="col-form-label">예약 날짜:</label>
-				</div>
-				<div class="col-auto">
-					<input type="date" class="form-control" id="reservationDate"
-						name="searchDate"
-						value="<fmt:formatDate value='${currentDate}' pattern='yyyy-MM-dd'/>"
-						required>
-				</div>
-				<div class="col-auto">
-					<button type="submit" class="btn custom-btn-search">검색</button>
-				</div>
-			</div>
-		</form>
+	<div class="row g-3 align-items-center">
+		<div class="col-auto">
+			<label for="reservationDate" class="col-form-label">예약 날짜:</label>
+		</div>
+		<div class="col-auto">
+			<input type="date" class="form-control" id="reservationDate"
+				name="searchDate"
+				value="${not empty searchDate ? searchDate : currentDate}" required>
+		</div>
+		<div class="col-auto">
+			<button type="submit" class="btn custom-btn-search">검색</button>
+		</div>
+	</div>
+</form>
+
 
 		<table class="table table-bordered table-hover">
 			<thead class="table-dark">
 				<tr>
+					<th>예약 날짜</th>
 					<th>예약 시간</th>
 					<th>가게 이름</th>
 					<th>내 이름</th>
 					<th>인원 수</th>
 					<th>연락처</th>
-					
-
-
-
-
-
-
-
-
+					<th>관리</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -125,14 +118,17 @@ body {
 					<c:when test="${not empty reservationList}">
 						<c:forEach var="reservation" items="${reservationList}">
 							<tr style="background-color: #e0f7fa; font-weight: bold;">
+							    <td><fmt:formatDate value="${reservation.reservationDate}" pattern="yyyy-MM-dd" /></td>
 								<td><fmt:formatDate value="${reservation.reservationTime}" pattern="HH:mm" /></td>
 								<td>${reservation.storeName}</td>
 								<td>${reservation.userName} (내 예약)</td>
 								<td>${reservation.peopleCount}명</td>
 								<td>${reservation.phone}</td>
 								<td>
-									<span class="badge bg-success">확정</span>
-								</td>
+    <button type="button" class="btn btn-warning btn-sm" onclick="alert('관리자에게 문의하세요.');">예약 수정</button>
+    <a href="/board/delete/${reservation.id}" class="btn btn-danger btn-sm"
+       onclick="return confirm('정말 취소하시겠습니까?');">예약 취소</a>
+</td>
 							</tr>
 						</c:forEach>
 					</c:when>

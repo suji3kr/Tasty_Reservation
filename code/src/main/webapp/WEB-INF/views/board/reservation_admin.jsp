@@ -103,12 +103,13 @@ body {
 		<table class="table table-bordered table-hover">
 			<thead class="table-dark">
 				<tr>
+					<th>예약 날짜</th>
 					<th>예약 시간</th>
 					<th>가게 이름</th>
 					<th>고객 이름</th>
 					<th>인원 수</th>
 					<th>연락처</th>
-					<th>상태</th>
+					<th>관리</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -116,6 +117,7 @@ body {
 					<c:when test="${not empty reservationList}">
 						<c:forEach var="reservation" items="${reservationList}">
 							<tr>
+							<td><fmt:formatDate value="${reservation.reservationDate}" pattern="yyyy-MM-dd" /></td>
 								<td><fmt:formatDate value="${reservation.reservationTime}"
 										pattern="HH:mm" /></td>
 								<td>${reservation.storeName}</td>
@@ -129,8 +131,8 @@ body {
 											${reservation.phone}
 										</c:otherwise>
 									</c:choose></td>
-								<td>
-								<span class="badge bg-success">확정</span>
+									<td>
+    								<a href="/reservation/edit/${reservation.id}" class="btn btn-warning btn-sm">수정</a>
 								</td>
 							</tr>
 						</c:forEach>
@@ -146,13 +148,11 @@ body {
 
 		<!-- 추가 액션 버튼 -->
 		<div class="button-container d-flex justify-content-between">
-			<a href="/reservation/create" class="btn custom-btn-success">
-				예약손님등록🍀</a>
 			<div>
 				<span class="me-2">총 예약 건수: ${fn:length(reservationList)}건</span>
 			</div>
 		</div>
-
+</div>
 
 		<!-- Bootstrap JS -->
 		<script

@@ -95,46 +95,42 @@ public class ReservationController {
 
         return "/board/reservation_admin";
     }
-
-
-    // 예약 수정 페이지로 이동 (GET)
-    @GetMapping("/edit/{reservationId}")
-    public String editReservation(@PathVariable("reservationId") Long reservationId, Model model, HttpSession session) {
-        // 세션에서 로그인된 사용자 이메일을 가져옴
-        String userEmail = (String) session.getAttribute("loginEmail");
-        
-        // 예약 정보를 가져옴
-        ReservationDTO reservation = reservationService.getReservationById(reservationId);
-        
-        // 예약자가 본인인지 확인
-        if (reservation != null && reservation.getCustomerEmail().equals(userEmail)) {
-            model.addAttribute("reservation", reservation);
-            return "/reservation/edit"; // 예약 수정 페이지로 이동
-        } else {
-            return "redirect:/reservation/error"; // 본인 예약이 아니면 에러 페이지로 리다이렉트
-        }
+ // 예약 수정 페이지 (관리자만 접근 가능)
+    @GetMapping("/edit/{id}")
+    public String editReservation(@PathVariable("id") Long id, Model model) {
+        ReservationDTO reservation = reservationService.findById(id);
+        model.addAttribute("reservation", reservation);
+        return "/reservation/edit"; // 수정 JSP 페이지
     }
 
-    // 예약 수정 처리 (POST)
     @PostMapping("/update")
-    public String updateReservation(@RequestParam("reservationId") Long reservationId, 
-                                    @RequestParam("reservationTime") Date reservationTime, 
-                                    @RequestParam("peopleCount") int peopleCount, 
-                                    @RequestParam("phoneNumber") String phoneNumber, 
-                                    HttpSession session) {
-        String userEmail = (String) session.getAttribute("loginEmail");
-        ReservationDTO reservation = reservationService.getReservationById(reservationId);
+    public String updateReservation(@RequestParam("id") Long id, 
+                                    @RequestParam("reservationDate") String reservationDateStr, // 📌 String으로 받기
+                                    @RequestParam("reservationTime") String reservationTimeStr, // 📌 String으로 받기
+                                    @RequestParam("peopleCount") int peopleCount,
+                                    @RequestParam("phone") String phone) throws ParseException {
 
-        // 예약자가 본인 예약인지 확인
-        if (reservation != null && reservation.getCustomerEmail().equals(userEmail)) {
-            reservation.setReservationTime((Time) reservationTime);
+        System.out.println("Received reservationDate: " + reservationDateStr);
+        System.out.println("Received reservationTime: " + reservationTimeStr);
+
+        // String → Date 변환
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date reservationDate = dateFormat.parse(reservationDateStr);
+
+        // String → Time 변환 (HH:mm:ss 형식으로 변환 필요)
+        Time reservationTime = Time.valueOf(reservationTimeStr + ":00");
+
+        ReservationDTO reservation = reservationService.findById(id);
+        if (reservation != null) {
+            reservation.setReservationDate(reservationDate);
+            reservation.setReservationTime(reservationTime);
             reservation.setPeopleCount(peopleCount);
-            reservation.setPhone(phoneNumber);
+            reservation.setPhone(phone);
+
             reservationService.updateReservation(reservation);
-            return "redirect:/reservation/list";
-        } else {
-            // 본인 예약이 아닌 경우
-            return "redirect:/reservation/error"; // 에러 페이지로 리다이렉트
         }
+        return "redirect:/board/reservation_admin?searchDate=" + reservationDateStr;
     }
+
+
 }

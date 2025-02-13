@@ -14,6 +14,7 @@ public class ReservationDTO {
     private String storeName;
     private String userName;
     private String phone;
+    private String phoneNumber;
     private Date reservationDate;
     private Time reservationTime;
     private int peopleCount;
