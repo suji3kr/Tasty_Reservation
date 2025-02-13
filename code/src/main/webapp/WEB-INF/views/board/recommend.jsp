@@ -6,6 +6,7 @@
 <html>
 <head>
 <title>랜덤 음식 추천</title>
+
 <style>
 body {
 	font-family: Arial, sans-serif;
@@ -29,9 +30,8 @@ h1 {
 }
 
 .food-image {
-	width: 100%;
 	max-width: 400px;
-	height: auto;
+	height: 300px;
 	border-radius: 8px;
 	margin: 20px 0;
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
@@ -123,9 +123,10 @@ button:hover {
 		</div>
 
 		<!-- 새로운 랜덤 추천 버튼 -->
-		<form action="recommend" method="get">
+		<form>
 			<button type="submit">다른 음식 추천 받기</button>
 		</form>
+
 	</div>
 </body>
 </html>

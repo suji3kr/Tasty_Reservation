@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,7 +63,7 @@ public class RecommendController {
 		    "콜드프레스 주스", "채식 버거", "두유 요거트", "바질페스토 파스타", "토푸 마파두부",
 
 		    // ✅ 다양한 간식류 (Snacks)
-		    "치킨 너겟", "핫도그", "떡꼬치", "어묵", "튀김만두", "순대", "옥수수 구이", "감자튀김",
+		    "치킨 너겟","핫도그", "떡꼬치", "어묵", "튀김만두", "순대", "옥수수 구이", "감자튀김",
 		    "팝콘", "바게트 샌드위치", "핫윙", "도리아", "치즈볼",
 
 		    // ✅ 이색 음식 (Exotic Foods)
@@ -69,49 +71,65 @@ public class RecommendController {
 		    "말고기 스테이크", "블루치즈 샐러드", "프로슈토"
 		};
 
-	@RequestMapping("/recommend")
-	public String recommend(Model model) {
-	    String food = getRandomFood();
-	    List<Restaurant> restaurants = getNaverSearchResults(food);
+    @RequestMapping("/recommend")
+    public Object recommend(Model model, HttpServletRequest request) {
+        String food = getRandomFood();
+        List<Restaurant> restaurants = getNaverSearchResults(food);
+        String imageUrl = naverImageSearchService.searchImage(food);
 
-	    // 네이버 API를 통해 음식 이미지 검색
-	    String imageUrl = naverImageSearchService.searchImage(food);
-
-	    model.addAttribute("food", food);
-	    model.addAttribute("restaurants", restaurants);
-	    model.addAttribute("imageUrl", imageUrl);
-	    return "/board/recommend";
-	}
-
-
-    // ✅ 랜덤 음식 추천
-    private String getRandomFood() {
-        Random random = new Random();
-        return FOOD_LIST[random.nextInt(FOOD_LIST.length)];
-    }
-
-    // ✅ 네이버 검색 결과 링크 제공
-    private List<Restaurant> getNaverSearchResults(String food) {
-        List<Restaurant> restaurantList = new ArrayList<>();
-
-        try {
-            // 검색어를 UTF-8로 인코딩
-            String encodedQuery = URLEncoder.encode(food + " 맛집", "UTF-8");
-            String searchUrl = "https://m.map.naver.com/search2/search.naver?query=" + encodedQuery;
-
-            // 네이버 검색 링크만 제공 (크롤링 대신)
-            restaurantList.add(new Restaurant(food + " 맛집 검색 결과", "네이버 검색에서 직접 확인하세요.", searchUrl));
-
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-            // 기본 예제 데이터 추가
-            restaurantList.add(new Restaurant("네이버 검색 실패", "검색 결과를 찾을 수 없습니다.", "https://map.naver.com"));
+        // 일반 요청 (JSP 렌더링)
+        if (request.getHeader("X-Requested-With") == null) {
+            model.addAttribute("food", food);
+            model.addAttribute("restaurants", restaurants);
+            model.addAttribute("imageUrl", imageUrl);
+            return "/board/recommend"; // JSP 반환
         }
 
-        return restaurantList;
+        // Ajax 요청 (JSON 반환)
+        return new RecommendResponse(food, imageUrl, restaurants);
     }
 
-    // Restaurant 모델 클래스
+    private String getRandomFood() {
+        return FOOD_LIST[new Random().nextInt(FOOD_LIST.length)];
+    }
+
+    private List<Restaurant> getNaverSearchResults(String food) {
+        List<Restaurant> list = new ArrayList<>();
+        try {
+            String encodedQuery = URLEncoder.encode(food + " 맛집", "UTF-8");
+            String searchUrl = "https://m.map.naver.com/search2/search.naver?query=" + encodedQuery;
+            list.add(new Restaurant(food + " 맛집 검색 결과", "네이버 검색에서 직접 확인하세요.", searchUrl));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            list.add(new Restaurant("네이버 검색 실패", "검색 결과를 찾을 수 없습니다.", "https://map.naver.com"));
+        }
+        return list;
+    }
+
+    public static class RecommendResponse {
+        private String food;
+        private String imageUrl;
+        private List<Restaurant> restaurants;
+
+        public RecommendResponse(String food, String imageUrl, List<Restaurant> restaurants) {
+            this.food = food;
+            this.imageUrl = imageUrl;
+            this.restaurants = restaurants;
+        }
+
+        public String getFood() {
+            return food;
+        }
+
+        public String getImageUrl() {
+            return imageUrl;
+        }
+
+        public List<Restaurant> getRestaurants() {
+            return restaurants;
+        }
+    }
+
     public static class Restaurant {
         private String name;
         private String address;
@@ -136,3 +154,4 @@ public class RecommendController {
         }
     }
 }
+
