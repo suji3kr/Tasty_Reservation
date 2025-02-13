@@ -26,6 +26,7 @@
 		<property name="preparerFactoryClass"
 			value="org.springframework.web.servlet.view.tiles3.SpringBeanPreparerFactory" />
 	</bean>
+	
 	<bean
 		class="org.springframework.web.servlet.view.tiles3.TilesViewResolver">
 		<property name="order" value="1" /> <!-- 뷰 리졸버 우선 순위 설정 -->
