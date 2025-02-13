@@ -38,6 +38,19 @@
         WHERE DATE(r.reservation_date) = #{reservationDate}
         ORDER BY r.reservation_time ASC;
     </select>
+     <!-- 특정 사용자의 예약 목록 조회 -->
+    <select id="findByUserName" parameterType="String" resultMap="reservationResultMap">
+        SELECT * FROM reservations WHERE username = #{userName} ORDER BY reservation_date ASC;
+    </select>
+    
+     <!-- 특정 사용자와 특정 날짜의 예약 조회 -->
+    <select id="findByUserNameAndDate" parameterType="map"  resultMap="reservationResultMap">
+        SELECT * FROM reservations 
+        WHERE username = #{userName} 
+        AND reservation_date = #{searchDate}
+        ORDER BY reservation_time ASC;
+    </select>
+    
 
     <!-- 예약 정보 매핑 -->
     <resultMap id="reservationResultMap" type="com.company.domain.ReservationDTO">

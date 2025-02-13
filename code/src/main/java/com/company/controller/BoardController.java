@@ -262,10 +262,26 @@ public class BoardController {
 
 
     @GetMapping("/reservation_user")
-    public String reservationUser() {
-        return "/board/reservation_user";
-    }
+    public String userReservationList(
+            @RequestParam(value = "searchDate", required = false) String searchDate,
+            HttpSession session,
+            Model model) {
 
+        // 현재 로그인한 사용자 정보 가져오기
+        String loginUserName = (String) session.getAttribute("loginUserName");
+
+        // 검색 날짜가 없으면 기본값을 오늘 날짜로 설정
+        if (searchDate == null || searchDate.isEmpty()) {
+            searchDate = java.time.LocalDate.now().toString();
+        }
+
+        // 로그인한 사용자 + 특정 날짜에 해당하는 예약만 조회
+        List<ReservationDTO> reservationList = reservationService.findByUserNameAndDate(loginUserName, searchDate);
+
+        model.addAttribute("reservationList", reservationList);
+        model.addAttribute("searchDate", searchDate); // 검색 날짜를 JSP에서 유지하도록 추가
+        return "board/reservation_user";  // JSP 페이지 경로
+    }
     /** ✅ 로그인한 사용자에 따라 예약 관리 페이지 이동 */
     @GetMapping("/reservation")
     public String reservation(HttpSession session) {

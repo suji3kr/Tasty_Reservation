@@ -1,7 +1,10 @@
 package com.company.repository;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 import com.company.domain.ReservationDTO;
@@ -53,5 +56,17 @@ public class ReservationRepository {
         System.out.println("🔍 [Repository] 조회된 전체 예약 개수: " + reservations.size());
         return reservations;
     }
+ // 특정 사용자의 예약 목록 조회
+    public List<ReservationDTO> findByUserName(String userName) {
+        return sql.selectList("reservation.findByUserName", userName);
+    }
+ // 특정 사용자와 날짜에 해당하는 예약 목록 조회
+    public List<ReservationDTO> findByUserNameAndDate(String userName, String searchDate) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("userName", userName);
+        params.put("searchDate", searchDate);
+        return sql.selectList("reservation.findByUserNameAndDate", params);
+    }
+    
 
 }

@@ -131,20 +131,6 @@ body {
 									</c:choose></td>
 								<td>
 								<span class="badge bg-success">확정</span>
-								<%-- <c:choose>
-									<c:when test="${reservation.status == 'CONFIRMED'}">
-										<span class="badge bg-success">확정</span>
-									</c:when>
-									<c:when test="${reservation.status == 'PENDING'}">
-										<span class="badge bg-warning">대기</span>
-									</c:when>
-									<c:when test="${reservation.status == 'CANCELLED'}">
-										<span class="badge bg-danger">취소</span>
-									</c:when>
-									<c:otherwise>
-										<span class="badge bg-secondary">미정</span>
-									</c:otherwise>
-								</c:choose> --%>
 								</td>
 							</tr>
 						</c:forEach>
