@@ -74,5 +74,13 @@ public class ReservationService {
         System.out.println("🔍 [Service] 조회된 전체 예약 개수: " + reservations.size());
         return reservations;
     }
+ // 특정 사용자의 예약 조회
+    public List<ReservationDTO> findByUserName(String userName) {
+        return reservationRepository.findByUserName(userName);
+    }
+ // 특정 사용자와 특정 날짜에 해당하는 예약 조회
+    public List<ReservationDTO> findByUserNameAndDate(String userName, String searchDate) {
+        return reservationRepository.findByUserNameAndDate(userName, searchDate);
+    }
 
 }
