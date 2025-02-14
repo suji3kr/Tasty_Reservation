@@ -27,9 +27,9 @@ public class PhotoGalleryController {
 
         // 예시 데이터: 실제 데이터는 DB에서 가져와야 합니다.
         List<String> photoList = Arrays.asList(
-            "/resources/image/photo1.jpg",
-            "/resources/image/photo2.jpg",
-            "/resources/image/photo3.jpg"
+            "photo1.jpg",
+            "photo2.jpg",
+            "photo3.jpg"
         );
         
         model.addAttribute("photos", photoList);

@@ -22,7 +22,7 @@ public class PhotoGalleryService {
 
     private final List<Comment> comments = new ArrayList<>();
     private final List<Rating> ratings = new ArrayList<>();
-    private static final String UPLOAD_DIR = "C:/upload"; // 저장 경로
+    private static final String UPLOAD_DIR = "C:/uploads"; // 저장 경로
 
     public void uploadImage(MultipartFile file) throws IOException {
         Path uploadPath = Paths.get(UPLOAD_DIR);

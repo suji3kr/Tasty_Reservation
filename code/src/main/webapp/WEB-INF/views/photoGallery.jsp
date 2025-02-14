@@ -150,7 +150,7 @@ h1 {
 <!-- 사진 업로드 폼 --> 
 <div class="upload-form">
     <h2>사진 업로드</h2>
-    <form action="uploadImage" method="post" enctype="multipart/form-data">
+    <form action="/upload" method="post" enctype="multipart/form-data">
         <input type="file" name="file" accept="image/*" required>
         <button type="submit">업로드</button>
     </form>

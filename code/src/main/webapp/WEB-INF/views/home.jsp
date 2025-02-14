@@ -60,7 +60,7 @@ body {
 }
 
 .bottom-row img {
-	width: 100%;
+	width: 90%;
 	height: 100%;
 	object-fit: cover; /* 이미지가 컨테이너를 꽉 채우도록 설정 */
 	object-position: center; /* 이미지의 중심을 기준으로 자르기 */
@@ -182,10 +182,10 @@ body {
 		<div id="container">
 			<div class="top-row">
 				<div class="photo-frame">
-					<img src="/resources/image/레스토랑1.png" alt="Image 1">
+					<img src="/resources/image/res.png" alt="Image 1">
 				</div>
 				<div class="photo-frame">
-					<img src="/resources/image/송아지스테이크.png" alt="Image 2">
+					<img src="/resources/image/stake.png" alt="Image 2">
 					<div class="overlay">
 						<h1>Art Of Reservation</h1>
 						<p>예약의 미학</p>
@@ -193,11 +193,11 @@ body {
 					</div>
 				</div>
 				<div class="photo-frame">
-					<img src="/resources/image/연어레스토랑.png" alt="Image 3">
+					<img src="/resources/image/salmon.png" alt="Image 3">
 				</div>
 			</div>
 			<div class="bottom-row">
-				<img src="/resources/image/과일스푼.png" alt="Image 4">
+				<img src="/resources/image/spoon.png" alt="Image 4">
 			</div>
 
 			<!-- 지도 및 검색 섹션 (최상단) -->

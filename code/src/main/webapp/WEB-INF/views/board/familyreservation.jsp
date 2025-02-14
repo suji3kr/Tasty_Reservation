@@ -357,8 +357,9 @@ to {
 					<div class="photo-frame" data-store-id="${store.id}">
 						<a href="/store/detail?id=${store.id}"> <c:choose>
 								<c:when test="${not empty store.storeImage}">
-									<img src="${store.storeImage}" alt="가게 이미지"
-										onerror="this.onerror=null; this.src='/resources/images/default.jpg'">
+									<%-- <img src="${store.storeImage}" alt="가게 이미지"
+										onerror="this.onerror=null; this.src='/resources/images/default.jpg'"> --%>
+									<img src="${store.storeImage}" alt="가게 이미지">
 								</c:when>
 								<c:otherwise>
 									<img src="/resources/images/default.jpg" alt="default">
