@@ -29,10 +29,10 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/board/list.jsp" />
 	</definition>
-	<definition name="board/register" extends="base">
+	<definition name="store/register" extends="base">
 		<put-attribute name="title" value="새로운 가게 등록" />
 		<put-attribute name="body"
-			value="/WEB-INF/views/board/register.jsp" />
+			value="/WEB-INF/views/store/register.jsp" />
 	</definition>
 	<definition name="/board/favfood" extends="base">
 		<put-attribute name="title" value="즐겨찾는 맛집" />
@@ -159,15 +159,15 @@
 
 
 	<!-- 추가되는 부분 -->
-	<definition name="/board/reservation_user" extends="base">
+	<definition name="/reservation/user" extends="base">
 		<put-attribute name="title" value="예약관리_user" />
 		<put-attribute name="body"
-			value="/WEB-INF/views/board/reservation_user.jsp" />
+			value="/WEB-INF/views/reservation/user.jsp" />
 	</definition>
-	<definition name="/board/reservation_admin" extends="base">
+	<definition name="/reservation/admin" extends="base">
 		<put-attribute name="title" value="예약관리_admin" />
 		<put-attribute name="body"
-			value="/WEB-INF/views/board/reservation_admin.jsp" />
+			value="/WEB-INF/views/reservation/admin.jsp" />
 	</definition>
 	<definition name="/board/favfood_admin" extends="base">
 		<put-attribute name="title" value="우리가게 추천리스트" />

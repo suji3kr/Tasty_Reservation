@@ -1,9 +1,5 @@
 package com.company.controller;
 
-import java.sql.Time;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -21,7 +17,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.company.domain.BoardVO;
 import com.company.domain.Criteria;
 import com.company.domain.PageDTO;
-import com.company.domain.ReservationDTO;
 import com.company.domain.StoreDTO;
 import com.company.service.BoardService;
 import com.company.service.ReservationService;
@@ -52,16 +47,6 @@ public class BoardController {
 
         model.addAttribute("pageMaker", new PageDTO(cri, total));
     }
-
-    /** ✅ 게시글 등록 처리 */
-    @PostMapping("/register")
-    public String register(BoardVO vo, RedirectAttributes rttr) {
-        log.info("register......." + vo);
-        boardservice.register(vo);
-        rttr.addFlashAttribute("result", vo.getBno());
-        return "redirect:/board/list";
-    }
-
     /** ✅ 게시글 상세 조회 & 수정 페이지 */
     @GetMapping({ "/get", "/modify" })
     public String get(@RequestParam("bno") Long bno, @ModelAttribute("cri") Criteria cri, Model model) {
@@ -104,11 +89,6 @@ public class BoardController {
         return "redirect:/board/list";
     }
 
-    /** ✅ 등록 입력 페이지 */
-    @GetMapping("/register")
-    public void register() {
-    }
-
     /** ✅ 즐겨찾는 맛집 페이지 */
     @GetMapping("/favfood")
     public String getFavFood() {
@@ -120,15 +100,6 @@ public class BoardController {
     public String getFavFood_admin() {
         return "/board/favfood_admin";
     }
-
-    /*
-	 * @GetMapping("/familyreservation")
-	 * 
-	 * public String familyReservation(Model model) { List<StoreDTO> storeList =
-	 * storeService.getAllStores(); // 기존 Store 데이터 가져오기
-	 * model.addAttribute("storeList", storeList); // 모델에 추가하여 JSP에서 사용 가능 return
-	 * "/board/familyreservation"; }
-	 */
 	// ✅ 가족 단체 예약 (페이징 추가)
 	@GetMapping("/familyreservation")
 	public String familyReservation(
@@ -251,51 +222,15 @@ public class BoardController {
         return "/board/privateroom";
     }
 
-    /** ✅ 예약 관리 페이지 (관리자 & 사용자 구분) */
-    @GetMapping("/reservation_admin")
-    public String showReservationAdminPage(Model model) {
-        System.out.println("🔍 [BoardController] 예약 관리자 페이지 접근");
-
-        // ✅ 전체 예약 조회 (날짜 필터링 없이)
-        List<ReservationDTO> reservations = reservationService.getAllReservations();
-        model.addAttribute("reservationList", reservations);
-
-        System.out.println("🔍 [BoardController] 전체 예약 개수: " + reservations.size());
-
-        return "/board/reservation_admin";
-    }
-
-
-    @GetMapping("/reservation_user")
-    public String userReservationList(
-            @RequestParam(value = "searchDate", required = false) String searchDate,
-            HttpSession session,
-            Model model) {
-
-        // 현재 로그인한 사용자 정보 가져오기
-        String loginUserName = (String) session.getAttribute("loginUserName");
-
-        // 검색 날짜가 없으면 기본값을 오늘 날짜로 설정
-        if (searchDate == null || searchDate.isEmpty()) {
-            searchDate = java.time.LocalDate.now().toString();
-        }
-
-        // 로그인한 사용자 + 특정 날짜에 해당하는 예약만 조회
-        List<ReservationDTO> reservationList = reservationService.findByUserNameAndDate(loginUserName, searchDate);
-
-        model.addAttribute("reservationList", reservationList);
-        model.addAttribute("searchDate", searchDate); // 검색 날짜를 JSP에서 유지하도록 추가
-        return "/board/reservation_user";  // JSP 페이지 경로
-    }
     /** ✅ 로그인한 사용자에 따라 예약 관리 페이지 이동 */
     @GetMapping("/reservation")
     public String reservation(HttpSession session) {
         String role = (String) session.getAttribute("userRole");
 
         if ("admin".equals(role)) {
-            return "redirect:/board/reservation_admin";  // 관리자 페이지 이동
+            return "redirect:/reservation/admin";  // 관리자 페이지 이동
         } else {
-            return "redirect:/board/reservation_user";   // 사용자 페이지 이동
+            return "redirect:/reservation/user";   // 사용자 페이지 이동
         }
     }
 
@@ -303,7 +238,7 @@ public class BoardController {
     @GetMapping("/delete/{id}")
     public String deleteReservation(@PathVariable("id") Long id) {
         reservationService.deleteReservation(id);
-        return "redirect:/board/reservation_user"; // 삭제 후 리스트로 이동
+        return "redirect:/reservation/user"; // 삭제 후 리스트로 이동
     }
 }
    

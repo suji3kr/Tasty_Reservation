@@ -187,7 +187,7 @@ img {
 																$(
 																		'#reservationResult')
 																		.html(
-																				'<p class="text-danger">예약에 실패했습니다. 다시 시도해주세요.</p>')
+																				'<p class="text-danger">예약에 실패했습니다. 항목을 올바르게 채워주세요</p>')
 																		.show();
 															}
 														});

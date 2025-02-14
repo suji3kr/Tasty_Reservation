@@ -53,11 +53,11 @@
 					<!-- 예약 맛집 관리 (Admin vs User 분기) -->
 					<c:choose>
 						<c:when test="${sessionScope.userRole eq 'admin'}">
-							<li><a href="${contextPath}/board/reservation_admin">예약손님
+							<li><a href="${contextPath}/reservation/admin">예약손님
 									관리</a></li>
 						</c:when>
 						<c:otherwise>
-							<li><a href="${contextPath}/board/reservation_user">예약맛집
+							<li><a href="${contextPath}/reservation/user">예약맛집
 									관리</a></li>
 						</c:otherwise>
 					</c:choose>
@@ -65,7 +65,7 @@
 					<!-- 회원정보 수정/ 가게정보 관리/수정 (Admin vs User 분기) -->
 					<c:choose>
 						<c:when test="${sessionScope.userRole eq 'admin'}">
-							<li><a href="${contextPath}/board/register">맛집가게 등록</a></li>
+							<li><a href="${contextPath}/store/register">맛집가게 등록</a></li>
 						</c:when>
 						<c:otherwise>
 							<li><a href="${contextPath}/member/update">회원정보수정</a></li>

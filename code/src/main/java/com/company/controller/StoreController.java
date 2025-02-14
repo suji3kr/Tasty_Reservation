@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.company.domain.StoreDTO;
+import com.company.service.BoardService;
 import com.company.service.StoreService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +27,7 @@ public class StoreController {
 
     @Autowired
     private StoreService storeService;
+    private BoardService boardservice;
 
     // ✅ 가게 등록 폼 페이지
     @GetMapping("/register")
@@ -125,6 +127,7 @@ public class StoreController {
         
         return "storeDetail"; // ✅ Tiles에 등록된 "storeDetail" 이름을 반환해야 함
     }
+    
 
     
 }
