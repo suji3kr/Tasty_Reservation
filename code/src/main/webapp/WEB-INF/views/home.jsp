@@ -11,6 +11,13 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>당신의 맛집예약을 도와드립니다.</title>
 
+<!-- jQuery 및 bxSlider 추가 -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+<script
+	src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+
 <style>
 /* 공통 스타일 */
 body {
@@ -19,7 +26,6 @@ body {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-
 }
 
 /* 컨테이너 설정 */
@@ -43,11 +49,27 @@ body {
 	margin: 30px 0; /* Adjust as needed for spacing */
 }
 
+.top-row {
+	overflow: hidden;
+	position: relative;
+}
+
+.slider {
+	padding: 0;
+	margin: 0;
+}
+
+.slider li {
+	list-style: none;
+	text-align: center;
+	display: inline-block;
+}
+
 .photo-frame {
-	width: 400px;
+	width: 400px; /* 슬라이드 크기에 맞게 조정 */
 	position: relative;
 	display: flex;
-	margin: 0 30px;
+	margin: 0 15px; /* 좌우 간격 조정 */
 	overflow: hidden;
 }
 
@@ -69,13 +91,15 @@ body {
 
 /* 텍스트와 버튼 오버레이 스타일 */
 .overlay {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	color: white;
-	text-align: center;
-	z-index: 1;
+    position: absolute; /* 화면 위에 고정 */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    z-index: 10; /* 슬라이더보다 위에 배치 */
+    padding: 20px;
+    border-radius: 10px;
 }
 
 .overlay h1 {
@@ -109,14 +133,13 @@ body {
 
 .left-section {
 	margin-right: 70px;
-	
 }
 
 .divide-line {
- 	width: 2px;
- 	height : 300px;
- 	margin : 0 10px;
- 	background: #ccc;
+	width: 2px;
+	height: 300px;
+	margin: 0 10px;
+	background: #ccc;
 }
 
 .right-section {
@@ -181,85 +204,94 @@ body {
 	<section id="home">
 		<div id="container">
 			<div class="top-row">
-				<div class="photo-frame">
-					<img src="/resources/image/res.png" alt="Image 1">
+				<ul class="slider">
+					<li class="photo-frame"><img src="/resources/image/res.png"
+						alt="Image 1"></li>
+					<li class="photo-frame"><img src="/resources/image/stake.png"
+						alt="Image 2">
+					<li class="photo-frame"><img src="/resources/image/salmon.png"
+						alt="Image 3"></li>
+					<li class="photo-frame"><img src="/resources/image/res.png"
+						alt="Image 4"></li>
+					<li class="photo-frame"><img src="/resources/image/stake.png"
+						alt="Image 5"></li>
+					<li class="photo-frame"><img src="/resources/image/salmon.png"
+						alt="Image 6"></li>
+				</ul>
+
+				<!-- ✅ 오버레이를 슬라이더 위로 이동 -->
+				<div class="overlay">
+					<h1>Art Of Reservation</h1>
+					<p>예약의 미학</p>
+					<a href="/board/familyreservation"> 예약하러가기 📑</a>
 				</div>
-				<div class="photo-frame">
-					<img src="/resources/image/stake.png" alt="Image 2">
-					<div class="overlay">
-						<h1>Art Of Reservation</h1>
-						<p>예약의 미학</p>
-						<a href="/board/familyreservation"> 예약하러가기 📑</a>
+			</div>
+		</div>
+
+
+		<div class="bottom-row">
+			<img src="/resources/image/spoon.png" alt="Image 4">
+		</div>
+
+		<!-- 지도 및 검색 섹션 (최상단) -->
+		<div id="info-section">
+			<div class="left-section">
+				<div id="map" style="width: 500px; height: 400px;"></div>
+			</div>
+			<div class="divide-line"></div>
+			<div class="right-section">
+				<div class="vertical-divider">
+					<div class="section-divider">
+						<div class="inline-select">
+							<label for="location">지역 선택</label> <select id="location">
+								<option value="seoul">서울</option>
+								<option value="gyeonggi">경기</option>
+								<option value="other">그 외 지역</option>
+							</select> <select id="sub-location-select">
+								<option value='gangnam'>강남</option>
+								<option value='hongdae'>홍대</option>
+								<option value='itaewon'>이태원</option>
+							</select>
+						</div>
+						<div class="inline-select">
+							<label for="date">날짜</label> <input type="date" id="date"
+								name="date">
+						</div>
+						<div class="inline-select">
+							<label for="time">시간</label> <select id="time" name="time">
+								<c:forEach var="hour" begin="10" end="23">
+									<option value="${hour}:00">${hour}:00</option>
+									<option value="${hour}:30">${hour}:30</option>
+								</c:forEach>
+							</select>
+						</div>
+						<div class="inline-select">
+							<label for="guests">인원</label> <select id="guests" name="guests">
+								<c:forEach var="num" begin="1" end="12">
+									<option value="${num}">${num}명</option>
+								</c:forEach>
+								<option value="more">기타</option>
+							</select> <input type="text" id="custom-guests" name="custom-guests"
+								placeholder="추가 인원 입력" style="display: none;">
+						</div>
+
 					</div>
-				</div>
-				<div class="photo-frame">
-					<img src="/resources/image/salmon.png" alt="Image 3">
-				</div>
-			</div>
-			<div class="bottom-row">
-				<img src="/resources/image/spoon.png" alt="Image 4">
-			</div>
-
-			<!-- 지도 및 검색 섹션 (최상단) -->
-			<div id="info-section">
-				<div class="left-section">
-					<div id="map" style="width: 500px; height: 400px;"></div>
-				</div>
-				<div class="divide-line"></div>
-				<div class="right-section">
-					<div class="vertical-divider">
-						<div class="section-divider">
-							<div class="inline-select">
-								<label for="location">지역 선택</label> <select id="location">
-									<option value="seoul">서울</option>
-									<option value="gyeonggi">경기</option>
-									<option value="other">그 외 지역</option>
-								</select> <select id="sub-location-select">
-									<option value='gangnam'>강남</option>
-									<option value='hongdae'>홍대</option>
-									<option value='itaewon'>이태원</option>
-								</select>
-							</div>
-							<div class="inline-select">
-								<label for="date">날짜</label> <input type="date" id="date"
-									name="date">
-							</div>
-							<div class="inline-select">
-								<label for="time">시간</label> <select id="time" name="time">
-									<c:forEach var="hour" begin="10" end="23">
-										<option value="${hour}:00">${hour}:00</option>
-										<option value="${hour}:30">${hour}:30</option>
-									</c:forEach>
-								</select>
-							</div>
-							<div class="inline-select">
-								<label for="guests">인원</label> <select id="guests" name="guests">
-									<c:forEach var="num" begin="1" end="12">
-										<option value="${num}">${num}명</option>
-									</c:forEach>
-									<option value="more">기타 </option>
-								</select> <input type="text" id="custom-guests" name="custom-guests"
-									placeholder="추가 인원 입력" style="display: none;">
-							</div>
-
-						</div>
-						<div class="section-divider">
-							<h3>별점 몇개 까지 허용하시겠습니까? 🚀</h3>
-							<label><input type="radio" name="rating" value="5">
-								별점 5점🚀</label> <label><input type="radio" name="rating"
-								value="4"> 별점 4점대🚀</label> <label><input type="radio"
-								name="rating" value="3"> 별점 3점대🚀</label>
-						</div>
-						<div>
-							<h3>오늘의 메뉴는? 🍽️</h3>
-							<label><input type="checkbox" name="food-type"
-								value="western"> 양식</label> <label><input
-								type="checkbox" name="food-type" value="korean"> 한식</label> <label><input
-								type="checkbox" name="food-type" value="chinese"> 중식</label> <label><input
-								type="checkbox" name="food-type" value="japanese"> 일식</label> <label><input
-								type="checkbox" name="food-type" value="dessert"> 디저트/카페</label>
-							<button type="button" id="search-restaurants">바로 찾아줄게 ✔</button>
-						</div>
+					<div class="section-divider">
+						<h3>별점 몇개 까지 허용하시겠습니까? 🚀</h3>
+						<label><input type="radio" name="rating" value="5">
+							별점 5점🚀</label> <label><input type="radio" name="rating"
+							value="4"> 별점 4점대🚀</label> <label><input type="radio"
+							name="rating" value="3"> 별점 3점대🚀</label>
+					</div>
+					<div>
+						<h3>오늘의 메뉴는? 🍽️</h3>
+						<label><input type="checkbox" name="food-type"
+							value="western"> 양식</label> <label><input type="checkbox"
+							name="food-type" value="korean"> 한식</label> <label><input
+							type="checkbox" name="food-type" value="chinese"> 중식</label> <label><input
+							type="checkbox" name="food-type" value="japanese"> 일식</label> <label><input
+							type="checkbox" name="food-type" value="dessert"> 디저트/카페</label>
+						<button type="button" id="search-restaurants">바로 찾아줄게 ✔</button>
 					</div>
 				</div>
 			</div>
@@ -319,14 +351,30 @@ body {
         setInterval(showSlides, 3000);
         
         <%-- 수정 성공 메시지가 있을 경우 alert 띄우기 --%>
-        <% if (request.getAttribute("updateSuccess") != null) { %>
+        <%if (request.getAttribute("updateSuccess") != null) {%>
             alert("수정이 완료되었습니다! 🚀");
-        <% } %>
+        <%}%>
     </script>
 
 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxtdZqbdS6d0jR-vYVhQOtICdiDXq8S_A">
-		</script>
+	</script>
+
+	<script>
+		$(document).ready(function(){
+		    $('.slider').bxSlider({
+		        minSlides: 3, // 한 번에 3개씩 표시
+		        maxSlides: 3,
+		        slideWidth: 400, // 각 슬라이드의 너비
+		        slideMargin: 30, // 슬라이드 간격
+		        moveSlides: 1, // 1개씩 이동
+		        controls: true, // 이전/다음 버튼 활성화
+		        auto: true, // 자동 슬라이드
+		        pause: 3000, // 3초마다 전환
+		        pager: false // 하단 인디케이터 제거
+		    });
+		});
+	</script>
 
 
 </body>
