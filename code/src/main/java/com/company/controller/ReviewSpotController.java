@@ -9,12 +9,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.company.model.Review;
 import com.company.service.ReviewService;
 
+@RequestMapping("/snaps/*")
 @Controller
 public class ReviewSpotController {
 
@@ -28,7 +30,7 @@ public class ReviewSpotController {
     public String reviewSpotPage(Model model) {
         model.addAttribute("reviews", reviewService.getAllReviews());
         model.addAttribute("newReview", new Review());
-        return "/reviewSpot/reviewSpot";
+        return "/snaps/reviewSpot";
     }
 
     @PostMapping("/addReview")
@@ -40,7 +42,7 @@ public class ReviewSpotController {
 
             if (!directory.exists() && !directory.mkdirs()) {
                 model.addAttribute("errorMessage", "Could not create upload directory!");
-                return "/reviewSpot/reviewSpot"; // Return to the review page on failure
+                return "/snaps/reviewSpot"; // Return to the review page on failure
             }
 
             try {
@@ -50,11 +52,11 @@ public class ReviewSpotController {
             } catch (IOException e) {
                 e.printStackTrace();
                 model.addAttribute("errorMessage", "File upload failed!");
-                return "/reviewSpot/reviewSpot"; // Return to the review page on failure
+                return "/snaps/reviewSpot"; // Return to the review page on failure
             }
         }
 
         reviewService.addReview(newReview);
-        return "redirect:/reviewSpot";
+        return "redirect:/snaps/reviewSpot";
     }
 }

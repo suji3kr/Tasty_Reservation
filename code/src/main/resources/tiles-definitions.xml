@@ -44,11 +44,7 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/board/get.jsp" />
 	</definition>
-	<definition name="/board/recommend" extends="base">
-		<put-attribute name="title" value="Ai 추천" />
-		<put-attribute name="body"
-			value="/WEB-INF/views/board/recommend.jsp" />
-	</definition>
+
 	<!-- filter -->
 	<definition name="/board/familyreservation" extends="base">
 		<put-attribute name="title" value="단체예약" />
@@ -133,22 +129,27 @@
 
 
 	<!-- 사진 및 리뷰 -->
-	<definition name="/photoGallery" extends="base">
+	<definition name="/snaps/photoGallery" extends="base">
 		<put-attribute name="title" value="사진 게시판" />
 		<put-attribute name="body"
-			value="/WEB-INF/views/photoGallery.jsp" />
+			value="/WEB-INF/views/snaps/photoGallery.jsp" />
 	</definition>
-	<definition name="/reviewSpot/reviewSpot" extends="base">
+	<definition name="/snaps/reviewSpot" extends="base">
 		<put-attribute name="title" value="리뷰" />
 		<put-attribute name="body"
-			value="/WEB-INF/views/reviewSpot/reviewSpot.jsp" />
+			value="/WEB-INF/views/snaps/reviewSpot.jsp" />
 	</definition>
-	<definition name="/recommendations" extends="base">
-		<put-attribute name="title" value="western" />
+	<definition name="/snaps/snsrecom" extends="base">
+		<put-attribute name="title" value="sns" />
 		<put-attribute name="body"
-			value="/WEB-INF/views/recommendations.jsp" />
+			value="/WEB-INF/views/snaps/snsrecom.jsp" />
 	</definition>
-	
+	<definition name="/snaps/recommend" extends="base">
+		<put-attribute name="title" value="Ai 추천" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/snaps/recommend.jsp" />
+	</definition>
+
 	<!-- 회사소개 -->
 	<definition name="company" extends="base">
 		<put-attribute name="title" value="회사정보" />
@@ -174,7 +175,7 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/board/favfood_admin.jsp" />
 	</definition>
-	
+
 	<definition name="/reservation/edit" extends="base">
 		<put-attribute name="title" value="예약수정" />
 		<put-attribute name="body"

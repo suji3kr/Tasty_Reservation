@@ -10,10 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.company.service.NaverImageSearchService;
 
+@RequestMapping("/snaps/*")
 @Controller
 public class RecommendController {
 	
@@ -60,18 +62,18 @@ public class RecommendController {
 
 		    // ✅ 건강식 & 채식 (Healthy & Vegetarian)
 		    "그린 샐러드", "퀴노아 샐러드", "두부스테이크", "렌틸수프", "바나나 스무디", "아보카도 토스트", "토마토 브루스케타",
-		    "콜드프레스 주스", "채식 버거", "두유 요거트", "바질페스토 파스타", "토푸 마파두부",
+		    "콜드프레스 주스", "채식 버거", "두유 요거트", "바질페스토 파스타", "마파두부",
 
 		    // ✅ 다양한 간식류 (Snacks)
 		    "치킨 너겟","핫도그", "떡꼬치", "어묵", "튀김만두", "순대", "옥수수 구이", "감자튀김",
 		    "팝콘", "바게트 샌드위치", "핫윙", "도리아", "치즈볼",
 
 		    // ✅ 이색 음식 (Exotic Foods)
-		    "에스카르고", "랍스터", "캐비어", "푸아그라", "타프나드", "스네일 수프", "카르파초", "사시미", "문어 숙회",
+		    "에스카르고", "랍스터", "캐비어", "푸아그라", "타프나드", "스네일 수프", "카르파초", "문어 숙회",
 		    "말고기 스테이크", "블루치즈 샐러드", "프로슈토"
 		};
 
-    @RequestMapping("/recommend")
+    @GetMapping("/recommend")
     public Object recommend(Model model, HttpServletRequest request) {
         String food = getRandomFood();
         List<Restaurant> restaurants = getNaverSearchResults(food);
@@ -82,7 +84,7 @@ public class RecommendController {
             model.addAttribute("food", food);
             model.addAttribute("restaurants", restaurants);
             model.addAttribute("imageUrl", imageUrl);
-            return "/board/recommend"; // JSP 반환
+            return "/snaps/recommend"; // JSP 반환
         }
 
         // Ajax 요청 (JSON 반환)

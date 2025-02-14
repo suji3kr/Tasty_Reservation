@@ -180,7 +180,7 @@ form button:hover {
 </div>
 
 <h2>리뷰 쓰기</h2>
-<form action="${pageContext.request.contextPath}/addReview" method="post" enctype="multipart/form-data">
+<form action="${pageContext.request.contextPath}/snaps/addReview" method="post" enctype="multipart/form-data">
     <input type="text" name="restaurantName" placeholder="식당 이름" required />
     <textarea name="reviewContent" placeholder="내용 쓰기" required></textarea>
 
