@@ -139,10 +139,25 @@ img {
 								name="reservationDate" required>
 						</div>
 						<div class="mb-3">
-							<label for="reservationTime" class="form-label">예약 시간</label> <input
-								type="time" class="form-control" id="reservationTime"
-								name="reservationTime" required>
-						</div>
+					    <label for="reservationTime" class="form-label">예약 시간</label> 
+					    <select class="form-control" id="reservationTime" name="reservationTime" required>
+					        <script>
+					            document.addEventListener("DOMContentLoaded", function() {
+					                let select = document.getElementById("reservationTime");
+					                for (let hour = 9; hour < 22; hour++) {
+					                    for (let minute of [0, 30]) { // 30분 단위
+					                        let time = hour.toString().padStart(2, '0') + ":" + minute.toString().padStart(2, '0');
+					                        let option = document.createElement("option");
+					                        option.value = time;
+					                        option.textContent = time;
+					                        select.appendChild(option);
+					                    }
+					                }
+					            });
+					        </script>
+					    </select>
+					</div>
+
 						<div class="mb-3">
 							<label for="peopleCount" class="form-label">인원수</label> <input
 								type="number" class="form-control" id="peopleCount"
@@ -157,6 +172,7 @@ img {
 			</div>
 		</div>
 	</div>
+	
 
 	<script>
 		$(document)

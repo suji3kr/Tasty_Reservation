@@ -90,11 +90,24 @@ body {
 			</div>
 
 			<div class="mb-3">
-				<label class="form-label">예약 시간</label> <input type="time"
-					class="form-control" name="reservationTime"
-					value="<fmt:formatDate value='${reservation.reservationTime}' pattern='HH:mm'/>"
-					required>
-			</div>
+					    <label for="reservationTime" class="form-label">예약 시간</label> 
+					    <select class="form-control" id="reservationTime" name="reservationTime" required>
+					        <script>
+					            document.addEventListener("DOMContentLoaded", function() {
+					                let select = document.getElementById("reservationTime");
+					                for (let hour = 9; hour < 22; hour++) {
+					                    for (let minute of [0, 30]) { // 30분 단위
+					                        let time = hour.toString().padStart(2, '0') + ":" + minute.toString().padStart(2, '0');
+					                        let option = document.createElement("option");
+					                        option.value = time;
+					                        option.textContent = time;
+					                        select.appendChild(option);
+					                    }
+					                }
+					            });
+					        </script>
+					    </select>
+					</div>
 
 			<div class="mb-3">
 				<label class="form-label">인원 수</label> <input type="number"
@@ -110,7 +123,7 @@ body {
 
 
 			<button type="submit" class="btn btn-primary">수정 완료</button>
-			<a href="/board/reservation_admin" class="btn btn-secondary">취소</a>
+			<a href="/reservation/admin" class="btn btn-secondary">취소</a>
 		</form>
 	</div>
 
