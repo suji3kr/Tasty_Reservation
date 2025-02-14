@@ -3,19 +3,15 @@ import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -66,35 +62,7 @@ public class ReservationController {
         return "redirect:/store/detail?id=" + storeId;
     }
 
-    @GetMapping("/list")
-    public String listReservations(@RequestParam(value = "searchDate", required = false) String searchDateStr, Model model) {
-        System.out.println("🔍 [Controller] 검색 요청이 들어옴!");
-
-        List<ReservationDTO> reservations;
-
-        if (searchDateStr == null || searchDateStr.isEmpty()) {
-            System.out.println("🔍 [Controller] 전체 예약 목록 조회");
-            reservations = reservationService.getAllReservations(); // 전체 예약 조회
-        } else {
-            System.out.println("🔍 [Controller] 특정 날짜 예약 조회: " + searchDateStr);
-            try {
-            	Date searchDate = parseDateString(searchDateStr);
-                model.addAttribute("currentDate", searchDate);
-                reservations = reservationService.getReservationDate(searchDate);
-            } catch (ParseException e) {
-                reservations = new ArrayList<>();
-            }
-        }
-
-        System.out.println("🔍 [Controller] 조회된 예약 개수: " + reservations.size());
-        for(var reservation : reservations) {
-        	System.out.println(reservation);
-        }
-        model.addAttribute("reservationList", reservations);
-       
-
-        return "/board/reservation_admin";
-    }
+    
  // 예약 수정 페이지 (관리자만 접근 가능)
     @GetMapping("/edit/{id}")
     public String editReservation(@PathVariable("id") Long id, Model model) {
@@ -129,8 +97,57 @@ public class ReservationController {
 
             reservationService.updateReservation(reservation);
         }
-        return "redirect:/board/reservation_admin?searchDate=" + reservationDateStr;
+        return "redirect:/reservation/admin?searchDate=" + reservationDateStr;
     }
+  
+    @GetMapping("/admin")
+    public String listReservations(@RequestParam(value = "searchDate", required = false) String searchDateStr, Model model) {
+        System.out.println("🔍 [Controller] 검색 요청이 들어옴!");
 
+        List<ReservationDTO> reservations;
 
+        if (searchDateStr == null || searchDateStr.isEmpty()) {
+            System.out.println("🔍 [Controller] 전체 예약 목록 조회");
+            reservations = reservationService.getAllReservations(); // 전체 예약 조회
+        } else {
+            System.out.println("🔍 [Controller] 특정 날짜 예약 조회: " + searchDateStr);
+            try {
+            	Date searchDate = parseDateString(searchDateStr);
+                model.addAttribute("currentDate", searchDate);
+                reservations = reservationService.getReservationDate(searchDate);
+            } catch (ParseException e) {
+                reservations = new ArrayList<>();
+            }
+        }
+
+        System.out.println("🔍 [Controller] 조회된 예약 개수: " + reservations.size());
+        for(var reservation : reservations) {
+        	System.out.println(reservation);
+        }
+        model.addAttribute("reservationList", reservations);
+       
+
+        return "/reservation/admin";
+    }
+    @GetMapping("/user")
+    public String userReservationList(
+            @RequestParam(value = "searchDate", required = false) String searchDate,
+            HttpSession session,
+            Model model) {
+
+        // 현재 로그인한 사용자 정보 가져오기
+        String loginUserName = (String) session.getAttribute("loginUserName");
+
+        // 검색 날짜가 없으면 기본값을 오늘 날짜로 설정
+        if (searchDate == null || searchDate.isEmpty()) {
+            searchDate = java.time.LocalDate.now().toString();
+        }
+
+        // 로그인한 사용자 + 특정 날짜에 해당하는 예약만 조회
+        List<ReservationDTO> reservationList = reservationService.findByUserNameAndDate(loginUserName, searchDate);
+
+        model.addAttribute("reservationList", reservationList);
+        model.addAttribute("searchDate", searchDate); // 검색 날짜를 JSP에서 유지하도록 추가
+        return "/reservation/user";  // JSP 페이지 경로
+    }
 }

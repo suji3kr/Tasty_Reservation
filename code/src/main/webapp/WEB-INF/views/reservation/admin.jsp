@@ -82,7 +82,7 @@ body {
 		<h3 class="text-center">예약 손님 리스트</h3>
 
 		<!-- 예약 검색 폼 -->
-		<form action="/reservation/list" method="get" class="mb-3">
+		<form action="/reservation/admin" method="get" class="mb-3">
 			<div class="row g-3 align-items-center">
 				<div class="col-auto">
 					<label for="reservationDate" class="col-form-label">예약 날짜:</label>
