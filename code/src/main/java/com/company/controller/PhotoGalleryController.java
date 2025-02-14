@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+@RequestMapping("/snaps/*")
 @Controller
 public class PhotoGalleryController {
 
@@ -34,7 +36,7 @@ public class PhotoGalleryController {
         
         model.addAttribute("photos", photoList);
 
-        return "/photoGallery"; // views/photoGallery.jsp로 이동
+        return "/snaps/photoGallery"; // views/photoGallery.jsp로 이동
     }
 
     @PostMapping("/upload")
@@ -44,18 +46,18 @@ public class PhotoGalleryController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "redirect:/photoGallery";
+        return "redirect:/snaps/photoGallery";
     }
 
     @PostMapping("/rate")
     public String rate(@RequestParam("rating") int rating) {
         photoGalleryService.addRating(rating);
-        return "redirect:/photoGallery";
+        return "redirect:/snaps/photoGallery";
     }
 
     @PostMapping("/comment")
     public String comment(@RequestParam("user") String user, @RequestParam("comment") String comment) {
         photoGalleryService.addComment(user, comment);
-        return "redirect:/photoGallery";
+        return "redirect:/snaps/photoGallery";
     }
 }

@@ -3,16 +3,18 @@ package com.company.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.company.model.FoodRecommendation;
 
 import java.util.Arrays;
 import java.util.List;
 
+@RequestMapping("/snaps/*")
 @Controller
 public class FoodRecommendationController {
 
-    @GetMapping("/recommendations")
+    @GetMapping("/snsrecom")
     public String showRecommendations(Model model) {
         List<FoodRecommendation> recommendations = Arrays.asList(
             new FoodRecommendation("맛집1", "서울 최고의 맛집!", "image1.jpg", Arrays.asList("#한식", "#서울")),
@@ -21,6 +23,6 @@ public class FoodRecommendationController {
         );
 
         model.addAttribute("recommendations", recommendations);
-        return "/recommendations"; // views/recommendations.jsp로 이동
+        return "/snaps/snsrecom"; // views/recommendations.jsp로 이동
     }
 }

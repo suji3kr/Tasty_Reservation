@@ -17,12 +17,12 @@
 	<ul id="nav-menu">
 		<li><a href="#"><b>사진 및 리뷰</b></a>
 			<ul class="dropdown-menu">
-				<li><a href="${contextPath}/recommendations">SNS 맛집</a></li>
-				<li><a href="${contextPath}/photoGallery">포토 스팟</a></li>
-				<li><a href="${contextPath}/reviewSpot">리뷰 스팟</a></li>
-				<li><a href="${contextPath}/recommend">실시간 Ai추천</a></li>
+				<li><a href="${contextPath}/snaps/snsrecom">SNS 맛집</a></li>
+				<li><a href="${contextPath}/snaps/photoGallery">포토 스팟</a></li>
+				<li><a href="${contextPath}/snaps/reviewSpot">리뷰 스팟</a></li>
+				<li><a href="${contextPath}/snaps/recommend">실시간 Ai추천</a></li>
 			</ul></li>
-		<li><a href="#"><b>테마</b></a>
+		<li><a href="#"><b>맞춤테마예약</b></a>
 			<ul class="dropdown-menu">
 				<li><a href="${contextPath}/board/familyreservation">가족/단체예약</a></li>
 				<li><a href="${contextPath}/board/privateroom">프라이빗룸</a></li>
