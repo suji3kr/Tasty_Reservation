@@ -23,10 +23,68 @@ body {
 .container {
 	max-width: 1200px;
 	margin: 0 auto;
-	padding: 20px;
+	padding-top: 20px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+}
+/* 제목 스타일 */
+.title {
+    justify-content: center;
+    width: 100%;
+}
+
+.title h3 {
+	max-width: 777px;
+	font-family: 'Roboto', sans-serif;
+	font-size: 24px;
+	font-weight: bold;
+	color: #575757;
+	background-color: #ffecaf;
+	padding: 10px 20px;
+	border-radius: 8px;
+	text-align: center;
+	margin: 0 auto 20px auto; /* 가운데 정렬 */
+	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+/* 페이지네이션 스타일 */
+.pagination {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 20px;
+	gap: 8px;
+}
+
+.pagination a, .pagination span {
+	display: inline-block;
+	padding: 8px 12px;
+	font-size: 16px;
+	font-weight: bold;
+	color: #4e7300;
+	background-color: #ffffff;
+	border: 1px solid #4e7300;
+	border-radius: 5px;
+	text-decoration: none;
+	transition: all 0.3s ease-in-out;
+}
+
+.pagination a:hover {
+	background-color: #4e7300;
+	color: white;
+	transform: scale(1.1);
+}
+
+.pagination .active {
+	background-color: #4e7300;
+	color: white;
+	border: none;
+}
+
+.pagination .disabled {
+	color: #bbb;
+	cursor: not-allowed;
+	border: 1px solid #ddd;
 }
 
 /* 필터 섹션 */
@@ -94,7 +152,7 @@ body {
 	flex-wrap: wrap;
 	justify-content: center;
 	gap: 10px;
-	margin-top: 10px;
+	margin: 10px;
 }
 
 .time-buttons button {
@@ -302,6 +360,33 @@ body {
 			</div>
 		</div>
 	</div>
+		<div class="title custom-title">
+		<h3> 스토어별 예약가능한 시간을 알려드립니다🍜</h3>
+	</div>
+		<div class="time-buttons">
+		<button>6:00</button>
+		<button>6:30</button>
+		<button>7:00</button>
+		<button>7:30</button>
+		<button>8:00</button>
+		<button>8:30</button>
+		<button>9:30</button>
+	</div>
+
+	<div class="photo-section">
+		<div class="photo-frame">
+			<a href="http://localhost:8092/store/detail?id=11"><img
+				src="/resources/image/nulmokssambab.jpg" alt="늘목쌈밥"></a>
+		</div>
+		<div class="photo-frame">
+			<a href="http://localhost:8092/store/detail?id=2"><img
+				src="/resources/image/베트남요리.png" alt="베트남요리"></a>
+		</div>
+		<div class="photo-frame">
+			<a href="http://localhost:8092/store/detail?id=3"><img
+				src="/resources/image/관자요리.jpg" alt="관자요리"></a>
+		</div>
+	</div>
 	<div class="body">
 		<h2 class="text-center"></h2>
 		<!-- 스토어 리스트 -->
@@ -328,33 +413,111 @@ body {
 	</div>
 
 	<script>
-		window.addEventListener('load', function() {
-			var locationSelect = document.getElementById('location');
-			var subLocationSelect = document
-					.getElementById('sub-location-select');
+	document.addEventListener("DOMContentLoaded", function () {
+	    const photoFrames = document.querySelectorAll(".photo-frame");
 
-			// 페이지가 로드될 때 locationSelect의 값을 'seoul'로 설정
-			locationSelect.value = 'seoul';
-		});
+	    // 가게별 예약 가능한 시간 데이터 (예제)
+	    const availableTimes = {
+	    		1: ["6:30", "7:30", "8:30", "9:30"],
+	    	    2: ["5:00", "6:00", "7:00", "8:00"],
+	    	    3: ["12:00", "1:00", "2:00", "3:00"],
+	    	    4: ["12:00", "1:00", "2:00", "3:00"],
+	    	    5: ["11:30", "12:30", "1:30", "2:30"],
+	    	    6: ["4:00", "5:00", "6:00", "7:00"],
+	    	    7: ["10:00", "11:00", "12:00", "1:00"],
+	    	    8: ["2:30", "3:30", "4:30", "5:30"],
+	    	    9: ["6:00", "7:00", "8:00", "9:00"],
+	    	    10: ["5:30", "6:30", "7:30", "8:30"],
+	    	    11: ["11:00", "12:00", "1:00", "2:00"],
+	    	    12: ["9:00", "10:00", "11:00", "12:00"]
+	        // 추가적인 가게 ID와 시간을 여기에 추가
+	    };
 
-		//지역 부가선택
-		document
-				.getElementById('location')
-				.addEventListener(
-						'change',
-						function() {
-							var subLocationSelect = document
-									.getElementById('sub-location-select');
-							subLocationSelect.innerHTML = "";
-							if (this.value === 'seoul') {
-								subLocationSelect.innerHTML = "<option value='gangnam'>강남</option><option value='hongdae'>홍대</option><option value='itaewon'>이태원</option>";
-							} else if (this.value === 'gyeonggi') {
-								subLocationSelect.innerHTML = "<option value='suwon'>수원</option><option value='bundang'>분당</option><option value='ilsan'>일산</option>";
-							} else {
-								subLocationSelect.innerHTML = "<option value='chungcheong'>충청도</option><option value='gangwon'>강원도</option><option value='jeolla'>전라도</option><option value='gyeongsang'>경상도</option><option value='jeju'>제주도</option>";
-							}
-						});
+	    photoFrames.forEach(frame => {
+	        const storeId = frame.getAttribute("data-store-id");
+	        const times = availableTimes[storeId] || [];
+	        const timeContainer = frame.querySelector(".time-buttons-container");
 
+	        // 예약 가능 시간 제목 추가
+	        const title = document.createElement("div");
+	        title.innerHTML = "⏰"; // 아이콘 추가
+	        title.classList.add("time-title");
+	        timeContainer.appendChild(title);
+
+	        // 시간 버튼 생성
+	        times.forEach(time => {
+	            const button = document.createElement("button");
+	            button.textContent = time;
+	            button.classList.add("time-button");
+	            button.addEventListener("click", function (event) {
+	                event.stopPropagation(); // 부모 요소로의 클릭 이벤트 전파 방지
+	                alert(`예약 시간: ${time} 선택됨!`);
+	            });
+	            timeContainer.appendChild(button);
+	        });
+
+	        // 마우스 호버 시 시간 버튼 표시
+	        frame.addEventListener("mouseenter", function () {
+	            timeContainer.style.display = "flex";
+	        });
+
+	        // 마우스 아웃 시 시간 버튼 숨기기
+	        frame.addEventListener("mouseleave", function () {
+	            timeContainer.style.display = "none";
+	        });
+	    });
+	});
+	// 날짜 선택 시 오늘 이전 날짜 선택 제한
+	const dateInput = document.getElementById('date');
+	const today = new Date().toISOString().split('T')[0];
+	dateInput.setAttribute('min', today);
+
+	window.addEventListener('load', function() {
+		var locationSelect = document.getElementById('location');
+		var subLocationSelect = document.getElementById('sub-location-select');
+
+		// 페이지가 로드될 때 locationSelect의 값을 'seoul'로 설정
+		locationSelect.value = 'seoul';
+	});
+
+	//지역 부가선택
+	document
+			.getElementById('location')
+			.addEventListener(
+					'change',
+					function() {
+						var subLocationSelect = document
+								.getElementById('sub-location-select');
+						subLocationSelect.innerHTML = "";
+						if (this.value === 'seoul') {
+					        subLocationSelect.innerHTML = `
+					            <option value='gangnam'>강남</option>
+					            <option value='hongdae'>홍대</option>
+					            <option value='itaewon'>이태원</option>
+					            <option value='gangbuk'>강북</option>
+					            <option value='yeouido'>여의도</option>
+					            <option value='jamsil'>잠실</option>
+					            <option value='dongdaemun'>동대문</option>
+					            <option value='myeongdong'>명동</option>
+					            <option value='sinchon'>신촌</option>
+					            <option value='yeoksam'>역삼</option>
+					            <option value='seocho'>서초</option>
+					            <option value='apgujeong'>압구정</option>
+					            <option value='samseong'>삼성</option>
+					            <option value='guro'>구로</option>
+					            <option value='yeongdeungpo'>영등포</option>
+					            <option value='konkuk'>건대입구</option>
+					            <option value='jongno'>종로</option>
+					            <option value='sadang'>사당</option>
+					            <option value='gangnam_station'>강남역</option>
+					            <option value='samsung_station'>삼성중앙역</option>
+					        `;
+						} else if (this.value === 'gyeonggi') {
+							subLocationSelect.innerHTML = "<option value='suwon'>수원</option><option value='bundang'>분당</option><option value='ilsan'>일산</option>";
+						} else {
+							subLocationSelect.innerHTML = "<option value='chungcheong'>충청도</option><option value='gangwon'>강원도</option><option value='jeolla'>전라도</option><option value='gyeongsang'>경상도</option><option value='jeju'>제주도</option>";
+						}
+					});
 		// 인원 입력 스크립트
 		document
 				.getElementById('guests')

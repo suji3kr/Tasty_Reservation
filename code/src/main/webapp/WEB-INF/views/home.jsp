@@ -74,10 +74,9 @@ body {
 }
 
 .photo-frame img {
-	width: 100%;
+	width: 200%;
 	height: 300px;
 	display: flex;
-	border-radius: 15px;
 	justify-content: space-between;
 }
 
@@ -91,35 +90,37 @@ body {
 
 /* 텍스트와 버튼 오버레이 스타일 */
 .overlay {
-    position: absolute; /* 화면 위에 고정 */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    text-align: center;
-    z-index: 10; /* 슬라이더보다 위에 배치 */
-    padding: 20px;
-    border-radius: 10px;
+	position: absolute; /* 화면 위에 고정 */
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color: #babe96;
+	text-align: center;
+	z-index: 10; /* 슬라이더보다 위에 배치 */
+	padding: 20px;
+	border-radius: 10px;
 }
 
 .overlay h1 {
-	font-size: 2rem;
+	font-size: 4rem;
 	font-weight: bold;
-	margin-bottom: 10px;
+	margin-bottom: 38px;
+	margin-top: 82px;
+	color: rgb(255 255 255/ 81%);
 	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
 .overlay p {
-	font-size: 1rem;
-	margin-bottom: 20px;
-	text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+	font-size: 1.5rem;
+	margin-bottom: 64px;
+	text-shadow: 1px 1px 3px rgb(33 33 33/ 60%);
 }
 
 .overlay a {
 	padding: 10px 20px;
 	font-size: 1rem;
 	color: #fff;
-	background-color: #ff7a00;
+	background-color: #fbcc64;
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;

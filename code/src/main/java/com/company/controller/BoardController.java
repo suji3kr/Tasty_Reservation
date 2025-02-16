@@ -104,7 +104,7 @@ public class BoardController {
 	@GetMapping("/familyreservation")
 	public String familyReservation(
 	        @RequestParam(name = "pageNum", required = false, defaultValue = "1") int pageNum,
-	        @RequestParam(name = "amount", required = false, defaultValue = "10") int amount,
+	        @RequestParam(name = "amount", required = false, defaultValue = "9") int amount,
 	        @RequestParam(name = "keyword", required = false) String keyword,
 	        @RequestParam(name = "store_category", required = false) List<String> storeCategories,
 	        Model model) {
@@ -171,7 +171,7 @@ public class BoardController {
     /** ✅ 유아동반 가능한 맛집 페이지 */
     @GetMapping("/kidnokids")
     public String getKidnokids(@RequestParam(name = "pageNum", required = false, defaultValue = "1") int pageNum,
-                               @RequestParam(name = "amount", required = false, defaultValue = "10") int amount, 
+                               @RequestParam(name = "amount", required = false, defaultValue = "9") int amount, 
                                Model model) {
         Criteria cri = new Criteria(pageNum, amount);
         log.info("kidnokids page: " + cri);
@@ -189,7 +189,7 @@ public class BoardController {
     /** ✅ 파티룸 맛집 페이지 */
     @GetMapping("/partyroom")
     public String getPartyroom(@RequestParam(name = "pageNum", required = false, defaultValue = "1") int pageNum,
-                               @RequestParam(name = "amount", required = false, defaultValue = "10") int amount, 
+                               @RequestParam(name = "amount", required = false, defaultValue = "9") int amount, 
                                Model model) {
         Criteria cri = new Criteria(pageNum, amount);
         log.info("partyroom page: " + cri);
@@ -207,7 +207,7 @@ public class BoardController {
     /** ✅ 프라이빗 룸 맛집 페이지 */
     @GetMapping("/privateroom")
     public String getPrivateRoom(@RequestParam(name = "pageNum", required = false, defaultValue = "1") int pageNum,
-                                 @RequestParam(name = "amount", required = false, defaultValue = "10") int amount, 
+                                 @RequestParam(name = "amount", required = false, defaultValue = "9") int amount, 
                                  Model model) {
         Criteria cri = new Criteria(pageNum, amount);
         log.info("privateroom page: " + cri);

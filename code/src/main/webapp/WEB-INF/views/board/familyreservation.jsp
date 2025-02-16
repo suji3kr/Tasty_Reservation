@@ -28,6 +28,64 @@ body {
 	flex-direction: column;
 	align-items: center;
 }
+/* 제목 스타일 */
+.title {
+	justify-content: center;
+	width: 100%;
+}
+
+.title h3 {
+	max-width: 777px;
+	font-family: 'Roboto', sans-serif;
+	font-size: 24px;
+	font-weight: bold;
+	color: #575757;
+	background-color: #ffecaf;
+	padding: 10px 20px;
+	border-radius: 8px;
+	text-align: center;
+	margin: 0 auto 20px auto; /* 가운데 정렬 */
+	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+/* 페이지네이션 스타일 */
+.pagination {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 20px;
+	gap: 8px;
+}
+
+.pagination a, .pagination span {
+	display: inline-block;
+	padding: 8px 12px;
+	font-size: 16px;
+	font-weight: bold;
+	color: #4e7300;
+	background-color: #ffffff;
+	border: 1px solid #4e7300;
+	border-radius: 5px;
+	text-decoration: none;
+	transition: all 0.3s ease-in-out;
+}
+
+.pagination a:hover {
+	background-color: #4e7300;
+	color: white;
+	transform: scale(1.1);
+}
+
+.pagination .active {
+	background-color: #4e7300;
+	color: white;
+	border: none;
+}
+
+.pagination .disabled {
+	color: #bbb;
+	cursor: not-allowed;
+	border: 1px solid #ddd;
+}
 
 /* 필터 섹션 */
 .filter-section {
@@ -38,7 +96,7 @@ body {
 	background-color: white;
 	padding: 15px;
 	padding-left: 84px;
-    padding-right: 84px;
+	padding-right: 84px;
 	border-radius: 10px;
 	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 	margin-bottom: 20px;
@@ -88,7 +146,6 @@ body {
 	border-radius: 5px;
 }
 
-
 .time-buttons-container {
 	gap: 10px; /* 버튼 간격 */
 	position: absolute;
@@ -99,7 +156,7 @@ body {
 	padding: 10px;
 	border-radius: 8px;
 	display: none;
-	text-align: center;/* 내부 요소 가운데 정렬 */
+	text-align: center; /* 내부 요소 가운데 정렬 */
 	z-index: 10;
 	text-align: center;
 }
@@ -152,8 +209,6 @@ body {
 	animation: fadeIn 1.5s ease-in-out; /* 사진도 페이드 인 */
 	border-radius: 15px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	
-
 }
 
 .photo-frame img {
@@ -207,12 +262,10 @@ body {
 	transform: scale(1.1);
 }
 
-
 .photo-frame:hover {
 	transform: scale(1.05);
 	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
-
 /* 애니메이션 */
 @keyframes fadeIn {
 	from { opacity: 0; }
@@ -227,91 +280,97 @@ body {
 </head>
 <body>
 
-<div class="container">
-	<form action="/board/search" method="get">
-		<div class="filter-section">
-			<div class="filter-group">
-				<label for="location"> 지 역</label> <select id="location">
-					<option value="seoul">서울</option>
-					<option value="gyeonggi">경기</option>
-					<option value="other">그 외 지역</option>
-				</select><select id="sub-location-select">
-					<option value='gangnam'>강남</option>
-					<option value='hongdae'>홍대</option>
-					<option value='itaewon'>이태원</option>
-				</select>
-			</div>
-			<div class="filter-group">
-				<label for="date">날 짜 </label> <input type="date" id="date"
-					name="date">
-			</div>
-			<div class="filter-group">
-				<label for="guests">총 인원 </label> <select id="guests" name="guests">
-					<c:forEach var="num" begin="4" end="12">
-						<option value="${num}">${num}명</option>
-					</c:forEach>
-					<option value="more">기타</option>
-				</select> <input type="text" id="custom-guests" name="custom-guests"
-					placeholder="아이포함 총인원 입력" style="display: none;">
-			</div>
-			<div class="filter-stargroup">
-				<label><b>별점 허용</b></label> <input type="radio" name="rating"
-					value="5"> 5점 <input type="radio" name="rating" value="4">
-				4점대 <input type="radio" name="rating" value="3"> 3점대
-			</div>
-			<!-- ✅ 메뉴 체크박스 추가 -->
-    <div class="filter-checkgroup">
-        <label><b> 메뉴</b></label>
-        <c:set var="selectedCategories" value="${paramValues.store_category}" />
-        <input type="checkbox" name="store_category" value="양식" 
-               <c:if test="${fn:contains(selectedCategories, '양식')}">checked</c:if>> 양식
-        <input type="checkbox" name="store_category" value="한식" 
-               <c:if test="${fn:contains(selectedCategories, '한식')}">checked</c:if>> 한식
-        <input type="checkbox" name="store_category" value="일식" 
-               <c:if test="${fn:contains(selectedCategories, '일식')}">checked</c:if>> 일식
-        <input type="checkbox" name="store_category" value="중식" 
-               <c:if test="${fn:contains(selectedCategories, '중식')}">checked</c:if>> 중식
-        <input type="checkbox" name="store_category" value="디저트/카페" 
-               <c:if test="${fn:contains(selectedCategories, '디저트/카페')}">checked</c:if>> 디저트/카페
-    </div>
-			<div class="filter-time-kids">
+	<div class="container">
+		<form action="/board/search" method="get">
+			<div class="filter-section">
 				<div class="filter-group">
-					<label for="time">시 간</label> <select id="time" name="time">
-						<c:forEach var="hour" begin="10" end="23">
-							<option value="${hour}:00">${hour}:00</option>
-							<option value="${hour}:30">${hour}:30</option>
-						</c:forEach>
+					<label for="location"> 지 역</label> <select id="location">
+						<option value="seoul">서울</option>
+						<option value="gyeonggi">경기</option>
+						<option value="other">그 외 지역</option>
+					</select><select id="sub-location-select">
+						<option value='gangnam'>강남</option>
+						<option value='hongdae'>홍대</option>
+						<option value='itaewon'>이태원</option>
 					</select>
 				</div>
-			</div>
-			<div class="filter-time-kids">
 				<div class="filter-group">
-					<div class="inline-select">
-						<label for="kids">아이 손님</label> <select id="kids" name="kids">
-							<option value="none" selected>0명</option>
-							<!-- 추가된 옵션 -->
-							<c:forEach var="num" begin="1" end="5">
-								<option value="${num}">${num}명</option>
+					<label for="date">날 짜 </label> <input type="date" id="date"
+						name="date">
+				</div>
+				<div class="filter-group">
+					<label for="guests">총 인원 </label> <select id="guests" name="guests">
+						<c:forEach var="num" begin="4" end="12">
+							<option value="${num}">${num}명</option>
+						</c:forEach>
+						<option value="more">기타</option>
+					</select> <input type="text" id="custom-guests" name="custom-guests"
+						placeholder="아이포함 총인원 입력" style="display: none;">
+				</div>
+				<div class="filter-stargroup">
+					<label><b>별점 허용</b></label> <input type="radio" name="rating"
+						value="5"> 5점 <input type="radio" name="rating" value="4">
+					4점대 <input type="radio" name="rating" value="3"> 3점대
+				</div>
+				<!-- ✅ 메뉴 체크박스 추가 -->
+				<div class="filter-checkgroup">
+					<label><b> 메뉴</b></label>
+					<c:set var="selectedCategories"
+						value="${paramValues.store_category}" />
+					<input type="checkbox" name="store_category" value="양식"
+						<c:if test="${fn:contains(selectedCategories, '양식')}">checked</c:if>>
+					양식 <input type="checkbox" name="store_category" value="한식"
+						<c:if test="${fn:contains(selectedCategories, '한식')}">checked</c:if>>
+					한식 <input type="checkbox" name="store_category" value="일식"
+						<c:if test="${fn:contains(selectedCategories, '일식')}">checked</c:if>>
+					일식 <input type="checkbox" name="store_category" value="중식"
+						<c:if test="${fn:contains(selectedCategories, '중식')}">checked</c:if>>
+					중식 <input type="checkbox" name="store_category" value="디저트/카페"
+						<c:if test="${fn:contains(selectedCategories, '디저트/카페')}">checked</c:if>>
+					디저트/카페
+				</div>
+				<div class="filter-time-kids">
+					<div class="filter-group">
+						<label for="time">시 간</label> <select id="time" name="time">
+							<c:forEach var="hour" begin="10" end="23">
+								<option value="${hour}:00">${hour}:00</option>
+								<option value="${hour}:30">${hour}:30</option>
 							</c:forEach>
-							<option value="more">기타</option>
-						</select> <input type="text" id="custom-kids" name="custom-kids"
-							placeholder="아이 인원 입력" style="display: none;">
+						</select>
 					</div>
+				</div>
+				<div class="filter-time-kids">
+					<div class="filter-group">
+						<div class="inline-select">
+							<label for="kids">아이 손님</label> <select id="kids" name="kids">
+								<option value="none" selected>0명</option>
+								<!-- 추가된 옵션 -->
+								<c:forEach var="num" begin="1" end="5">
+									<option value="${num}">${num}명</option>
+								</c:forEach>
+								<option value="more">기타</option>
+							</select> <input type="text" id="custom-kids" name="custom-kids"
+								placeholder="아이 인원 입력" style="display: none;">
+						</div>
 
+					</div>
 				</div>
-			</div>
-			<div class="filter-time-kids">
-				<div class="filter-group">
-					
-						<input type="text" class="form-control me-2" name="keyword" value="${param.keyword}"
-							placeholder="가게명 검색">
+				<div class="filter-time-kids">
+					<div class="filter-group">
+
+						<input type="text" class="form-control me-2" name="keyword"
+							value="${param.keyword}" placeholder="가게명 검색">
 						<button type="submit">바로 찾아줄게 ✔</button>
-					
-					<!-- 검색 폼 -->
+
+						<!-- 검색 폼 -->
+					</div>
 				</div>
 			</div>
-		</div><!-- .filter-section -->
-</form>
+			<!-- .filter-section -->
+		</form>
+		<div class="title custom-title">
+			<h3>스토어별 예약가능한 시간 🍜</h3>
+		</div>
 		<!-- 스토어 리스트 -->
 		<div class="body">
 			<h2 class="text-center"></h2>
@@ -362,10 +421,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 가게별 예약 가능한 시간 데이터 (예제)
     const availableTimes = {
-        1: ["6:30", "7:30", "8:30", "9:30"],
-        2: ["5:00", "6:00", "7:00", "8:00"],
-        3: ["12:00", "1:00", "2:00", "3:00"],
-         4: ["12:00", "1:00", "2:00", "3:00"]
+    		1: ["6:30", "7:30", "8:30", "9:30"],
+    	    2: ["5:00", "6:00", "7:00", "8:00"],
+    	    3: ["12:00", "1:00", "2:00", "3:00"],
+    	    4: ["12:00", "1:00", "2:00", "3:00"],
+    	    5: ["11:30", "12:30", "1:30", "2:30"],
+    	    6: ["4:00", "5:00", "6:00", "7:00"],
+    	    7: ["10:00", "11:00", "12:00", "1:00"],
+    	    8: ["2:30", "3:30", "4:30", "5:30"],
+    	    9: ["6:00", "7:00", "8:00", "9:00"],
+    	    10: ["5:30", "6:30", "7:30", "8:30"],
+    	    11: ["11:00", "12:00", "1:00", "2:00"],
+    	    12: ["9:00", "10:00", "11:00", "12:00"]
         // 추가적인 가게 ID와 시간을 여기에 추가
     };
 
@@ -417,24 +484,45 @@ window.addEventListener('load', function() {
 		// 페이지가 로드될 때 locationSelect의 값을 'seoul'로 설정
 		locationSelect.value = 'seoul';
 	});
+//지역 부가선택
+document
+		.getElementById('location')
+		.addEventListener(
+				'change',
+				function() {
+					var subLocationSelect = document
+							.getElementById('sub-location-select');
+					subLocationSelect.innerHTML = "";
+					if (this.value === 'seoul') {
+				        subLocationSelect.innerHTML = `
+				            <option value='gangnam'>강남</option>
+				            <option value='hongdae'>홍대</option>
+				            <option value='itaewon'>이태원</option>
+				            <option value='gangbuk'>강북</option>
+				            <option value='yeouido'>여의도</option>
+				            <option value='jamsil'>잠실</option>
+				            <option value='dongdaemun'>동대문</option>
+				            <option value='myeongdong'>명동</option>
+				            <option value='sinchon'>신촌</option>
+				            <option value='yeoksam'>역삼</option>
+				            <option value='seocho'>서초</option>
+				            <option value='apgujeong'>압구정</option>
+				            <option value='samseong'>삼성</option>
+				            <option value='guro'>구로</option>
+				            <option value='yeongdeungpo'>영등포</option>
+				            <option value='konkuk'>건대입구</option>
+				            <option value='jongno'>종로</option>
+				            <option value='sadang'>사당</option>
+				            <option value='gangnam_station'>강남역</option>
+				            <option value='samsung_station'>삼성중앙역</option>
+				        `;
+					} else if (this.value === 'gyeonggi') {
+						subLocationSelect.innerHTML = "<option value='suwon'>수원</option><option value='bundang'>분당</option><option value='ilsan'>일산</option>";
+					} else {
+						subLocationSelect.innerHTML = "<option value='chungcheong'>충청도</option><option value='gangwon'>강원도</option><option value='jeolla'>전라도</option><option value='gyeongsang'>경상도</option><option value='jeju'>제주도</option>";
+					}
+				});
 
-	//지역 부가선택
-	document
-			.getElementById('location')
-			.addEventListener(
-					'change',
-					function() {
-						var subLocationSelect = document
-								.getElementById('sub-location-select');
-						subLocationSelect.innerHTML = "";
-						if (this.value === 'seoul') {
-							subLocationSelect.innerHTML = "<option value='gangnam'>강남</option><option value='hongdae'>홍대</option><option value='itaewon'>이태원</option>";
-						} else if (this.value === 'gyeonggi') {
-							subLocationSelect.innerHTML = "<option value='suwon'>수원</option><option value='bundang'>분당</option><option value='ilsan'>일산</option>";
-						} else {
-							subLocationSelect.innerHTML = "<option value='chungcheong'>충청도</option><option value='gangwon'>강원도</option><option value='jeolla'>전라도</option><option value='gyeongsang'>경상도</option><option value='jeju'>제주도</option>";
-						}
-					});
 
 	// 인원 입력 스크립트
 	document
@@ -500,7 +588,7 @@ window.addEventListener('load', function() {
 <div class="pagination">
 
 	<c:set var="amount"
-		value="${not empty param.amount ? param.amount : 10}"></c:set>
+		value="${not empty param.amount ? param.amount : 9}"></c:set>
 	<c:set var="pageNum"
 		value="${not empty param.pageNum ? param.pageNum : 1}"></c:set>
 
