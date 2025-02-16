@@ -37,6 +37,8 @@ body {
 	justify-content: space-around;
 	background-color: white;
 	padding: 15px;
+	padding-left: 84px;
+    padding-right: 84px;
 	border-radius: 10px;
 	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 	margin-bottom: 20px;
@@ -205,60 +207,21 @@ body {
 	transform: scale(1.1);
 }
 
-/* 사진 섹션 */
-.photo-section {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: 20px;
-}
 
-@media ( max-width : 768px) {
-	.photo-section {
-		grid-template-columns: repeat(2, 1fr);
-	}
-}
-
-@media ( max-width : 480px) {
-	.photo-section {
-		grid-template-columns: 1fr;
-	}
-}
-
-/* 이미지 호버 효과 */
-.photo-frame img:hover {
-	transform: scale(1.05); /* 살짝 확대 */
+.photo-frame:hover {
+	transform: scale(1.05);
 	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* 테이블 애니메이션 */
-table {
-	width: 100%;
-	border-collapse: collapse;
-	animation: fadeIn 1s ease-in-out;
+/* 애니메이션 */
+@keyframes fadeIn {
+	from { opacity: 0; }
+	to { opacity: 1; }
 }
 
-/* 페이드 인 애니메이션 */
-@
-keyframes fadeIn {from { opacity:0;
-	
-}
-
-to {
-	opacity: 1;
-}
-
-}
-
-/* 슬라이드 업 애니메이션 */
-@
-keyframes slideUp {from { transform:translateY(20px);
-	opacity: 0;
-}
-
-to {
-	transform: translateY(0);
-	opacity: 1;
-}
+@keyframes slideUp {
+	from { transform: translateY(20px); opacity: 0; }
+	to
 </style>
 
 </head>

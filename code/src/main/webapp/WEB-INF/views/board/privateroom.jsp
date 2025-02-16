@@ -37,6 +37,8 @@ body {
 	justify-content: space-around;
 	background-color: white;
 	padding: 15px;
+	padding-left: 84px;
+	padding-right: 84px;
 	border-radius: 10px;
 	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 	margin-bottom: 20px;
@@ -49,6 +51,7 @@ body {
 	align-items: center;
 	padding: 3px 0;
 	justify-content: center;
+	padding-top: 13px;
 }
 
 .filter-stargroup {
@@ -63,16 +66,52 @@ body {
 	/* 	display: flex; */
 	flex-direction: column;
 	align-items: center;
-	padding-top: 11px; /* 위쪽 패딩 값 추가 */
+	padding-top: 13px; /* 위쪽 패딩 값 추가 */
 	padding-bottom: 5px; /* 아래쪽 패딩은 기존처럼 유지 */
 }
 
-.filter-time-kids {
-	/* 	display: flex; */
+.filter-checkgroup select:hover {
+	border-color: #999;
+}
+
+/* 레이블 스타일 강화 */
+.filter-checkgroup label {
+	font-weight: bold;
+	color: #333;
+	margin-bottom: 8px;
+}
+
+.filter-checkgroup label {
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+.filter-pricegroup {
 	flex-direction: column;
 	align-items: center;
-	padding-top: 8px; /* 위쪽 패딩 값 추가 */
+	padding-top: 10px; /* 위쪽 패딩 값 추가 */
 	padding-bottom: 5px; /* 아래쪽 패딩은 기존처럼 유지 */
+}
+
+/* price-range select 스타일 추가 */
+.filter-pricegroup select {
+	padding: 5px 10px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	background-color: white;
+	margin-top: 5px;
+}
+
+/* price-range select 호버 효과 */
+.filter-pricegroup select:hover {
+	border-color: #999;
+}
+
+/* 레이블 스타일 강화 */
+.filter-pricegroup label {
+	font-weight: bold;
+	color: #333;
+	margin-bottom: 8px;
 }
 
 .filter-group label {
@@ -123,13 +162,20 @@ body {
 	width: 100%;
 	display: flex;
 	justify-content: center;
+	flex-wrap: wrap;
 	gap: 20px;
 }
 
 .photo-frame {
-	width: 400px;
+	width: 380px;
+	overflow: hidden;
 	position: relative;
+	display: inline-block;
 	animation: fadeIn 1.5s ease-in-out; /* 사진도 페이드 인 */
+	border-radius: 15px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	
+
 }
 
 .photo-frame img {
@@ -140,42 +186,66 @@ body {
 	transition: transform 0.3s ease-in-out;
 }
 
-/* 이미지 호버 효과 */
-.photo-frame img:hover {
-	transform: scale(1.05); /* 살짝 확대 */
+/* 예약 가능한 시간 버튼 컨테이너 */
+.time-buttons-container {
+	position: absolute;
+	bottom: 10px;
+	left: 50%;
+	transform: translateX(-50%);
+	background: rgb(223 212 182/ 85%); /* 반투명 배경 */
+	padding: 8px 10px;
+	border-radius: 15px;
+	display: none;
+	text-align: center;
+	z-index: 10;
+	width: 90%;
+	display: flex;
+	justify-content: center;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.time-title {
+	font-size: 16px;
+	font-weight: bold;
+	color: #444;
+	margin-bottom: 5px;
+}
+
+/* 시간 버튼 스타일 */
+.time-button {
+	font-size: 14px;
+	border: none;
+	background-color: rgb(46 89 43/ 76%); /* 연한 오렌지색 */
+	color: black;
+	cursor: pointer;
+	border-radius: 8px;
+	padding: 6px 10px;
+	transition: all 0.3s ease-in-out;
+}
+
+.time-button:hover {
+	background-color: #ff9900;
+	transform: scale(1.1);
+}
+
+
+.photo-frame:hover {
+	transform: scale(1.05);
 	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* 테이블 애니메이션 */
-table {
-	width: 100%;
-	border-collapse: collapse;
-	animation: fadeIn 1s ease-in-out;
+/* 애니메이션 */
+@keyframes fadeIn {
+	from { opacity: 0; }
+	to { opacity: 1; }
 }
 
-/* 페이드 인 애니메이션 */
-@
-keyframes fadeIn {from { opacity:0;
-	
-}
-
-to {
-	opacity: 1;
-}
-
-}
-
-/* 슬라이드 업 애니메이션 */
-@
-keyframes slideUp {from { transform:translateY(20px);
-	opacity: 0;
-}
-
-to {
-	transform: translateY(0);
-	opacity: 1;
-}
+@keyframes slideUp {
+	from { transform: translateY(20px); opacity: 0; }
+	to
 </style>
+
 
 </head>
 <body>
@@ -191,6 +261,23 @@ to {
 					<option value='gangnam'>강남</option>
 					<option value='hongdae'>홍대</option>
 					<option value='itaewon'>이태원</option>
+					<option value='gangbuk'>강북</option>
+					<option value='yeouido'>여의도</option>
+					<option value='jamsil'>잠실</option>
+					<option value='dongdaemun'>동대문</option>
+					<option value='myeongdong'>명동</option>
+					<option value='sinchon'>신촌</option>
+					<option value='yeoksam'>역삼</option>
+					<option value='seocho'>서초</option>
+					<option value='apgujeong'>압구정</option>
+					<option value='samseong'>삼성</option>
+					<option value='guro'>구로</option>
+					<option value='yeongdeungpo'>영등포</option>
+					<option value='konkuk'>건대입구</option>
+					<option value='jongno'>종로</option>
+					<option value='sadang'>사당</option>
+					<option value='gangnam_station'>강남역</option>
+					<option value='samsung_station'>삼성중앙역</option>
 				</select>
 			</div>
 
@@ -226,33 +313,18 @@ to {
 				<label><b>룸 타입</b></label> <input type="checkbox" name="room-type"
 					value="vip"> VIP룸 <input type="checkbox" name="room-type"
 					value="business"> 비즈니스룸 <input type="checkbox"
-					name="room-type" value="standard"> 스탠다드룸 <input
-					type="checkbox" name="room-type" value="couple"> 커플룸 <input
-					type="checkbox" name="room-type" value="family"> 패밀리룸
-			</div>
-
-			<div class="filter-checkgroup">
-				<label><b>편의시설</b></label> <input type="checkbox" name="amenities"
-					value="projector"> 프로젝터 <input type="checkbox"
-					name="amenities" value="wifi"> 와이파이 <input type="checkbox"
-					name="amenities" value="pc"> PC/노트북 <input type="checkbox"
-					name="amenities" value="whiteboard"> 화이트보드 <input
-					type="checkbox" name="amenities" value="printer"> 프린터
+					name="room-type" value="family"> 패밀리룸
 			</div>
 
 			<div class="filter-group">
-				<label><b>이용 목적</b></label> <select id="purpose" name="purpose">
-					<option value="all">전체</option>
-					<option value="meeting">회의/미팅</option>
-					<option value="study">스터디</option>
-					<option value="interview">면접</option>
-					<option value="counseling">상담</option>
-					<option value="private">프라이빗 모임</option>
-				</select>
+				<form action="/privateroom/search" method="get">
+					<input type="text" class="form-control me-2" name="searchKeyword"
+						placeholder="프라이빗 룸 검색">
+					<button type="submit" class="btn btn-primary">찾아줄게 ✔</button>
+				</form>
 			</div>
-
-			<div class="filter-price">
-				<label><b>가격대</b></label> <select id="price-range"
+			<div class="filter-pricegroup">
+				<label><b>예약 가격</b></label> <select id="price-range"
 					name="price-range">
 					<option value="all">전체</option>
 					<option value="0-30000">3만원 이하</option>
@@ -261,48 +333,13 @@ to {
 					<option value="100000">10만원 이상</option>
 				</select>
 			</div>
-
-			<div class="filter-stargroup">
-				<label><b>별점 허용</b></label> <input type="radio" name="rating"
-					value="5"> 5점 <input type="radio" name="rating" value="4">
-				4점대 <input type="radio" name="rating" value="3"> 3점대
-			</div>
-
-			<div class="filter-group">
-				<form action="/privateroom/search" method="get">
-					<input type="text" class="form-control me-2" name="searchKeyword"
-						placeholder="프라이빗 룸 검색">
-					<button type="submit" class="btn btn-primary"> 찾아줄게 ✔</button>
-				</form>
-			</div>
 		</div>
-	</div>
-	<!-- 스토어 리스트 -->
-	<div class="body">
-		<h2 class="text-center"></h2>
-		<div class="photo-section">
-			<c:forEach var="store" items="${storeList}">
-				<div class="photo-frame"
-					onclick="location.href='/store/detail?id=${store.id}'">
-					<c:choose>
-						<c:when test="${not empty store.storeImage}">
-							<img src="${store.storeImage}" alt="가게 이미지"
-								onerror="this.onerror=null; this.src='/resources/images/default.jpg'">
-						</c:when>
-						<c:otherwise>
-							<img src="/resources/images/default.jpg" alt="기본 이미지">
-						</c:otherwise>
-					</c:choose>
-				</div>
-			</c:forEach>
-		</div>
-		<a href="/board/register" class="btn btn-success">새 가게 등록</a>
 	</div>
 
 	<div class="photo-section">
 		<div class="photo-frame">
-			<a href="http://localhost:8092/store/detail?id=4"><img
-				src="/resources/image/뷔페.jpg" alt="뷔페"></a>
+			<a href="http://localhost:8092/store/detail?id=11"><img
+				src="/resources/image/nulmokssambab.jpg" alt="늘목쌈밥"></a>
 		</div>
 		<div class="photo-frame">
 			<a href="http://localhost:8092/store/detail?id=2"><img
@@ -314,11 +351,37 @@ to {
 		</div>
 	</div>
 	<div class="time-buttons">
+		<button>6:00</button>
 		<button>6:30</button>
+		<button>7:00</button>
 		<button>7:30</button>
+		<button>8:00</button>
 		<button>8:30</button>
 		<button>9:30</button>
 	</div>
+	<!-- 스토어 리스트 -->
+	<div class="body">
+		<h2 class="text-center"></h2>
+		<div class="photo-section">
+			<c:forEach var="store" items="${storeList}">
+				<div class="photo-frame" data-store-id="${store.id}">
+					<a href="/store/detail?id=${store.id}"> <c:choose>
+							<c:when test="${not empty store.storeImage}">
+								<%-- <img src="${store.storeImage}" alt="가게 이미지"
+										onerror="this.onerror=null; this.src='/resources/images/default.jpg'"> --%>
+								<img src="${store.storeImage}" alt="가게 이미지">
+							</c:when>
+							<c:otherwise>
+								<img src="/resources/images/default.jpg" alt="default">
+							</c:otherwise>
+						</c:choose>
+					</a>
+					<div class="time-buttons-container"></div>
+				</div>
+			</c:forEach>
+		</div>
+	</div>
+
 </body>
 
 
@@ -346,7 +409,28 @@ to {
 								.getElementById('sub-location-select');
 						subLocationSelect.innerHTML = "";
 						if (this.value === 'seoul') {
-							subLocationSelect.innerHTML = "<option value='gangnam'>강남</option><option value='hongdae'>홍대</option><option value='itaewon'>이태원</option>";
+					        subLocationSelect.innerHTML = `
+					            <option value='gangnam'>강남</option>
+					            <option value='hongdae'>홍대</option>
+					            <option value='itaewon'>이태원</option>
+					            <option value='gangbuk'>강북</option>
+					            <option value='yeouido'>여의도</option>
+					            <option value='jamsil'>잠실</option>
+					            <option value='dongdaemun'>동대문</option>
+					            <option value='myeongdong'>명동</option>
+					            <option value='sinchon'>신촌</option>
+					            <option value='yeoksam'>역삼</option>
+					            <option value='seocho'>서초</option>
+					            <option value='apgujeong'>압구정</option>
+					            <option value='samseong'>삼성</option>
+					            <option value='guro'>구로</option>
+					            <option value='yeongdeungpo'>영등포</option>
+					            <option value='konkuk'>건대입구</option>
+					            <option value='jongno'>종로</option>
+					            <option value='sadang'>사당</option>
+					            <option value='gangnam_station'>강남역</option>
+					            <option value='samsung_station'>삼성중앙역</option>
+					        `;
 						} else if (this.value === 'gyeonggi') {
 							subLocationSelect.innerHTML = "<option value='suwon'>수원</option><option value='bundang'>분당</option><option value='ilsan'>일산</option>";
 						} else {

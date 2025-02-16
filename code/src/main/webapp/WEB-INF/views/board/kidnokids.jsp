@@ -37,6 +37,8 @@ body {
 	justify-content: space-around;
 	background-color: white;
 	padding: 15px;
+	padding-left: 84px;
+	padding-right: 84px;
 	border-radius: 10px;
 	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 	margin-bottom: 20px;
@@ -117,19 +119,25 @@ body {
 	transform: scale(0.95); /* 살짝 눌리는 효과 */
 	box-shadow: none;
 }
-
 /* 사진 섹션 */
 .photo-section {
 	width: 100%;
 	display: flex;
 	justify-content: center;
+	flex-wrap: wrap;
 	gap: 20px;
 }
 
 .photo-frame {
-	width: 400px;
+	width: 380px;
+	overflow: hidden;
 	position: relative;
+	display: inline-block;
 	animation: fadeIn 1.5s ease-in-out; /* 사진도 페이드 인 */
+	border-radius: 15px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	
+
 }
 
 .photo-frame img {
@@ -140,41 +148,64 @@ body {
 	transition: transform 0.3s ease-in-out;
 }
 
-/* 이미지 호버 효과 */
-.photo-frame img:hover {
-	transform: scale(1.05); /* 살짝 확대 */
+/* 예약 가능한 시간 버튼 컨테이너 */
+.time-buttons-container {
+	position: absolute;
+	bottom: 10px;
+	left: 50%;
+	transform: translateX(-50%);
+	background: rgb(223 212 182/ 85%); /* 반투명 배경 */
+	padding: 8px 10px;
+	border-radius: 15px;
+	display: none;
+	text-align: center;
+	z-index: 10;
+	width: 90%;
+	display: flex;
+	justify-content: center;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.time-title {
+	font-size: 16px;
+	font-weight: bold;
+	color: #444;
+	margin-bottom: 5px;
+}
+
+/* 시간 버튼 스타일 */
+.time-button {
+	font-size: 14px;
+	border: none;
+	background-color: rgb(46 89 43/ 76%); /* 연한 오렌지색 */
+	color: black;
+	cursor: pointer;
+	border-radius: 8px;
+	padding: 6px 10px;
+	transition: all 0.3s ease-in-out;
+}
+
+.time-button:hover {
+	background-color: #ff9900;
+	transform: scale(1.1);
+}
+
+
+.photo-frame:hover {
+	transform: scale(1.05);
 	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* 테이블 애니메이션 */
-table {
-	width: 100%;
-	border-collapse: collapse;
-	animation: fadeIn 1s ease-in-out;
+/* 애니메이션 */
+@keyframes fadeIn {
+	from { opacity: 0; }
+	to { opacity: 1; }
 }
 
-/* 페이드 인 애니메이션 */
-@
-keyframes fadeIn {from { opacity:0;
-	
-}
-
-to {
-	opacity: 1;
-}
-
-}
-
-/* 슬라이드 업 애니메이션 */
-@
-keyframes slideUp {from { transform:translateY(20px);
-	opacity: 0;
-}
-
-to {
-	transform: translateY(0);
-	opacity: 1;
-}
+@keyframes slideUp {
+	from { transform: translateY(20px); opacity: 0; }
+	to
 </style>
 
 </head>
