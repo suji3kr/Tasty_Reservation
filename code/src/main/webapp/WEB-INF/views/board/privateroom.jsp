@@ -292,13 +292,10 @@ body {
 }
 /* 애니메이션 */
 @keyframes fadeIn {
-	from { opacity: 0; }
+	from { opacity: 0.5; }
 	to { opacity: 1; }
 }
 
-@keyframes slideUp {
-	from { transform: translateY(20px); opacity: 0; }
-	to
 </style>
 
 

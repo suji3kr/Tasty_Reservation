@@ -30,8 +30,8 @@ body {
 }
 /* 제목 스타일 */
 .title {
-    justify-content: center;
-    width: 100%;
+	justify-content: center;
+	width: 100%;
 }
 
 .title h3 {
@@ -194,8 +194,6 @@ body {
 	animation: fadeIn 1.5s ease-in-out; /* 사진도 페이드 인 */
 	border-radius: 15px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	
-
 }
 
 .photo-frame img {
@@ -249,21 +247,16 @@ body {
 	transform: scale(1.1);
 }
 
-
 .photo-frame:hover {
 	transform: scale(1.05);
 	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
-
 /* 애니메이션 */
 @keyframes fadeIn {
-	from { opacity: 0; }
+	from { opacity: 0.5; }
 	to { opacity: 1; }
 }
 
-@keyframes slideUp {
-	from { transform: translateY(20px); opacity: 0; }
-	to
 </style>
 
 </head>
@@ -360,19 +353,9 @@ body {
 			</div>
 		</div>
 	</div>
-		<div class="title custom-title">
-		<h3> 스토어별 예약가능한 시간을 알려드립니다🍜</h3>
+	<div class="title custom-title">
+		<h3>스토어별 예약가능한 시간 🍜</h3>
 	</div>
-		<div class="time-buttons">
-		<button>6:00</button>
-		<button>6:30</button>
-		<button>7:00</button>
-		<button>7:30</button>
-		<button>8:00</button>
-		<button>8:30</button>
-		<button>9:30</button>
-	</div>
-
 	<div class="photo-section">
 		<div class="photo-frame">
 			<a href="http://localhost:8092/store/detail?id=11"><img
@@ -409,7 +392,6 @@ body {
 				</c:forEach>
 			</div>
 		</div>
-		<a href="/board/register" class="btn btn-success">새 가게 등록</a>
 	</div>
 
 	<script>
@@ -589,34 +571,34 @@ body {
 				});
 	</script>
 
-	<%-- <!-- 페이징처리 -->
-<div class="pagination">
+	<!-- 페이징처리 -->
+	<div class="pagination">
 
-	<c:set var="amount"
-		value="${not empty param.amount ? param.amount : 10}"></c:set>
-	<c:set var="pageNum"
-		value="${not empty param.pageNum ? param.pageNum : 1}"></c:set>
+		<c:set var="amount"
+			value="${not empty param.amount ? param.amount : 9}"></c:set>
+		<c:set var="pageNum"
+			value="${not empty param.pageNum ? param.pageNum : 1}"></c:set>
 
-	<c:if test="${pageMaker.prev}">
-		<a
-			href="/board/familyreservation?pageNum=${pageMaker.startPage - 1}&amount=${amount}">이전</a>
-	</c:if>
+		<c:if test="${pageMaker.prev}">
+			<a
+				href="/board/familyreservation?pageNum=${pageMaker.startPage - 1}&amount=${amount}">이전</a>
+		</c:if>
 
-	<c:forEach var="i" begin="${pageMaker.startPage}"
-		end="${pageMaker.endPage}">
-		<c:choose>
-			<c:when test="${i == pageNum}">
-				<span class="current-page">${i}</span>
-			</c:when>
-			<c:otherwise>
-				<a href="/board/familyreservation?pageNum=${i}&amount=${amount}">${i}</a>
-			</c:otherwise>
-		</c:choose>
-	</c:forEach>
+		<c:forEach var="i" begin="${pageMaker.startPage}"
+			end="${pageMaker.endPage}">
+			<c:choose>
+				<c:when test="${i == pageNum}">
+					<span class="current-page">${i}</span>
+				</c:when>
+				<c:otherwise>
+					<a href="/board/familyreservation?pageNum=${i}&amount=${amount}">${i}</a>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
 
-	<c:if test="${pageMaker.next}">
-		<a
-			href="/board/familyreservation?pageNum=${pageMaker.endPage + 1}&amount=${amount}">다음</a>
-	</c:if>
-</div> --%>
+		<c:if test="${pageMaker.next}">
+			<a
+				href="/board/familyreservation?pageNum=${pageMaker.endPage + 1}&amount=${amount}">다음</a>
+		</c:if>
+	</div>
 </html>

@@ -105,9 +105,9 @@ body {
 	font-size: 4rem;
 	font-weight: bold;
 	margin-bottom: 38px;
-	margin-top: 82px;
-	color: rgb(255 195 55/ 88%);
-	text-shadow: 2px 2px 4px rgb(49, 45, 45);
+	margin-top: 111px;
+	color: rgb(255 132 0/ 88%);
+	text-shadow: 2.5px 0.4px 1.5px rgb(255, 255, 255);
 }
 
 .overlay p {

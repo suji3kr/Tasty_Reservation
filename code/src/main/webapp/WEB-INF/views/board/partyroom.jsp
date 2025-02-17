@@ -126,22 +126,6 @@ body {
 	padding-bottom: 5px; /* 아래쪽 패딩은 기존처럼 유지 */
 }
 
-.filter-checkgroup select:hover {
-	border-color: #999;
-}
-
-/* 레이블 스타일 강화 */
-.filter-checkgroup label {
-	font-weight: bold;
-	color: #333;
-	margin-bottom: 8px;
-}
-
-.filter-checkgroup label {
-	font-weight: bold;
-	margin-bottom: 5px;
-}
-
 .filter-pricegroup {
 	flex-direction: column;
 	align-items: center;
@@ -289,13 +273,9 @@ body {
 }
 /* 애니메이션 */
 @keyframes fadeIn {
-	from { opacity: 0; }
+	from { opacity: 0.5; }
 	to { opacity: 1; }
 }
-
-@keyframes slideUp {
-	from { transform: translateY(20px); opacity: 0; }
-	to
 </style>
 
 
@@ -394,16 +374,7 @@ body {
 		</div>
 	</div>
 	<div class="title custom-title">
-		<h3> 스토어별 예약가능한 시간을 알려드립니다🍜</h3>
-	</div>
-		<div class="time-buttons">
-		<button>6:00</button>
-		<button>6:30</button>
-		<button>7:00</button>
-		<button>7:30</button>
-		<button>8:00</button>
-		<button>8:30</button>
-		<button>9:30</button>
+		<h3> 스토어별 예약가능한 시간 🍜</h3>
 	</div>
 	<div class="photo-section">
 		<div class="photo-frame">
