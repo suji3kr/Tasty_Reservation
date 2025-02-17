@@ -46,6 +46,11 @@
 	</definition>
 
 	<!-- filter -->
+	<definition name="/board/mainreservation" extends="base">
+		<put-attribute name="title" value="맛집예약" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/board/mainreservation.jsp" />
+	</definition>
 	<definition name="/board/familyreservation" extends="base">
 		<put-attribute name="title" value="단체예약" />
 		<put-attribute name="body"
@@ -181,22 +186,6 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/reservation/edit.jsp" />
 	</definition>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
