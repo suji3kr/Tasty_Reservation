@@ -260,7 +260,7 @@ keyframes fadeIn {from { opacity:0.5;
 to {
 	opacity: 1;
 }
-}
+
 </style>
 
 </head>
