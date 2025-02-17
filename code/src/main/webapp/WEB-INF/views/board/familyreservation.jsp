@@ -10,14 +10,17 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>가족 단체예약</title>
 
+<!-- Swiper.js CDN 추가 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
 <style>
 body {
 	font-family: 'Roboto', sans-serif;
-	background-color: #e5ebbc;
+	background-color: #f7f9e9;
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	background-color: #f7f9e9;
 }
 
 .container {
@@ -28,575 +31,150 @@ body {
 	flex-direction: column;
 	align-items: center;
 }
-/* 제목 스타일 */
-.title {
-	justify-content: center;
-	width: 100%;
+
+/* ✅ Swiper 스타일 (큰 메인 배너) */
+.swiper-container {
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.title h3 {
-	max-width: 777px;
-	font-family: 'Roboto', sans-serif;
-	font-size: 24px;
-	font-weight: bold;
-	color: #575757;
-	background-color: #ffecaf;
-	padding: 10px 20px;
-	border-radius: 8px;
-	text-align: center;
-	margin: 0 auto 20px auto; /* 가운데 정렬 */
-	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-}
-/* 페이지네이션 스타일 */
-.pagination {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-top: 20px;
-	gap: 8px;
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.pagination a, .pagination span {
-	display: inline-block;
-	padding: 8px 12px;
-	font-size: 16px;
-	font-weight: bold;
-	color: #4e7300;
-	background-color: #ffffff;
-	border: 1px solid #4e7300;
-	border-radius: 5px;
-	text-decoration: none;
-	transition: all 0.3s ease-in-out;
+.swiper-slide img {
+    width: 100%;
+    height: 400px; /* ✅ 메인 배너 크기 */
+    object-fit: cover;
+    border-radius: 15px;
 }
 
-.pagination a:hover {
-	background-color: #4e7300;
-	color: white;
-	transform: scale(1.1);
+/* ✅ 페이지네이션 위치 조정 */
+.swiper-pagination {
+    position: relative !important;  
+    margin-top: 10px;
+    text-align: center;
 }
 
-.pagination .active {
-	background-color: #4e7300;
-	color: white;
-	border: none;
+/* ✅ 페이지네이션 점 스타일 */
+.swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background-color: rgba(0, 0, 0, 0.3);
+    opacity: 0.6;
+    transition: all 0.3s ease-in-out;
 }
 
-.pagination .disabled {
-	color: #bbb;
-	cursor: not-allowed;
-	border: 1px solid #ddd;
+.swiper-pagination-bullet-active {
+    background-color: #4e7300;
+    opacity: 1;
+    transform: scale(1.2);
 }
 
-/* 필터 섹션 */
-.filter-section {
-	width: 1002px;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-around;
-	background-color: white;
-	padding: 15px;
-	padding-left: 84px;
-	padding-right: 84px;
-	border-radius: 10px;
-	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-	margin-bottom: 20px;
-	animation: slideUp 0.8s ease-in-out; /* 슬라이드 업 애니메이션 */
+.swiper-button-next, .swiper-button-prev {
+    color: #4e7300;
 }
 
-/* 필터 그룹 */
-.filter-group {
-	flex-direction: column;
-	align-items: center;
-	padding: 3px 0;
-	justify-content: center;
-}
-
-.filter-stargroup {
-	/* 	display: flex; */
-	flex-direction: column;
-	align-items: center;
-	padding-top: 6px; /* 위쪽 패딩 값 추가 */
-	padding-bottom: 5px; /* 아래쪽 패딩은 기존처럼 유지 */
-}
-
-.filter-checkgroup {
-	/* 	display: flex; */
-	flex-direction: column;
-	align-items: center;
-	padding-top: 11px; /* 위쪽 패딩 값 추가 */
-	padding-bottom: 5px; /* 아래쪽 패딩은 기존처럼 유지 */
-}
-
-.filter-time-kids {
-	/* 	display: flex; */
-	flex-direction: column;
-	align-items: center;
-	padding-top: 8px; /* 위쪽 패딩 값 추가 */
-	padding-bottom: 5px; /* 아래쪽 패딩은 기존처럼 유지 */
-}
-
-.filter-group label {
-	font-weight: bold;
-	margin-bottom: 5px;
-}
-
-.filter-group select, .filter-group input, .filter-group button {
-	padding: 3px;
-	border: 1px solid #ccc;
-	border-radius: 5px;
-}
-
-.time-buttons-container {
-	gap: 10px; /* 버튼 간격 */
-	position: absolute;
-	top: 248px;
-	left: 50%;
-	transform: translateX(-50%);
-	background: rgb(226 203 145/ 70%);
-	padding: 10px;
-	border-radius: 8px;
-	display: none;
-	text-align: center; /* 내부 요소 가운데 정렬 */
-	z-index: 10;
-	text-align: center;
-}
-
-.time-title {
-	color: #445e54;
-	font-size: 19px;
-	margin-bottom: 5px;
-	font-weight: bold;
-}
-
-.time-button:hover {
-	background-color: #ff9900;
-	transform: scale(1.1);
-}
-/* 버튼 클릭 효과 */
-.time-buttons button:active {
-	transform: scale(0.95); /* 살짝 눌리는 효과 */
-	box-shadow: none;
-}
-
-/* 사진 섹션 */
+/* ✅ 하단 사진 스타일 (썸네일 목록) */
 .photo-section {
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	flex-wrap: wrap;
-	gap: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
 }
 
 .photo-frame {
-	width: 380px;
-	overflow: hidden;
-	position: relative;
-	display: inline-block;
-	animation: fadeIn 1.5s ease-in-out; /* 사진도 페이드 인 */
-	border-radius: 15px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 250px;  /* ✅ 썸네일 크기 */
+    height: 180px; /* ✅ 썸네일 크기 */
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
 }
 
 .photo-frame img {
-	width: 100%;
-	height: 300px;
-	border-radius: 15px;
-	object-fit: cover;
-	transition: transform 0.3s ease-in-out;
-}
-
-/* 예약 가능한 시간 버튼 컨테이너 */
-.time-buttons-container {
-	position: absolute;
-	bottom: 10px;
-	left: 50%;
-	transform: translateX(-50%);
-	background: rgb(223 212 182/ 85%); /* 반투명 배경 */
-	padding: 8px 10px;
-	border-radius: 15px;
-/* 	display: none; */
-	text-align: center;
-	z-index: 10;
-	width: 90%;
-/* 	display: flex; */
-	justify-content: center;
-	gap: 8px;
-	flex-wrap: wrap;
-}
-
-.time-title {
-	font-size: 16px;
-	font-weight: bold;
-	color: #444;
-	margin-bottom: 5px;
-}
-
-/* 시간 버튼 스타일 */
-.time-button {
-    font-size: 14px;
-    border: none;
-    background-color: #fbd374e6;
-    color: #444;
-    cursor: pointer;
-    border-radius: 8px;
-    padding: 6px 10px;
-    transition: all 0.3s ease-in-out;
-    display: flex;
-    justify-content: center;
-    margin: 2px 0;
-}
-
-.time-button:hover {
-	background-color: #ff9900;
-	transform: scale(1.1);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
 }
 
 .photo-frame:hover {
-	transform: scale(1.05);
-	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-}
-/* 애니메이션 */
-@keyframes fadeIn {
-	from { opacity: 0.5; }
-	to { opacity: 1; }
+    transform: scale(1.05);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 </style>
-
 </head>
+
 <body>
 
-	<div class="container">
-		<form action="/board/search" method="get">
-			<div class="filter-section">
-				<div class="filter-group">
-					<label for="location"> 지 역</label> <select id="location">
-						<option value="seoul">서울</option>
-						<option value="gyeonggi">경기</option>
-						<option value="other">그 외 지역</option>
-					</select><select id="sub-location-select">
-						<option value='gangnam'>강남</option>
-						<option value='hongdae'>홍대</option>
-						<option value='itaewon'>이태원</option>
-					</select>
-				</div>
-				<div class="filter-group">
-					<label for="date">날 짜 </label> <input type="date" id="date"
-						name="date">
-				</div>
-				<div class="filter-group">
-					<label for="guests">총 인원 </label> <select id="guests" name="guests">
-						<c:forEach var="num" begin="4" end="12">
-							<option value="${num}">${num}명</option>
-						</c:forEach>
-						<option value="more">기타</option>
-					</select> <input type="text" id="custom-guests" name="custom-guests"
-						placeholder="아이포함 총인원 입력" style="display: none;">
-				</div>
-				<div class="filter-stargroup">
-					<label><b>별점 허용</b></label> <input type="radio" name="rating"
-						value="5"> 5점 <input type="radio" name="rating" value="4">
-					4점대 <input type="radio" name="rating" value="3"> 3점대
-				</div>
-				<!-- ✅ 메뉴 체크박스 추가 -->
-				<div class="filter-checkgroup">
-					<label><b> 메뉴</b></label>
-					<c:set var="selectedCategories"
-						value="${paramValues.store_category}" />
-					<input type="checkbox" name="store_category" value="양식"
-						<c:if test="${fn:contains(selectedCategories, '양식')}">checked</c:if>>
-					양식 <input type="checkbox" name="store_category" value="한식"
-						<c:if test="${fn:contains(selectedCategories, '한식')}">checked</c:if>>
-					한식 <input type="checkbox" name="store_category" value="일식"
-						<c:if test="${fn:contains(selectedCategories, '일식')}">checked</c:if>>
-					일식 <input type="checkbox" name="store_category" value="중식"
-						<c:if test="${fn:contains(selectedCategories, '중식')}">checked</c:if>>
-					중식 <input type="checkbox" name="store_category" value="디저트/카페"
-						<c:if test="${fn:contains(selectedCategories, '디저트/카페')}">checked</c:if>>
-					디저트/카페
-				</div>
-				<div class="filter-time-kids">
-					<div class="filter-group">
-						<label for="time">시 간</label> <select id="time" name="time">
-							<c:forEach var="hour" begin="10" end="23">
-								<option value="${hour}:00">${hour}:00</option>
-								<option value="${hour}:30">${hour}:30</option>
-							</c:forEach>
-						</select>
-					</div>
-				</div>
-				<div class="filter-time-kids">
-					<div class="filter-group">
-						<div class="inline-select">
-							<label for="kids">아이 손님</label> <select id="kids" name="kids">
-								<option value="none" selected>0명</option>
-								<!-- 추가된 옵션 -->
-								<c:forEach var="num" begin="1" end="5">
-									<option value="${num}">${num}명</option>
-								</c:forEach>
-								<option value="more">기타</option>
-							</select> <input type="text" id="custom-kids" name="custom-kids"
-								placeholder="아이 인원 입력" style="display: none;">
-						</div>
+    <div class="container">
+        <!-- ✅ Swiper 슬라이드 (메인 배너) -->
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="/resources/image/일식 밥.png" alt="일식밥"></div>
+                <div class="swiper-slide"><img src="/resources/image/장어덮밥.png" alt="장어덮밥"></div>
+                <div class="swiper-slide"><img src="/resources/image/탕수육.png" alt="탕수육"></div>
+                <div class="swiper-slide"><img src="/resources/image/jan.png" alt="닭꼬치"></div>
+                <div class="swiper-slide"><img src="/resources/image/베트남요리.png" alt="베트남요리"></div>
+            </div>
+            <!-- 네비게이션 버튼 -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
 
-					</div>
-				</div>
-				<div class="filter-time-kids">
-					<div class="filter-group">
+        <!-- ✅ 페이지네이션 (슬라이드 하단에 배치) -->
+        <div class="swiper-pagination"></div>
 
-						<input type="text" class="form-control me-2" name="keyword"
-							value="${param.keyword}" placeholder="가게명 검색">
-						<button type="submit">바로 찾아줄게 ✔</button>
+        <!-- ✅ 하단 사진 리스트 (썸네일 목록) -->
+        <div class="photo-section">
+            <div class="photo-frame">
+                <a href="https://www.koong.co.kr/2020/index.php"><img src="/resources/image/mandu.png" alt="만두"></a>
+            </div>
+            <div class="photo-frame">
+                <a href="https://www.outback.co.kr/"><img src="/resources/image/stake.png" alt="스테이크"></a>
+            </div>
+            <div class="photo-frame">
+                <a href="https://map.naver.com/p/entry/place/1718170443?placePath=%252Fhome%253Fentry%253Dplt&searchType=place&lng=127.0014545&lat=37.5372131&c=15.00,0,0,0,dh"><img src="/resources/image/디저트.png" alt="디저트"></a>
+            </div>
+            <div class="photo-frame">
+                <a href="https://www.nonamepasta.com/"><img src="/resources/image/파스타.png" alt="파스타"></a>
+            </div>
+         </div>
+    </div>
 
-						<!-- 검색 폼 -->
-					</div>
-				</div>
-			</div>
-			<!-- .filter-section -->
-		</form>
-		<div class="title custom-title">
-			<h3>스토어별 예약가능한 시간 🍜</h3>
-		</div>
-		<!-- 스토어 리스트 -->
-		<div class="body">
-			<h2 class="text-center"></h2>
-			<div class="photo-section">
-				<c:forEach var="store" items="${storeList}">
-					<div class="photo-frame" data-store-id="${store.id}">
-						<a href="/store/detail?id=${store.id}"> <c:choose>
-								<c:when test="${not empty store.storeImage}">
-									<%-- <img src="${store.storeImage}" alt="가게 이미지"
-										onerror="this.onerror=null; this.src='/resources/images/default.jpg'"> --%>
-									<img src="${store.storeImage}" alt="가게 이미지">
-								</c:when>
-								<c:otherwise>
-									<img src="/resources/images/default.jpg" alt="default">
-								</c:otherwise>
-							</c:choose>
-						</a>
-						<div class="time-buttons-container"></div>
-					</div>
-				</c:forEach>
-			</div>
-		</div>
-		<!-- 		<div class="photo-section">
-			<div class="photo-frame" data-store-id="4">
-				<a href="javascript:void(0)"><img src="/resources/image/뷔페.jpg" alt="뷔페"></a>
-				<div class="time-buttons-container"></div>
-			</div>
-			<div class="photo-frame" data-store-id="2">
-				<a href="javascript:void(0)"><img src="/resources/image/베트남요리.png" alt="베트남요리"></a>
-				<div class="time-buttons-container"></div>
-			</div>
-			<div class="photo-frame" data-store-id="3">
-				<a href="javascript:void(0)"><img src="/resources/image/관자요리.jpg" alt="관자요리"></a>
-				<div class="time-buttons-container"></div>
-			</div>
-		</div>
-
- -->
-
-	</div>
+    <!-- Swiper.js 초기화 -->
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            loop: true, // 무한 루프
+            autoplay: {
+                delay: 3000, // 3초마다 자동 슬라이드
+                disableOnInteraction: false // 유저가 조작 후에도 자동 슬라이드 유지
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev'
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true
+            },
+            effect: 'fade' // 부드러운 전환 효과
+        });
+    </script>
 
 </body>
-
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    const photoFrames = document.querySelectorAll(".photo-frame");
-
-    // 가게별 예약 가능한 시간 데이터 (예제)
-    const availableTimes = {
-    		1: ["6:30", "7:30", "8:30", "9:30"],
-    	    2: ["5:00", "6:00", "7:00", "8:00"],
-    	    3: ["12:00", "1:00", "2:00", "3:00"],
-    	    4: ["12:00", "1:00", "2:00", "3:00"],
-    	    5: ["11:30", "12:30", "1:30", "2:30"],
-    	    6: ["4:00", "5:00", "6:00", "7:00"],
-    	    7: ["10:00", "11:00", "12:00", "1:00"],
-    	    8: ["2:30", "3:30", "4:30", "5:30"],
-    	    9: ["6:00", "7:00", "8:00", "9:00"],
-    	    10: ["5:30", "6:30", "7:30", "8:30"],
-    	    11: ["11:00", "12:00", "1:00", "2:00"],
-    	    12: ["9:00", "10:00", "11:00", "12:00"]
-        // 추가적인 가게 ID와 시간을 여기에 추가
-    };
-
-    photoFrames.forEach(frame => {
-        const storeId = frame.getAttribute("data-store-id");
-        const times = availableTimes[storeId] || [];
-        const timeContainer = frame.querySelector(".time-buttons-container");
-
-        // 예약 가능 시간 제목 추가
-        const title = document.createElement("div");
-        title.innerHTML = "⏰"; // 아이콘 추가
-        title.classList.add("time-title");
-        timeContainer.appendChild(title);
-
-        // 시간 버튼 생성
-        times.forEach(time => {
-            const button = document.createElement("button");
-            button.textContent = time;
-            button.classList.add("time-button");
-            button.addEventListener("click", function (event) {
-                event.stopPropagation(); // 부모 요소로의 클릭 이벤트 전파 방지
-                alert(`예약 시간: ${time} 선택됨!`);
-            });
-            timeContainer.appendChild(button);
-        });
-
-        // 마우스 호버 시 시간 버튼 표시
-        frame.addEventListener("mouseenter", function () {
-            timeContainer.style.display = "flex";
-        });
-
-        // 마우스 아웃 시 시간 버튼 숨기기
-        frame.addEventListener("mouseleave", function () {
-            timeContainer.style.display = "none";
-        });
-    });
-});
-
-
-// 날짜 선택 시 오늘 이전 날짜 선택 제한
-const dateInput = document.getElementById('date');
-const today = new Date().toISOString().split('T')[0];
-dateInput.setAttribute('min', today);
-
-window.addEventListener('load', function() {
-	var locationSelect = document.getElementById('location');
-	var subLocationSelect = document.getElementById('sub-location-select');
-
-		// 페이지가 로드될 때 locationSelect의 값을 'seoul'로 설정
-		locationSelect.value = 'seoul';
-	});
-//지역 부가선택
-document
-		.getElementById('location')
-		.addEventListener(
-				'change',
-				function() {
-					var subLocationSelect = document
-							.getElementById('sub-location-select');
-					subLocationSelect.innerHTML = "";
-					if (this.value === 'seoul') {
-				        subLocationSelect.innerHTML = `
-				            <option value='gangnam'>강남</option>
-				            <option value='hongdae'>홍대</option>
-				            <option value='itaewon'>이태원</option>
-				            <option value='gangbuk'>강북</option>
-				            <option value='yeouido'>여의도</option>
-				            <option value='jamsil'>잠실</option>
-				            <option value='dongdaemun'>동대문</option>
-				            <option value='myeongdong'>명동</option>
-				            <option value='sinchon'>신촌</option>
-				            <option value='yeoksam'>역삼</option>
-				            <option value='seocho'>서초</option>
-				            <option value='apgujeong'>압구정</option>
-				            <option value='samseong'>삼성</option>
-				            <option value='guro'>구로</option>
-				            <option value='yeongdeungpo'>영등포</option>
-				            <option value='konkuk'>건대입구</option>
-				            <option value='jongno'>종로</option>
-				            <option value='sadang'>사당</option>
-				            <option value='gangnam_station'>강남역</option>
-				            <option value='samsung_station'>삼성중앙역</option>
-				        `;
-					} else if (this.value === 'gyeonggi') {
-						subLocationSelect.innerHTML = "<option value='suwon'>수원</option><option value='bundang'>분당</option><option value='ilsan'>일산</option>";
-					} else {
-						subLocationSelect.innerHTML = "<option value='chungcheong'>충청도</option><option value='gangwon'>강원도</option><option value='jeolla'>전라도</option><option value='gyeongsang'>경상도</option><option value='jeju'>제주도</option>";
-					}
-				});
-
-
-	// 인원 입력 스크립트
-	document
-			.getElementById('guests')
-			.addEventListener(
-					'change',
-					function() {
-						// '기타'가 선택되면 'custom-guests' 입력 필드를 표시
-						document.getElementById('custom-guests').style.display = (this.value === 'more') ? 'inline-block'
-								: 'none';
-					});
-
-	// 'custom-guests' 입력 필드에 숫자만 입력할 수 있도록 하고, 입력 시 "명"을 자동으로 붙임
-	document.getElementById('custom-guests').addEventListener('input',
-			function(e) {
-				// 입력 값에서 "명"이 이미 붙어 있는지를 확인하고 제거
-				let value = e.target.value;
-				if (value.endsWith('명')) {
-					value = value.slice(0, -1);
-				}
-				// 입력 값 중 숫자가 아닌 모든 문자를 제거
-				value = value.replace(/\D/g, '');
-				// 숫자가 있을 경우에만 "명"을 붙여 입력 필드에 설정
-				if (value) {
-					e.target.value = value + '명';
-				} else {
-					e.target.value = '';
-				}
-			});
-
-	// 아이 인원 입력 스크립트
-	document
-			.getElementById('kids')
-			.addEventListener(
-					'change',
-					function() {
-						// '기타'가 선택되면 'custom-kids' 입력 필드를 표시
-						document.getElementById('custom-kids').style.display = (this.value === 'more') ? 'inline-block'
-								: 'none';
-					});
-
-	// 'custom-kids' 입력 필드에 숫자만 입력할 수 있도록 하고, 입력 시 "명"을 자동으로 붙임
-	document.getElementById('custom-kids').addEventListener('input',
-			function(e) {
-				// 입력 값에서 "명"이 이미 붙어 있는지를 확인하고 제거
-				let value = e.target.value;
-				if (value.endsWith('명')) {
-					value = value.slice(0, -1);
-				}
-				// 입력 값 중 숫자가 아닌 모든 문자를 제거
-				value = value.replace(/\D/g, '');
-				// 숫자가 있을 경우에만 "명"을 붙여 입력 필드에 설정
-				if (value) {
-					e.target.value = value + '명';
-				} else {
-					e.target.value = '';
-				}
-			});
-</script>
-
-<!-- 페이징처리 -->
-<div class="pagination">
-
-	<c:set var="amount"
-		value="${not empty param.amount ? param.amount : 9}"></c:set>
-	<c:set var="pageNum"
-		value="${not empty param.pageNum ? param.pageNum : 1}"></c:set>
-
-	<c:if test="${pageMaker.prev}">
-		<a
-			href="/board/familyreservation?pageNum=${pageMaker.startPage - 1}&amount=${amount}">이전</a>
-	</c:if>
-
-	<c:forEach var="i" begin="${pageMaker.startPage}"
-		end="${pageMaker.endPage}">
-		<c:choose>
-			<c:when test="${i == pageNum}">
-				<span class="current-page">${i}</span>
-			</c:when>
-			<c:otherwise>
-				<a href="/board/familyreservation?pageNum=${i}&amount=${amount}">${i}</a>
-			</c:otherwise>
-		</c:choose>
-	</c:forEach>
-
-	<c:if test="${pageMaker.next}">
-		<a
-			href="/board/familyreservation?pageNum=${pageMaker.endPage + 1}&amount=${amount}">다음</a>
-	</c:if>
-</div>
 </html>
+
+
