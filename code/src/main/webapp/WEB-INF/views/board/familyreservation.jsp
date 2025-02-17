@@ -267,14 +267,21 @@ body {
 	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 /* 애니메이션 */
-@keyframes fadeIn {
-	from { opacity: 0; }
-	to { opacity: 1; }
+@
+keyframes fadeIn {from { opacity:0;
+	
 }
 
-@keyframes slideUp {
-	from { transform: translateY(20px); opacity: 0; }
-	to
+to {
+	opacity: 1;
+}
+
+}
+@
+keyframes slideUp {from { transform:translateY(20px);
+	opacity: 0;
+}
+to
 </style>
 
 </head>
@@ -582,7 +589,6 @@ document
 				}
 			});
 </script>
-
 
 <!-- 페이징처리 -->
 <div class="pagination">

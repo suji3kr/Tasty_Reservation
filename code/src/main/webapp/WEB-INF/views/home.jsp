@@ -94,7 +94,7 @@ body {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	color: #babe96;
+	color: #faffc8;
 	text-align: center;
 	z-index: 10; /* 슬라이더보다 위에 배치 */
 	padding: 20px;
@@ -106,8 +106,8 @@ body {
 	font-weight: bold;
 	margin-bottom: 38px;
 	margin-top: 82px;
-	color: rgb(255 255 255/ 81%);
-	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+	color: rgb(255 195 55/ 88%);
+	text-shadow: 2px 2px 4px rgb(49, 45, 45);
 }
 
 .overlay p {
