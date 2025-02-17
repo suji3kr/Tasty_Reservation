@@ -86,13 +86,40 @@ body {
 
 				<!-- 추가수정 -->
 				<label for="store-time" class="form-label">영업시간</label>
-				<div class="input-group">
-					<input type="time" class="form-control" id="storeTimeStart"
-						name="storeTimeStart" required> <span
-						class="input-group-text">~</span> <input type="time"
-						class="form-control" id="storeTimeEnd" name="storeTimeEnd"
-						required>
-				</div>
+<div class="input-group">
+    <select class="form-control" id="storeTimeStart" name="storeTimeStart" required>
+        <option value="">시작 시간</option>
+    </select>
+    <span class="input-group-text">~</span>
+    <select class="form-control" id="storeTimeEnd" name="storeTimeEnd" required>
+        <option value="">끝 시간</option>
+    </select>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let startSelect = document.getElementById("storeTimeStart");
+        let endSelect = document.getElementById("storeTimeEnd");
+
+        // 9시부터 22시까지 30분 단위 시간 생성
+        for (let hour = 9; hour < 22; hour++) {
+            for (let minute of [0, 30]) { // 30분 단위
+                let time = hour.toString().padStart(2, '0') + ":" + minute.toString().padStart(2, '0');
+                let optionStart = document.createElement("option");
+                let optionEnd = document.createElement("option");
+
+                optionStart.value = time;
+                optionStart.textContent = time;
+                optionEnd.value = time;
+                optionEnd.textContent = time;
+
+                startSelect.appendChild(optionStart);
+                endSelect.appendChild(optionEnd);
+            }
+        }
+    });
+</script>
+
 			</div>
 			<div class="mb-3">
 				<label for="storeDescription" class="form-label">가게 설명</label>
