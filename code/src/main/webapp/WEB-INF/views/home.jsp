@@ -224,7 +224,7 @@ body {
 				<!-- ✅ 오버레이를 슬라이더 위로 이동 -->
 				<div class="overlay">
 					<h1>Art Of Reservation</h1>
-					<a href="/board/familyreservation"> 예약하러가기 📑</a>
+					<a href="/board/mainreservation"> 예약하러가기 📑</a>
 				</div>
 			</div>
 		</div>
