@@ -63,7 +63,7 @@ public class MemberController {
 			session.setAttribute("loginUserName", memberDTO.getUsername());
 			session.setAttribute("userRole", memberDTO.getRole());
 
-			return "redirect:/";
+			return "redirect:/member/login";
 		} else {
 			return "/member/signup";
 		}
