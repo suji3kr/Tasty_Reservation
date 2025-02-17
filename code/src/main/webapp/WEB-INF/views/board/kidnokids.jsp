@@ -252,9 +252,13 @@ body {
 	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 /* 애니메이션 */
-@keyframes fadeIn {
-	from { opacity: 0.5; }
-	to { opacity: 1; }
+@
+keyframes fadeIn {from { opacity:0.5;
+	
+}
+
+to {
+	opacity: 1;
 }
 
 </style>
@@ -273,6 +277,23 @@ body {
 					<option value='gangnam'>강남</option>
 					<option value='hongdae'>홍대</option>
 					<option value='itaewon'>이태원</option>
+					<option value='gangbuk'>강북</option>
+					<option value='yeouido'>여의도</option>
+					<option value='jamsil'>잠실</option>
+					<option value='dongdaemun'>동대문</option>
+					<option value='myeongdong'>명동</option>
+					<option value='sinchon'>신촌</option>
+					<option value='yeoksam'>역삼</option>
+					<option value='seocho'>서초</option>
+					<option value='apgujeong'>압구정</option>
+					<option value='samseong'>삼성</option>
+					<option value='guro'>구로</option>
+					<option value='yeongdeungpo'>영등포</option>
+					<option value='konkuk'>건대입구</option>
+					<option value='jongno'>종로</option>
+					<option value='sadang'>사당</option>
+					<option value='gangnam_station'>강남역</option>
+					<option value='samsung_station'>삼성중앙역</option>
 				</select>
 			</div>
 

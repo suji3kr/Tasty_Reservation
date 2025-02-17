@@ -166,6 +166,24 @@ public class BoardController {
 	    return "/board/familyreservation";  // ✅ 검색 결과를 같은 페이지에 렌더링
 	}
 	
+	/** ✅ 메인 맛집 페이지 */
+    @GetMapping("/mainreservation")
+    public String getMainReservation(@RequestParam(name = "pageNum", required = false, defaultValue = "1") int pageNum,
+                               @RequestParam(name = "amount", required = false, defaultValue = "9") int amount, 
+                               Model model) {
+        Criteria cri = new Criteria(pageNum, amount);
+        log.info("mainReservation page: " + cri);
+
+        List<StoreDTO> storeList = storeService.getList(cri);
+        model.addAttribute("storeList", storeList);
+
+        int total = storeService.getTotal(cri);
+        log.info("total stores: " + total);
+        model.addAttribute("pageMaker", new PageDTO(cri, total));
+
+        return "/board/mainreservation";
+    }
+	
 	
 
     /** ✅ 유아동반 가능한 맛집 페이지 */

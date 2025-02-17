@@ -105,7 +105,7 @@ body {
 .overlay h1 {
 	font-size: 4rem;
 	font-weight: bold;
-	margin-bottom: 38px;
+	margin-bottom: 131px;
 	margin-top: 111px;
 	color: rgb(255 132 0/ 88%);
 	text-shadow: 2.5px 0.4px 1.5px rgb(255, 255, 255);
@@ -224,7 +224,7 @@ body {
 				<!-- ✅ 오버레이를 슬라이더 위로 이동 -->
 				<div class="overlay">
 					<h1>Art Of Reservation</h1>
-					<a href="/board/familyreservation"> 예약하러가기 📑</a>
+					<a href="/board/mainreservation"> 예약하러가기 📑</a>
 				</div>
 			</div>
 		</div>
