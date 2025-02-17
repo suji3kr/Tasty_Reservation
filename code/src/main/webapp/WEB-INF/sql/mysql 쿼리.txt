@@ -1,12 +1,15 @@
 USE restdb;
 
 -- 기존 테이블 삭제 (데이터가 있는 경우 주의)
+set foreign_key_checks=0;
 DROP TABLE IF EXISTS Reservations;
 DROP TABLE IF EXISTS Reviews;
 DROP TABLE IF EXISTS Restaurants;
 DROP TABLE IF EXISTS Admins;
-DROP TABLE IF EXISTS photogallery;
+DROP TABLE IF EXISTS PhotoGallery;
 DROP TABLE IF EXISTS Users;
+set foreign_key_checks=1;
+
 
 -- Users 테이블 (username의 UNIQUE 제약 제거)
 CREATE TABLE Users (
@@ -76,18 +79,10 @@ CREATE TABLE PhotoGallery (
     upload_date DATE NOT NULL DEFAULT (CURRENT_DATE),
     FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
 );
-select * from users;
-
-select * from reservations;
-
-select users.*
-	from admins inner join users
-	on admins.id = users.id;
 
 
-select * from restaurants;
 
-INSERT INTO restaurants (id, admin_id, store_name, store_location, store_description, store_category, phone_number, store_image) VALUES
+INSERT INTO Restaurants (id, admin_id, store_name, store_location, store_description, store_category, phone_number, store_image) VALUES
 (1, NULL, '돈가스', '돈가스', '돈가스 전문점', '양식', '01011111111', '/uploads/store1.jpg'),
 (2, NULL, '김밥천국', '서울 강남구 테헤란로', '다양한 한식 분식', '한식', '01022222222', '/uploads/store2.jpg'),
 (3, NULL, '스타벅스', '서울 강남구 강남대로', '커피와 디저트 전문점', '디저트/카페', '01033333333', '/uploads/store3.jpg'),
@@ -97,7 +92,7 @@ INSERT INTO restaurants (id, admin_id, store_name, store_location, store_descrip
 (7, NULL, '홍콩반점', '서울 종로구 종각', '짜장면과 짬뽕 전문점', '중식', '01077777777', '/uploads/store7.jpg'),
 (8, NULL, '스시로', '서울 강남구 논현동', '신선한 초밥', '일식', '01088888888', '/uploads/store8.jpg'),
 (9, NULL, '봉구스밥버거', '서울 송파구 잠실', '간편한 한끼 밥버거', '한식', '01099999999', '/uploads/store9.jpg'),
-(10, NULL, '버거킹', '서울 용산구 한강로', '수제 햄버거 전문점', '양식', '01012345678', '/uploads/store10.jpg');
+(10, NULL, '버거킹', '서울 용산구 한강로', '수제 햄버거 전문점', '양식', '01012345678', '/uploads/store10.jpg'),
 (11, NULL, '늘목쌈밥', '대한민국 인천광역시 중구 운남동 산65-1', '예약, 단체 이용 가능, 무선 인터넷, 남/녀 화장실 구분.
  다양한 메뉴로 남녀노소 만족하는
  영종도 대표 쌈밥집 입니다
@@ -107,3 +102,5 @@ INSERT INTO restaurants (id, admin_id, store_name, store_location, store_descrip
 
 INSERT INTO Users (username, password, age, email, phone, gender, role) VALUES
 ('admin', '$2a$10$m8g9rFhSQKUk87HqzEWI/Oe8hoGkUd8RL6j2i4mKuNvH2PhJC0c1y', 30, 'admin@aor.com', '0105555555', 'F', 'admin');
+
+SELECT * FROM Users;

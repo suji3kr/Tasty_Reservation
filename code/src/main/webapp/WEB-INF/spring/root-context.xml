@@ -16,9 +16,9 @@
 		<property name="driverClassName"
 			value="com.mysql.cj.jdbc.Driver" />
 		<property name="jdbcUrl"
-			value="jdbc:mysql://localhost:3306/restdb" />
-		<property name="username" value="restuser" />
-		<property name="password" value="12345" />
+			value="jdbc:mysql://aor.cpsuay4ugddy.ap-northeast-2.rds.amazonaws.com:3306/restdb" />
+		<property name="username" value="aor" />
+		<property name="password" value="aor12345" />
 	</bean>
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
