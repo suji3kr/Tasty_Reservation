@@ -190,10 +190,10 @@ body {
 .photo-frame {
 	position: relative;
 	width: 350px;
-	height: 350px;
-	border-radius: 10px;
+	height: 350px; border-radius : 10px;
 	overflow: hidden;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	border-radius: 10px;
 }
 
 .photo-frame img {
@@ -224,6 +224,15 @@ body {
 	border-radius: 10px;
 	opacity: 0;
 	transition: opacity 0.3s ease-in-out;
+}
+
+.overlay-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
 }
 
 .photo-frame:hover .overlay {
@@ -276,7 +285,7 @@ body {
 	text-align: center;
 	z-index: 10;
 	width: 90%;
-	height : 30px;
+	height: 30px;
 	/* 	display: flex; */
 	justify-content: center;
 	gap: 8px;
@@ -438,10 +447,12 @@ to {
 
 						<!-- 가게 이름과 타임 버튼을 표시할 오버레이 -->
 						<div class="overlay">
+							<a href="/store/detail?id=${store.id}" class="overlay-link"></a>
 							<h3 class="store-name">${store.storeName}</h3>
 							<div class="time-buttons-container"></div>
 							<!-- JS에서 타임 버튼 추가 -->
 						</div>
+
 					</div>
 				</c:forEach>
 			</div>
