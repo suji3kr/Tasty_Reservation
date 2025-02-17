@@ -57,6 +57,7 @@ body {
 .slider {
 	padding: 0;
 	margin: 0;
+	border: none;
 }
 
 .slider li {
@@ -223,7 +224,6 @@ body {
 				<!-- ✅ 오버레이를 슬라이더 위로 이동 -->
 				<div class="overlay">
 					<h1>Art Of Reservation</h1>
-					<p>예약의 미학</p>
 					<a href="/board/familyreservation"> 예약하러가기 📑</a>
 				</div>
 			</div>
@@ -362,7 +362,7 @@ body {
 	</script>
 
 	<script>
-		$(document).ready(function(){
+		$(document).ready(function() {
 		    $('.slider').bxSlider({
 		        minSlides: 3, // 한 번에 3개씩 표시
 		        maxSlides: 3,
@@ -374,7 +374,15 @@ body {
 		        pause: 3000, // 3초마다 전환
 		        pager: false // 하단 인디케이터 제거
 		    });
+	
+		    // bx-wrapper의 스타일 제거
+		    $('.bx-wrapper').css({
+		        'box-shadow': 'none',
+		        'border': 'none',
+		        'background': 'transparent'
+		    });
 		});
+
 	</script>
 
 
