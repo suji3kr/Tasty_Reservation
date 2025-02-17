@@ -1,29 +1,31 @@
 USE restdb;
 
 -- 기존 테이블 삭제 (데이터가 있는 경우 주의)
-DROP TABLE IF EXISTS PhotoGallery;
-DROP TABLE IF EXISTS Reviews;
+set foreign_key_checks=0;
 DROP TABLE IF EXISTS Reservations;
+DROP TABLE IF EXISTS Reviews;
 DROP TABLE IF EXISTS Restaurants;
 DROP TABLE IF EXISTS Admins;
+DROP TABLE IF EXISTS PhotoGallery;
 DROP TABLE IF EXISTS Users;
+set foreign_key_checks=1;
 
 -- Users 테이블 (username의 UNIQUE 제약 제거)
 CREATE TABLE Users (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) NOT NULL,  
+    username VARCHAR(50) NOT NULL,  -- UNIQUE 제거
     password VARCHAR(255) NOT NULL,
     age INT,
-    email VARCHAR(100) UNIQUE,  
+    email VARCHAR(100) UNIQUE,  -- email만 UNIQUE 유지
     phone VARCHAR(20),
     gender ENUM('M', 'F'),
-    role ENUM('admin', 'user') NOT NULL DEFAULT 'user'
+    role ENUM('admin', 'user') NOT NULL DEFAULT 'user' -- 역할 추가
 );
 
--- Admins 테이블 (Users 참조)
+-- Admins 테이블
 CREATE TABLE Admins (
-    id BIGINT PRIMARY KEY,
-    FOREIGN KEY (id) REFERENCES Users(id) ON DELETE CASCADE
+    id BIGINT PRIMARY KEY REFERENCES Users(id),
+    UNIQUE (id) -- 중복 방지
 );
 
 -- Restaurants 테이블
@@ -36,35 +38,35 @@ CREATE TABLE Restaurants (
     store_category VARCHAR(50),
     phone_number VARCHAR(20),
     store_image VARCHAR(255),
-    FOREIGN KEY (admin_id) REFERENCES Admins(id) ON DELETE CASCADE
+    FOREIGN KEY (admin_id) REFERENCES Admins(id) ON DELETE SET NULL
 );
 
 -- Reservations 테이블 (username 대신 user_id 사용)
 CREATE TABLE Reservations (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     store_id BIGINT,
-    user_id BIGINT NOT NULL,  
+    username VARCHAR(20) NOT NULL,  -- username 대신 user_id 사용
     phone VARCHAR(20),
     reservation_date DATE NOT NULL,
     reservation_time TIME NOT NULL,
     people_count INT NOT NULL,
     FOREIGN KEY (store_id) REFERENCES Restaurants(id) ON DELETE CASCADE,
-    FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
+    FOREIGN KEY (id) REFERENCES Users(id) ON DELETE CASCADE
 );
 
--- 리뷰 테이블
+
+-- Reviews 테이블
 CREATE TABLE Reviews (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    store_id BIGINT NOT NULL,
+    store_id bigINT NOT NULL,
     title VARCHAR(200),
     content TEXT,
     user_id BIGINT NOT NULL,
-    rating INT CHECK (rating BETWEEN 1 AND 5),
-    imagePath VARCHAR(255),
     regdate DATE NOT NULL DEFAULT (CURRENT_DATE),
     FOREIGN KEY (store_id) REFERENCES Restaurants(id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
 );
+
 
 -- PhotoGallery 테이블
 CREATE TABLE PhotoGallery (
@@ -76,56 +78,33 @@ CREATE TABLE PhotoGallery (
     upload_date DATE NOT NULL DEFAULT (CURRENT_DATE),
     FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
 );
+select * from Users;
 
--- Users 테이블에 관리자 계정 추가
+select * from Reservations;
+
+select Users.*
+	from Admins inner join Users
+	on Admins.id = Users.id;
+
+
+select * from Restaurants;
+
+INSERT INTO Restaurants (id, admin_id, store_name, store_location, store_description, store_category, phone_number, store_image) VALUES
+(1, NULL, '돈가스', '돈가스', '돈가스 전문점', '양식', '01011111111', '/uploads/1.jpg'),
+(2, NULL, '김밥천국', '서울 강남구 테헤란로', '다양한 한식 분식', '한식', '01022222222', '/uploads/2.jpg'),
+(3, NULL, '스타벅스', '서울 강남구 강남대로', '커피와 디저트 전문점', '디저트/카페', '01033333333', '/uploads/3.jpg'),
+(4, NULL, 'BBQ 치킨', '서울 마포구 홍대입구', '바삭한 프라이드 치킨', '양식', '01044444444', '/uploads/4.jpg'),
+(5, NULL, '이삭토스트', '서울 중구 명동', '토스트 전문점', '디저트/카페', '01055555555', '/uploads/5.jpg'),
+(6, NULL, '피자헛', '서울 서초구 반포동', '전통 이탈리안 피자', '양식', '01066666666', '/uploads/6.jpg'),
+(7, NULL, '홍콩반점', '서울 종로구 종각', '짜장면과 짬뽕 전문점', '중식', '01077777777', '/uploads/7.jpg'),
+(8, NULL, '스시로', '서울 강남구 논현동', '신선한 초밥', '일식', '01088888888', '/uploads/8.jpg'),
+(9, NULL, '봉구스밥버거', '서울 송파구 잠실', '간편한 한끼 밥버거', '한식', '01099999999', '/uploads/9.jpg'),
+(10, NULL, '버거킹', '서울 용산구 한강로', '수제 햄버거 전문점', '양식', '01012345678', '/uploads/10.jpg'),
+(11, NULL, '늘목쌈밥', '대한민국 인천광역시 중구 운남동 산65-1', '예약, 단체 이용 가능, 
+무선 인터넷, 남/녀 화장실 구분
+ 다양한 메뉴로 남녀노소 만족하는 영종도 대표 쌈밥집 입니다. 
+언제나 내 가족이 먹는다는 생각으로 고객님 한분 한분께 최선을 다 하겠습니다.', '한식', '01014698937', '/uploads/nulmokssambab.jpg');
+
 INSERT INTO Users (username, password, age, email, phone, gender, role) VALUES
 ('admin', '$2a$10$m8g9rFhSQKUk87HqzEWI/Oe8hoGkUd8RL6j2i4mKuNvH2PhJC0c1y', 30, 'admin@aor.com', '0105555555', 'F', 'admin');
 
--- Admins 테이블에 관리자 계정 연결
-INSERT INTO Admins (id) SELECT id FROM Users WHERE username='admin';
-
--- Restaurants 테이블 더미 데이터 추가
-
-INSERT INTO Restaurants (admin_id, store_name, store_location, store_description, store_category, phone_number, store_image) VALUES
-((SELECT id FROM Admins LIMIT 1), '돈가스', '서울 강남구', '돈가스 전문점', '양식', '01011111111', '/uploads/store1.jpg'),
-((SELECT id FROM Admins LIMIT 1), '김밥천국', '서울 강남구 테헤란로', '다양한 한식 분식', '한식', '01022222222', '/uploads/store2.jpg'),
-((SELECT id FROM Admins LIMIT 1), '스타벅스', '서울 강남구 강남대로', '커피와 디저트 전문점', '디저트/카페', '01033333333', '/uploads/store3.jpg'),
-((SELECT id FROM Admins LIMIT 1), 'BBQ 치킨', '서울 마포구 홍대입구', '바삭한 프라이드 치킨', '양식', '01044444444', '/uploads/store4.jpg'),
-((SELECT id FROM Admins LIMIT 1), '이삭토스트', '서울 중구 명동', '토스트 전문점', '디저트/카페', '01055555555', '/uploads/store5.jpg'),
-((SELECT id FROM Admins LIMIT 1), '피자헛', '서울 서초구 반포동', '전통 이탈리안 피자', '양식', '01066666666', '/uploads/store6.jpg'),
-((SELECT id FROM Admins LIMIT 1), '홍콩반점', '서울 종로구 종각', '짜장면과 짬뽕 전문점', '중식', '01077777777', '/uploads/store7.jpg'),
-((SELECT id FROM Admins LIMIT 1), '스시로', '서울 강남구 논현동', '신선한 초밥', '일식', '01088888888', '/uploads/store8.jpg'),
-((SELECT id FROM Admins LIMIT 1), '봉구스밥버거', '서울 송파구 잠실', '간편한 한끼 밥버거', '한식', '01099999999', '/uploads/store9.jpg'),
-((SELECT id FROM Admins LIMIT 1), '버거킹', '서울 용산구 한강로', '수제 햄버거 전문점', '양식', '01012345678', '/uploads/store10.jpg');
-
-
--- Users 테이블에 일반 사용자 추가
-INSERT INTO Users (username, password, age, email, phone, gender, role) VALUES
-('john_doe', 'password123', 25, 'john@example.com', '01012341234', 'M', 'user'),
-('jane_doe', 'password456', 28, 'jane@example.com', '01056785678', 'F', 'user'),
-('alice', 'password789', 32, 'alice@example.com', '01087658765', 'F', 'user');
-
--- Reviews 테이블 데이터 추가
-INSERT INTO Reviews (store_id, title, content, user_id, rating, imagePath, regdate)
-VALUES 
-((SELECT id FROM Restaurants WHERE store_name='스타벅스'), '좋은 카페', '커피가 맛있어요!', (SELECT id FROM Users WHERE username='john_doe'), 5, '/images/review1.jpg', '2025-02-10'),
-((SELECT id FROM Restaurants WHERE store_name='김밥천국'), '한식 좋아요', '김밥과 떡볶이가 훌륭함', (SELECT id FROM Users WHERE username='jane_doe'), 4, '/images/review2.jpg', '2025-02-11'),
-((SELECT id FROM Restaurants WHERE store_name='돈가스'), '돈가스 최고', '바삭하고 맛있습니다.', (SELECT id FROM Users WHERE username='alice'), 5, '/images/review3.jpg', '2025-02-12');
-
--- PhotoGallery 테이블 데이터 추가
-INSERT INTO PhotoGallery (user_id, photo_title, photo_description, photo_path, upload_date)
-VALUES 
-((SELECT id FROM Users WHERE username='john_doe'), '카페 방문', '스타벅스에서 한 컷', '/images/gallery1.jpg', '2025-02-10'),
-((SELECT id FROM Users WHERE username='jane_doe'), '맛있는 김밥', '김밥천국에서 찍음', '/images/gallery2.jpg', '2025-02-11'),
-((SELECT id FROM Users WHERE username='alice'), '돈가스 한입', '돈가스가 정말 맛있어요!', '/images/gallery3.jpg', '2025-02-12');
-
--- 데이터 조회
-SELECT * FROM Users;
-SELECT * FROM Admins;
-SELECT * FROM Restaurants;
-SELECT * FROM Reservations;
-SELECT * FROM Reviews;
-SELECT * FROM PhotoGallery;
-
--- 관리자와 연결된 사용자 확인
-SELECT users.* FROM Admins INNER JOIN Users ON Admins.id = Users.id;

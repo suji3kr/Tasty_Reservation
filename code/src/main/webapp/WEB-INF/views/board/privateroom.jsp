@@ -392,21 +392,6 @@ body {
 	</div>
 	
 
-	<div class="photo-section">
-		<div class="photo-frame">
-			<a href="http://localhost:8092/store/detail?id=11"><img
-				src="/resources/image/nulmokssambab.jpg" alt="늘목쌈밥"></a>
-		</div>
-		<div class="photo-frame">
-			<a href="http://localhost:8092/store/detail?id=2"><img
-				src="/resources/image/베트남요리.png" alt="베트남요리"></a>
-		</div>
-		<div class="photo-frame">
-			<a href="http://localhost:8092/store/detail?id=3"><img
-				src="/resources/image/관자요리.jpg" alt="관자요리"></a>
-		</div>
-	</div>
-
 	<!-- 스토어 리스트 -->
 	<div class="body">
 		<h2 class="text-center"></h2>
@@ -620,14 +605,14 @@ document.addEventListener("DOMContentLoaded", function () {
 				<span class="current-page">${i}</span>
 			</c:when>
 			<c:otherwise>
-				<a href="/board/familyreservation?pageNum=${i}&amount=${amount}">${i}</a>
+				<a href="/board/privateroom?pageNum=${i}&amount=${amount}">${i}</a>
 			</c:otherwise>
 		</c:choose>
 	</c:forEach>
 
 	<c:if test="${pageMaker.next}">
 		<a
-			href="/board/familyreservation?pageNum=${pageMaker.endPage + 1}&amount=${amount}">다음</a>
+			href="/board/privateroom?pageNum=${pageMaker.endPage + 1}&amount=${amount}">다음</a>
 	</c:if>
 </div>
 </html>

@@ -31,3 +31,5 @@ public interface StoreService {
     int getTotalByCategories(Criteria cri, List<String> storeCategories);
 
 }
+
+
