@@ -391,15 +391,6 @@ body {
 		<h3> 스토어별 예약가능한 시간 🍜</h3>
 	</div>
 	
-	<div class="time-buttons">
-		<button>6:00</button>
-		<button>6:30</button>
-		<button>7:00</button>
-		<button>7:30</button>
-		<button>8:00</button>
-		<button>8:30</button>
-		<button>9:30</button>
-	</div>
 
 	<div class="photo-section">
 		<div class="photo-frame">
