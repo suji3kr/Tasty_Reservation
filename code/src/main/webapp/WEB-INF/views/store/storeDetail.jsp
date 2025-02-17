@@ -46,12 +46,15 @@ img {
 				<c:choose>
 					<c:when test="${not empty store.storeImage}">
 						<img src="${store.storeImage}" alt="가게 이미지"
-							onerror="this.onerror=null; this.src='/resources/images/default.jpg'">
+							onerror="this.onerror=null; this.src='/resources/images/default.jpg'"
+							style="width: 450px; height: 450px; object-fit: cover;">
 					</c:when>
 					<c:otherwise>
-						<img src="/resources/images/default.jpg" alt="기본 이미지">
+						<img src="/resources/images/default.jpg" alt="기본 이미지"
+							style="width: 450px; height: 450px; object-fit: cover;">
 					</c:otherwise>
 				</c:choose>
+
 			</div>
 			<div class="col-md-6">
 				<form>
@@ -139,9 +142,10 @@ img {
 								name="reservationDate" required>
 						</div>
 						<div class="mb-3">
-					    <label for="reservationTime" class="form-label">예약 시간</label> 
-					    <select class="form-control" id="reservationTime" name="reservationTime" required>
-					        <script>
+							<label for="reservationTime" class="form-label">예약 시간</label> <select
+								class="form-control" id="reservationTime" name="reservationTime"
+								required>
+								<script>
 					            document.addEventListener("DOMContentLoaded", function() {
 					                let select = document.getElementById("reservationTime");
 					                for (let hour = 9; hour < 22; hour++) {
@@ -155,8 +159,8 @@ img {
 					                }
 					            });
 					        </script>
-					    </select>
-					</div>
+							</select>
+						</div>
 
 						<div class="mb-3">
 							<label for="peopleCount" class="form-label">인원수</label> <input
@@ -172,7 +176,7 @@ img {
 			</div>
 		</div>
 	</div>
-	
+
 
 	<script>
 		$(document)
