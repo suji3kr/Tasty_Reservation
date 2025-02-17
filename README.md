@@ -13,6 +13,11 @@
 
 <br><br>
 
+[배포페이지](http://13.209.168.45:8092/)
+
+<br><br>
+<br><br>
+
 >기술 스택
 ![image](https://github.com/user-attachments/assets/f9c46cce-33e4-454f-9b63-35c43f5a803b)
 
