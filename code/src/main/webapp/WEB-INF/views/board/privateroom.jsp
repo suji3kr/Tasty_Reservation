@@ -611,8 +611,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	</c:forEach>
 
 	<c:if test="${pageMaker.next}">
-		<a
-			href="/board/privateroom?pageNum=${pageMaker.endPage + 1}&amount=${amount}">다음</a>
+		<a href="/board/privateroom?pageNum=${pageMaker.endPage + 1}&amount=${amount}">다음</a>
 	</c:if>
 </div>
 </html>

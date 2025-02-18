@@ -379,23 +379,7 @@ body {
 				</c:forEach>
 			</div>
 		</div>
-		<!-- 		<div class="photo-section">
-			<div class="photo-frame" data-store-id="4">
-				<a href="javascript:void(0)"><img src="/resources/image/뷔페.jpg" alt="뷔페"></a>
-				<div class="time-buttons-container"></div>
-			</div>
-			<div class="photo-frame" data-store-id="2">
-				<a href="javascript:void(0)"><img src="/resources/image/베트남요리.png" alt="베트남요리"></a>
-				<div class="time-buttons-container"></div>
-			</div>
-			<div class="photo-frame" data-store-id="3">
-				<a href="javascript:void(0)"><img src="/resources/image/관자요리.jpg" alt="관자요리"></a>
-				<div class="time-buttons-container"></div>
-			</div>
-		</div>
-
- -->
-
+	
 	</div>
 
 </body>

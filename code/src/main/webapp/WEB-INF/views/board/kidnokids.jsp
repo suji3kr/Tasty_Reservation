@@ -10,6 +10,10 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>키즈 노키즈</title>
 
+<!-- Swiper.js CDN 추가 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
 <style>
 body {
 	font-family: 'Roboto', sans-serif;
