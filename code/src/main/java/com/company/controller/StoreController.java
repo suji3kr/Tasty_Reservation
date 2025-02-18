@@ -27,7 +27,7 @@ public class StoreController {
 
     @Autowired
     private StoreService storeService;
-    private BoardService boardservice;
+    private BoardService boardService;
 
     // ✅ 가게 등록 폼 페이지
     @GetMapping("/register")

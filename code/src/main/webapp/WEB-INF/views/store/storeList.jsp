@@ -84,7 +84,7 @@ img {
 			</tbody>
 		</table>
 
-		<a href="/board/register" class="btn btn-success">가게 등록</a>
+		<a href="/store/register" class="btn btn-success">가게 등록</a>
 	</div>
 
 	<!-- Bootstrap JS -->
