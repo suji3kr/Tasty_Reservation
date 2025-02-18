@@ -51,7 +51,6 @@ CREATE TABLE Reservations (
     reservation_time TIME NOT NULL,
     people_count INT NOT NULL,
     FOREIGN KEY (store_id) REFERENCES Restaurants(id) ON DELETE CASCADE,
-    FOREIGN KEY (id) REFERENCES Users(id) ON DELETE CASCADE
 );
 
 
