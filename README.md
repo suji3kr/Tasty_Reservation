@@ -3,15 +3,19 @@
 -------------------------------
 <br>
 
+![image](https://github.com/user-attachments/assets/fb38f045-e21f-4d74-95c0-65d736eb1e35)
+>황승현씨제작
 
+<br> 
 <br>
 
 
 
 
 ![image](https://github.com/user-attachments/assets/a26092ee-786e-4862-b3af-2b141b0abdb2)
-
+>강미림제작 
 <br><br>
+
 
 [배포페이지](http://13.209.168.45:8092/)
 
